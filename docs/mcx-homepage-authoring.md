@@ -46,6 +46,8 @@ The shell is loaded separately through metadata:
 
 Use these files directly when building the page in DA.live:
 
+- [Google Docs ready block sheet](/Users/hanki/Jenifer%20GitHub%20repository/usmccsmymcx/docs/mcx-google-docs-copy-paste.html)
+
 - [index metadata](/Users/hanki/Jenifer%20GitHub%20repository/usmccsmymcx/docs/mcx-examples/index-metadata.table.txt)
 - [announcement bar](/Users/hanki/Jenifer%20GitHub%20repository/usmccsmymcx/docs/mcx-examples/mcx-announcement-bar.table.txt)
 - [hero](/Users/hanki/Jenifer%20GitHub%20repository/usmccsmymcx/docs/mcx-examples/mcx-hero.table.txt)
