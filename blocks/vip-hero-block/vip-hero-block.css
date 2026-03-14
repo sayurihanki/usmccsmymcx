@@ -103,8 +103,7 @@
   gap: var(--spacing-medium);
   justify-content: center;
   padding-block: clamp(var(--spacing-big), 6vw, var(--spacing-large));
-  padding-inline-end: clamp(var(--spacing-big), 4vw, var(--spacing-large));
-  padding-inline-start: 0;
+  padding-inline: 0 clamp(var(--spacing-big), 4vw, var(--spacing-large));
   position: relative;
 }
 

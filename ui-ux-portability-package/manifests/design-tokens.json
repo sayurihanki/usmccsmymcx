@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-14T09:24:19.314Z",
+  "generatedAt": "2026-03-14T09:37:33.999Z",
   "summary": {
     "totalTokens": 713,
     "definedTokens": 660,
@@ -6895,7 +6895,7 @@
       "definedIn": [
         "blocks/search-bar/search-bar.css"
       ],
-      "usageCount": 2,
+      "usageCount": 1,
       "usedIn": [
         "blocks/search-bar/search-bar.css"
       ],
@@ -6921,7 +6921,7 @@
       "definedIn": [
         "blocks/search-bar/search-bar.css"
       ],
-      "usageCount": 2,
+      "usageCount": 1,
       "usedIn": [
         "blocks/search-bar/search-bar.css"
       ],
@@ -10139,7 +10139,7 @@
     {
       "name": "--vmb-border",
       "prefix": "vmb",
-      "value": "var(--shape-border-width-1) solid rgba(15, 61, 36, 0.1)",
+      "value": "var(--shape-border-width-1) solid rgb(15 61 36 / 10%)",
       "definedIn": [
         "blocks/vip-member-block/vip-member-block.css"
       ],

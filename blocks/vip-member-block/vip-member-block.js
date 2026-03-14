@@ -195,7 +195,11 @@ function buildRackSvg() {
   const ys = [24, 46, 68, 90, 112, 134, 156];
   ys.forEach((y, i) => {
     svg.append(create('rect', {
-      x: '32', y: `${y}`, width: '116', height: '16', rx: '1',
+      x: '32',
+      y: `${y}`,
+      width: '116',
+      height: '16',
+      rx: '1',
       fill: i === 2 ? '#26a067' : 'white',
       'fill-opacity': i === 2 ? '0.3' : '0.08',
       stroke: i === 2 ? '#26a067' : 'white',
@@ -205,8 +209,11 @@ function buildRackSvg() {
 
   [32, 54, 76, 98].forEach((cy) => {
     svg.append(create('circle', {
-      cx: '136', cy: `${cy}`, r: '3',
-      fill: '#26a067', 'fill-opacity': cy === 76 ? '1' : '0.7',
+      cx: '136',
+      cy: `${cy}`,
+      r: '3',
+      fill: '#26a067',
+      'fill-opacity': cy === 76 ? '1' : '0.7',
     }));
   });
 
@@ -356,7 +363,10 @@ export default function decorate(block) {
   ]);
 
   // Benefits card
-  const benefitsCard = el('div', 'vmb-card vmb-benefits', { role: 'list', 'aria-label': 'Member benefits' },
+  const benefitsCard = el(
+    'div',
+    'vmb-card vmb-benefits',
+    { role: 'list', 'aria-label': 'Member benefits' },
     benefits.map((b, i) => el('div', 'vmb-benefit', { role: 'listitem' }, [
       el('div', 'vmb-benefit-icon', { 'aria-hidden': 'true' }, [benefitIcon(i)]),
       el('div', 'vmb-benefit-text', {}, [
@@ -367,7 +377,8 @@ export default function decorate(block) {
         text(b.linkText),
         el('span', '', { 'aria-hidden': 'true' }, [text(' →')]),
       ]) : null,
-    ])));
+    ])),
+  );
 
   // Spotlight card
   const spotlightCard = el('div', 'vmb-card vmb-spotlight', {}, [
@@ -375,7 +386,10 @@ export default function decorate(block) {
       el('span', 'vmb-spotlight-label', {}, [text(spotlightLabel)]),
       el('span', 'vmb-spotlight-count', {}, [text(spotlightCount)]),
     ]),
-    el('div', 'vmb-spotlight-items', { role: 'list', 'aria-label': 'Featured products' },
+    el(
+      'div',
+      'vmb-spotlight-items',
+      { role: 'list', 'aria-label': 'Featured products' },
       spotlightItems.map((item, i) => el('div', 'vmb-spotlight-item', {
         role: 'listitem',
         tabindex: '0',
@@ -390,7 +404,8 @@ export default function decorate(block) {
           el('span', 'vmb-spotlight-price', {}, [text(item.memberPrice)]),
           el('span', 'vmb-spotlight-price-was', {}, [text(item.wasPrice)]),
         ]),
-      ]))),
+      ])),
+    ),
     el('div', 'vmb-spotlight-footer', {}, [
       el('span', 'vmb-spotlight-footer-text', {}, [text(spotlightFooterText)]),
       (() => {
@@ -419,13 +434,20 @@ export default function decorate(block) {
       el('div', 'vmb-account-name', {}, [text(accountName)]),
       el('div', 'vmb-account-org', {}, [text(accountOrg)]),
     ]),
-    el('div', 'vmb-account-metrics', { role: 'list', 'aria-label': 'Account metrics' },
+    el(
+      'div',
+      'vmb-account-metrics',
+      { role: 'list', 'aria-label': 'Account metrics' },
       metrics.map((m) => el('div', 'vmb-metric', { role: 'listitem' }, [
         el('div', `vmb-metric-val${m.green ? ' vmb-green' : ''}`, {}, [text(m.value)]),
         el('div', 'vmb-metric-label', {}, [text(m.label)]),
         m.delta ? el('div', 'vmb-metric-delta', {}, [text(m.delta)]) : null,
-      ]))),
-    el('div', 'vmb-account-actions', {},
+      ])),
+    ),
+    el(
+      'div',
+      'vmb-account-actions',
+      {},
       actions.map((a) => {
         const row = el('div', 'vmb-action-row', {
           tabindex: '0',
@@ -445,7 +467,8 @@ export default function decorate(block) {
         });
 
         return row;
-      })),
+      }),
+    ),
   ]);
 
   // Grid

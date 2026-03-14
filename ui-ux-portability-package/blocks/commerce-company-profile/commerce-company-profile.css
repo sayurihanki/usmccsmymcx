@@ -49,6 +49,12 @@
     transition: background-color var(--transition-fast) var(--ease-out), transform var(--transition-fast) var(--ease-out);
 }
 
+.commerce-company-profile-wrapper .account-edit-company-profile__actions .dropin-button,
+.commerce-company-profile-wrapper .account-edit-company-profile__actions button {
+    min-width: 148px;
+    border-radius: var(--shape-border-radius-3);
+}
+
 .commerce-company-profile-wrapper .account-company-profile-card__actions .dropin-button:hover,
 .commerce-company-profile-wrapper .account-company-profile-card__actions button:hover {
     background: rgb(46 190 122 / 12%);
@@ -94,12 +100,6 @@
 
 .commerce-company-profile-wrapper .account-company-profile-card__content li {
     margin-bottom: 0.35em;
-}
-
-.commerce-company-profile-wrapper .account-edit-company-profile__actions .dropin-button,
-.commerce-company-profile-wrapper .account-edit-company-profile__actions button {
-    min-width: 148px;
-    border-radius: var(--shape-border-radius-3);
 }
 
 @media (max-width: 899px) {
