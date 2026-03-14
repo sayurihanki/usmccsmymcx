@@ -15,11 +15,62 @@
  * from Adobe.
  ****************************************************************** */
 
-/* Company Structure block styles */
-.commerce-company-structure { padding: 16px; }
+.commerce-company-structure {
+    padding: var(--spacing-small);
+}
 
 main .commerce-company-structure-container {
-  max-width: 700px;
-  margin: 40px auto;
-  width: 100%;
+    max-width: 980px;
+    margin: 40px auto;
+    width: 100%;
+}
+
+.commerce-company-structure-wrapper .company-structure__title {
+    font: var(--type-headline-2-strong-font);
+    letter-spacing: normal;
+}
+
+.commerce-company-structure-wrapper .acm-structure-toolbar,
+.commerce-company-structure-wrapper .acm-structure-panel,
+.commerce-company-structure-wrapper .acm-structure-message-card {
+    border: 1px solid var(--glass-border-subtle);
+    border-radius: calc(var(--shape-border-radius-2) + 2px);
+    background: var(--glass-bg-strong);
+    backdrop-filter: var(--glass-blur-xs) var(--glass-saturate);
+    box-shadow: 0 6px 18px rgb(0 0 0 / 7%);
+}
+
+.commerce-company-structure-wrapper .acm-structure-toolbar,
+.commerce-company-structure-wrapper .acm-structure-panel {
+    padding: var(--spacing-small);
+}
+
+.commerce-company-structure-wrapper .acm-structure-row {
+    border-radius: var(--shape-border-radius-2);
+    transition: background-color var(--transition-fast) var(--ease-out);
+}
+
+.commerce-company-structure-wrapper .acm-structure-row:hover {
+    background: rgb(46 190 122 / 6%);
+}
+
+.commerce-company-structure-wrapper .acm-structure-label {
+    color: var(--color-neutral-900);
+    font: var(--type-body-2-strong-font);
+}
+
+.commerce-company-structure-wrapper .acm-structure-count,
+.commerce-company-structure-wrapper .acm-structure-description {
+    color: var(--color-neutral-700);
+    font: var(--type-details-caption-2-font);
+}
+
+.commerce-company-structure-wrapper .acm-structure-description-button {
+    color: var(--main-color-accent);
+}
+
+@media (max-width: 899px) {
+    .commerce-company-structure {
+        padding: 0;
+    }
 }

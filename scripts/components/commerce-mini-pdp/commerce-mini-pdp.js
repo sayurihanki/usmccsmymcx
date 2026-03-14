@@ -30,6 +30,11 @@ import '../../initializers/cart.js';
 import { fetchPlaceholders, CS_FETCH_GRAPHQL } from '../../commerce.js';
 
 import { loadCSS } from '../../aem.js';
+import {
+  mountProductInputOptions,
+  deriveEnteredOptionsFromCustomizableOptions,
+  transformProductInputOptions,
+} from '../pdp-input-options/pdp-input-options.js';
 
 // Function to get fresh cart item data by UID
 async function getFreshCartItem(cartItemUid) {
@@ -87,6 +92,9 @@ export default async function createMiniPDP(cartItem, onUpdate, onClose) {
       models: {
         ProductDetails: {
           initialData: { ...product },
+          transformer: (rawProduct) => ({
+            inputOptions: transformProductInputOptions(rawProduct),
+          }),
           fallbackData: (parent, refinedData) => ({
             ...parent,
             ...refinedData,
@@ -133,6 +141,7 @@ export default async function createMiniPDP(cartItem, onUpdate, onClose) {
         <div class="mini-pdp__right-column">
           <div class="mini-pdp__configuration">
             <div class="mini-pdp__options"></div>
+            <div class="mini-pdp__input-options"></div>
             <div class="mini-pdp__quantity-wrapper">
               <div class="mini-pdp__quantity-label">
                 ${placeholders?.Global?.quantityLabel}
@@ -157,6 +166,7 @@ export default async function createMiniPDP(cartItem, onUpdate, onClose) {
     const $price = fragment.querySelector('.mini-pdp__price');
     const $gallery = fragment.querySelector('.mini-pdp__gallery');
     const $options = fragment.querySelector('.mini-pdp__options');
+    const $inputOptions = fragment.querySelector('.mini-pdp__input-options');
     const $quantity = fragment.querySelector('.mini-pdp__quantity');
     const $updateButton = fragment.querySelector('.mini-pdp__update-button');
     const $cancelButton = fragment.querySelector('.mini-pdp__cancel-button');
@@ -236,6 +246,10 @@ export default async function createMiniPDP(cartItem, onUpdate, onClose) {
                 && values.optionsUIDs.length > 0 && {
                 optionsUIDs: values.optionsUIDs,
               }),
+              ...(values.enteredOptions
+                && values.enteredOptions.length > 0 && {
+                enteredOptions: values.enteredOptions,
+              }),
             };
 
             const updateResponse = await Cart.updateProductsFromCart([
@@ -303,6 +317,14 @@ export default async function createMiniPDP(cartItem, onUpdate, onClose) {
         },
       })($redirectButton),
     ]);
+
+    await mountProductInputOptions($inputOptions, {
+      scope: 'modal',
+      initialEnteredOptions: deriveEnteredOptionsFromCustomizableOptions(
+        product?.inputOptions,
+        freshCartItem?.customizableOptions,
+      ),
+    });
 
     // Handle PDP validation events
     events.on(

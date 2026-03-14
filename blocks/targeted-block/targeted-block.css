@@ -1,1 +1,16 @@
-/* stylelint-disable no-empty-source */
+/*
+ * Fragment-backed targeted block container reset.
+ * Only remove the global section shell when a targeted block successfully
+ * loads a fragment, so inline targeted content keeps the default layout.
+ */
+
+.targeted-block-container.targeted-block-container--fragment {
+  margin: 0;
+}
+
+.targeted-block-container.targeted-block-container--fragment > div,
+.targeted-block-container.targeted-block-container--fragment .targeted-block-wrapper {
+  max-width: unset;
+  margin: 0;
+  padding: 0;
+}

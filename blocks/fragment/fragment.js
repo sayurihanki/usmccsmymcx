@@ -16,7 +16,7 @@ import {
  * @returns {Promise<HTMLElement>} The root element of the fragment
  */
 export async function loadFragment(path) {
-  if (path && path.startsWith('/') && !path.startsWith('//')) {
+  if (path && path.startsWith('/')) {
     const root = getRootPath().replace(/\/$/, '');
     const url = `${root}${path}.plain.html`;
     const resp = await fetch(url);
@@ -41,9 +41,55 @@ export async function loadFragment(path) {
   return null;
 }
 
+/**
+ * Mounts loaded fragment sections into the page.
+ * When the host occupies a dedicated section, replace that section so the
+ * fragment sections become top-level siblings under <main>.
+ * @param {Element} host The element currently standing in for the fragment
+ * @param {HTMLElement} fragment The decorated fragment main
+ * @returns {boolean} True when content was mounted
+ */
+export function mountFragment(host, fragment) {
+  if (!host || !fragment) return false;
+
+  const fragmentSections = [...fragment.children]
+    .filter((node) => node.nodeType === Node.ELEMENT_NODE);
+  if (!fragmentSections.length) return false;
+
+  const hostSection = host.closest('.section');
+  let replaceTarget = host;
+
+  while (
+    replaceTarget.parentElement
+    && replaceTarget.parentElement !== hostSection
+    && replaceTarget.parentElement.children.length === 1
+  ) {
+    replaceTarget = replaceTarget.parentElement;
+  }
+
+  const dedicatedSection = hostSection
+    && replaceTarget.parentElement === hostSection
+    && hostSection.children.length === 1;
+
+  if (dedicatedSection) {
+    hostSection.replaceWith(...fragmentSections);
+    return true;
+  }
+
+  const firstFragmentSection = fragmentSections.find((node) => node.classList?.contains('section'));
+  if (hostSection && firstFragmentSection) {
+    hostSection.classList.add(...firstFragmentSection.classList);
+  }
+
+  replaceTarget.replaceWith(...fragmentSections);
+  return true;
+}
+
 export default async function decorate(block) {
   const link = block.querySelector('a');
   const path = link ? link.getAttribute('href') : block.textContent.trim();
   const fragment = await loadFragment(path);
-  if (fragment) block.replaceChildren(...fragment.childNodes);
+  if (fragment) {
+    mountFragment(block, fragment);
+  }
 }

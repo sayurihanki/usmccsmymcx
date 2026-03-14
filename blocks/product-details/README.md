@@ -6,6 +6,11 @@ The Product Details block provides comprehensive product detail page functionali
 
 ## Integration
 
+### Block Configuration
+
+- `defaultsku` - Optional default SKU for template or demo usage
+- `presentation` - `default` or `auto-immersive`
+
 <!-- ### Block Configuration
 
 No block configuration is read via `readBlockConfig()`. The block uses dynamic product data and URL parameters. -->
@@ -41,6 +46,7 @@ No events are emitted by this block. -->
 - **Update Mode**: When itemUid in URL, operates in update-cart mode with different button text and behavior
 - **Product Configuration**: Validates product options and enables/disables add to cart button accordingly
 - **Wishlist Context**: Updates wishlist context based on current product configuration
+- **Auto Immersive Mode**: In `auto-immersive`, keeps the normal PDP visible until a compatible configurator emits `pdp/configurator-ready` with `presentation: rack-immersive`
 
 ### User Interaction Flows
 
@@ -49,7 +55,8 @@ No events are emitted by this block. -->
 3. **Add to Cart**: Users can add products to cart or update existing cart items
 4. **Wishlist Management**: Users can add/remove products from wishlist
 5. **Image Gallery**: Users can view product images in desktop thumbnail or mobile carousel format
-6. **SEO Optimization**: Sets JSON-LD structured data and meta tags for search engines
+6. **Immersive Sync**: Hides the default description and attributes only after the immersive configurator is ready
+7. **SEO Optimization**: Sets JSON-LD structured data and meta tags for search engines
 
 ### Error Handling
 

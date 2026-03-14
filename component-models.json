@@ -22,12 +22,6 @@
         "name": "robots",
         "label": "Robots",
         "description": "Index control via robots"
-      },
-      {
-        "component": "text",
-        "name": "sku",
-        "label": "SKU",
-        "description": "Optional: Specify a product SKU for this page"
       }
     ]
   },
@@ -64,6 +58,18 @@
           {
             "name": "Highlight",
             "value": "highlight"
+          },
+          {
+            "name": "Light",
+            "value": "light"
+          },
+          {
+            "name": "Glass",
+            "value": "glass"
+          },
+          {
+            "name": "Dark glass",
+            "value": "dark-glass"
           }
         ]
       },
@@ -544,16 +550,6 @@
     ]
   },
   {
-    "id": "commerce-account-header",
-    "fields": [
-      {
-        "component": "text",
-        "name": "title",
-        "label": "Title"
-      }
-    ]
-  },
-  {
     "id": "commerce-account-hub",
     "fields": [
       {
@@ -612,131 +608,6 @@
     ]
   },
   {
-    "id": "commerce-addresses",
-    "fields": [
-      {
-        "component": "boolean",
-        "name": "minified-view",
-        "label": "Minified View"
-      }
-    ]
-  },
-  {
-    "id": "commerce-cart",
-    "fields": [
-      {
-        "component": "boolean",
-        "name": "hide-heading",
-        "label": "Hide Heading"
-      },
-      {
-        "component": "text",
-        "name": "max-items",
-        "label": "Max Items"
-      },
-      {
-        "component": "text",
-        "name": "hide-attributes",
-        "label": "Hide Attributes"
-      },
-      {
-        "component": "boolean",
-        "name": "enable-item-quantity-update",
-        "label": "Enable Item Quantity Update"
-      },
-      {
-        "component": "boolean",
-        "name": "enable-item-remove",
-        "label": "Enable Item Remove"
-      },
-      {
-        "component": "boolean",
-        "name": "enable-estimate-shipping",
-        "label": "Enable Estimate Shipping"
-      },
-      {
-        "component": "text",
-        "name": "start-shopping-url",
-        "label": "Start Shopping URL"
-      },
-      {
-        "component": "text",
-        "name": "checkout-url",
-        "label": "Checkout URL"
-      },
-      {
-        "component": "boolean",
-        "name": "enable-updating-product",
-        "label": "Enable Updating Product"
-      },
-      {
-        "component": "boolean",
-        "name": "undo-remove-item",
-        "label": "Undo Remove Item"
-      }
-    ]
-  },
-  {
-    "id": "commerce-mini-cart",
-    "fields": [
-      {
-        "component": "text",
-        "name": "start-shopping-url",
-        "label": "Start Shopping URL"
-      },
-      {
-        "component": "text",
-        "name": "cart-url",
-        "label": "Cart URL"
-      },
-      {
-        "component": "text",
-        "name": "checkout-url",
-        "label": "Checkout URL"
-      },
-      {
-        "component": "boolean",
-        "name": "enable-updating-product",
-        "label": "Enable Updating Product"
-      },
-      {
-        "component": "boolean",
-        "name": "undo-remove-item",
-        "label": "Undo Remove Item"
-      }
-    ]
-  },
-  {
-    "id": "commerce-orders-list",
-    "fields": [
-      {
-        "component": "boolean",
-        "name": "minified-view",
-        "label": "Minified View"
-      }
-    ]
-  },
-  {
-    "id": "commerce-returns-list",
-    "fields": [
-      {
-        "component": "boolean",
-        "name": "minified-view",
-        "label": "Minified View"
-      }
-    ]
-  },
-  {
-    "id": "commerce-wishlist",
-    "fields": [
-      {
-        "component": "text",
-        "name": "start-shopping-url",
-        "label": "Start Shopping URL"
-      }
-    ]
-  },
-  {
     "id": "customer-segment-personalization-block",
     "fields": [
       {
@@ -786,31 +657,6 @@
         "valueType": "string",
         "name": "embedUrlText",
         "label": "Embed URL Text"
-      }
-    ]
-  },
-  {
-    "id": "enrichment",
-    "fields": [
-      {
-        "component": "select",
-        "name": "type",
-        "label": "Type",
-        "options": [
-          {
-            "name": "Product",
-            "value": "product"
-          },
-          {
-            "name": "Category",
-            "value": "category"
-          }
-        ]
-      },
-      {
-        "component": "text",
-        "name": "position",
-        "label": "Position"
       }
     ]
   },
@@ -2512,26 +2358,33 @@
     "fields": [
       {
         "component": "text",
-        "name": "defaultSku",
+        "valueType": "string",
+        "name": "defaultsku",
         "label": "Default SKU",
-        "description": "Optional: Specify a default product SKU if this is a template page"
+        "value": ""
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "presentation",
+        "label": "Presentation",
+        "value": "default",
+        "options": [
+          {
+            "name": "Default",
+            "value": "default"
+          },
+          {
+            "name": "Auto Immersive",
+            "value": "auto-immersive"
+          }
+        ]
       }
     ]
   },
   {
     "id": "product-highlights",
     "fields": []
-  },
-  {
-    "id": "product-list-page",
-    "fields": [
-      {
-        "component": "text",
-        "name": "urlpath",
-        "label": "URL Path",
-        "description": "URL Path of the category as defined in the catalog (not CMS)"
-      }
-    ]
   },
   {
     "id": "product-recommendations",

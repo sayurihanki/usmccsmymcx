@@ -1,1 +1,48 @@
-/* stylelint-disable no-empty-source */
+.commerce-addresses-wrapper .account-addresses-header,
+.commerce-addresses-wrapper .dropin-header-container {
+    margin-bottom: var(--spacing-small);
+}
+
+.commerce-addresses-wrapper .dropin-header-container__title {
+    font: var(--type-headline-2-strong-font);
+    letter-spacing: normal;
+}
+
+.commerce-addresses-wrapper .dropin-divider {
+    opacity: 0.45;
+}
+
+.commerce-addresses-wrapper .account-address-card,
+.commerce-addresses-wrapper .account-actions-address,
+.commerce-addresses-wrapper .account-empty-list .dropin-card {
+    border: 1px solid var(--glass-border-subtle);
+    border-radius: calc(var(--shape-border-radius-2) + 2px);
+    background: var(--glass-bg-strong);
+    backdrop-filter: var(--glass-blur-xs) var(--glass-saturate);
+    box-shadow: 0 6px 18px rgb(0 0 0 / 7%);
+}
+
+.commerce-addresses-wrapper .account-address-card .dropin-card__content {
+    padding: var(--spacing-medium);
+}
+
+.commerce-addresses-wrapper .account-address-card__description p:nth-child(1),
+.commerce-addresses-wrapper .account-address-card__description p:nth-child(2) {
+    color: var(--color-neutral-900);
+}
+
+.commerce-addresses-wrapper .account-actions-address {
+    min-height: 76px;
+    height: auto;
+    transition: transform var(--transition-fast) var(--ease-out), box-shadow var(--transition-fast) var(--ease-out);
+}
+
+.commerce-addresses-wrapper .account-actions-address:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgb(0 0 0 / 10%);
+}
+
+.commerce-addresses-wrapper .account-actions-address__title {
+    font: var(--type-body-1-strong-font);
+    letter-spacing: normal;
+}

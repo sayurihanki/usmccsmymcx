@@ -112,6 +112,45 @@ export const ACCEPTED_FILE_TYPES = [
   'image/png', // .png
 ];
 
+const CUSTOMER_GROUP_UID_QUERY = `
+  query customerGroupContext {
+    customerGroup {
+      uid
+    }
+  }
+`;
+
+const CUSTOMER_GROUP_UID_SESSION_KEY = 'DROPINS_CUSTOMER_GROUP_UID';
+const DEFAULT_GUEST_CUSTOMER_GROUP_UID = 'MA==';
+
+let customerGroupUidPromise;
+
+async function hashCustomerGroupUid(customerGroupUid) {
+  if (!customerGroupUid) {
+    return null;
+  }
+
+  try {
+    const decodedUid = Uint8Array.from(atob(customerGroupUid), (char) => char.charCodeAt(0));
+    const digest = await crypto.subtle.digest('SHA-1', decodedUid);
+    return Array.from(new Uint8Array(digest))
+      .map((byte) => byte.toString(16).padStart(2, '0'))
+      .join('');
+  } catch (error) {
+    console.warn('Unable to hash Commerce customer group uid', { error });
+    return null;
+  }
+}
+
+/**
+ * Encodes a SKU for use in product URL paths (e.g. replaces / with __).
+ * @param {string} sku - Product SKU
+ * @returns {string} URL-safe SKU
+ */
+export function encodeSkuForUrl(sku) {
+  return sku?.replace(/\//g, '__') || '';
+}
+
 /**
  * Auth Privacy Policy Consent Slot
  * @param {Object} ctx - The context object
@@ -356,8 +395,14 @@ export async function initializeCommerce() {
   CORE_FETCH_GRAPHQL.setFetchGraphQlHeaders((prev) => ({ ...prev, ...getHeaders('all') }));
 
   // Set Fetch GraphQL (Catalog Service)
-  CS_FETCH_GRAPHQL.setEndpoint(await commerceEndpointWithQueryParams());
-  CS_FETCH_GRAPHQL.setFetchGraphQlHeaders((prev) => ({ ...prev, ...getHeaders('cs') }));
+  await refreshCatalogServiceEndpoint();
+  CS_FETCH_GRAPHQL.setFetchGraphQlHeaders((prev) => ({
+    ...prev,
+    ...getHeaders('all'),
+    ...getHeaders('cs'),
+  }));
+
+  await refreshCatalogCustomerGroupHeader({ force: true });
 
   return initializeDropins();
 }
@@ -589,6 +634,16 @@ export async function fetchPlaceholders(path) {
  */
 export async function getConfigFromSession() {
   const configURL = `${window.location.origin}/config.json`;
+  const isLegacyStoreScope = (cfg) => {
+    const allHeadersStore = cfg?.public?.default?.headers?.all?.Store;
+    const csStoreCode = cfg?.public?.default?.headers?.cs?.['Magento-Store-Code'];
+    const csStoreViewCode = cfg?.public?.default?.headers?.cs?.['Magento-Store-View-Code'];
+
+    // Invalidate old cached scope so users pick up the current Bodea store config.
+    return allHeadersStore === 'default'
+      || csStoreCode === 'main_website_store'
+      || csStoreViewCode === 'default';
+  };
 
   try {
     const configJSON = window.sessionStorage.getItem('config');
@@ -603,12 +658,15 @@ export async function getConfigFromSession() {
     ) {
       throw new Error('Config expired');
     }
+    if (isLegacyStoreScope(parsedConfig)) {
+      throw new Error('Config store scope stale');
+    }
     return parsedConfig;
   } catch (e) {
     const config = await fetch(configURL);
     if (!config.ok) throw new Error('Failed to fetch config');
     const configJSON = await config.json();
-    configJSON[':expiry'] = Math.round(Date.now() / 1000) + 7200;
+    configJSON[':expiry'] = Math.round(Date.now() / 1000) + 300;
     window.sessionStorage.setItem('config', JSON.stringify(configJSON));
     return configJSON;
   }
@@ -643,12 +701,124 @@ function createHashFromObject(obj, length = 5) {
 export async function commerceEndpointWithQueryParams(customHeaders = {}) {
   const urlWithQueryParams = new URL(getConfigValue('commerce-endpoint'));
   const headers = {
+    ...getHeaders('all'),
     ...getHeaders('cs'),
     ...customHeaders,
   };
   const shortHash = createHashFromObject(headers);
   urlWithQueryParams.searchParams.append('cb', shortHash);
   return urlWithQueryParams;
+}
+
+export async function refreshCatalogServiceEndpoint(customHeaders = {}) {
+  CS_FETCH_GRAPHQL.setEndpoint(await commerceEndpointWithQueryParams(customHeaders));
+}
+
+export function getStoredCustomerGroupUid() {
+  try {
+    return window.sessionStorage.getItem(CUSTOMER_GROUP_UID_SESSION_KEY);
+  } catch {
+    return null;
+  }
+}
+
+export async function setCatalogCustomerGroupHeader(customerGroupUid) {
+  if (customerGroupUid) {
+    const customerGroupHeader = await hashCustomerGroupUid(customerGroupUid);
+
+    try {
+      window.sessionStorage.setItem(CUSTOMER_GROUP_UID_SESSION_KEY, customerGroupUid);
+    } catch {
+      // Ignore session storage failures and continue with runtime header updates.
+    }
+
+    if (customerGroupHeader) {
+      CS_FETCH_GRAPHQL.setFetchGraphQlHeader('Magento-Customer-Group', customerGroupHeader);
+      await refreshCatalogServiceEndpoint({ 'Magento-Customer-Group': customerGroupHeader });
+      return customerGroupUid;
+    }
+
+    CS_FETCH_GRAPHQL.removeFetchGraphQlHeader('Magento-Customer-Group');
+    await refreshCatalogServiceEndpoint();
+    return customerGroupUid;
+  }
+
+  try {
+    window.sessionStorage.removeItem(CUSTOMER_GROUP_UID_SESSION_KEY);
+  } catch {
+    // Ignore session storage failures and continue with runtime header updates.
+  }
+  CS_FETCH_GRAPHQL.removeFetchGraphQlHeader('Magento-Customer-Group');
+  await refreshCatalogServiceEndpoint();
+  return null;
+}
+
+export async function fetchCustomerGroupUid({ force = false } = {}) {
+  const cachedCustomerGroupUid = !force && getStoredCustomerGroupUid();
+  if (cachedCustomerGroupUid) {
+    return cachedCustomerGroupUid;
+  }
+
+  if (customerGroupUidPromise && !force) {
+    return customerGroupUidPromise;
+  }
+
+  customerGroupUidPromise = CS_FETCH_GRAPHQL.fetchGraphQl(CUSTOMER_GROUP_UID_QUERY, {
+    method: 'GET',
+  })
+    .then(({ data, errors }) => {
+      if (errors?.length) {
+        console.warn('Unable to resolve Commerce customer group uid', { errors });
+        return null;
+      }
+
+      return data?.customerGroup?.uid || null;
+    })
+    .catch((error) => {
+      console.warn('Error while resolving Commerce customer group uid', { error });
+      return null;
+    })
+    .finally(() => {
+      customerGroupUidPromise = null;
+    });
+
+  return customerGroupUidPromise;
+}
+
+export async function refreshCatalogCustomerGroupHeader({ force = false } = {}) {
+  const customerGroupUid = await fetchCustomerGroupUid({ force });
+  const normalizedCustomerGroupUid = customerGroupUid || DEFAULT_GUEST_CUSTOMER_GROUP_UID;
+  await setCatalogCustomerGroupHeader(normalizedCustomerGroupUid);
+  return normalizedCustomerGroupUid;
+}
+
+export function getSearchViewHistory(limit = 10) {
+  try {
+    const storeViewCode = getConfigValue('headers.cs.Magento-Store-View-Code');
+    const historyKey = `${storeViewCode}:productViewHistory`;
+    const parsedHistory = JSON.parse(window.localStorage.getItem(historyKey) || '[]');
+
+    if (!Array.isArray(parsedHistory)) {
+      return [];
+    }
+
+    return parsedHistory
+      .filter((item) => item?.sku)
+      .slice(-limit)
+      .map((item) => ({
+        dateTime: item.date || new Date(0).toISOString(),
+        sku: item.sku,
+      }));
+  } catch {
+    return [];
+  }
+}
+
+export function getSearchContext() {
+  return {
+    customerGroup: getStoredCustomerGroupUid() || DEFAULT_GUEST_CUSTOMER_GROUP_UID,
+    userViewHistory: getSearchViewHistory(),
+  };
 }
 
 /**

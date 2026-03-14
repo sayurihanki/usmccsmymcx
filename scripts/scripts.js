@@ -7,6 +7,7 @@ import {
   decorateBlocks,
   decorateTemplateAndTheme,
   waitForFirstImage,
+  loadBlock,
   loadSection,
   loadSections,
   loadCSS,
@@ -22,6 +23,7 @@ import {
   IS_UE,
   IS_DA,
 } from './commerce.js';
+import { runExperimentation } from './experiment-loader.js';
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -60,16 +62,16 @@ async function loadFonts() {
  */
 function buildAutoBlocks(main) {
   try {
-    // auto load `*/fragments/*` references
-    const fragments = [...main.querySelectorAll('a[href*="/fragments/"]')].filter((f) => !f.closest('.fragment'));
+    // auto block `*/fragments/*` references
+    const fragments = main.querySelectorAll('a[href*="/fragments/"]');
     if (fragments.length > 0) {
       // eslint-disable-next-line import/no-cycle
-      import('../blocks/fragment/fragment.js').then(({ loadFragment }) => {
+      import('../blocks/fragment/fragment.js').then(({ loadFragment, mountFragment }) => {
         fragments.forEach(async (fragment) => {
           try {
             const { pathname } = new URL(fragment.href);
             const frag = await loadFragment(pathname);
-            fragment.parentElement.replaceWith(...frag.children);
+            mountFragment(fragment.parentElement, frag);
           } catch (error) {
             // eslint-disable-next-line no-console
             console.error('Fragment loading failed', error);
@@ -97,6 +99,30 @@ export function decorateMain(main) {
   decorateBlocks(main);
 }
 
+const experimentationConfig = {
+  audiences: {},
+  decorateFunction: async (el) => {
+    if (el.matches('main')) {
+      decorateMain(el);
+      await loadSections(el);
+      return;
+    }
+
+    if (el.matches('.section')) {
+      el.dataset.sectionStatus = 'initialized';
+      decorateBlocks(el);
+      await loadSection(el);
+      return;
+    }
+
+    const block = el.matches('.block') ? el : el.closest('.block');
+    if (block) {
+      block.dataset.blockStatus = 'initialized';
+      await loadBlock(block);
+    }
+  },
+};
+
 /**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
@@ -104,6 +130,7 @@ export function decorateMain(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
+  await runExperimentation(doc, experimentationConfig);
 
   const main = doc.querySelector('main');
   if (main) {

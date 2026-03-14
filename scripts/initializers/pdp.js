@@ -3,12 +3,13 @@ import { Image, provider as UI } from '@dropins/tools/components.js';
 import { initialize, setEndpoint, fetchProductData } from '@dropins/storefront-pdp/api.js';
 import { isAemAssetsEnabled, tryGenerateAemAssetsOptimizedUrl } from '@dropins/tools/lib/aem/assets.js';
 import { initializeDropin } from './index.js';
+import { transformProductInputOptions } from '../components/pdp-input-options/pdp-input-options.js';
 import {
   CS_FETCH_GRAPHQL,
   fetchPlaceholders,
   getOptionsUIDsFromUrl,
   getProductSku,
-  IS_UE,
+  getSearchContext,
   loadErrorPage,
   preloadFile,
 } from '../commerce.js';
@@ -18,6 +19,58 @@ export const IMAGES_SIZES = {
   width: 960,
   height: 1191,
 };
+
+const URLKEY_TO_SKU_QUERY = `
+  query resolveSkuByUrlKey($phrase: String!, $pageSize: Int = 20, $context: QueryContextInput) {
+    productSearch(phrase: $phrase, page_size: $pageSize, context: $context) {
+      items {
+        productView {
+          sku
+          urlKey
+        }
+      }
+    }
+  }
+`;
+
+function getUrlKeyFromPath(pathname = window.location.pathname) {
+  const result = pathname.match(/\/products\/([\w|-]+)(?:\/[\w|-]+)?$/);
+  return result?.[1] || null;
+}
+
+async function resolveSkuByUrlKey(urlKey) {
+  if (!urlKey) {
+    return null;
+  }
+
+  try {
+    const { data, errors } = await CS_FETCH_GRAPHQL.fetchGraphQl(URLKEY_TO_SKU_QUERY, {
+      method: 'GET',
+      variables: {
+        phrase: urlKey,
+        pageSize: 20,
+        context: getSearchContext(),
+      },
+    });
+
+    if (errors?.length) {
+      console.warn('Unable to resolve sku from urlKey via productSearch', { urlKey, errors });
+      return null;
+    }
+
+    const exactMatch = data?.productSearch?.items
+      ?.find((item) => item?.productView?.urlKey === urlKey)?.productView;
+
+    if (!exactMatch?.sku) {
+      return null;
+    }
+
+    return exactMatch.sku;
+  } catch (error) {
+    console.warn('Error while resolving sku from urlKey', { urlKey, error });
+    return null;
+  }
+}
 
 /**
  * Extracts the main product image URL from JSON-LD or meta tags
@@ -80,24 +133,32 @@ await initializeDropin(async () => {
   preloadPDPAssets();
 
   // Fetch product data
-  const sku = getProductSku();
+  let sku = getProductSku();
   const optionsUIDs = getOptionsUIDsFromUrl();
+  const urlKey = getUrlKeyFromPath();
 
-  // If we cannot find a sku, and we are not in UE, there's a problem.
-  if (!sku && !IS_UE) {
-    return loadErrorPage();
-  }
-
-  const getProductData = async (skipTransform) => {
-    const data = await fetchProductData(sku, { optionsUIDs, skipTransform })
+  const getProductData = async (targetSku, skipTransform) => {
+    const data = await fetchProductData(targetSku, { optionsUIDs, skipTransform })
       .then(preloadImageMiddleware);
     return data;
   };
 
-  const [product, labels] = await Promise.all([
-    getProductData(true),
-    fetchPlaceholders('placeholders/pdp.json'),
-  ]);
+  const labelsPromise = fetchPlaceholders('placeholders/pdp.json');
+  let product = await getProductData(sku, true);
+
+  if (!product?.sku && urlKey) {
+    const resolvedSku = await resolveSkuByUrlKey(urlKey);
+    if (resolvedSku) {
+      sku = resolvedSku;
+      product = await getProductData(sku, true);
+    }
+  }
+
+  const labels = await labelsPromise;
+
+  if (!product?.sku) {
+    return loadErrorPage();
+  }
 
   const langDefinitions = {
     default: {
@@ -108,6 +169,9 @@ await initializeDropin(async () => {
   const models = {
     ProductDetails: {
       initialData: { ...product },
+      transformer: (rawProduct) => ({
+        inputOptions: transformProductInputOptions(rawProduct),
+      }),
     },
   };
 

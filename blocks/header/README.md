@@ -18,6 +18,15 @@ No URL parameters are directly read by the header block.
 
 No localStorage keys are used directly by this block. Authentication and cart state are managed through cookies and the event bus.
 
+### Site Config
+
+The header can conditionally show a VIP Catalog submenu entry based on customer group hash:
+
+- Config path: `navigation.catalog.vipCategory.allowedGroupHashes`
+- Expected type: `string[]` (comma-separated string also tolerated)
+- Match source: `auth/group-uid` event payload (hashed customer group id)
+- Default behavior: fail-closed (VIP entry hidden when config or group state is missing)
+
 ### Events
 
 #### Event Listeners
@@ -120,4 +129,3 @@ The header creates three main sections from the nav fragment:
 - `header.css` - Styles for navigation, panels, and responsive layouts
 - `renderAuthCombine.js` - Authentication modal for mobile with sign in/sign up/reset password forms
 - `renderAuthDropdown.js` - Authentication dropdown for desktop with sign in form and user menu
-

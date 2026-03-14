@@ -1,1 +1,134 @@
-/* stylelint-disable no-empty-source */
+main .commerce-b2b-requisition-list-view-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    width: 100%;
+}
+
+.commerce-b2b-requisition-list-view-wrapper .requisition-list-header {
+    border: 1px solid var(--glass-border-subtle);
+    border-radius: calc(var(--shape-border-radius-2) + 2px);
+    background: var(--glass-bg-strong);
+    backdrop-filter: var(--glass-blur-xs) var(--glass-saturate);
+    box-shadow: 0 6px 18px rgb(0 0 0 / 7%);
+    margin-bottom: var(--spacing-small);
+    padding: var(--spacing-medium);
+}
+
+.commerce-b2b-requisition-list-view-wrapper .requisition-list-header__title {
+    font: var(--type-headline-2-strong-font);
+    letter-spacing: normal;
+}
+
+.commerce-b2b-requisition-list-view-wrapper .requisition-list-header__description {
+    color: var(--color-neutral-700);
+    font: var(--type-body-2-default-font);
+}
+
+.commerce-b2b-requisition-list-view-wrapper .requisition-list-header__action-link {
+    color: var(--main-color-accent);
+    font: var(--type-body-2-strong-font);
+    text-decoration: none;
+}
+
+.commerce-b2b-requisition-list-view-wrapper .requisition-list-header__action-link:hover {
+    text-decoration: underline;
+}
+
+.commerce-b2b-requisition-list-view-wrapper .requisition-list-view__batch-actions {
+    border: 1px solid var(--glass-border-subtle);
+    border-radius: calc(var(--shape-border-radius-2) + 2px);
+    background: var(--glass-bg-strong);
+    backdrop-filter: var(--glass-blur-xs) var(--glass-saturate);
+    margin-bottom: var(--spacing-small);
+}
+
+.commerce-b2b-requisition-list-view-wrapper .requisition-list-view__batch-actions-count-badge {
+    background: var(--main-color-accent);
+}
+
+.commerce-b2b-requisition-list-view-wrapper .requisition-list-view__batch-actions-buttons .dropin-button,
+.commerce-b2b-requisition-list-view-wrapper .requisition-list-view__batch-actions-select-label {
+    border: 1px solid rgb(46 190 122 / 26%);
+    border-radius: var(--shape-border-radius-3);
+    background: rgb(46 190 122 / 8%);
+    color: var(--main-color-accent);
+}
+
+.commerce-b2b-requisition-list-view-wrapper .requisition-list-view__batch-actions-buttons .dropin-button:hover,
+.commerce-b2b-requisition-list-view-wrapper .requisition-list-view__batch-actions-select-label:hover {
+    background: rgb(46 190 122 / 16%);
+}
+
+.commerce-b2b-requisition-list-view-wrapper .dropin-table,
+.commerce-b2b-requisition-list-view-wrapper .requisition-list-view-product-list-table-container {
+    border: 1px solid var(--glass-border-subtle);
+    border-radius: calc(var(--shape-border-radius-2) + 2px);
+    background: var(--glass-bg-strong);
+    backdrop-filter: var(--glass-blur-xs) var(--glass-saturate);
+    box-shadow: 0 6px 18px rgb(0 0 0 / 7%);
+    overflow: hidden;
+}
+
+.commerce-b2b-requisition-list-view-wrapper .dropin-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.commerce-b2b-requisition-list-view-wrapper .dropin-table th {
+    color: var(--color-neutral-700);
+    font: var(--type-details-overline-font);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgb(0 0 0 / 8%);
+    padding: var(--spacing-xsmall) var(--spacing-small);
+}
+
+.commerce-b2b-requisition-list-view-wrapper .dropin-table td {
+    border-bottom: 1px solid rgb(0 0 0 / 6%);
+    padding: var(--spacing-small);
+}
+
+.commerce-b2b-requisition-list-view-wrapper .dropin-table tr:last-child td {
+    border-bottom: 0;
+}
+
+.commerce-b2b-requisition-list-view-wrapper .dropin-table tr:hover td {
+    background: rgb(46 190 122 / 6%);
+}
+
+.commerce-b2b-requisition-list-view-wrapper .requisition-list-view-product-list-table__product-name {
+    color: var(--color-neutral-900);
+}
+
+.commerce-b2b-requisition-list-view-wrapper .requisition-list-view-product-list-table__sku {
+    color: var(--color-neutral-700);
+}
+
+.commerce-b2b-requisition-list-view-wrapper .requisition-list-view__pagination {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-small);
+    justify-content: space-between;
+    margin-top: var(--spacing-small);
+}
+
+@media (max-width: 899px) {
+    .commerce-b2b-requisition-list-view-wrapper .requisition-list-header {
+        padding: var(--spacing-small);
+    }
+
+    .commerce-b2b-requisition-list-view-wrapper .dropin-table {
+        overflow-x: auto;
+    }
+
+    .commerce-b2b-requisition-list-view-wrapper .dropin-table th,
+    .commerce-b2b-requisition-list-view-wrapper .dropin-table td {
+        padding: var(--spacing-xsmall);
+    }
+
+    .commerce-b2b-requisition-list-view-wrapper .requisition-list-view__pagination {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

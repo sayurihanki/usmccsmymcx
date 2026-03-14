@@ -14,4 +14,127 @@
  * is strictly forbidden unless prior written permission is obtained
  * from Adobe.
  ****************************************************************** */
-/* stylelint-disable no-empty-source */
+main .commerce-company-credit-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    width: 100%;
+}
+
+.commerce-company-credit-wrapper .dropin-header-container__title {
+    font: var(--type-headline-2-strong-font);
+    letter-spacing: normal;
+}
+
+.commerce-company-credit-wrapper .dropin-divider {
+    opacity: 0.45;
+}
+
+.commerce-company-credit-wrapper .company-management-company-credit-grid {
+    display: grid;
+    gap: var(--spacing-small);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-bottom: var(--spacing-small);
+}
+
+.commerce-company-credit-wrapper .company-management-company-credit-outstanding-balance,
+.commerce-company-credit-wrapper .company-management-company-credit-available-credit,
+.commerce-company-credit-wrapper .company-management-company-credit-credit-limit,
+.commerce-company-credit-wrapper .company-management-company-credit-history-table,
+.commerce-company-credit-wrapper .company-management-credit-history-empty,
+.commerce-company-credit-wrapper .company-management-company-credit-empty,
+.commerce-company-credit-wrapper .dropin-card {
+    border: 1px solid var(--glass-border-subtle);
+    border-radius: calc(var(--shape-border-radius-2) + 2px);
+    background: var(--glass-bg-strong);
+    backdrop-filter: var(--glass-blur-xs) var(--glass-saturate);
+    box-shadow: 0 6px 18px rgb(0 0 0 / 7%);
+}
+
+.commerce-company-credit-wrapper .company-management-company-credit-grid .dropin-card__content,
+.commerce-company-credit-wrapper .company-management-company-credit-history-table .dropin-card__content {
+    padding: var(--spacing-medium);
+}
+
+.commerce-company-credit-wrapper .company-management-company-credit-grid p {
+    margin: 0;
+    color: var(--color-neutral-800);
+}
+
+.commerce-company-credit-wrapper .company-management-company-credit-grid .dropin-price {
+    color: var(--color-neutral-900);
+    font: var(--type-headline-2-strong-font);
+}
+
+.commerce-company-credit-wrapper .company-management-company-credit-grid .company-management-company-credit-negative {
+    color: var(--color-alert-800);
+}
+
+.commerce-company-credit-wrapper .company-management-company-credit-history-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.commerce-company-credit-wrapper .company-management-company-credit-history-table thead th {
+    color: var(--color-neutral-700);
+    font: var(--type-details-overline-font);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgb(0 0 0 / 8%);
+    padding: var(--spacing-xsmall) var(--spacing-small);
+}
+
+.commerce-company-credit-wrapper .company-management-company-credit-history-table tbody td {
+    border-bottom: 1px solid rgb(0 0 0 / 6%);
+    padding: var(--spacing-small);
+}
+
+.commerce-company-credit-wrapper .company-management-company-credit-history-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.commerce-company-credit-wrapper .company-management-company-credit-history-table tbody tr:hover td {
+    background: rgb(46 190 122 / 6%);
+}
+
+.commerce-company-credit-wrapper .table-footer {
+    align-items: center;
+    border-top: 1px solid rgb(0 0 0 / 8%);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-small);
+    justify-content: space-between;
+    margin-top: var(--spacing-small);
+    padding-top: var(--spacing-small);
+}
+
+.commerce-company-credit-wrapper .pagination-controls {
+    align-items: center;
+    display: flex;
+    gap: var(--spacing-xsmall);
+}
+
+.commerce-company-credit-wrapper .pagination-label,
+.commerce-company-credit-wrapper .item-count {
+    color: var(--color-neutral-700);
+    font: var(--type-details-caption-2-font);
+}
+
+@media (max-width: 899px) {
+    .commerce-company-credit-wrapper .company-management-company-credit-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .commerce-company-credit-wrapper .company-management-company-credit-history-table {
+        overflow-x: auto;
+    }
+
+    .commerce-company-credit-wrapper .company-management-company-credit-history-table thead th,
+    .commerce-company-credit-wrapper .company-management-company-credit-history-table tbody td {
+        padding: var(--spacing-xsmall);
+    }
+
+    .commerce-company-credit-wrapper .table-footer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

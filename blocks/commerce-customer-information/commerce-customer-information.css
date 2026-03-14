@@ -1,1 +1,21 @@
-/* stylelint-disable no-empty-source */
+.commerce-customer-information-wrapper .customer-information__title,
+.commerce-customer-information-wrapper .dropin-header-container__title {
+    font: var(--type-headline-2-strong-font);
+    letter-spacing: normal;
+}
+
+.commerce-customer-information-wrapper .account-customer-information-card,
+.commerce-customer-information-wrapper .account-change-password,
+.commerce-customer-information-wrapper .account-edit-customer-information {
+    border: 1px solid var(--glass-border-subtle);
+    border-radius: calc(var(--shape-border-radius-2) + 2px);
+    background: var(--glass-bg-strong);
+    backdrop-filter: var(--glass-blur-xs) var(--glass-saturate);
+    box-shadow: 0 6px 18px rgb(0 0 0 / 7%);
+}
+
+.commerce-customer-information-wrapper .account-customer-information-card .dropin-card__content,
+.commerce-customer-information-wrapper .account-change-password .dropin-card__content,
+.commerce-customer-information-wrapper .account-edit-customer-information .dropin-card__content {
+    padding: var(--spacing-medium);
+}

@@ -1,5 +1,13 @@
 footer {
-    background-color: var(--color-neutral-100);
+    background:
+        linear-gradient(
+            135deg,
+            rgb(14 20 16 / 98%) 0%,
+            rgb(8 12 10 / 98%) 58%,
+            rgb(10 41 24 / 96%) 100%
+        );
+    border-top: 1px solid rgb(46 190 122 / 18%);
+    color: var(--ink-200);
     font: var(--type-body-2-default-font);
     letter-spacing: var(--type-body-2-default-letter-spacing);
 }
@@ -12,11 +20,24 @@ footer .footer > div {
 
 footer .footer p {
     margin: 0;
+    color: var(--ink-300);
+}
+
+footer .footer a {
+    color: var(--ink-300);
+    text-decoration: none;
+    transition: color 0.2s ease-out;
+}
+
+footer .footer a:hover,
+footer .footer a:focus-visible {
+    color: var(--green-200);
 }
 
 .storeview-switcher-button {
     background: transparent;
     padding-left: 0;
+    color: var(--ink-200);
 }
 
 .storeview-modal-storeview-title {

@@ -4,7 +4,12 @@ import { events } from '@dropins/tools/event-bus.js';
 import { initializers } from '@dropins/tools/initializer.js';
 import { getConfigValue } from '@dropins/tools/lib/aem/configs.js';
 import { isAemAssetsEnabled } from '@dropins/tools/lib/aem/assets.js';
-import { CORE_FETCH_GRAPHQL, CS_FETCH_GRAPHQL, fetchPlaceholders } from '../commerce.js';
+import {
+  CORE_FETCH_GRAPHQL,
+  CS_FETCH_GRAPHQL,
+  fetchPlaceholders,
+  refreshCatalogCustomerGroupHeader,
+} from '../commerce.js';
 
 export const getUserTokenCookie = () => getCookie('auth_dropin_user_token');
 
@@ -21,16 +26,9 @@ const setAuthHeaders = (state) => {
   }
 };
 
-const setCustomerGroupHeader = (customerGroupId) => {
-  CS_FETCH_GRAPHQL.setFetchGraphQlHeader('Magento-Customer-Group', customerGroupId);
-};
-
-const setAdobeCommerceOptimizerHeader = (adobeCommerceOptimizer) => {
-  if (adobeCommerceOptimizer?.priceBookId) {
-    CS_FETCH_GRAPHQL.setFetchGraphQlHeader('AC-Price-Book-ID', adobeCommerceOptimizer.priceBookId);
-  } else {
-    CS_FETCH_GRAPHQL.removeFetchGraphQlHeader('AC-Price-Book-ID');
-  }
+const handleAuthenticationChange = async (state) => {
+  setAuthHeaders(state);
+  await refreshCatalogCustomerGroupHeader({ force: true });
 };
 
 const persistCartDataInSession = (data) => {
@@ -57,15 +55,8 @@ const setupAemAssetsImageParams = () => {
 
 export default async function initializeDropins() {
   const init = async () => {
-    // Set Customer-Group-ID header
-    if (getConfigValue('adobe-commerce-optimizer')) {
-      events.on('auth/adobe-commerce-optimizer', setAdobeCommerceOptimizerHeader, { eager: true });
-    } else {
-      events.on('auth/group-uid', setCustomerGroupHeader, { eager: true });
-    }
-
     // Set auth headers on authenticated event
-    events.on('authenticated', setAuthHeaders, { eager: true });
+    events.on('authenticated', handleAuthenticationChange, { eager: true });
 
     // Cache cart data in session storage
     events.on('cart/data', persistCartDataInSession, { eager: true });
@@ -73,7 +64,7 @@ export default async function initializeDropins() {
     // on page load, check if user is authenticated
     const token = getUserTokenCookie();
     // set auth headers
-    setAuthHeaders(!!token);
+    await handleAuthenticationChange(!!token);
 
     // Event Bus Logger
     events.enableLogger(true);

@@ -1,1 +1,123 @@
-/* add global styles that can be loaded post LCP here */
+/*
+ * Lazy styles — loaded post-LCP.
+ * Background orbs, grid overlay, scroll-triggered animations.
+ */
+
+/* Floating gradient orbs behind content */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 20%, rgb(46 190 122 / 16%), transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 10%, rgb(31 122 77 / 12%), transparent 45%),
+    radial-gradient(ellipse 50% 30% at 70% 80%, rgb(15 61 36 / 11%), transparent 45%),
+    radial-gradient(ellipse 40% 30% at 10% 70%, rgb(201 168 76 / 9%), transparent 45%);
+  filter: blur(60px);
+  animation: drift 25s ease-in-out infinite;
+}
+
+/* Subtle grid overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgb(0 0 0 / 3%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(0 0 0 / 3%) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 70%);
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(2%, -1%) scale(1.02); }
+  50% { transform: translate(-1%, 2%) scale(0.98); }
+  75% { transform: translate(1%, 1%) scale(1.01); }
+}
+
+/* Scroll-triggered entrance: fadeInUp with stagger */
+main > .section.appear > div > * {
+  animation: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+main > .section.appear > div > *:nth-child(1) { animation-delay: 0.05s; }
+main > .section.appear > div > *:nth-child(2) { animation-delay: 0.1s; }
+main > .section.appear > div > *:nth-child(3) { animation-delay: 0.15s; }
+main > .section.appear > div > *:nth-child(4) { animation-delay: 0.2s; }
+main > .section.appear > div > *:nth-child(5) { animation-delay: 0.25s; }
+main > .section.appear > div > *:nth-child(6) { animation-delay: 0.3s; }
+main > .section.appear > div > *:nth-child(7) { animation-delay: 0.35s; }
+main > .section.appear > div > *:nth-child(8) { animation-delay: 0.4s; }
+main > .section.appear > div > *:nth-child(9) { animation-delay: 0.45s; }
+main > .section.appear > div > *:nth-child(n+10) { animation-delay: 0.5s; }
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Reduced motion: disable animations */
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+  }
+
+  main > .section.appear > div > * {
+    animation: none;
+    opacity: 1;
+  }
+}

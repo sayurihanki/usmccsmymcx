@@ -3,6 +3,41 @@ import { events } from '@dropins/tools/event-bus.js';
 
 import '../../scripts/initializers/auth.js';
 
+/**
+ * Parse a permission string into normalized keys.
+ * Supports comma- and newline-delimited ACL IDs.
+ * @param {string | undefined} raw
+ * @returns {string[]}
+ */
+function parsePermissionKeys(raw) {
+  if (!raw) return [];
+
+  return raw
+    .split(/[\n,]+/)
+    .map((value) => value.trim())
+    .filter(Boolean);
+}
+
+/**
+ * Build permission decision for one nav item.
+ * @param {object} permissions
+ * @param {string[]} keys
+ * @returns {{ isGranted: boolean, isExplicitlyDisabled: boolean }}
+ */
+function evaluatePermissions(permissions, keys) {
+  const safePermissions = permissions && typeof permissions === 'object' ? permissions : {};
+  const normalizedKeys = keys.length > 0 ? keys : ['all'];
+
+  const isExplicitlyDisabled = normalizedKeys.some((key) => safePermissions[key] === false);
+
+  const isGranted = normalizedKeys.includes('all')
+    || safePermissions.admin
+    || safePermissions.all
+    || normalizedKeys.some((key) => safePermissions[key] === true);
+
+  return { isGranted: Boolean(isGranted), isExplicitlyDisabled };
+}
+
 export default async function decorate(block) {
   /** Get rows data */
   const [keys, ...$items] = [...block.children].map((child, index) => {
@@ -35,15 +70,17 @@ export default async function decorate(block) {
        * Note: permissions can be explicitly set to false (disabled feature),
        * which should hide the item even for admins.
        */
-      const permission = $item.querySelector(`:scope > div:nth-child(${rows.permission})`)?.textContent?.trim() || 'all';
+      const permissionRaw = $item.querySelector(`:scope > div:nth-child(${rows.permission})`)?.textContent?.trim() || 'all';
+      const permissionKeys = parsePermissionKeys(permissionRaw);
+      const { isGranted, isExplicitlyDisabled } = evaluatePermissions(permissions, permissionKeys);
 
       // Skip if permission is explicitly disabled (false)
-      if (permissions[permission] === false) {
+      if (isExplicitlyDisabled) {
         return;
       }
 
-      // Skip if the user is not an admin and permission is not granted
-      if (!permissions.admin && !permissions[permission]) {
+      // Skip if permission is not granted
+      if (!isGranted) {
         return;
       }
 

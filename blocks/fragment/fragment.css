@@ -1,1 +1,17 @@
-/* stylelint-disable no-empty-source */
+/*
+ * Fragment block container reset.
+ * Imported fragments render inside the host page's `.fragment-container`
+ * section, so clear the global section max-width/padding here to let the
+ * fragment content own its layout, like the hero blocks do.
+ */
+
+.fragment-container {
+  margin: 0;
+}
+
+.fragment-container > div,
+.fragment-container .fragment-wrapper {
+  max-width: unset;
+  margin: 0;
+  padding: 0;
+}

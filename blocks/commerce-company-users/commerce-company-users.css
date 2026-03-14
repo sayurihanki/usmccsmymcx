@@ -14,4 +14,139 @@
  * is strictly forbidden unless prior written permission is obtained
  * from Adobe.
  ****************************************************************** */
-/* stylelint-disable no-empty-source */
+main .commerce-company-users-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    width: 100%;
+}
+
+.commerce-company-users-wrapper .dropin-header-container,
+.commerce-company-users-wrapper .company-users__header {
+    margin-bottom: var(--spacing-small);
+}
+
+.commerce-company-users-wrapper .dropin-header-container__title,
+.commerce-company-users-wrapper .company-users__title {
+    font: var(--type-headline-2-strong-font);
+    letter-spacing: normal;
+}
+
+.commerce-company-users-wrapper .dropin-divider {
+    opacity: 0.45;
+}
+
+.commerce-company-users-wrapper .companyUsersTable,
+.commerce-company-users-wrapper .companyUsersTable__empty,
+.commerce-company-users-wrapper .dropin-card {
+    border: 1px solid var(--glass-border-subtle);
+    border-radius: calc(var(--shape-border-radius-2) + 2px);
+    background: var(--glass-bg-strong);
+    backdrop-filter: var(--glass-blur-xs) var(--glass-saturate);
+    box-shadow: 0 6px 18px rgb(0 0 0 / 7%);
+}
+
+.commerce-company-users-wrapper .companyUsersTable {
+    overflow: hidden;
+}
+
+.commerce-company-users-wrapper .companyUsersTable table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.commerce-company-users-wrapper .companyUsersTable thead th {
+    color: var(--color-neutral-700);
+    font: var(--type-details-overline-font);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgb(0 0 0 / 8%);
+    padding: var(--spacing-xsmall) var(--spacing-small);
+}
+
+.commerce-company-users-wrapper .companyUsersTable tbody td {
+    border-bottom: 1px solid rgb(0 0 0 / 6%);
+    padding: var(--spacing-small);
+    vertical-align: middle;
+}
+
+.commerce-company-users-wrapper .companyUsersTable tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.commerce-company-users-wrapper .companyUsersTable tbody tr:hover td {
+    background: rgb(46 190 122 / 6%);
+}
+
+.commerce-company-users-wrapper .filterButtons {
+    display: flex;
+    gap: var(--spacing-xsmall);
+    flex-wrap: wrap;
+    margin-bottom: var(--spacing-small);
+}
+
+.commerce-company-users-wrapper .filterButtons button,
+.commerce-company-users-wrapper .manage-user-button,
+.commerce-company-users-wrapper .edit-user-button,
+.commerce-company-users-wrapper .user-actions button {
+    border: 1px solid rgb(46 190 122 / 26%);
+    border-radius: var(--shape-border-radius-3);
+    background: rgb(46 190 122 / 8%);
+    color: var(--main-color-accent);
+    cursor: pointer;
+    transition: background-color var(--transition-fast) var(--ease-out), transform var(--transition-fast) var(--ease-out);
+}
+
+.commerce-company-users-wrapper .filterButtons button:hover,
+.commerce-company-users-wrapper .manage-user-button:hover,
+.commerce-company-users-wrapper .edit-user-button:hover,
+.commerce-company-users-wrapper .user-actions button:hover {
+    background: rgb(46 190 122 / 16%);
+    transform: translateY(-1px);
+}
+
+.commerce-company-users-wrapper .addUserButtonContainer {
+    margin: var(--spacing-small) 0;
+}
+
+.commerce-company-users-wrapper .paginationContainer {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-small);
+    justify-content: space-between;
+    margin-top: var(--spacing-small);
+}
+
+.commerce-company-users-wrapper .paginationButtons {
+    align-items: center;
+    display: flex;
+    gap: var(--spacing-xsmall);
+}
+
+.commerce-company-users-wrapper .pageSizeSelector {
+    align-items: center;
+    display: flex;
+    gap: var(--spacing-xsmall);
+    font: var(--type-body-2-default-font);
+}
+
+.commerce-company-users-wrapper .companyUsersTable__empty {
+    margin-top: var(--spacing-small);
+    padding: var(--spacing-medium);
+}
+
+@media (max-width: 899px) {
+    .commerce-company-users-wrapper .companyUsersTable {
+        overflow-x: auto;
+    }
+
+    .commerce-company-users-wrapper .companyUsersTable thead th,
+    .commerce-company-users-wrapper .companyUsersTable tbody td {
+        padding: var(--spacing-xsmall);
+    }
+
+    .commerce-company-users-wrapper .paginationContainer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

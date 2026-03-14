@@ -14,4 +14,104 @@
  * is strictly forbidden unless prior written permission is obtained
  * from Adobe.
  ****************************************************************** */
-/* stylelint-disable no-empty-source */
+
+.commerce-company-profile-wrapper .company-profile__title,
+.commerce-company-profile-wrapper .dropin-header-container__title {
+    font: var(--type-headline-2-strong-font);
+    letter-spacing: normal;
+}
+
+.commerce-company-profile-wrapper .dropin-divider {
+    opacity: 0.45;
+}
+
+.commerce-company-profile-wrapper .account-company-profile-card,
+.commerce-company-profile-wrapper .account-edit-company-profile {
+    border: 1px solid var(--glass-border-subtle);
+    border-radius: calc(var(--shape-border-radius-2) + 4px);
+    background: var(--glass-bg-strong);
+    backdrop-filter: var(--glass-blur-sm) var(--glass-saturate);
+    box-shadow: var(--shadow-glass);
+}
+
+.commerce-company-profile-wrapper .account-company-profile-card .dropin-card__content,
+.commerce-company-profile-wrapper .account-edit-company-profile .dropin-card__content {
+    padding: var(--spacing-medium);
+}
+
+.commerce-company-profile-wrapper .account-company-profile-card__actions .dropin-button,
+.commerce-company-profile-wrapper .account-company-profile-card__actions button {
+    padding: var(--spacing-xxsmall) var(--spacing-small);
+    border: 1px solid rgb(46 190 122 / 25%);
+    border-radius: var(--shape-border-radius-3);
+    background: rgb(46 190 122 / 6%);
+    color: var(--main-color-accent);
+    transition: background-color var(--transition-fast) var(--ease-out), transform var(--transition-fast) var(--ease-out);
+}
+
+.commerce-company-profile-wrapper .account-company-profile-card__actions .dropin-button:hover,
+.commerce-company-profile-wrapper .account-company-profile-card__actions button:hover {
+    background: rgb(46 190 122 / 12%);
+    transform: translateY(-1px);
+}
+
+.commerce-company-profile-wrapper .account-company-profile-card__content p {
+    line-height: 1.55;
+    margin-bottom: var(--spacing-xsmall);
+}
+
+.commerce-company-profile-wrapper .account-company-profile-card__content .company-legal-address,
+.commerce-company-profile-wrapper .account-company-profile-card__content .company-contacts,
+.commerce-company-profile-wrapper .account-company-profile-card__content .company-payment-methods,
+.commerce-company-profile-wrapper .account-company-profile-card__content .company-shipping-methods {
+    margin-top: var(--spacing-medium);
+    padding: var(--spacing-small) var(--spacing-medium);
+    border: 1px solid rgb(0 0 0 / 7%);
+    border-radius: var(--shape-border-radius-2);
+    background: rgb(255 255 255 / 62%);
+}
+
+.commerce-company-profile-wrapper .account-company-profile-card__content .company-contacts {
+    border-top: 1px solid rgb(0 0 0 / 7%);
+}
+
+.commerce-company-profile-wrapper .account-company-profile-card__content .company-contact {
+    margin: 0 0 var(--spacing-small);
+    padding: var(--spacing-small);
+    border: 1px solid rgb(0 0 0 / 6%);
+    border-radius: var(--shape-border-radius-2);
+    background: var(--glass-bg);
+}
+
+.commerce-company-profile-wrapper .account-company-profile-card__content .company-contact:last-child {
+    margin-bottom: 0;
+}
+
+.commerce-company-profile-wrapper .account-company-profile-card__content ul {
+    margin: var(--spacing-xxsmall) 0 0;
+    padding-left: 1.2em;
+}
+
+.commerce-company-profile-wrapper .account-company-profile-card__content li {
+    margin-bottom: 0.35em;
+}
+
+.commerce-company-profile-wrapper .account-edit-company-profile__actions .dropin-button,
+.commerce-company-profile-wrapper .account-edit-company-profile__actions button {
+    min-width: 148px;
+    border-radius: var(--shape-border-radius-3);
+}
+
+@media (max-width: 899px) {
+    .commerce-company-profile-wrapper .account-company-profile-card .dropin-card__content,
+    .commerce-company-profile-wrapper .account-edit-company-profile .dropin-card__content {
+        padding: var(--spacing-small);
+    }
+
+    .commerce-company-profile-wrapper .account-company-profile-card__content .company-legal-address,
+    .commerce-company-profile-wrapper .account-company-profile-card__content .company-contacts,
+    .commerce-company-profile-wrapper .account-company-profile-card__content .company-payment-methods,
+    .commerce-company-profile-wrapper .account-company-profile-card__content .company-shipping-methods {
+        padding: var(--spacing-small);
+    }
+}

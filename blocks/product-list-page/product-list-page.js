@@ -16,11 +16,20 @@ import { tryRenderAemAssetsImage } from '@dropins/tools/lib/aem/assets.js';
 import { events } from '@dropins/tools/event-bus.js';
 // AEM
 import { readBlockConfig } from '../../scripts/aem.js';
-import { fetchPlaceholders, getProductLink } from '../../scripts/commerce.js';
+import {
+  fetchPlaceholders,
+  getProductLink,
+  getSearchContext,
+} from '../../scripts/commerce.js';
 
 // Initializers
 import '../../scripts/initializers/search.js';
 import '../../scripts/initializers/wishlist.js';
+
+function getSafeAemAlias(product) {
+  const rawAlias = product?.urlKey || product?.sku || 'product-image';
+  return encodeURIComponent(rawAlias);
+}
 
 export default async function decorate(block) {
   const labels = await fetchPlaceholders();
@@ -49,10 +58,9 @@ export default async function decorate(block) {
   block.innerHTML = '';
   block.appendChild(fragment);
 
-  // Add url path back to the block for enrichment, incase enrichment block is
-  // executed after the plp block and block config is not available
+  // Add category url path to block for enrichment
   if (config.urlpath) {
-    block.dataset.urlpath = config.urlpath;
+    block.dataset.category = config.urlpath;
   }
 
   // Get variables from the URL
@@ -135,8 +143,13 @@ export default async function decorate(block) {
           const anchorWrapper = document.createElement('a');
           anchorWrapper.href = getProductLink(product.urlKey, product.sku);
 
+          if (!defaultImageProps?.src) {
+            ctx.replaceWith(anchorWrapper);
+            return;
+          }
+
           tryRenderAemAssetsImage(ctx, {
-            alias: product.sku,
+            alias: getSafeAemAlias(product),
             imageProps: defaultImageProps,
             wrapper: anchorWrapper,
             params: {
@@ -235,6 +248,7 @@ async function performInitialSearch(config, urlParams) {
     sort,
     filter,
   } = urlParams;
+  const context = getSearchContext();
   // Request search based on the page type on block load
   if (config.urlpath) {
     // If it's a category page...
@@ -257,6 +271,7 @@ async function performInitialSearch(config, urlParams) {
         },
         ...getFilterFromParams(filter),
       ],
+      context,
     })
       .catch(() => {
         console.error('Error searching for products');
@@ -275,6 +290,7 @@ async function performInitialSearch(config, urlParams) {
         },
         ...getFilterFromParams(filter),
       ],
+      context,
     })
       .catch(() => {
         console.error('Error searching for products');
