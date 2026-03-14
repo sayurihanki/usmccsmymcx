@@ -7,63 +7,224 @@ import {
   cellText,
 } from '../../scripts/mcx-block-utils.js';
 
-const isLibraryPreview = () => /\/(?:\.da\/library\/blocks|library\/blocks)\/mcx-hero\/?(\?|$)/.test(window.location.pathname + (window.location.search || '?'));
+const LIBRARY_PREVIEW_PATTERN = /\/(?:\.da\/library\/blocks|library\/blocks)\/mcx-hero\/?(\?|$)/;
+const STATUS_BADGE_KEYS = ['status-badge-1', 'status-badge-2', 'status-badge-3'];
+const STAT_KEYS = ['1', '2', '3', '4'];
+const LIBRARY_PREVIEW_DEFAULTS = {
+  eyebrow: 'Spring Collection - 2026 - Tax-Free',
+  'heading-line-1': 'OUTFITTED',
+  'heading-line-2': 'FOR THE',
+  'heading-line-3': 'mission & beyond',
+  description:
+    'Serving Marines and their families since 1897. Premium brands, exclusive savings, and'
+    + ' tax-free shopping - exclusively for those who serve.',
+  image: {
+    src: 'https://images.unsplash.com/photo-1519415943484-9fa1873496d4?w=1200&q=80',
+    alt: 'Marine Corps collection hero',
+  },
+  'primary-cta': {
+    href: '#products',
+    text: 'Shop Now',
+  },
+  'secondary-cta': {
+    href: '#deals',
+    text: 'View Deals',
+  },
+  'status-badge-1': 'SYS: MCX-2026',
+  'status-badge-2': 'STATUS: ACTIVE',
+  'status-badge-3': 'PATRON: AUTHORIZED',
+  'stat-1-value': '20%+',
+  'stat-1-label': 'Average Savings',
+  'stat-2-value': '33M+',
+  'stat-2-label': 'Yearly Transactions',
+  'stat-3-value': 'Tax Free',
+  'stat-3-label': 'Exclusive Benefit',
+  'stat-4-value': '127+',
+  'stat-4-label': 'Store Locations',
+};
 
-/** Build default field "cells" (DOM elements) for library preview when doc has no 2-column table. */
+const isLibraryPreview = () => {
+  const currentPath = window.location.pathname + (window.location.search || '?');
+  return LIBRARY_PREVIEW_PATTERN.test(currentPath);
+};
+
+function createSvgArrow() {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('width', '14');
+  svg.setAttribute('height', '14');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('fill', 'none');
+  svg.setAttribute('stroke', 'currentColor');
+  svg.setAttribute('stroke-width', '2.5');
+
+  const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  line.setAttribute('d', 'M5 12h14');
+
+  const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  arrow.setAttribute('d', 'M12 5l7 7-7 7');
+
+  svg.append(line, arrow);
+  return svg;
+}
+
+function createImageCell(src, alt) {
+  const cell = document.createElement('div');
+  const image = document.createElement('img');
+  image.src = src;
+  image.alt = alt;
+  cell.append(image);
+  return cell;
+}
+
+function createLinkCell(href, text) {
+  const cell = document.createElement('div');
+  const link = document.createElement('a');
+  link.href = href;
+  link.textContent = text;
+  cell.append(link);
+  return cell;
+}
+
+function createFieldCell(text) {
+  const cell = document.createElement('div');
+  cell.textContent = text;
+  return cell;
+}
+
 function getDefaultLibraryFields() {
-  const imageCell = document.createElement('div');
-  const img = document.createElement('img');
-  img.src = 'https://images.unsplash.com/photo-1519415943484-9fa1873496d4?w=1200&q=80';
-  img.alt = 'Marine Corps collection hero';
-  imageCell.appendChild(img);
-  const primaryCtaCell = document.createElement('div');
-  const primaryLink = document.createElement('a');
-  primaryLink.href = '#products';
-  primaryLink.textContent = 'Shop Now';
-  primaryCtaCell.appendChild(primaryLink);
-  const secondaryCtaCell = document.createElement('div');
-  const secondaryLink = document.createElement('a');
-  secondaryLink.href = '#deals';
-  secondaryLink.textContent = 'View Deals';
-  secondaryCtaCell.appendChild(secondaryLink);
-  const textCell = (text) => {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div;
-  };
   return {
-    eyebrow: textCell('Spring Collection - 2026 - Tax-Free'),
-    'heading-line-1': textCell('OUTFITTED'),
-    'heading-line-2': textCell('FOR THE'),
-    'heading-line-3': textCell('mission & beyond'),
-    description: textCell('Serving Marines and their families since 1897. Premium brands, exclusive savings, and tax-free shopping - exclusively for those who serve.'),
-    image: imageCell,
-    'primary-cta': primaryCtaCell,
-    'secondary-cta': secondaryCtaCell,
-    'status-badge-1': textCell('SYS: MCX-2026'),
-    'status-badge-2': textCell('STATUS: ACTIVE'),
-    'status-badge-3': textCell('PATRON: AUTHORIZED'),
-    'stat-1-value': textCell('20%+'),
-    'stat-1-label': textCell('Average Savings'),
-    'stat-2-value': textCell('33M+'),
-    'stat-2-label': textCell('Yearly Transactions'),
-    'stat-3-value': textCell('Tax Free'),
-    'stat-3-label': textCell('Exclusive Benefit'),
-    'stat-4-value': textCell('127+'),
-    'stat-4-label': textCell('Store Locations'),
+    eyebrow: createFieldCell(LIBRARY_PREVIEW_DEFAULTS.eyebrow),
+    'heading-line-1': createFieldCell(LIBRARY_PREVIEW_DEFAULTS['heading-line-1']),
+    'heading-line-2': createFieldCell(LIBRARY_PREVIEW_DEFAULTS['heading-line-2']),
+    'heading-line-3': createFieldCell(LIBRARY_PREVIEW_DEFAULTS['heading-line-3']),
+    description: createFieldCell(LIBRARY_PREVIEW_DEFAULTS.description),
+    image: createImageCell(
+      LIBRARY_PREVIEW_DEFAULTS.image.src,
+      LIBRARY_PREVIEW_DEFAULTS.image.alt,
+    ),
+    'primary-cta': createLinkCell(
+      LIBRARY_PREVIEW_DEFAULTS['primary-cta'].href,
+      LIBRARY_PREVIEW_DEFAULTS['primary-cta'].text,
+    ),
+    'secondary-cta': createLinkCell(
+      LIBRARY_PREVIEW_DEFAULTS['secondary-cta'].href,
+      LIBRARY_PREVIEW_DEFAULTS['secondary-cta'].text,
+    ),
+    'status-badge-1': createFieldCell(LIBRARY_PREVIEW_DEFAULTS['status-badge-1']),
+    'status-badge-2': createFieldCell(LIBRARY_PREVIEW_DEFAULTS['status-badge-2']),
+    'status-badge-3': createFieldCell(LIBRARY_PREVIEW_DEFAULTS['status-badge-3']),
+    'stat-1-value': createFieldCell(LIBRARY_PREVIEW_DEFAULTS['stat-1-value']),
+    'stat-1-label': createFieldCell(LIBRARY_PREVIEW_DEFAULTS['stat-1-label']),
+    'stat-2-value': createFieldCell(LIBRARY_PREVIEW_DEFAULTS['stat-2-value']),
+    'stat-2-label': createFieldCell(LIBRARY_PREVIEW_DEFAULTS['stat-2-label']),
+    'stat-3-value': createFieldCell(LIBRARY_PREVIEW_DEFAULTS['stat-3-value']),
+    'stat-3-label': createFieldCell(LIBRARY_PREVIEW_DEFAULTS['stat-3-label']),
+    'stat-4-value': createFieldCell(LIBRARY_PREVIEW_DEFAULTS['stat-4-value']),
+    'stat-4-label': createFieldCell(LIBRARY_PREVIEW_DEFAULTS['stat-4-label']),
   };
 }
 
 function createCta(linkData, className) {
   const link = createLink(className, linkData.href, linkData.text);
-  link.innerHTML = `
-    <span>${linkData.text}</span>
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-      <path d="M5 12h14"></path>
-      <path d="M12 5l7 7-7 7"></path>
-    </svg>
-  `;
+  const label = document.createElement('span');
+  label.textContent = linkData.text;
+  link.replaceChildren(label, createSvgArrow());
   return link;
+}
+
+function appendHeadingLine(heading, className, text) {
+  if (!text) return;
+  const line = document.createElement('span');
+  line.className = className;
+  line.textContent = text;
+  heading.append(line);
+}
+
+function createStatusBadges(fields) {
+  const rank = document.createElement('div');
+  rank.className = 'hero-rank';
+
+  STATUS_BADGE_KEYS.forEach((key) => {
+    const text = cellText(fields[key]);
+    if (!text) return;
+    const badge = document.createElement('span');
+    badge.textContent = text;
+    rank.append(badge);
+  });
+
+  return rank.children.length ? rank : null;
+}
+
+function createEyebrow(text) {
+  if (!text) return null;
+
+  const eyebrow = document.createElement('div');
+  eyebrow.className = 'hero-eyebrow';
+
+  const pip = document.createElement('div');
+  pip.className = 'eyebrow-pip';
+
+  for (let index = 0; index < 3; index += 1) {
+    pip.append(document.createElement('span'));
+  }
+
+  const label = document.createElement('span');
+  label.className = 'hero-eyebrow-txt';
+  label.textContent = text;
+
+  eyebrow.append(pip, label);
+  return eyebrow;
+}
+
+function createStats(fields) {
+  const stats = document.createElement('div');
+  stats.className = 'hero-stats';
+
+  STAT_KEYS.forEach((index) => {
+    const value = cellText(fields[`stat-${index}-value`]);
+    const label = cellText(fields[`stat-${index}-label`]);
+    if (!value || !label) return;
+
+    const item = document.createElement('div');
+    item.className = 'h-stat';
+
+    item.append(
+      createTextElement('div', 'h-stat-num', value),
+      createTextElement('div', 'h-stat-lbl', label),
+    );
+
+    stats.append(item);
+  });
+
+  return stats.children.length ? stats : null;
+}
+
+function createHeroNavigation() {
+  const heroNav = document.createElement('div');
+  heroNav.className = 'hero-nav';
+
+  for (let index = 0; index < 3; index += 1) {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = index === 0 ? 'h-dot on' : 'h-dot';
+    dot.dataset.heroDot = String(index);
+    dot.setAttribute('aria-label', `Hero slide ${index + 1}`);
+    heroNav.append(dot);
+  }
+
+  return heroNav;
+}
+
+function createHeroScroll() {
+  const scroll = document.createElement('div');
+  scroll.className = 'hero-scroll';
+
+  scroll.append(
+    createTextElement('div', 'scroll-line'),
+    createTextElement('span', 'scroll-txt', 'Scroll to explore'),
+  );
+
+  return scroll;
 }
 
 export default function decorate(block) {
@@ -100,80 +261,40 @@ export default function decorate(block) {
   fade.className = 'hero-photo-fade';
   hero.append(fade);
 
-  const rank = document.createElement('div');
-  rank.className = 'hero-rank';
-  ['status-badge-1', 'status-badge-2', 'status-badge-3'].forEach((key) => {
-    const text = cellText(fields[key]);
-    if (!text) return;
-    const badge = document.createElement('span');
-    badge.textContent = text;
-    rank.append(badge);
-  });
-  hero.append(rank);
+  const rank = createStatusBadges(fields);
+  if (rank) hero.append(rank);
 
   const content = document.createElement('div');
   content.className = 'hero-content';
 
-  const eyebrow = document.createElement('div');
-  eyebrow.className = 'hero-eyebrow';
-  eyebrow.innerHTML = `
-    <div class="eyebrow-pip" aria-hidden="true"><span></span><span></span><span></span></div>
-    <span class="hero-eyebrow-txt">${cellText(fields.eyebrow)}</span>
-  `;
-  content.append(eyebrow);
+  const eyebrow = createEyebrow(cellText(fields.eyebrow));
+  if (eyebrow) content.append(eyebrow);
 
   const heading = document.createElement('h1');
   heading.className = 'hero-h1';
-  heading.innerHTML = `
-    <span class="l1">${cellText(fields['heading-line-1'])}</span>
-    <span class="l2">${cellText(fields['heading-line-2'])}</span>
-    <span class="l3">${cellText(fields['heading-line-3'])}</span>
-  `;
-  content.append(heading);
+  appendHeadingLine(heading, 'l1', cellText(fields['heading-line-1']));
+  appendHeadingLine(heading, 'l2', cellText(fields['heading-line-2']));
+  appendHeadingLine(heading, 'l3', cellText(fields['heading-line-3']));
+  if (heading.children.length) content.append(heading);
 
-  const description = createTextElement('p', 'hero-desc', cellText(fields.description));
-  content.append(description);
+  const descriptionText = cellText(fields.description);
+  if (descriptionText) {
+    content.append(createTextElement('p', 'hero-desc', descriptionText));
+  }
 
   const ctas = document.createElement('div');
   ctas.className = 'hero-ctas';
   const primaryCta = extractLink(fields['primary-cta'], 'Shop Now');
   const secondaryCta = extractLink(fields['secondary-cta'], 'View Deals');
-  ctas.append(createCta(primaryCta, 'btn-hero'), createCta(secondaryCta, 'btn-ghost'));
-  content.append(ctas);
+  if (primaryCta.text || primaryCta.href) ctas.append(createCta(primaryCta, 'btn-hero'));
+  if (secondaryCta.text || secondaryCta.href) ctas.append(createCta(secondaryCta, 'btn-ghost'));
+  if (ctas.children.length) content.append(ctas);
 
-  const stats = document.createElement('div');
-  stats.className = 'hero-stats';
-  ['1', '2', '3', '4'].forEach((index) => {
-    const value = cellText(fields[`stat-${index}-value`]);
-    const label = cellText(fields[`stat-${index}-label`]);
-    if (!value || !label) return;
-    const item = document.createElement('div');
-    item.className = 'h-stat';
-    item.innerHTML = `
-      <div class="h-stat-num">${value}</div>
-      <div class="h-stat-lbl">${label}</div>
-    `;
-    stats.append(item);
-  });
-  content.append(stats);
+  const stats = createStats(fields);
+  if (stats) content.append(stats);
   hero.append(content);
 
-  const scroll = document.createElement('div');
-  scroll.className = 'hero-scroll';
-  scroll.innerHTML = `
-    <div class="scroll-line"></div>
-    <span class="scroll-txt">Scroll to explore</span>
-  `;
-  hero.append(scroll);
-
-  const heroNav = document.createElement('div');
-  heroNav.className = 'hero-nav';
-  heroNav.innerHTML = `
-    <button type="button" class="h-dot on" data-hero-dot="0" aria-label="Hero slide 1"></button>
-    <button type="button" class="h-dot" data-hero-dot="1" aria-label="Hero slide 2"></button>
-    <button type="button" class="h-dot" data-hero-dot="2" aria-label="Hero slide 3"></button>
-  `;
-  hero.append(heroNav);
+  hero.append(createHeroScroll(), createHeroNavigation());
 
   block.replaceChildren(hero);
 }
