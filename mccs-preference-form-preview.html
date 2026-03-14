@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCCS Preference Form Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./blocks/form-mccs-preferences/form-mccs-preferences.css">
+  <style>
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    body {
+      background: #f5f3ef;
+      font-family: "DM Sans", sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-mccs-preferences">
+    <div>Personalize
+your MCCS experience</div>
+    <div>Tell us about your military life, interests, and preferences. We will tailor shopping, events, and family programs around your world.</div>
+    <div></div>
+  </div>
+
+  <script type="module">
+    import decorate from './blocks/form-mccs-preferences/form-mccs-preferences.js';
+
+    decorate(document.querySelector('.form-mccs-preferences'));
+  </script>
+</body>
+</html>
