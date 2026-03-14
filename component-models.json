@@ -1717,6 +1717,62 @@
     ]
   },
   {
+    "id": "mcx-announcement-bar",
+    "fields": []
+  },
+  {
+    "id": "mcx-benefits",
+    "fields": []
+  },
+  {
+    "id": "mcx-brands",
+    "fields": []
+  },
+  {
+    "id": "mcx-category-grid",
+    "fields": []
+  },
+  {
+    "id": "mcx-deal-countdown",
+    "fields": []
+  },
+  {
+    "id": "mcx-editorial-cards",
+    "fields": []
+  },
+  {
+    "id": "mcx-featured-collections",
+    "fields": []
+  },
+  {
+    "id": "mcx-footer",
+    "fields": []
+  },
+  {
+    "id": "mcx-header",
+    "fields": []
+  },
+  {
+    "id": "mcx-hero",
+    "fields": []
+  },
+  {
+    "id": "mcx-newsletter",
+    "fields": []
+  },
+  {
+    "id": "mcx-product-cards",
+    "fields": []
+  },
+  {
+    "id": "mcx-promo-strip",
+    "fields": []
+  },
+  {
+    "id": "mcx-ticker",
+    "fields": []
+  },
+  {
     "id": "medal-rack-configurator",
     "fields": [
       {

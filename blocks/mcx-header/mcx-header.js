@@ -1,0 +1,381 @@
+import { getMetadata, toClassName } from '../../scripts/aem.js';
+
+function iconMarkup(name) {
+  const icons = {
+    search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>',
+    chevron: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>',
+    stores: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>',
+    heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>',
+    cart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>',
+    user: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>',
+  };
+
+  return icons[name] || '';
+}
+
+function createLogo() {
+  const link = document.createElement('a');
+  link.className = 'logo';
+  link.href = '/';
+  link.setAttribute('aria-label', 'MCX home');
+  link.innerHTML = `
+    <div class="logo-emblem" aria-hidden="true">
+      <svg viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="23" cy="23" r="22" fill="#C1121F" opacity="0.15"></circle>
+        <circle cx="23" cy="23" r="22" stroke="#C1121F" stroke-width="1" opacity="0.4"></circle>
+        <path d="M23 6L10 12V22C10 29.73 15.8 37.04 23 39C30.2 37.04 36 29.73 36 22V12L23 6Z" fill="rgba(193,18,31,0.25)" stroke="rgba(193,18,31,0.7)" stroke-width="1.2"></path>
+        <path d="M23 13L17 16V21C17 24.87 19.7 28.48 23 29.5C26.3 28.48 29 24.87 29 21V16L23 13Z" fill="white" fill-opacity="0.85"></path>
+        <circle cx="23" cy="21" r="4" fill="#C1121F"></circle>
+        <circle cx="23" cy="21" r="1.5" fill="white"></circle>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <div class="logo-mcx">MCX</div>
+      <div class="logo-tagline">Marine Corps Exchange</div>
+    </div>
+  `;
+  return link;
+}
+
+function getDefaultData() {
+  return {
+    configs: {
+      searchPlaceholder: 'Search products, brands, gear...',
+      hotLabel: 'Deals & Offers',
+      hotUrl: '/deals',
+      signInLabel: 'Sign In',
+      signInUrl: '/account',
+    },
+    navItems: [
+      {
+        label: 'Shop All',
+        url: '/shop',
+        groups: [],
+        features: [],
+      },
+      {
+        label: 'Apparel & Footwear',
+        url: '/apparel-footwear',
+        groups: [
+          { label: "Men's", links: ['Uniforms & Cammies', 'T-Shirts & Polos', 'Athletic Wear', 'Outerwear', 'Pants & Shorts', 'Dress Attire'].map((text) => ({ text, url: '/apparel-footwear' })) },
+          { label: "Women's", links: ['Uniforms', 'Activewear', 'Casual Wear', 'Outerwear', 'Loungewear', 'Accessories'].map((text) => ({ text, url: '/apparel-footwear' })) },
+          { label: 'Footwear', links: ['Tactical Boots', 'Athletic Shoes', 'Dress Shoes', 'Sandals & Slides', 'Work & Safety'].map((text) => ({ text, url: '/apparel-footwear' })) },
+        ],
+        features: [
+          { text: 'Clearance Apparel', url: '/clearance' },
+          { text: 'Top Rated Boots', url: '/boots' },
+          { text: 'New Arrivals', url: '/new' },
+        ],
+      },
+      {
+        label: 'Electronics',
+        url: '/electronics',
+        groups: [
+          { label: 'Computers', links: ['MacBooks & Laptops', 'Tablets & iPads', 'Monitors', 'Accessories'].map((text) => ({ text, url: '/electronics' })) },
+          { label: 'Mobile & Audio', links: ['Smartphones', 'Headphones', 'Earbuds', 'Speakers', 'Smart Watches'].map((text) => ({ text, url: '/electronics' })) },
+          { label: 'Gaming', links: ['Consoles', 'Games & Software', 'Controllers', 'Gaming Chairs'].map((text) => ({ text, url: '/electronics' })) },
+        ],
+        features: [
+          { text: 'Apple Products', url: '/electronics/apple' },
+          { text: 'Gaming Deals', url: '/electronics/gaming' },
+        ],
+      },
+      {
+        label: 'Home & Living',
+        url: '/home',
+        groups: [
+          { label: 'Furniture', links: ['Bedroom', 'Living Room', 'Office', 'Outdoor Living'].map((text) => ({ text, url: '/home' })) },
+          { label: 'Kitchen', links: ['Appliances', 'Cookware', 'Dining', 'Food Storage'].map((text) => ({ text, url: '/home' })) },
+          { label: 'Bedding & Bath', links: ['Bed Sheets', 'Comforters', 'Pillows', 'Towels'].map((text) => ({ text, url: '/home' })) },
+        ],
+        features: [],
+      },
+      {
+        label: 'Sports & Outdoors',
+        url: '/sports-outdoors',
+        groups: [],
+        features: [],
+      },
+      {
+        label: 'Uniforms',
+        url: '/uniforms',
+        groups: [],
+        features: [],
+      },
+      {
+        label: 'Kids & Toys',
+        url: '/kids-toys',
+        groups: [],
+        features: [],
+      },
+    ],
+  };
+}
+
+async function fetchFragmentDocument(path) {
+  const response = await fetch(`${path}.plain.html`);
+  if (!response.ok) throw new Error(`Unable to load fragment: ${path}`);
+  const main = document.createElement('main');
+  main.innerHTML = await response.text();
+  return main;
+}
+
+function normalizeConfigKey(key) {
+  const aliasMap = {
+    'search-placeholder': 'searchPlaceholder',
+    'hot-label': 'hotLabel',
+    'hot-url': 'hotUrl',
+    'sign-in-label': 'signInLabel',
+    'sign-in-url': 'signInUrl',
+  };
+
+  return aliasMap[key] || key;
+}
+
+function upsertNavItem(items, label, url = '#') {
+  let item = items.find((entry) => entry.label === label);
+  if (!item) {
+    item = {
+      label,
+      url: url || '#',
+      groups: [],
+      features: [],
+    };
+    items.push(item);
+  }
+  if (url) item.url = url;
+  return item;
+}
+
+function upsertGroup(item, label) {
+  let group = item.groups.find((entry) => entry.label === label);
+  if (!group) {
+    group = {
+      label,
+      links: [],
+    };
+    item.groups.push(group);
+  }
+  return group;
+}
+
+function parseNavData(main) {
+  const dataBlock = main.querySelector('.mcx-nav-data');
+  if (!dataBlock) return getDefaultData();
+
+  const data = {
+    configs: {
+      searchPlaceholder: 'Search products, brands, gear...',
+      hotLabel: 'Deals & Offers',
+      hotUrl: '/deals',
+      signInLabel: 'Sign In',
+      signInUrl: '/account',
+    },
+    navItems: [],
+  };
+
+  [...dataBlock.children].forEach((row) => {
+    const cells = [...row.children].map((cell) => cell.textContent.trim());
+    const [type, parent, label, value] = cells;
+    if (!type) return;
+
+    const normalizedType = toClassName(type);
+
+    if (normalizedType === 'config') {
+      data.configs[normalizeConfigKey(toClassName(label))] = value;
+      return;
+    }
+
+    if (normalizedType === 'hot') {
+      data.configs.hotLabel = label;
+      data.configs.hotUrl = value;
+      return;
+    }
+
+    if (normalizedType === 'item') {
+      upsertNavItem(data.navItems, label, value);
+      return;
+    }
+
+    if (normalizedType === 'group') {
+      const item = upsertNavItem(data.navItems, parent);
+      upsertGroup(item, label);
+      return;
+    }
+
+    if (normalizedType === 'link') {
+      const [itemLabel, groupLabel] = parent.split('>').map((entry) => entry.trim());
+      const item = upsertNavItem(data.navItems, itemLabel);
+      const group = upsertGroup(item, groupLabel);
+      group.links.push({ text: label, url: value || '#' });
+      return;
+    }
+
+    if (normalizedType === 'feature') {
+      const item = upsertNavItem(data.navItems, parent);
+      item.features.push({ text: label, url: value || '#' });
+    }
+  });
+
+  return data.navItems.length ? data : getDefaultData();
+}
+
+function createActionButton(kind, label, href = '#') {
+  const isLink = kind === 'signin';
+  const element = document.createElement(isLink ? 'a' : 'button');
+  element.className = `hdr-act${kind === 'signin' ? ' hdr-signin' : ''}`;
+  if (isLink) {
+    element.href = href || '#';
+  } else {
+    element.type = 'button';
+  }
+
+  if (kind === 'cart') {
+    element.setAttribute('data-mcx-cart-toggle', 'true');
+  }
+
+  let iconName = kind;
+  if (kind === 'wishlist') iconName = 'heart';
+  if (kind === 'signin') iconName = 'user';
+
+  element.innerHTML = `${iconMarkup(iconName)}${label ? `<span>${label}</span>` : ''}`;
+
+  if (kind === 'cart') {
+    const dot = document.createElement('span');
+    dot.className = 'cart-dot';
+    dot.dataset.mcxCartCount = 'true';
+    dot.textContent = '0';
+    element.append(dot);
+  }
+
+  return element;
+}
+
+function buildMegaMenu(item) {
+  if (!item.groups.length) return null;
+
+  const mega = document.createElement('div');
+  mega.className = 'mega';
+
+  const columns = document.createElement('div');
+  columns.className = 'mega-cols';
+
+  item.groups.forEach((group) => {
+    const column = document.createElement('div');
+    column.className = 'mega-col';
+
+    const title = document.createElement('h4');
+    title.textContent = group.label;
+    column.append(title);
+
+    const list = document.createElement('ul');
+    group.links.forEach((linkData) => {
+      const listItem = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = linkData.url;
+      link.textContent = linkData.text;
+      listItem.append(link);
+      list.append(listItem);
+    });
+
+    column.append(list);
+    columns.append(column);
+  });
+
+  mega.append(columns);
+
+  if (item.features.length) {
+    const featureRow = document.createElement('div');
+    featureRow.className = 'mega-ft';
+    item.features.forEach((feature) => {
+      const link = document.createElement('a');
+      link.className = 'mega-ft-tag';
+      link.href = feature.url;
+      link.textContent = feature.text;
+      featureRow.append(link);
+    });
+    mega.append(featureRow);
+  }
+
+  return mega;
+}
+
+function buildHeaderDom(data) {
+  const shell = document.createElement('div');
+  shell.className = 'header';
+
+  const mainBar = document.createElement('div');
+  mainBar.className = 'hdr-main';
+  mainBar.append(createLogo());
+
+  const search = document.createElement('div');
+  search.className = 'hdr-search';
+  search.innerHTML = `
+    <input type="text" data-mcx-search-input="true" placeholder="${data.configs.searchPlaceholder}">
+    <span class="search-icon" aria-hidden="true">${iconMarkup('search')}</span>
+    <span class="search-shortcut" aria-hidden="true">Ctrl K</span>
+  `;
+  mainBar.append(search);
+
+  const actions = document.createElement('div');
+  actions.className = 'hdr-actions';
+  actions.append(
+    createActionButton('stores', 'Stores'),
+    createActionButton('wishlist', ''),
+    createActionButton('cart', ''),
+    createActionButton('signin', data.configs.signInLabel, data.configs.signInUrl),
+  );
+  mainBar.append(actions);
+  shell.append(mainBar);
+
+  const nav = document.createElement('nav');
+  nav.className = 'nav-bar';
+  const navInner = document.createElement('div');
+  navInner.className = 'nav-inner';
+
+  data.navItems.forEach((item, index) => {
+    const navItem = document.createElement('div');
+    navItem.className = 'nav-item';
+
+    const link = document.createElement('a');
+    link.className = `nav-link${index === 0 ? ' on' : ''}`;
+    link.href = item.url;
+    link.innerHTML = `${item.label}${item.groups.length ? iconMarkup('chevron') : ''}`;
+    navItem.append(link);
+
+    const mega = buildMegaMenu(item);
+    if (mega) navItem.append(mega);
+
+    navInner.append(navItem);
+  });
+
+  const spacer = document.createElement('div');
+  spacer.className = 'nav-spacer';
+  navInner.append(spacer);
+
+  const hotLink = document.createElement('a');
+  hotLink.className = 'nav-hot';
+  hotLink.href = data.configs.hotUrl;
+  hotLink.textContent = data.configs.hotLabel;
+  navInner.append(hotLink);
+
+  nav.append(navInner);
+  shell.append(nav);
+
+  return shell;
+}
+
+export default async function decorate(block) {
+  const navMeta = getMetadata('nav');
+  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/fragments/mcx-nav';
+
+  let data = getDefaultData();
+  try {
+    const fragment = await fetchFragmentDocument(navPath);
+    data = parseNavData(fragment);
+  } catch (error) {
+    // Fall back to the bundled demo data when the authored fragment is unavailable.
+  }
+
+  block.replaceChildren(buildHeaderDom(data));
+}

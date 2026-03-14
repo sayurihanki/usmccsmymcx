@@ -1,0 +1,91 @@
+body.mcx main .mcx-announcement-bar-container .section {
+  max-width: none;
+  padding: 0;
+}
+
+body.mcx main .mcx-announcement-bar-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+body.mcx main .mcx-announcement-bar {
+  overflow: hidden;
+}
+
+body.mcx main .mcx-announcement-bar .ann-bar {
+  align-items: center;
+  background: var(--scarlet);
+  display: flex;
+  height: 38px;
+  overflow: hidden;
+  position: relative;
+}
+
+body.mcx main .mcx-announcement-bar .ann-bar::before {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 120px,
+      rgb(255 255 255 / 4%) 120px,
+      rgb(255 255 255 / 4%) 122px
+    );
+  content: '';
+  inset: 0;
+  position: absolute;
+}
+
+body.mcx main .mcx-announcement-bar .ann-scroll {
+  animation: mcx-ann-roll 28s linear infinite;
+  display: flex;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+body.mcx main .mcx-announcement-bar .ann-item {
+  align-items: center;
+  color: rgb(255 255 255 / 92%);
+  display: inline-flex;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  gap: 10px;
+  letter-spacing: 0.14em;
+  padding: 0 36px;
+  position: relative;
+  text-transform: uppercase;
+}
+
+body.mcx main .mcx-announcement-bar .ann-item::after {
+  color: rgb(255 255 255 / 35%);
+  content: '\25c6';
+  font-size: 6px;
+}
+
+body.mcx main .mcx-announcement-bar .ann-close {
+  background: linear-gradient(90deg, transparent, var(--scarlet-deep) 40%);
+  bottom: 0;
+  color: rgb(255 255 255 / 60%);
+  font-size: 14px;
+  padding: 0 16px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: color var(--t-fast);
+  z-index: 2;
+}
+
+body.mcx main .mcx-announcement-bar .ann-close:hover,
+body.mcx main .mcx-announcement-bar .ann-close:focus-visible {
+  color: #fff;
+}
+
+@keyframes mcx-ann-roll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}

@@ -25,6 +25,8 @@ import {
 } from './commerce.js';
 import { runExperimentation } from './experiment-loader.js';
 
+const isMcxPage = () => document.body.classList.contains('mcx');
+
 /**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
@@ -48,12 +50,18 @@ function buildHeroBlock(main) {
  * load fonts.css and set a session storage flag
  */
 async function loadFonts() {
+  if (isMcxPage()) return;
   await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
   try {
     if (!window.location.hostname.includes('localhost')) sessionStorage.setItem('fonts-loaded', 'true');
   } catch (e) {
     // do nothing
   }
+}
+
+async function loadMcxPackage() {
+  if (!isMcxPage()) return;
+  await loadCSS(`${window.hlx.codeBasePath}/styles/mcx-package.css`);
 }
 
 /**
@@ -80,7 +88,7 @@ function buildAutoBlocks(main) {
       });
     }
 
-    if (!main.querySelector('.hero')) buildHeroBlock(main);
+    if (!isMcxPage() && !main.querySelector('.hero')) buildHeroBlock(main);
   } catch (error) {
     console.error('Auto Blocking failed', error);
   }
@@ -130,6 +138,7 @@ const experimentationConfig = {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
+  await loadMcxPackage();
   await runExperimentation(doc, experimentationConfig);
 
   const main = doc.querySelector('main');
@@ -149,7 +158,7 @@ async function loadEager(doc) {
 
   try {
     /* if desktop (proxy for fast connection) or fonts already loaded, load fonts.css */
-    if (window.innerWidth >= 900 || sessionStorage.getItem('fonts-loaded')) {
+    if (!isMcxPage() && (window.innerWidth >= 900 || sessionStorage.getItem('fonts-loaded'))) {
       loadFonts();
     }
   } catch (e) {
@@ -176,7 +185,11 @@ async function loadLazy(doc) {
   loadCommerceLazy();
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
-  loadFonts();
+  if (isMcxPage()) {
+    import('./mcx-ui.js').then(({ default: initMcxUi }) => initMcxUi());
+  } else {
+    loadFonts();
+  }
 }
 
 /**

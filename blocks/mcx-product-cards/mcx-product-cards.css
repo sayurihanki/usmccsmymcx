@@ -1,0 +1,288 @@
+body.mcx main .mcx-product-cards .prod-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+
+body.mcx main .mcx-product-cards .ptab {
+  background: var(--surface-3);
+  border: 1px solid var(--rim);
+  border-radius: var(--r-pill);
+  color: var(--text-dim);
+  cursor: none;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 8px 20px;
+  text-transform: uppercase;
+  transition: var(--t-fast);
+}
+
+body.mcx main .mcx-product-cards .ptab:hover,
+body.mcx main .mcx-product-cards .ptab:focus-visible {
+  border-color: rgb(255 255 255 / 10%);
+  color: var(--text-body);
+}
+
+body.mcx main .mcx-product-cards .ptab.on {
+  background: var(--scarlet);
+  border-color: transparent;
+  box-shadow: var(--shadow-red);
+  color: #fff;
+}
+
+body.mcx main .mcx-product-cards .prod-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+body.mcx main .mcx-product-cards .prod-card {
+  background: var(--surface-2);
+  border: 1px solid var(--rim);
+  border-radius: var(--r-xl);
+  cursor: none;
+  overflow: hidden;
+  position: relative;
+  transition: transform var(--t-mid), border-color var(--t-mid), box-shadow var(--t-mid), opacity 0.25s, display 0.25s;
+}
+
+body.mcx main .mcx-product-cards .prod-card:hover,
+body.mcx main .mcx-product-cards .prod-card:focus-within {
+  border-color: var(--rim-gold);
+  box-shadow: var(--shadow-card);
+  transform: translateY(-8px);
+}
+
+body.mcx main .mcx-product-cards .prod-img-zone {
+  background: var(--surface-3);
+  height: 260px;
+  overflow: hidden;
+  position: relative;
+}
+
+body.mcx main .mcx-product-cards .prod-img,
+body.mcx main .mcx-product-cards .prod-img img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease);
+  width: 100%;
+}
+
+body.mcx main .mcx-product-cards .prod-card:hover .prod-img img,
+body.mcx main .mcx-product-cards .prod-card:focus-within .prod-img img {
+  transform: scale(1.09);
+}
+
+body.mcx main .mcx-product-cards .prod-img-ph {
+  align-items: center;
+  background: var(--surface-3);
+  display: flex;
+  font-size: 52px;
+  inset: 0;
+  justify-content: center;
+  pointer-events: none;
+  position: absolute;
+}
+
+body.mcx main .mcx-product-cards .prod-flags {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  left: 12px;
+  position: absolute;
+  top: 12px;
+  z-index: 3;
+}
+
+body.mcx main .mcx-product-cards .flag {
+  border-radius: var(--r-sm);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  padding: 3px 9px;
+  text-transform: uppercase;
+}
+
+body.mcx main .mcx-product-cards .f-new {
+  background: var(--gold);
+  color: var(--void);
+}
+
+body.mcx main .mcx-product-cards .f-sale {
+  background: var(--scarlet);
+  color: #fff;
+}
+
+body.mcx main .mcx-product-cards .f-excl {
+  background: var(--surface-4);
+  border: 1px solid var(--rim);
+  color: var(--text-body);
+}
+
+body.mcx main .mcx-product-cards .f-hot {
+  background: var(--teal);
+  color: var(--void);
+}
+
+body.mcx main .mcx-product-cards .prod-love {
+  align-items: center;
+  backdrop-filter: blur(10px);
+  background: rgb(8 15 27 / 75%);
+  border: 1px solid var(--rim);
+  border-radius: 50%;
+  color: var(--text-dim);
+  cursor: none;
+  display: flex;
+  height: 36px;
+  justify-content: center;
+  opacity: 0;
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  transition: opacity var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+  width: 36px;
+  z-index: 3;
+}
+
+body.mcx main .mcx-product-cards .prod-love svg {
+  height: 15px;
+  width: 15px;
+}
+
+body.mcx main .mcx-product-cards .prod-card .prod-love:hover,
+body.mcx main .mcx-product-cards .prod-card .prod-love:focus-visible,
+body.mcx main .mcx-product-cards .prod-love.loved {
+  border-color: var(--scarlet);
+  color: var(--scarlet);
+}
+
+body.mcx main .mcx-product-cards .prod-card:hover .prod-love,
+body.mcx main .mcx-product-cards .prod-card:focus-within .prod-love {
+  opacity: 1;
+}
+
+body.mcx main .mcx-product-cards .prod-quick {
+  align-items: center;
+  background: var(--scarlet);
+  color: #fff;
+  display: flex;
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  font-weight: 700;
+  gap: 8px;
+  inset: auto 0 0;
+  justify-content: center;
+  letter-spacing: 0.15em;
+  padding: 12px;
+  position: absolute;
+  text-align: center;
+  text-transform: uppercase;
+  transform: translateY(100%);
+  transition: transform var(--t-mid) var(--ease);
+  width: 100%;
+  z-index: 3;
+}
+
+body.mcx main .mcx-product-cards .prod-card .prod-quick:hover,
+body.mcx main .mcx-product-cards .prod-card .prod-quick:focus-visible {
+  background: var(--scarlet-bright);
+}
+
+body.mcx main .mcx-product-cards .prod-card:hover .prod-quick,
+body.mcx main .mcx-product-cards .prod-card:focus-within .prod-quick {
+  transform: translateY(0);
+}
+
+body.mcx main .mcx-product-cards .prod-info {
+  padding: 16px 18px 20px;
+}
+
+body.mcx main .mcx-product-cards .prod-brand {
+  color: var(--gold);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.24em;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+body.mcx main .mcx-product-cards .prod-name {
+  color: var(--text-bright);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+  margin-bottom: 10px;
+}
+
+body.mcx main .mcx-product-cards .prod-stars {
+  align-items: center;
+  display: flex;
+  gap: 7px;
+  margin-bottom: 12px;
+}
+
+body.mcx main .mcx-product-cards .stars-row {
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+}
+
+body.mcx main .mcx-product-cards .stars-ct {
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+}
+
+body.mcx main .mcx-product-cards .prod-pricing {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+body.mcx main .mcx-product-cards .p-current {
+  color: var(--text-bright);
+  font-family: var(--font-hero);
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+body.mcx main .mcx-product-cards .p-orig {
+  color: var(--text-dim);
+  font-size: 13px;
+  text-decoration: line-through;
+}
+
+body.mcx main .mcx-product-cards .p-chip {
+  background: var(--scarlet-glow);
+  border: 1px solid rgb(193 18 31 / 20%);
+  border-radius: var(--r-sm);
+  color: var(--scarlet-bright);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 2px 7px;
+}
+
+@media (max-width: 1200px) {
+  body.mcx main .mcx-product-cards .prod-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  body.mcx main .mcx-product-cards .prod-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  body.mcx main .mcx-product-cards .prod-grid {
+    grid-template-columns: 1fr;
+  }
+}

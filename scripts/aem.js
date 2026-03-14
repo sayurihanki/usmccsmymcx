@@ -620,7 +620,8 @@ function decorateBlocks(main) {
  * @returns {Promise}
  */
 async function loadHeader(header) {
-  const headerBlock = buildBlock('header', '');
+  const blockName = document.body.classList.contains('mcx') ? 'mcx-header' : 'header';
+  const headerBlock = buildBlock(blockName, '');
   header.append(headerBlock);
   decorateBlock(headerBlock);
   return loadBlock(headerBlock);
@@ -632,7 +633,8 @@ async function loadHeader(header) {
  * @returns {Promise}
  */
 async function loadFooter(footer) {
-  const footerBlock = buildBlock('footer', '');
+  const blockName = document.body.classList.contains('mcx') ? 'mcx-footer' : 'footer';
+  const footerBlock = buildBlock(blockName, '');
   footer.append(footerBlock);
   decorateBlock(footerBlock);
   return loadBlock(footerBlock);
