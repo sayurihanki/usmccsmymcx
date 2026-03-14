@@ -4,8 +4,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import decorate from '../../blocks/mcx-hero/mcx-hero.js';
-
 class FakeEventTarget {
   constructor() {
     this.listeners = new Map();
@@ -331,6 +329,7 @@ async function withFakeDom(fn) {
 
 test('mcx-hero renders authored content', async () => {
   await withFakeDom(async ({ document }) => {
+    const { default: decorate } = await import('../../blocks/mcx-hero/mcx-hero.js');
     const { section, block } = createAuthoredBlock(document);
 
     decorate(block);
@@ -356,6 +355,7 @@ test('mcx-hero renders authored content', async () => {
 
 test('mcx-hero falls back to library preview defaults', async () => {
   await withFakeDom(async ({ document, window }) => {
+    const { default: decorate } = await import('../../blocks/mcx-hero/mcx-hero.js');
     window.location.pathname = '/library/blocks/mcx-hero';
     window.location.href = 'https://example.com/library/blocks/mcx-hero';
 
