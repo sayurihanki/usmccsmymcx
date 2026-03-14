@@ -1,25 +1,25 @@
-body.mcx main .mcx-newsletter-wrapper {
+body:is(.mcx, .mcx-preview) main .mcx-newsletter-wrapper {
   max-width: none;
   padding: 0;
 }
 
-body.mcx main .mcx-newsletter .nl {
+body:is(.mcx, .mcx-preview) main .mcx-newsletter .nl {
   background: var(--surface-2);
   border-top: 1px solid var(--rim);
   padding: 84px 48px;
 }
 
-body.mcx main .mcx-newsletter .nl-box {
+body:is(.mcx, .mcx-preview) main .mcx-newsletter .nl-box {
   margin: 0 auto;
   max-width: 620px;
   text-align: center;
 }
 
-body.mcx main .mcx-newsletter .nl-box .sec-label {
+body:is(.mcx, .mcx-preview) main .mcx-newsletter .nl-box .sec-label {
   text-align: center;
 }
 
-body.mcx main .mcx-newsletter .nl-icon {
+body:is(.mcx, .mcx-preview) main .mcx-newsletter .nl-icon {
   align-items: center;
   background: var(--scarlet-glow);
   border: 1px solid rgb(193 18 31 / 25%);
@@ -31,7 +31,7 @@ body.mcx main .mcx-newsletter .nl-icon {
   width: 64px;
 }
 
-body.mcx main .mcx-newsletter .nl-title {
+body:is(.mcx, .mcx-preview) main .mcx-newsletter .nl-title {
   color: var(--text-bright);
   font-family: var(--font-hero);
   font-size: 52px;
@@ -40,21 +40,21 @@ body.mcx main .mcx-newsletter .nl-title {
   margin-bottom: 14px;
 }
 
-body.mcx main .mcx-newsletter .nl-desc {
+body:is(.mcx, .mcx-preview) main .mcx-newsletter .nl-desc {
   color: var(--text-body);
   font-size: 15px;
   line-height: 1.75;
   margin-bottom: 36px;
 }
 
-body.mcx main .mcx-newsletter .nl-form {
+body:is(.mcx, .mcx-preview) main .mcx-newsletter .nl-form {
   display: flex;
   gap: 12px;
   margin: 0 auto;
   max-width: 480px;
 }
 
-body.mcx main .mcx-newsletter .nl-input {
+body:is(.mcx, .mcx-preview) main .mcx-newsletter .nl-input {
   background: var(--surface-3);
   border: 1px solid var(--rim);
   border-radius: var(--r-sm);
@@ -66,16 +66,16 @@ body.mcx main .mcx-newsletter .nl-input {
   transition: var(--t-mid);
 }
 
-body.mcx main .mcx-newsletter .nl-input::placeholder {
+body:is(.mcx, .mcx-preview) main .mcx-newsletter .nl-input::placeholder {
   color: var(--text-dim);
 }
 
-body.mcx main .mcx-newsletter .nl-input:focus {
+body:is(.mcx, .mcx-preview) main .mcx-newsletter .nl-input:focus {
   border-color: rgb(193 18 31 / 50%);
   box-shadow: 0 0 0 3px var(--scarlet-glow);
 }
 
-body.mcx main .mcx-newsletter .btn-nl {
+body:is(.mcx, .mcx-preview) main .mcx-newsletter .btn-nl {
   background: var(--scarlet);
   border-radius: var(--r-sm);
   box-shadow: var(--shadow-red);
@@ -91,12 +91,12 @@ body.mcx main .mcx-newsletter .btn-nl {
   white-space: nowrap;
 }
 
-body.mcx main .mcx-newsletter .btn-nl:hover,
-body.mcx main .mcx-newsletter .btn-nl:focus-visible {
+body:is(.mcx, .mcx-preview) main .mcx-newsletter .btn-nl:hover,
+body:is(.mcx, .mcx-preview) main .mcx-newsletter .btn-nl:focus-visible {
   background: var(--scarlet-bright);
 }
 
-body.mcx main .mcx-newsletter .nl-note {
+body:is(.mcx, .mcx-preview) main .mcx-newsletter .nl-note {
   color: var(--text-dim);
   font-family: var(--font-mono);
   font-size: 10px;
@@ -105,11 +105,11 @@ body.mcx main .mcx-newsletter .nl-note {
 }
 
 @media (max-width: 600px) {
-  body.mcx main .mcx-newsletter .nl {
+  body:is(.mcx, .mcx-preview) main .mcx-newsletter .nl {
     padding: 64px 20px;
   }
 
-  body.mcx main .mcx-newsletter .nl-form {
+  body:is(.mcx, .mcx-preview) main .mcx-newsletter .nl-form {
     flex-direction: column;
   }
 }

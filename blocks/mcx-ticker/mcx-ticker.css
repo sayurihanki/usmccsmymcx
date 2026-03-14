@@ -1,9 +1,9 @@
-body.mcx main .mcx-ticker-wrapper {
+body:is(.mcx, .mcx-preview) main .mcx-ticker-wrapper {
   max-width: none;
   padding: 0;
 }
 
-body.mcx main .mcx-ticker .ticker-wrap {
+body:is(.mcx, .mcx-preview) main .mcx-ticker .ticker-wrap {
   background: var(--surface-2);
   border-bottom: 1px solid var(--rim);
   border-top: 1px solid var(--rim);
@@ -12,8 +12,8 @@ body.mcx main .mcx-ticker .ticker-wrap {
   position: relative;
 }
 
-body.mcx main .mcx-ticker .ticker-wrap::before,
-body.mcx main .mcx-ticker .ticker-wrap::after {
+body:is(.mcx, .mcx-preview) main .mcx-ticker .ticker-wrap::before,
+body:is(.mcx, .mcx-preview) main .mcx-ticker .ticker-wrap::after {
   content: '';
   inset: 0 auto 0 0;
   position: absolute;
@@ -21,27 +21,27 @@ body.mcx main .mcx-ticker .ticker-wrap::after {
   z-index: 2;
 }
 
-body.mcx main .mcx-ticker .ticker-wrap::before {
+body:is(.mcx, .mcx-preview) main .mcx-ticker .ticker-wrap::before {
   background: linear-gradient(90deg, var(--surface-2), transparent);
 }
 
-body.mcx main .mcx-ticker .ticker-wrap::after {
+body:is(.mcx, .mcx-preview) main .mcx-ticker .ticker-wrap::after {
   background: linear-gradient(270deg, var(--surface-2), transparent);
   inset: 0 0 0 auto;
 }
 
-body.mcx main .mcx-ticker .ticker-track {
+body:is(.mcx, .mcx-preview) main .mcx-ticker .ticker-track {
   animation: mcx-ticker-roll 35s linear infinite;
   display: flex;
   white-space: nowrap;
   will-change: transform;
 }
 
-body.mcx main .mcx-ticker .ticker-track:hover {
+body:is(.mcx, .mcx-preview) main .mcx-ticker .ticker-track:hover {
   animation-play-state: paused;
 }
 
-body.mcx main .mcx-ticker .ticker-item {
+body:is(.mcx, .mcx-preview) main .mcx-ticker .ticker-item {
   align-items: center;
   color: var(--text-dim);
   display: inline-flex;
@@ -54,11 +54,11 @@ body.mcx main .mcx-ticker .ticker-item {
   text-transform: uppercase;
 }
 
-body.mcx main .mcx-ticker .ticker-item b {
+body:is(.mcx, .mcx-preview) main .mcx-ticker .ticker-item b {
   color: var(--text-body);
 }
 
-body.mcx main .mcx-ticker .ticker-gem {
+body:is(.mcx, .mcx-preview) main .mcx-ticker .ticker-gem {
   color: var(--scarlet);
   font-size: 7px;
 }

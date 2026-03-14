@@ -26,6 +26,8 @@ import {
 import { runExperimentation } from './experiment-loader.js';
 
 const isMcxPage = () => document.body.classList.contains('mcx');
+const isMcxLibraryPreview = () => /\/(?:\.da\/library\/blocks|blocks)\/mcx-[^/]+\/?$/.test(window.location.pathname);
+const usesMcxExperience = () => isMcxPage() || isMcxLibraryPreview();
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -50,7 +52,7 @@ function buildHeroBlock(main) {
  * load fonts.css and set a session storage flag
  */
 async function loadFonts() {
-  if (isMcxPage()) return;
+  if (usesMcxExperience()) return;
   await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
   try {
     if (!window.location.hostname.includes('localhost')) sessionStorage.setItem('fonts-loaded', 'true');
@@ -60,7 +62,7 @@ async function loadFonts() {
 }
 
 async function loadMcxPackage() {
-  if (!isMcxPage()) return;
+  if (!usesMcxExperience()) return;
   await loadCSS(`${window.hlx.codeBasePath}/styles/mcx-package.css`);
 }
 
@@ -88,7 +90,7 @@ function buildAutoBlocks(main) {
       });
     }
 
-    if (!isMcxPage() && !main.querySelector('.hero')) buildHeroBlock(main);
+    if (!usesMcxExperience() && !main.querySelector('.hero')) buildHeroBlock(main);
   } catch (error) {
     console.error('Auto Blocking failed', error);
   }
@@ -138,6 +140,9 @@ const experimentationConfig = {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
+  if (!isMcxPage() && isMcxLibraryPreview()) {
+    document.body.classList.add('mcx-preview');
+  }
   await loadMcxPackage();
   await runExperimentation(doc, experimentationConfig);
 
@@ -158,7 +163,7 @@ async function loadEager(doc) {
 
   try {
     /* if desktop (proxy for fast connection) or fonts already loaded, load fonts.css */
-    if (!isMcxPage() && (window.innerWidth >= 900 || sessionStorage.getItem('fonts-loaded'))) {
+    if (!usesMcxExperience() && (window.innerWidth >= 900 || sessionStorage.getItem('fonts-loaded'))) {
       loadFonts();
     }
   } catch (e) {
@@ -185,7 +190,7 @@ async function loadLazy(doc) {
   loadCommerceLazy();
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
-  if (isMcxPage()) {
+  if (usesMcxExperience()) {
     import('./mcx-ui.js').then(({ default: initMcxUi }) => initMcxUi());
   } else {
     loadFonts();

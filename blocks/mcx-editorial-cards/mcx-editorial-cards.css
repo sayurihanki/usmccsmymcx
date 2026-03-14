@@ -1,21 +1,21 @@
-body.mcx main .mcx-editorial-cards-wrapper {
+body:is(.mcx, .mcx-preview) main .mcx-editorial-cards-wrapper {
   max-width: none;
   padding: 0;
 }
 
-body.mcx main .mcx-editorial-cards .ed-grid {
+body:is(.mcx, .mcx-preview) main .mcx-editorial-cards .ed-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
 
-body.mcx main .mcx-editorial-cards .ed-card {
+body:is(.mcx, .mcx-preview) main .mcx-editorial-cards .ed-card {
   cursor: none;
   overflow: hidden;
   position: relative;
 }
 
-body.mcx main .mcx-editorial-cards .ed-photo,
-body.mcx main .mcx-editorial-cards .ed-photo img {
+body:is(.mcx, .mcx-preview) main .mcx-editorial-cards .ed-photo,
+body:is(.mcx, .mcx-preview) main .mcx-editorial-cards .ed-photo img {
   background: var(--surface-3);
   display: block;
   height: 500px;
@@ -24,18 +24,18 @@ body.mcx main .mcx-editorial-cards .ed-photo img {
   width: 100%;
 }
 
-body.mcx main .mcx-editorial-cards .ed-card:hover .ed-photo img,
-body.mcx main .mcx-editorial-cards .ed-card:focus-within .ed-photo img {
+body:is(.mcx, .mcx-preview) main .mcx-editorial-cards .ed-card:hover .ed-photo img,
+body:is(.mcx, .mcx-preview) main .mcx-editorial-cards .ed-card:focus-within .ed-photo img {
   transform: scale(1.06);
 }
 
-body.mcx main .mcx-editorial-cards .ed-shade {
+body:is(.mcx, .mcx-preview) main .mcx-editorial-cards .ed-shade {
   background: linear-gradient(to top, rgb(4 8 16 / 97%) 0%, rgb(4 8 16 / 45%) 45%, transparent 100%);
   inset: 0;
   position: absolute;
 }
 
-body.mcx main .mcx-editorial-cards .ed-body {
+body:is(.mcx, .mcx-preview) main .mcx-editorial-cards .ed-body {
   bottom: 0;
   left: 0;
   padding: 32px 28px;
@@ -43,7 +43,7 @@ body.mcx main .mcx-editorial-cards .ed-body {
   right: 0;
 }
 
-body.mcx main .mcx-editorial-cards .ed-idx {
+body:is(.mcx, .mcx-preview) main .mcx-editorial-cards .ed-idx {
   color: rgb(255 255 255 / 4%);
   font-family: var(--font-hero);
   font-size: 90px;
@@ -53,7 +53,7 @@ body.mcx main .mcx-editorial-cards .ed-idx {
   margin-bottom: -26px;
 }
 
-body.mcx main .mcx-editorial-cards .ed-tag {
+body:is(.mcx, .mcx-preview) main .mcx-editorial-cards .ed-tag {
   color: var(--scarlet);
   font-family: var(--font-mono);
   font-size: 10px;
@@ -62,7 +62,7 @@ body.mcx main .mcx-editorial-cards .ed-tag {
   text-transform: uppercase;
 }
 
-body.mcx main .mcx-editorial-cards .ed-title {
+body:is(.mcx, .mcx-preview) main .mcx-editorial-cards .ed-title {
   color: #fff;
   font-family: var(--font-ui);
   font-size: 22px;
@@ -71,14 +71,14 @@ body.mcx main .mcx-editorial-cards .ed-title {
   margin-bottom: 10px;
 }
 
-body.mcx main .mcx-editorial-cards .ed-desc {
+body:is(.mcx, .mcx-preview) main .mcx-editorial-cards .ed-desc {
   color: rgb(255 255 255 / 50%);
   font-size: 13px;
   line-height: 1.7;
 }
 
 @media (max-width: 900px) {
-  body.mcx main .mcx-editorial-cards .ed-grid {
+  body:is(.mcx, .mcx-preview) main .mcx-editorial-cards .ed-grid {
     grid-template-columns: 1fr;
   }
 }

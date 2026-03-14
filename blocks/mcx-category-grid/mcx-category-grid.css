@@ -1,10 +1,10 @@
-body.mcx main .mcx-category-grid .cat-grid {
+body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-grid {
   display: grid;
   gap: 12px;
   grid-template-columns: repeat(6, 1fr);
 }
 
-body.mcx main .mcx-category-grid .cat-tile {
+body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-tile {
   align-items: center;
   background: var(--surface-3);
   border: 1px solid var(--rim);
@@ -20,7 +20,7 @@ body.mcx main .mcx-category-grid .cat-tile {
   transition: var(--t-mid) var(--ease);
 }
 
-body.mcx main .mcx-category-grid .cat-tile::after {
+body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-tile::after {
   background: radial-gradient(ellipse at 50% 100%, rgb(193 18 31 / 20%), transparent 70%);
   content: '';
   inset: 0;
@@ -29,26 +29,26 @@ body.mcx main .mcx-category-grid .cat-tile::after {
   transition: opacity var(--t-mid);
 }
 
-body.mcx main .mcx-category-grid .cat-tile:hover,
-body.mcx main .mcx-category-grid .cat-tile:focus-visible {
+body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-tile:hover,
+body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-tile:focus-visible {
   border-color: rgb(193 18 31 / 40%);
   box-shadow: 0 16px 40px rgb(193 18 31 / 12%);
   transform: translateY(-6px) scale(1.02);
 }
 
-body.mcx main .mcx-category-grid .cat-tile:hover::after,
-body.mcx main .mcx-category-grid .cat-tile:focus-visible::after {
+body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-tile:hover::after,
+body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-tile:focus-visible::after {
   opacity: 1;
 }
 
-body.mcx main .mcx-category-grid .cat-emoji,
-body.mcx main .mcx-category-grid .cat-name,
-body.mcx main .mcx-category-grid .cat-count {
+body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-emoji,
+body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-name,
+body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-count {
   position: relative;
   z-index: 1;
 }
 
-body.mcx main .mcx-category-grid .cat-emoji {
+body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-emoji {
   align-items: center;
   background: var(--surface-4);
   border-radius: var(--r-lg);
@@ -60,13 +60,13 @@ body.mcx main .mcx-category-grid .cat-emoji {
   width: 58px;
 }
 
-body.mcx main .mcx-category-grid .cat-tile:hover .cat-emoji,
-body.mcx main .mcx-category-grid .cat-tile:focus-visible .cat-emoji {
+body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-tile:hover .cat-emoji,
+body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-tile:focus-visible .cat-emoji {
   background: var(--scarlet);
   transform: rotate(-8deg) scale(1.15);
 }
 
-body.mcx main .mcx-category-grid .cat-name {
+body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-name {
   color: var(--text-body);
   font-family: var(--font-ui);
   font-size: 12px;
@@ -76,12 +76,12 @@ body.mcx main .mcx-category-grid .cat-name {
   transition: color var(--t-fast);
 }
 
-body.mcx main .mcx-category-grid .cat-tile:hover .cat-name,
-body.mcx main .mcx-category-grid .cat-tile:focus-visible .cat-name {
+body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-tile:hover .cat-name,
+body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-tile:focus-visible .cat-name {
   color: var(--text-bright);
 }
 
-body.mcx main .mcx-category-grid .cat-count {
+body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-count {
   color: var(--text-dim);
   font-family: var(--font-mono);
   font-size: 10px;
@@ -89,13 +89,13 @@ body.mcx main .mcx-category-grid .cat-count {
 }
 
 @media (max-width: 1200px) {
-  body.mcx main .mcx-category-grid .cat-grid {
+  body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-grid {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
 @media (max-width: 600px) {
-  body.mcx main .mcx-category-grid .cat-grid {
+  body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }

@@ -1,9 +1,9 @@
-body.mcx main .mcx-deal-countdown-wrapper {
+body:is(.mcx, .mcx-preview) main .mcx-deal-countdown-wrapper {
   max-width: none;
   padding: 0;
 }
 
-body.mcx main .mcx-deal-countdown .deal-strip {
+body:is(.mcx, .mcx-preview) main .mcx-deal-countdown .deal-strip {
   background:
     linear-gradient(98deg, var(--void) 0%, #0b1625 35%, #0b1625 65%, var(--void) 100%);
   border-bottom: 1px solid var(--rim);
@@ -11,7 +11,7 @@ body.mcx main .mcx-deal-countdown .deal-strip {
   padding: 48px;
 }
 
-body.mcx main .mcx-deal-countdown .deal-inner {
+body:is(.mcx, .mcx-preview) main .mcx-deal-countdown .deal-inner {
   align-items: center;
   display: grid;
   gap: 60px;
@@ -20,7 +20,7 @@ body.mcx main .mcx-deal-countdown .deal-inner {
   max-width: 1500px;
 }
 
-body.mcx main .mcx-deal-countdown .deal-label {
+body:is(.mcx, .mcx-preview) main .mcx-deal-countdown .deal-label {
   color: var(--scarlet);
   font-family: var(--font-mono);
   font-size: 10px;
@@ -29,7 +29,7 @@ body.mcx main .mcx-deal-countdown .deal-label {
   text-transform: uppercase;
 }
 
-body.mcx main .mcx-deal-countdown .deal-title {
+body:is(.mcx, .mcx-preview) main .mcx-deal-countdown .deal-title {
   color: var(--text-bright);
   font-family: var(--font-hero);
   font-size: 52px;
@@ -38,7 +38,7 @@ body.mcx main .mcx-deal-countdown .deal-title {
   line-height: 0.92;
 }
 
-body.mcx main .mcx-deal-countdown .deal-desc {
+body:is(.mcx, .mcx-preview) main .mcx-deal-countdown .deal-desc {
   color: var(--text-body);
   font-size: 14px;
   line-height: 1.7;
@@ -46,7 +46,7 @@ body.mcx main .mcx-deal-countdown .deal-desc {
   max-width: 360px;
 }
 
-body.mcx main .mcx-deal-countdown .countdown {
+body:is(.mcx, .mcx-preview) main .mcx-deal-countdown .countdown {
   align-items: center;
   background: var(--surface-2);
   border: 1px solid var(--rim);
@@ -57,11 +57,11 @@ body.mcx main .mcx-deal-countdown .countdown {
   padding: 28px 36px;
 }
 
-body.mcx main .mcx-deal-countdown .cd-unit {
+body:is(.mcx, .mcx-preview) main .mcx-deal-countdown .cd-unit {
   text-align: center;
 }
 
-body.mcx main .mcx-deal-countdown .cd-num {
+body:is(.mcx, .mcx-preview) main .mcx-deal-countdown .cd-num {
   color: var(--text-bright);
   font-family: var(--font-hero);
   font-size: 56px;
@@ -73,7 +73,7 @@ body.mcx main .mcx-deal-countdown .cd-num {
   transition: transform 0.18s, opacity 0.18s;
 }
 
-body.mcx main .mcx-deal-countdown .cd-num::after {
+body:is(.mcx, .mcx-preview) main .mcx-deal-countdown .cd-num::after {
   background: var(--rim);
   content: '';
   height: 1px;
@@ -81,7 +81,7 @@ body.mcx main .mcx-deal-countdown .cd-num::after {
   position: absolute;
 }
 
-body.mcx main .mcx-deal-countdown .cd-lbl {
+body:is(.mcx, .mcx-preview) main .mcx-deal-countdown .cd-lbl {
   color: var(--text-dim);
   font-family: var(--font-mono);
   font-size: 9.5px;
@@ -90,7 +90,7 @@ body.mcx main .mcx-deal-countdown .cd-lbl {
   text-transform: uppercase;
 }
 
-body.mcx main .mcx-deal-countdown .cd-sep {
+body:is(.mcx, .mcx-preview) main .mcx-deal-countdown .cd-sep {
   color: var(--scarlet);
   font-family: var(--font-hero);
   font-size: 40px;
@@ -99,17 +99,17 @@ body.mcx main .mcx-deal-countdown .cd-sep {
   opacity: 0.7;
 }
 
-body.mcx main .mcx-deal-countdown .deal-cta {
+body:is(.mcx, .mcx-preview) main .mcx-deal-countdown .deal-cta {
   text-align: right;
 }
 
-body.mcx main .mcx-deal-countdown .deal-cta p {
+body:is(.mcx, .mcx-preview) main .mcx-deal-countdown .deal-cta p {
   color: var(--text-body);
   font-size: 13px;
   margin-bottom: 16px;
 }
 
-body.mcx main .mcx-deal-countdown .btn-deal {
+body:is(.mcx, .mcx-preview) main .mcx-deal-countdown .btn-deal {
   align-items: center;
   background: var(--gold);
   border-radius: var(--r-sm);
@@ -126,24 +126,24 @@ body.mcx main .mcx-deal-countdown .btn-deal {
   transition: var(--t-mid);
 }
 
-body.mcx main .mcx-deal-countdown .btn-deal:hover,
-body.mcx main .mcx-deal-countdown .btn-deal:focus-visible {
+body:is(.mcx, .mcx-preview) main .mcx-deal-countdown .btn-deal:hover,
+body:is(.mcx, .mcx-preview) main .mcx-deal-countdown .btn-deal:focus-visible {
   background: var(--gold-lt);
   box-shadow: 0 0 36px rgb(201 162 39 / 35%);
   transform: translateY(-2px);
 }
 
 @media (max-width: 1200px) {
-  body.mcx main .mcx-deal-countdown .deal-inner {
+  body:is(.mcx, .mcx-preview) main .mcx-deal-countdown .deal-inner {
     grid-template-columns: 1fr;
     text-align: center;
   }
 
-  body.mcx main .mcx-deal-countdown .countdown {
+  body:is(.mcx, .mcx-preview) main .mcx-deal-countdown .countdown {
     justify-content: center;
   }
 
-  body.mcx main .mcx-deal-countdown .deal-cta {
+  body:is(.mcx, .mcx-preview) main .mcx-deal-countdown .deal-cta {
     text-align: center;
   }
 }

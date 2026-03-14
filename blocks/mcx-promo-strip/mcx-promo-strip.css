@@ -1,16 +1,16 @@
-body.mcx main .mcx-promo-strip-wrapper {
+body:is(.mcx, .mcx-preview) main .mcx-promo-strip-wrapper {
   max-width: none;
   padding: 0;
 }
 
-body.mcx main .mcx-promo-strip .promo-banner {
+body:is(.mcx, .mcx-preview) main .mcx-promo-strip .promo-banner {
   background: linear-gradient(108deg, #5a0000 0%, var(--scarlet-deep) 22%, var(--scarlet) 55%, #d8202e 80%, #b5001f 100%);
   overflow: hidden;
   padding: 72px 48px;
   position: relative;
 }
 
-body.mcx main .mcx-promo-strip .promo-banner::before {
+body:is(.mcx, .mcx-preview) main .mcx-promo-strip .promo-banner::before {
   color: rgb(255 255 255 / 2.8%);
   content: 'MARINES';
   font-family: var(--font-hero);
@@ -26,7 +26,7 @@ body.mcx main .mcx-promo-strip .promo-banner::before {
   user-select: none;
 }
 
-body.mcx main .mcx-promo-strip .promo-lines {
+body:is(.mcx, .mcx-preview) main .mcx-promo-strip .promo-lines {
   background-image:
     repeating-linear-gradient(
       -45deg,
@@ -39,7 +39,7 @@ body.mcx main .mcx-promo-strip .promo-lines {
   position: absolute;
 }
 
-body.mcx main .mcx-promo-strip .promo-inner {
+body:is(.mcx, .mcx-preview) main .mcx-promo-strip .promo-inner {
   align-items: center;
   display: flex;
   gap: 48px;
@@ -50,7 +50,7 @@ body.mcx main .mcx-promo-strip .promo-inner {
   z-index: 1;
 }
 
-body.mcx main .mcx-promo-strip .promo-badge {
+body:is(.mcx, .mcx-preview) main .mcx-promo-strip .promo-badge {
   align-items: center;
   border: 1px solid rgb(255 255 255 / 15%);
   border-radius: var(--r-pill);
@@ -64,7 +64,7 @@ body.mcx main .mcx-promo-strip .promo-badge {
   text-transform: uppercase;
 }
 
-body.mcx main .mcx-promo-strip .promo-title {
+body:is(.mcx, .mcx-preview) main .mcx-promo-strip .promo-title {
   color: #fff;
   font-family: var(--font-hero);
   font-size: clamp(44px, 5.5vw, 68px);
@@ -74,14 +74,14 @@ body.mcx main .mcx-promo-strip .promo-title {
   margin-bottom: 14px;
 }
 
-body.mcx main .mcx-promo-strip .promo-sub {
+body:is(.mcx, .mcx-preview) main .mcx-promo-strip .promo-sub {
   color: rgb(255 255 255 / 75%);
   font-size: 15px;
   line-height: 1.65;
   max-width: 580px;
 }
 
-body.mcx main .mcx-promo-strip .btn-promo {
+body:is(.mcx, .mcx-preview) main .mcx-promo-strip .btn-promo {
   align-items: center;
   background: #fff;
   border-radius: var(--r-sm);
@@ -99,8 +99,8 @@ body.mcx main .mcx-promo-strip .btn-promo {
   white-space: nowrap;
 }
 
-body.mcx main .mcx-promo-strip .btn-promo:hover,
-body.mcx main .mcx-promo-strip .btn-promo:focus-visible {
+body:is(.mcx, .mcx-preview) main .mcx-promo-strip .btn-promo:hover,
+body:is(.mcx, .mcx-preview) main .mcx-promo-strip .btn-promo:focus-visible {
   background: var(--gold);
   box-shadow: 0 12px 32px rgb(0 0 0 / 30%);
   color: var(--void);
@@ -108,11 +108,11 @@ body.mcx main .mcx-promo-strip .btn-promo:focus-visible {
 }
 
 @media (max-width: 900px) {
-  body.mcx main .mcx-promo-strip .promo-banner {
+  body:is(.mcx, .mcx-preview) main .mcx-promo-strip .promo-banner {
     padding: 56px 20px;
   }
 
-  body.mcx main .mcx-promo-strip .promo-inner {
+  body:is(.mcx, .mcx-preview) main .mcx-promo-strip .promo-inner {
     align-items: flex-start;
     flex-direction: column;
   }

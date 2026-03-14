@@ -18,6 +18,7 @@ from docx.shared import Inches, Pt, RGBColor
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_DIR = ROOT / "output" / "doc"
 OUTPUT_PATH = OUTPUT_DIR / "mcx-google-docs-blocks.docx"
+BLOCK_OUTPUT_DIR = OUTPUT_DIR / "mcx-library-blocks"
 
 
 def image_cell(url: str, alt: str, width: float = 1.45) -> dict[str, Any]:
@@ -174,6 +175,7 @@ def add_note(document: Document, text: str) -> None:
 
 SECTIONS: list[dict[str, Any]] = [
     {
+        "slug": "homepage-metadata",
         "heading": "1. Homepage Metadata",
         "note": "Paste this table into the homepage Google Doc metadata area.",
         "block": "metadata",
@@ -187,6 +189,7 @@ SECTIONS: list[dict[str, Any]] = [
         ],
     },
     {
+        "slug": "mcx-nav-fragment",
         "heading": "2. Header Fragment",
         "note": "Paste this into a dedicated fragment doc for /fragments/mcx-nav.",
         "block": "mcx-nav-data",
@@ -239,6 +242,7 @@ SECTIONS: list[dict[str, Any]] = [
         ],
     },
     {
+        "slug": "mcx-footer-fragment",
         "heading": "3. Footer Fragment",
         "note": "Paste this into a dedicated fragment doc for /fragments/mcx-footer.",
         "block": "mcx-footer-data",
@@ -285,6 +289,7 @@ SECTIONS: list[dict[str, Any]] = [
         ],
     },
     {
+        "slug": "mcx-announcement-bar",
         "heading": "4. Announcement Bar",
         "note": "Paste on the page body.",
         "block": "mcx-announcement-bar",
@@ -300,6 +305,7 @@ SECTIONS: list[dict[str, Any]] = [
         ],
     },
     {
+        "slug": "mcx-hero",
         "heading": "5. Hero",
         "note": "Explicit hero block. This is not auto-generated.",
         "block": "mcx-hero",
@@ -328,6 +334,7 @@ SECTIONS: list[dict[str, Any]] = [
         ],
     },
     {
+        "slug": "mcx-ticker",
         "heading": "6. Ticker",
         "note": "Single-column ticker rows.",
         "block": "mcx-ticker",
@@ -343,6 +350,7 @@ SECTIONS: list[dict[str, Any]] = [
         ],
     },
     {
+        "slug": "mcx-benefits",
         "heading": "7. Benefits",
         "note": "Three-column icon + title + subtitle rows.",
         "block": "mcx-benefits",
@@ -356,6 +364,7 @@ SECTIONS: list[dict[str, Any]] = [
         ],
     },
     {
+        "slug": "mcx-category-grid-section-metadata",
         "heading": "8. Category Section Metadata",
         "note": "Paste immediately above the category grid block.",
         "block": "section-metadata",
@@ -364,6 +373,7 @@ SECTIONS: list[dict[str, Any]] = [
         "rows": [["style", "sec, sec-mid"]],
     },
     {
+        "slug": "mcx-category-grid",
         "heading": "9. Category Grid",
         "note": "Four-column category rows.",
         "block": "mcx-category-grid",
@@ -387,6 +397,7 @@ SECTIONS: list[dict[str, Any]] = [
         ],
     },
     {
+        "slug": "mcx-product-cards-section-metadata",
         "heading": "10. Product Section Metadata",
         "note": "Paste immediately above the product cards block.",
         "block": "section-metadata",
@@ -395,6 +406,7 @@ SECTIONS: list[dict[str, Any]] = [
         "rows": [["style", "sec, sec-dark"]],
     },
     {
+        "slug": "mcx-product-cards",
         "heading": "11. Product Cards",
         "note": "Four-column product rows with image, name, metrics, and config.",
         "block": "mcx-product-cards",
@@ -417,6 +429,7 @@ SECTIONS: list[dict[str, Any]] = [
         ],
     },
     {
+        "slug": "mcx-deal-countdown",
         "heading": "12. Deal Countdown",
         "note": "Two-column key/value block.",
         "block": "mcx-deal-countdown",
@@ -434,6 +447,7 @@ SECTIONS: list[dict[str, Any]] = [
         ],
     },
     {
+        "slug": "mcx-promo-strip",
         "heading": "13. Promo Strip",
         "note": "Two-column key/value block.",
         "block": "mcx-promo-strip",
@@ -447,6 +461,7 @@ SECTIONS: list[dict[str, Any]] = [
         ],
     },
     {
+        "slug": "mcx-featured-collections-section-metadata",
         "heading": "14. Featured Collections Section Metadata",
         "note": "Paste immediately above the featured collections block.",
         "block": "section-metadata",
@@ -455,6 +470,7 @@ SECTIONS: list[dict[str, Any]] = [
         "rows": [["style", "sec, sec-dark"]],
     },
     {
+        "slug": "mcx-featured-collections",
         "heading": "15. Featured Collections",
         "note": "Four-column image + tag + title + CTA rows.",
         "block": "mcx-featured-collections",
@@ -470,6 +486,7 @@ SECTIONS: list[dict[str, Any]] = [
         ],
     },
     {
+        "slug": "mcx-brands",
         "heading": "16. Brands",
         "note": "Single-column brand rows.",
         "block": "mcx-brands",
@@ -486,6 +503,7 @@ SECTIONS: list[dict[str, Any]] = [
         ],
     },
     {
+        "slug": "mcx-editorial-cards",
         "heading": "17. Editorial Cards",
         "note": "Four-column editorial rows.",
         "block": "mcx-editorial-cards",
@@ -498,6 +516,7 @@ SECTIONS: list[dict[str, Any]] = [
         ],
     },
     {
+        "slug": "mcx-newsletter",
         "heading": "18. Newsletter",
         "note": "Final homepage block.",
         "block": "mcx-newsletter",
@@ -515,9 +534,7 @@ SECTIONS: list[dict[str, Any]] = [
 ]
 
 
-def build_document() -> Path:
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-
+def create_base_document() -> Document:
     document = Document()
     section = document.sections[0]
     section.page_width = Inches(8.5)
@@ -530,6 +547,12 @@ def build_document() -> Path:
     normal = document.styles["Normal"]
     normal.font.name = "Arial"
     normal.font.size = Pt(10.5)
+    return document
+
+
+def build_document() -> Path:
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    document = create_base_document()
 
     title = document.add_paragraph()
     title.alignment = WD_ALIGN_PARAGRAPH.LEFT
@@ -563,8 +586,30 @@ def build_document() -> Path:
     return OUTPUT_PATH
 
 
+def build_single_block_documents() -> list[Path]:
+    BLOCK_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    paths: list[Path] = []
+
+    for section_data in SECTIONS:
+        document = create_base_document()
+        add_table(
+            document,
+            section_data["block"],
+            section_data["columns"],
+            section_data["rows"],
+            section_data["widths"],
+        )
+        output_path = BLOCK_OUTPUT_DIR / f"{section_data['slug']}.docx"
+        document.save(output_path)
+        paths.append(output_path)
+
+    return paths
+
+
 if __name__ == "__main__":
     path = build_document()
+    single_paths = build_single_block_documents()
     verify = Document(path)
     print(f"Wrote {path}")
     print(f"Table count: {len(verify.tables)}")
+    print(f"Wrote {len(single_paths)} single-table docs to {BLOCK_OUTPUT_DIR}")

@@ -1,18 +1,18 @@
-body.mcx main .mcx-announcement-bar-container .section {
+body:is(.mcx, .mcx-preview) main .mcx-announcement-bar-container .section {
   max-width: none;
   padding: 0;
 }
 
-body.mcx main .mcx-announcement-bar-wrapper {
+body:is(.mcx, .mcx-preview) main .mcx-announcement-bar-wrapper {
   max-width: none;
   padding: 0;
 }
 
-body.mcx main .mcx-announcement-bar {
+body:is(.mcx, .mcx-preview) main .mcx-announcement-bar {
   overflow: hidden;
 }
 
-body.mcx main .mcx-announcement-bar .ann-bar {
+body:is(.mcx, .mcx-preview) main .mcx-announcement-bar .ann-bar {
   align-items: center;
   background: var(--scarlet);
   display: flex;
@@ -21,7 +21,7 @@ body.mcx main .mcx-announcement-bar .ann-bar {
   position: relative;
 }
 
-body.mcx main .mcx-announcement-bar .ann-bar::before {
+body:is(.mcx, .mcx-preview) main .mcx-announcement-bar .ann-bar::before {
   background:
     repeating-linear-gradient(
       90deg,
@@ -35,14 +35,14 @@ body.mcx main .mcx-announcement-bar .ann-bar::before {
   position: absolute;
 }
 
-body.mcx main .mcx-announcement-bar .ann-scroll {
+body:is(.mcx, .mcx-preview) main .mcx-announcement-bar .ann-scroll {
   animation: mcx-ann-roll 28s linear infinite;
   display: flex;
   white-space: nowrap;
   will-change: transform;
 }
 
-body.mcx main .mcx-announcement-bar .ann-item {
+body:is(.mcx, .mcx-preview) main .mcx-announcement-bar .ann-item {
   align-items: center;
   color: rgb(255 255 255 / 92%);
   display: inline-flex;
@@ -56,13 +56,13 @@ body.mcx main .mcx-announcement-bar .ann-item {
   text-transform: uppercase;
 }
 
-body.mcx main .mcx-announcement-bar .ann-item::after {
+body:is(.mcx, .mcx-preview) main .mcx-announcement-bar .ann-item::after {
   color: rgb(255 255 255 / 35%);
   content: '\25c6';
   font-size: 6px;
 }
 
-body.mcx main .mcx-announcement-bar .ann-close {
+body:is(.mcx, .mcx-preview) main .mcx-announcement-bar .ann-close {
   background: linear-gradient(90deg, transparent, var(--scarlet-deep) 40%);
   bottom: 0;
   color: rgb(255 255 255 / 60%);
@@ -75,8 +75,8 @@ body.mcx main .mcx-announcement-bar .ann-close {
   z-index: 2;
 }
 
-body.mcx main .mcx-announcement-bar .ann-close:hover,
-body.mcx main .mcx-announcement-bar .ann-close:focus-visible {
+body:is(.mcx, .mcx-preview) main .mcx-announcement-bar .ann-close:hover,
+body:is(.mcx, .mcx-preview) main .mcx-announcement-bar .ann-close:focus-visible {
   color: #fff;
 }
 
