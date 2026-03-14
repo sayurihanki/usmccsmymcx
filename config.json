@@ -1,0 +1,49 @@
+{
+  "public": {
+    "default": {
+      "commerce-endpoint": "https://na1.api.commerce.adobe.com/R2BTcyPc7knfUJMozF1oQQ/graphql",
+      "headers": {
+        "all": {
+          "Store": "marineexchange"
+        },
+        "cs": {
+          "Magento-Store-Code": "mymcx",
+          "Magento-Store-View-Code": "marineexchange",
+          "Magento-Website-Code": "base"
+        }
+      },
+      "commerce-b2b-enabled": true,
+      "commerce-companies-enabled": true,
+      "commerce-assets-enabled": true,
+      "navigation": {
+        "catalog": {
+          "vipCategory": {
+            "allowedGroupHashes": [
+              "ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4"
+            ]
+          }
+        }
+      },
+      "analytics": {
+        "base-currency-code": "USD",
+        "environment": "Testing",
+        "environment-id": "R2BTcyPc7knfUJMozF1oQQ",
+        "store-code": "mymcx",
+        "store-id": "mymcx",
+        "store-name": "MYMCX",
+        "store-url": "https://coresaas-subgraph-external:8000/R2BTcyPc7knfUJMozF1oQQ/",
+        "store-view-code": "marineexchange",
+        "store-view-id": "marineexchange",
+        "store-view-name": "Marine Exchange",
+        "website-code": "base",
+        "website-id": "base",
+        "website-name": "Main Website"
+      },
+      "plugins": {
+        "picker": {
+          "rootCategory": "12"
+        }
+      }
+    }
+  }
+}
