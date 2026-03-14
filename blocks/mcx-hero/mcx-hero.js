@@ -7,6 +7,53 @@ import {
   cellText,
 } from '../../scripts/mcx-block-utils.js';
 
+const isLibraryPreview = () => /\/(?:\.da\/library\/blocks|library\/blocks)\/mcx-hero\/?(\?|$)/.test(window.location.pathname + (window.location.search || '?'));
+
+/** Build default field "cells" (DOM elements) for library preview when doc has no 2-column table. */
+function getDefaultLibraryFields() {
+  const imageCell = document.createElement('div');
+  const img = document.createElement('img');
+  img.src = 'https://images.unsplash.com/photo-1519415943484-9fa1873496d4?w=1200&q=80';
+  img.alt = 'Marine Corps collection hero';
+  imageCell.appendChild(img);
+  const primaryCtaCell = document.createElement('div');
+  const primaryLink = document.createElement('a');
+  primaryLink.href = '#products';
+  primaryLink.textContent = 'Shop Now';
+  primaryCtaCell.appendChild(primaryLink);
+  const secondaryCtaCell = document.createElement('div');
+  const secondaryLink = document.createElement('a');
+  secondaryLink.href = '#deals';
+  secondaryLink.textContent = 'View Deals';
+  secondaryCtaCell.appendChild(secondaryLink);
+  const textCell = (text) => {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div;
+  };
+  return {
+    eyebrow: textCell('Spring Collection - 2026 - Tax-Free'),
+    'heading-line-1': textCell('OUTFITTED'),
+    'heading-line-2': textCell('FOR THE'),
+    'heading-line-3': textCell('mission & beyond'),
+    description: textCell('Serving Marines and their families since 1897. Premium brands, exclusive savings, and tax-free shopping - exclusively for those who serve.'),
+    image: imageCell,
+    'primary-cta': primaryCtaCell,
+    'secondary-cta': secondaryCtaCell,
+    'status-badge-1': textCell('SYS: MCX-2026'),
+    'status-badge-2': textCell('STATUS: ACTIVE'),
+    'status-badge-3': textCell('PATRON: AUTHORIZED'),
+    'stat-1-value': textCell('20%+'),
+    'stat-1-label': textCell('Average Savings'),
+    'stat-2-value': textCell('33M+'),
+    'stat-2-label': textCell('Yearly Transactions'),
+    'stat-3-value': textCell('Tax Free'),
+    'stat-3-label': textCell('Exclusive Benefit'),
+    'stat-4-value': textCell('127+'),
+    'stat-4-label': textCell('Store Locations'),
+  };
+}
+
 function createCta(linkData, className) {
   const link = createLink(className, linkData.href, linkData.text);
   link.innerHTML = `
@@ -20,7 +67,11 @@ function createCta(linkData, className) {
 }
 
 export default function decorate(block) {
-  const fields = parseFieldRows(block);
+  let fields = parseFieldRows(block);
+  const hasContent = fields['heading-line-1'] && cellText(fields['heading-line-1']).trim();
+  if (isLibraryPreview() && !hasContent) {
+    fields = getDefaultLibraryFields();
+  }
   const section = block.closest('.section');
   if (section) section.classList.add('mcx-hero-section');
 

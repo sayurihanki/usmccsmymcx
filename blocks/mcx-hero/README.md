@@ -57,4 +57,15 @@ Supported fields:
 
 - The image cell must contain a real image, not pasted plain text.
 - CTA cells should contain real links.
-- If the library page shows raw labels like `eyebrow` and `heading-line-1`, the content was pasted as plain text instead of a block table.
+- **Why the block library preview doesn’t render:** The block expects a **2-column table** (field name | value). If the DA library doc at `/.da/library/blocks/mcx-hero` only has library metadata, or the content was pasted as **plain text** or a single column, the block gets no key/value rows and nothing renders. Fix: ensure the library doc contains a proper **table** whose first row is `mcx-hero | (empty)` and subsequent rows are two columns (e.g. `eyebrow | Spring Collection - 2026 - Tax-Free`). If the table is missing, the block uses built-in demo content on the library preview URL so a preview still appears.
+
+## DA Library Metadata Table
+
+Use this table for the DA library entry at `/.da/library/blocks/mcx-hero`.
+Do not paste the hero field rows into the library metadata doc.
+
+| library metadata | |
+| --- | --- |
+| name | mcx hero |
+| description | Tactical MCX homepage hero with eyebrow, multi-line heading, image, two CTAs, status badges, and KPI stats. |
+| searchtags | mcx, hero, tactical, homepage, military exchange, savings, tax free, kpi, banner, campaign |

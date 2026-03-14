@@ -47,10 +47,16 @@
   <script type="module">
     const response = await fetch('/drafts/index.plain.html');
     const html = await response.text();
-    document.addEventListener('DOMContentLoaded', async () => {
+    const mountPage = async () => {
       document.querySelector('main').innerHTML = html;
       await import('/scripts/scripts.js');
-    });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', mountPage, { once: true });
+    } else {
+      await mountPage();
+    }
   </script>
 </head>
 
