@@ -1,0 +1,106 @@
+{
+  "groups": [
+    {
+      "title": "Default Content",
+      "id": "default",
+      "components": [
+        {
+          "...": "./_text.json#/definitions"
+        },
+        {
+          "...": "./_image.json#/definitions"
+        }
+      ]
+    },
+    {
+      "title": "Sections",
+      "id": "sections",
+      "components": [
+        {
+          "...": "./_section.json#/definitions"
+        }
+      ]
+    },
+    {
+      "title": "Blocks",
+      "id": "blocks",
+      "components": [
+        {
+          "...": "../blocks/accordion/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/cards/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/catalog-highlights/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/carousel/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/columns/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/fragment/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/form-mccs-preferences/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/hero/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/vip-hero-block/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/vip-hero-mccs/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/how-it-works-stats/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/how-it-works-stats-2/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/targeted-block/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/customer-segment-personalization-block/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/live-block/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/live-block-premium/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/vip-member-block/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/vip-member-block-real-v2/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/commerce-account-hub/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/uniform-configurator/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/quiz-router/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/quiz-router-mccs/_*.json#/definitions"
+        }
+      ]
+    },
+    {
+      "title": "Product",
+      "id": "product",
+      "components": [
+        {
+          "...": "../blocks/product-*/_*.json#/definitions"
+        }
+      ]
+    }
+  ]
+}

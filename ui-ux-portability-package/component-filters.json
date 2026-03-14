@@ -1,0 +1,136 @@
+[
+  {
+    "id": "main",
+    "components": [
+      "section"
+    ]
+  },
+  {
+    "id": "section",
+    "components": [
+      "hero",
+      "vip-hero-block",
+      "how-it-works-stats",
+      "how-it-works-stats-2",
+      "accordion",
+      "cards",
+      "catalog-highlights",
+      "carousel",
+      "columns",
+      "fragment",
+      "image",
+      "text",
+      "targeted-block",
+      "customer-segment-personalization-block",
+      "live-block",
+      "live-block-premium",
+      "vip-hero-mccs",
+      "product-recommendations",
+      "product-highlights",
+      "quiz-router",
+      "quiz-router-mccs"
+    ]
+  },
+  {
+    "id": "accordion",
+    "components": [
+      "accordion-item"
+    ]
+  },
+  {
+    "id": "cards",
+    "components": [
+      "card"
+    ]
+  },
+  {
+    "id": "carousel",
+    "components": [
+      "carousel-item"
+    ]
+  },
+  {
+    "id": "circle-carousel",
+    "components": [
+      "circle-carousel-item"
+    ]
+  },
+  {
+    "id": "circle-carousel-item",
+    "components": []
+  },
+  {
+    "id": "circle-carousel-cell",
+    "components": [
+      "text",
+      "image"
+    ]
+  },
+  {
+    "id": "columns",
+    "components": [
+      "columns-row"
+    ]
+  },
+  {
+    "id": "columns-row",
+    "components": []
+  },
+  {
+    "id": "columns-cell",
+    "components": [
+      "text",
+      "image"
+    ]
+  },
+  {
+    "id": "quiz-router-mccs",
+    "components": []
+  },
+  {
+    "id": "quiz-router",
+    "components": []
+  },
+  {
+    "id": "search-bar",
+    "components": []
+  },
+  {
+    "id": "store-locator",
+    "components": [
+      "store-locator-item"
+    ]
+  },
+  {
+    "id": "store-locator-item",
+    "components": []
+  },
+  {
+    "id": "store-locator-cell",
+    "components": [
+      "text"
+    ]
+  },
+  {
+    "id": "table",
+    "components": [
+      "table-row"
+    ]
+  },
+  {
+    "id": "table-row",
+    "components": []
+  },
+  {
+    "id": "table-cell",
+    "components": [
+      "text"
+    ]
+  },
+  {
+    "id": "tabs",
+    "components": [
+      "tab-item"
+    ]
+  }
+]

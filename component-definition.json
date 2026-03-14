@@ -271,6 +271,16 @@
           }
         },
         {
+          "title": "Commerce Account Hub",
+          "id": "commerce-account-hub",
+          "model": "commerce-account-hub",
+          "plugins": {
+            "da": {
+              "type": "key-value-block"
+            }
+          }
+        },
+        {
           "title": "Commerce Account Sidebar",
           "id": "commerce-account-sidebar",
           "model": "commerce-account-sidebar",
@@ -557,12 +567,34 @@
       "id": "product",
       "components": [
         {
+          "title": "Product Configurator Luxe",
+          "id": "product-configurator-luxe",
+          "model": "product-configurator-luxe",
+          "plugins": {
+            "da": {
+              "type": "key-value-block"
+            }
+          }
+        },
+        {
           "title": "Product Details",
           "id": "product-details",
           "model": "product-details",
           "plugins": {
             "da": {
               "type": "key-value-block"
+            }
+          }
+        },
+        {
+          "title": "Product Highlights",
+          "id": "product-highlights",
+          "model": "product-highlights",
+          "plugins": {
+            "da": {
+              "name": "product-highlights",
+              "rows": 4,
+              "columns": 2
             }
           }
         },
@@ -580,6 +612,26 @@
           "title": "Product Recommendations",
           "id": "product-recommendations",
           "model": "product-recommendations",
+          "plugins": {
+            "da": {
+              "type": "key-value-block"
+            }
+          }
+        },
+        {
+          "title": "Product Teaser",
+          "id": "product-teaser",
+          "model": "product-teaser",
+          "plugins": {
+            "da": {
+              "type": "key-value-block"
+            }
+          }
+        },
+        {
+          "title": "Product Technical Details",
+          "id": "product-technical-details",
+          "model": "product-technical-details",
           "plugins": {
             "da": {
               "type": "key-value-block"

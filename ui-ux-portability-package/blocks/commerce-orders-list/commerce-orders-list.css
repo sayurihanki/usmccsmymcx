@@ -1,0 +1,34 @@
+.commerce-orders-list-wrapper .account-orders-list-header,
+.commerce-orders-list-wrapper .dropin-header-container {
+    margin-bottom: var(--spacing-small);
+}
+
+.commerce-orders-list-wrapper .dropin-header-container__title {
+    font: var(--type-headline-2-strong-font);
+    letter-spacing: normal;
+}
+
+.commerce-orders-list-wrapper .dropin-divider {
+    opacity: 0.45;
+}
+
+.commerce-orders-list-wrapper .account-orders-list-card,
+.commerce-orders-list-wrapper .account-empty-list .dropin-card,
+.commerce-orders-list-wrapper .account-orders-list-action--minifiedView .dropin-card {
+    border: 1px solid var(--glass-border-subtle);
+    border-radius: calc(var(--shape-border-radius-2) + 2px);
+    background: var(--glass-bg-strong);
+    backdrop-filter: var(--glass-blur-xs) var(--glass-saturate);
+    box-shadow: 0 6px 18px rgb(0 0 0 / 7%);
+    transition: transform var(--transition-fast) var(--ease-out), box-shadow var(--transition-fast) var(--ease-out);
+}
+
+.commerce-orders-list-wrapper .account-orders-list-action--minifiedView:hover .dropin-card,
+.commerce-orders-list-wrapper .account-orders-list-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgb(0 0 0 / 10%);
+}
+
+.commerce-orders-list-wrapper .account-orders-list-action__card-wrapper > p {
+    font: var(--type-body-1-strong-font);
+}
