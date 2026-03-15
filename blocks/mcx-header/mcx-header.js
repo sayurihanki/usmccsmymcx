@@ -998,29 +998,6 @@ function syncMegaOffsets(block) {
   });
 }
 
-function measureElementHeight(element) {
-  if (!element) return 0;
-
-  const rectHeight = typeof element.getBoundingClientRect === 'function'
-    ? Number(element.getBoundingClientRect().height) || 0
-    : 0;
-  const offsetHeight = Number(element.offsetHeight) || 0;
-
-  return Math.max(rectHeight, offsetHeight);
-}
-
-function syncHeaderOffset(block) {
-  const headerHeight = Math.round(measureElementHeight(block));
-  if (!headerHeight) return;
-
-  const nextValue = `${headerHeight}px`;
-  const bodyStyle = document.body?.style;
-  const rootStyle = document.documentElement?.style;
-
-  bodyStyle?.setProperty?.('--mcx-header-offset', nextValue);
-  rootStyle?.setProperty?.('--mcx-header-offset', nextValue);
-}
-
 function bindMegaState(block) {
   const navItems = [...block.querySelectorAll('.nav-item.has-mega')];
 
@@ -1395,13 +1372,7 @@ export default async function decorate(block) {
 
   bindMegaState(block);
   await enhanceLiveSearch(block);
-  const syncHeaderLayout = () => {
-    syncMegaOffsets(block);
-    syncHeaderOffset(block);
-  };
-
-  syncHeaderLayout();
-  window.requestAnimationFrame(syncHeaderLayout);
+  syncMegaOffsets(block);
 
   events.on('authenticated', (payload) => {
     const snapshot = getAuthSnapshot();
@@ -1414,10 +1385,5 @@ export default async function decorate(block) {
     syncCartCount(refs.cartCount, cartData);
   }, { eager: true });
 
-  if ('ResizeObserver' in window) {
-    const headerResizeObserver = new window.ResizeObserver(syncHeaderLayout);
-    headerResizeObserver.observe(block);
-  }
-
-  window.addEventListener('resize', syncHeaderLayout, { passive: true });
+  window.addEventListener('resize', () => syncMegaOffsets(block), { passive: true });
 }

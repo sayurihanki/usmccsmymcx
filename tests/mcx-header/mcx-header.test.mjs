@@ -91,29 +91,6 @@ test('mcx-header renders the storefront switcher and guest account shortcut menu
   });
 });
 
-test('mcx-header publishes its sticky offset for anchor-safe section scrolling', async () => {
-  await withFakeDom(async ({ document }) => {
-    const decorate = await loadDecorate();
-    const block = document.createElement('div');
-    block.className = 'mcx-header';
-    block.getBoundingClientRect = () => ({ height: 172 });
-    document.body.append(block);
-
-    await decorate(block);
-
-    assert.equal(document.body.style['--mcx-header-offset'], '172px');
-  }, {
-    window: {
-      location: {
-        href: 'https://example.com/',
-        pathname: '/',
-        search: '',
-        hostname: 'example.com',
-      },
-    },
-  });
-});
-
 test('mcx-header renders the authenticated account shortcut menu when auth cookies exist', async () => {
   await withFakeDom(async ({ document }) => {
     document.cookie = 'auth_dropin_firstname=Alex; auth_dropin_user_token=token';
