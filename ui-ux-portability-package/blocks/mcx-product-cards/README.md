@@ -17,7 +17,7 @@ The table below is a real block instance so the block library page can render an
 | default-tab | all |  |  |
 | ![Tactical boot](https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=75) | Danner<br>Tachyon 8 Tactical Boot GTX | rating: 5<br>reviews: 248<br>price: 189.99<br>original: 239.99<br>chip: Save $50 | category: footwear<br>flags: New<br>emoji: 🥾<br>sizes: 8, 9, 10, 11, 12 |
 | ![Sony headphones](https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=75) | Sony<br>WH-1000XM5 Noise Canceling Headphones | rating: 5<br>reviews: 1024<br>price: 279.99<br>original: 349.99<br>chip: Save $70 | category: electronics<br>flags: Sale<br>emoji: 🎧 |
-| ![Under Armour vest](https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=500&q=75) | Under Armour<br>UA Storm ColdGear Reactor Vest | rating: 4<br>reviews: 187<br>price: 89.99<br>original: 120.00<br>chip: Save 25% | category: apparel<br>flags: MCX Exclusive, New<br>emoji: 🧥<br>sizes: XS, S, M, L, XL |
+| ![Under Armour Active Hybrid vest](https://underarmour.scene7.com/is/image/Underarmour/V5-1378505-001_FC?bgc=F0F0F0&cache=on%2Con&fmt=jpg&hei=708&qlt=85&resMode=sharp2&rp=standard-0pad%7CpdpMainDesktop&scl=1&size=566%2C708&wid=566) | Under Armour<br>UA Storm ColdGear Reactor Vest | rating: 4<br>reviews: 187<br>price: 89.99<br>original: 120.00<br>chip: Save 25% | category: apparel<br>flags: MCX Exclusive, New<br>emoji: 🧥<br>sizes: XS, S, M, L, XL |
 | ![Garmin watch](https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=75) | Garmin<br>Instinct 2X Solar Tactical Edition | rating: 5<br>reviews: 512<br>price: 424.99<br>original: 499.99<br>chip: Save $75 | category: electronics<br>flags: 15% Off<br>emoji: ⌚ |
 
 ## Authoring Shape
