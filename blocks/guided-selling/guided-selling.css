@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&family=Rajdhani:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&family=Rajdhani:wght@500;600;700&display=swap');
 /* stylelint-disable no-descending-specificity */
 
 main > .section.guided-selling-section {
@@ -26,10 +26,10 @@ main > .section.guided-selling-section > div {
   --gs-text-secondary: #8595a6;
   --gs-text-muted: #3e4e60;
   --gs-success: #34c678;
-  --gs-font-display: 'Bebas Neue', var(--font-display, 'Impact', sans-serif);
-  --gs-font-condensed: 'Barlow Condensed', var(--font-body, sans-serif);
-  --gs-font-body: 'Barlow', var(--font-body, system-ui, sans-serif);
-  --gs-font-tech: 'Rajdhani', var(--font-body, sans-serif);
+  --gs-font-display: 'Teko', 'Impact', sans-serif;
+  --gs-font-condensed: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --gs-font-body: 'Barlow', system-ui, sans-serif;
+  --gs-font-tech: 'Rajdhani', 'Barlow', sans-serif;
   --gs-radius-sm: 8px;
   --gs-radius-md: 14px;
   --gs-radius-lg: 18px;
@@ -45,7 +45,7 @@ main > .section.guided-selling-section > div {
   color: var(--gs-text-primary);
   display: block;
   font-family: var(--gs-font-body);
-  font-size: 20px;
+  font-size: 24px;
   overflow: hidden;
   position: relative;
   width: 100%;
@@ -96,9 +96,9 @@ main > .section.guided-selling-section > div {
   background: rgb(13 21 32 / 88%);
   border-bottom: 1px solid var(--gs-border);
   display: grid;
-  gap: 32px;
+  gap: 36px;
   grid-template-columns: auto 1fr auto;
-  padding: 18px clamp(28px, 5vw, 76px);
+  padding: 20px clamp(32px, 6vw, 96px);
   position: sticky;
   top: 0;
   z-index: 4;
@@ -121,12 +121,12 @@ main > .section.guided-selling-section > div {
   box-shadow: 0 0 20px rgb(193 18 31 / 25%);
   display: inline-flex;
   font-family: var(--gs-font-condensed);
-  font-size: 1.7rem;
+  font-size: 1.9rem;
   font-weight: 700;
-  height: 72px;
+  height: 80px;
   justify-content: center;
   letter-spacing: 0.08em;
-  width: 72px;
+  width: 80px;
 }
 
 .guided-selling .gs-brand-copy {
@@ -136,14 +136,14 @@ main > .section.guided-selling-section > div {
 
 .guided-selling .gs-brand-title {
   font-family: var(--gs-font-display);
-  font-size: 4.2rem;
+  font-size: 4.8rem;
   line-height: 0.9;
 }
 
 .guided-selling .gs-brand-subtitle {
   color: var(--gs-gold);
   font-family: var(--gs-font-tech);
-  font-size: 1rem;
+  font-size: 1.08rem;
   font-weight: 700;
   letter-spacing: 0.25em;
   text-transform: uppercase;
@@ -154,14 +154,14 @@ main > .section.guided-selling-section > div {
   flex-direction: column;
   gap: 12px;
   margin: 0 auto;
-  max-width: 1280px;
+  max-width: 1480px;
   width: 100%;
 }
 
 .guided-selling .gs-header-title {
   color: var(--gs-text-secondary);
   font-family: var(--gs-font-tech);
-  font-size: 1.35rem;
+  font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 0.26em;
   text-align: center;
@@ -193,7 +193,7 @@ main > .section.guided-selling-section > div {
 .guided-selling .gs-progress-step {
   color: var(--gs-text-muted);
   font-family: var(--gs-font-tech);
-  font-size: 1.08rem;
+  font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -213,7 +213,7 @@ main > .section.guided-selling-section > div {
   color: var(--gs-text-secondary);
   display: inline-flex;
   font-family: var(--gs-font-condensed);
-  font-size: 1.42rem;
+  font-size: 1.55rem;
   font-weight: 700;
   gap: 8px;
   letter-spacing: 0.12em;
@@ -223,7 +223,7 @@ main > .section.guided-selling-section > div {
 
 .guided-selling .gs-exit-link::before {
   content: '×';
-  font-size: 2rem;
+  font-size: 2.35rem;
   line-height: 1;
 }
 
@@ -239,7 +239,7 @@ main > .section.guided-selling-section > div {
 .guided-selling .gs-screen {
   display: none;
   min-height: calc(100vh - 88px);
-  padding: clamp(44px, 7vw, 88px) clamp(28px, 5vw, 76px);
+  padding: clamp(56px, 8vw, 110px) clamp(32px, 6vw, 96px);
 }
 
 .guided-selling .gs-screen.is-active {
@@ -289,8 +289,8 @@ main > .section.guided-selling-section > div {
   flex-direction: column;
   gap: 0;
   margin: 0 auto;
-  max-width: 1480px;
-  padding: clamp(56px, 8vw, 128px) 0;
+  max-width: 1680px;
+  padding: clamp(72px, 9vw, 152px) 0;
   position: relative;
   text-align: center;
   z-index: 1;
@@ -303,11 +303,11 @@ main > .section.guided-selling-section > div {
   color: var(--gs-scarlet);
   display: inline-flex;
   font-family: var(--gs-font-tech);
-  font-size: 1.3rem;
+  font-size: 1.42rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   margin-bottom: 24px;
-  padding: 12px 28px;
+  padding: 14px 30px;
   text-transform: uppercase;
 }
 
@@ -322,16 +322,16 @@ main > .section.guided-selling-section > div {
 }
 
 .guided-selling .gs-intro-title {
-  font-size: clamp(7rem, 16vw, 16rem);
-  margin: 0 0 22px;
+  font-size: clamp(8.5rem, 18vw, 19rem);
+  margin: 0 0 28px;
 }
 
 .guided-selling .gs-intro-subtitle {
   color: var(--gs-text-secondary);
-  font-size: 2.15rem;
-  line-height: 1.65;
-  margin: 0 auto 34px;
-  max-width: 1100px;
+  font-size: 2.6rem;
+  line-height: 1.6;
+  margin: 0 auto 42px;
+  max-width: 1240px;
 }
 
 .guided-selling .gs-intro-features {
@@ -347,7 +347,7 @@ main > .section.guided-selling-section > div {
   color: var(--gs-text-secondary);
   display: inline-flex;
   font-family: var(--gs-font-tech);
-  font-size: 1.34rem;
+  font-size: 1.55rem;
   font-weight: 600;
   gap: 10px;
   letter-spacing: 0.12em;
@@ -367,7 +367,7 @@ main > .section.guided-selling-section > div {
 .guided-selling .gs-intro-note {
   color: var(--gs-text-muted);
   font-family: var(--gs-font-tech);
-  font-size: 1.28rem;
+  font-size: 1.42rem;
   letter-spacing: 0.12em;
   margin-top: 20px;
   text-transform: uppercase;
@@ -381,7 +381,7 @@ main > .section.guided-selling-section > div {
   justify-content: center;
   letter-spacing: 0.16em;
   line-height: 1;
-  padding: 24px 42px;
+  padding: 28px 50px;
   text-transform: uppercase;
   transition:
     background var(--gs-transition),
@@ -393,12 +393,12 @@ main > .section.guided-selling-section > div {
 
 .guided-selling .gs-button-label {
   font-family: var(--gs-font-condensed);
-  font-size: 1.85rem;
+  font-size: 2.1rem;
   font-weight: 700;
 }
 
 .guided-selling .gs-arrow {
-  font-size: 1.9rem;
+  font-size: 2.15rem;
   line-height: 1;
 }
 
@@ -453,7 +453,7 @@ main > .section.guided-selling-section > div {
 .guided-selling .gs-step-number {
   color: rgb(255 255 255 / 6%);
   font-family: var(--gs-font-display);
-  font-size: clamp(8rem, 14vw, 12rem);
+  font-size: clamp(9rem, 15vw, 14rem);
   position: absolute;
   right: 0;
   top: 0;
@@ -478,10 +478,10 @@ main > .section.guided-selling-section > div {
   color: var(--gs-scarlet);
   display: inline-flex;
   font-family: var(--gs-font-tech);
-  font-size: 1.28rem;
+  font-size: 1.42rem;
   font-weight: 700;
   letter-spacing: 0.28em;
-  padding: 10px 22px;
+  padding: 12px 24px;
   text-transform: uppercase;
 }
 
@@ -506,7 +506,7 @@ main > .section.guided-selling-section > div {
 .guided-selling .gs-step-hint,
 .guided-selling .gs-selection-label {
   color: var(--gs-text-muted);
-  font-size: 1.28rem;
+  font-size: 1.44rem;
 }
 
 .guided-selling .gs-step-hint {
@@ -518,26 +518,26 @@ main > .section.guided-selling-section > div {
 }
 
 .guided-selling .gs-step-title {
-  font-size: clamp(5.4rem, 10vw, 10.5rem);
-  margin: 0 0 18px;
-  max-width: 1120px;
+  font-size: clamp(6.2rem, 11vw, 12rem);
+  margin: 0 0 22px;
+  max-width: 1260px;
 }
 
 .guided-selling .gs-step-description {
   color: var(--gs-text-secondary);
-  font-size: 2rem;
-  line-height: 1.65;
-  margin: 0 0 42px;
-  max-width: 960px;
+  font-size: 2.35rem;
+  line-height: 1.55;
+  margin: 0 0 48px;
+  max-width: 1120px;
 }
 
 .guided-selling .gs-options {
   display: grid;
-  gap: 24px;
+  gap: 28px;
 }
 
 .guided-selling .gs-options-card {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .guided-selling .gs-options-slim {
@@ -545,7 +545,7 @@ main > .section.guided-selling-section > div {
 }
 
 .guided-selling .gs-options-image {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .guided-selling .gs-option {
@@ -596,12 +596,12 @@ main > .section.guided-selling-section > div {
 
 .guided-selling .gs-option-card {
   flex-direction: column;
-  padding: 44px 36px;
+  padding: 52px 42px;
 }
 
 .guided-selling .gs-option-slim {
   align-items: center;
-  padding: 34px 36px;
+  padding: 40px 42px;
 }
 
 .guided-selling .gs-option-image {
@@ -637,7 +637,7 @@ main > .section.guided-selling-section > div {
 }
 
 .guided-selling .gs-option-visual {
-  font-size: 4rem;
+  font-size: 4.8rem;
   line-height: 1;
 }
 
@@ -645,13 +645,13 @@ main > .section.guided-selling-section > div {
   align-items: center;
   background: var(--gs-surface-3);
   display: flex;
-  font-size: 7.8rem;
-  height: 280px;
+  font-size: 8.8rem;
+  height: 320px;
   justify-content: center;
 }
 
 .guided-selling .gs-option-image-body {
-  padding: 30px 32px 36px;
+  padding: 34px 36px 40px;
 }
 
 .guided-selling .gs-option-copy {
@@ -663,14 +663,14 @@ main > .section.guided-selling-section > div {
 
 .guided-selling .gs-option-label {
   font-family: var(--gs-font-condensed);
-  font-size: 2.4rem;
+  font-size: 2.8rem;
   font-weight: 700;
   letter-spacing: 0.04em;
 }
 
 .guided-selling .gs-option-description {
   color: var(--gs-text-secondary);
-  font-size: 1.62rem;
+  font-size: 1.82rem;
   line-height: 1.6;
 }
 
@@ -680,7 +680,7 @@ main > .section.guided-selling-section > div {
   border-radius: var(--gs-radius-pill);
   color: var(--gs-text-muted);
   font-family: var(--gs-font-tech);
-  font-size: 1.08rem;
+  font-size: 1.18rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   margin-top: auto;
@@ -717,7 +717,7 @@ main > .section.guided-selling-section > div {
   display: flex;
   flex-direction: column;
   margin: auto;
-  max-width: 760px;
+  max-width: 920px;
   text-align: center;
 }
 
@@ -738,13 +738,13 @@ main > .section.guided-selling-section > div {
 }
 
 .guided-selling .gs-loading-title {
-  font-size: clamp(5.4rem, 10vw, 9rem);
+  font-size: clamp(6.2rem, 11vw, 10.5rem);
   margin: 0 0 16px;
 }
 
 .guided-selling .gs-loading-subtitle {
   color: var(--gs-text-secondary);
-  font-size: 2rem;
+  font-size: 2.3rem;
   line-height: 1.65;
   margin: 0 0 32px;
 }
@@ -764,7 +764,7 @@ main > .section.guided-selling-section > div {
   color: var(--gs-text-muted);
   display: flex;
   font-family: var(--gs-font-tech);
-  font-size: 1.44rem;
+  font-size: 1.62rem;
   font-weight: 700;
   gap: 14px;
   letter-spacing: 0.14em;
@@ -813,9 +813,9 @@ main > .section.guided-selling-section > div {
 .guided-selling .gs-results-header {
   align-items: start;
   display: grid;
-  gap: 40px;
-  grid-template-columns: minmax(0, 1.45fr) minmax(420px, 560px);
-  margin-bottom: 64px;
+  gap: 48px;
+  grid-template-columns: minmax(0, 1.5fr) minmax(480px, 620px);
+  margin-bottom: 76px;
 }
 
 .guided-selling .gs-results-badge {
@@ -824,20 +824,20 @@ main > .section.guided-selling-section > div {
   border-radius: var(--gs-radius-pill);
   color: var(--gs-success);
   display: inline-flex;
-  font-size: 1.2rem;
+  font-size: 1.32rem;
   margin-bottom: 22px;
   padding: 12px 24px;
 }
 
 .guided-selling .gs-results-title {
-  font-size: clamp(5.8rem, 10vw, 10.5rem);
+  font-size: clamp(6.8rem, 11vw, 12rem);
   margin: 0 0 18px;
 }
 
 .guided-selling .gs-results-description {
   color: var(--gs-text-secondary);
-  font-size: 2rem;
-  line-height: 1.65;
+  font-size: 2.25rem;
+  line-height: 1.55;
   margin: 0;
   max-width: 1000px;
 }
@@ -852,12 +852,12 @@ main > .section.guided-selling-section > div {
 }
 
 .guided-selling .gs-profile-card {
-  padding: 44px;
+  padding: 50px;
 }
 
 .guided-selling .gs-profile-label {
   color: var(--gs-gold);
-  font-size: 1.14rem;
+  font-size: 1.24rem;
   margin-bottom: 18px;
 }
 
@@ -866,23 +866,23 @@ main > .section.guided-selling-section > div {
   background: linear-gradient(135deg, var(--gs-scarlet), var(--gs-gold));
   border-radius: 50%;
   display: inline-flex;
-  font-size: 3.5rem;
-  height: 92px;
+  font-size: 4rem;
+  height: 108px;
   justify-content: center;
   margin-bottom: 20px;
-  width: 92px;
+  width: 108px;
 }
 
 .guided-selling .gs-profile-name {
   font-family: var(--gs-font-condensed);
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-weight: 700;
   margin-bottom: 10px;
 }
 
 .guided-selling .gs-profile-subtitle {
   color: var(--gs-text-secondary);
-  font-size: 1.58rem;
+  font-size: 1.8rem;
   line-height: 1.65;
   margin-bottom: 18px;
   white-space: pre-line;
@@ -898,7 +898,7 @@ main > .section.guided-selling-section > div {
   background: var(--gs-surface-3);
   border-radius: var(--gs-radius-pill);
   color: var(--gs-text-secondary);
-  font-size: 1.08rem;
+  font-size: 1.16rem;
   padding: 10px 16px;
 }
 
@@ -913,13 +913,13 @@ main > .section.guided-selling-section > div {
 .guided-selling .gs-results-section-label {
   color: var(--gs-scarlet);
   display: block;
-  font-size: 1.24rem;
+  font-size: 1.34rem;
   margin-bottom: 8px;
 }
 
 .guided-selling .gs-results-section-title {
   font-family: var(--gs-font-display);
-  font-size: 4.8rem;
+  font-size: 5.8rem;
   letter-spacing: 0.03em;
   line-height: 1;
   margin: 0;
@@ -927,8 +927,8 @@ main > .section.guided-selling-section > div {
 
 .guided-selling .gs-results-grid {
   display: grid;
-  gap: 22px;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .guided-selling .gs-card {
@@ -941,14 +941,14 @@ main > .section.guided-selling-section > div {
   align-items: center;
   background: var(--gs-surface-3);
   display: flex;
-  height: 360px;
+  height: 420px;
   justify-content: center;
   overflow: hidden;
   position: relative;
 }
 
 .guided-selling .gs-card-media.is-emoji {
-  font-size: 6.6rem;
+  font-size: 7.6rem;
 }
 
 .guided-selling .gs-media-image {
@@ -972,8 +972,8 @@ main > .section.guided-selling-section > div {
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 14px;
-  padding: 28px;
+  gap: 16px;
+  padding: 34px;
 }
 
 .guided-selling .gs-card-badge {
@@ -991,7 +991,7 @@ main > .section.guided-selling-section > div {
 
 .guided-selling .gs-card-description {
   color: var(--gs-text-secondary);
-  font-size: 1.45rem;
+  font-size: 1.62rem;
   font-style: italic;
   line-height: 1.55;
   margin: 0;
@@ -1008,13 +1008,13 @@ main > .section.guided-selling-section > div {
 .guided-selling .gs-card-price-current,
 .guided-selling .gs-bundle-price {
   font-family: var(--gs-font-condensed);
-  font-size: 2.7rem;
+  font-size: 3.2rem;
   font-weight: 700;
 }
 
 .guided-selling .gs-card-price-compare {
   color: var(--gs-text-muted);
-  font-size: 1.42rem;
+  font-size: 1.56rem;
   text-decoration: line-through;
 }
 
@@ -1037,32 +1037,32 @@ main > .section.guided-selling-section > div {
   background: var(--gs-scarlet);
   color: #fff;
   display: inline-flex;
-  font-size: 1.45rem;
+  font-size: 1.62rem;
   gap: 10px;
   justify-content: center;
-  padding: 18px 28px;
+  padding: 20px 32px;
 }
 
 .guided-selling .gs-band-grid {
   display: grid;
   gap: 18px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .guided-selling .gs-band {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 38px 32px;
+  padding: 44px 38px;
 }
 
 .guided-selling .gs-band-icon {
-  font-size: 3.8rem;
+  font-size: 4.4rem;
 }
 
 .guided-selling .gs-band-title {
   font-family: var(--gs-font-condensed);
-  font-size: 2.3rem;
+  font-size: 2.7rem;
   font-weight: 700;
   letter-spacing: 0.04em;
 }
@@ -1070,7 +1070,7 @@ main > .section.guided-selling-section > div {
 .guided-selling .gs-band-description,
 .guided-selling .gs-bundle-description {
   color: var(--gs-text-secondary);
-  font-size: 1.56rem;
+  font-size: 1.76rem;
   line-height: 1.6;
   margin: 0;
 }
@@ -1092,7 +1092,7 @@ main > .section.guided-selling-section > div {
 .guided-selling .gs-band-link {
   color: var(--gs-gold-light);
   font-family: var(--gs-font-condensed);
-  font-size: 1.5rem;
+  font-size: 1.66rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   margin-top: auto;
@@ -1108,13 +1108,13 @@ main > .section.guided-selling-section > div {
 .guided-selling .gs-bundle {
   align-items: center;
   display: flex;
-  gap: 28px;
-  padding: 38px;
+  gap: 32px;
+  padding: 44px;
 }
 
 .guided-selling .gs-bundle-icon {
   flex-shrink: 0;
-  font-size: 4rem;
+  font-size: 4.6rem;
 }
 
 .guided-selling .gs-bundle-body {
@@ -1131,7 +1131,7 @@ main > .section.guided-selling-section > div {
 
 .guided-selling .gs-bundle-title {
   font-family: var(--gs-font-condensed);
-  font-size: 2.3rem;
+  font-size: 2.7rem;
   font-weight: 700;
   letter-spacing: 0.04em;
 }
@@ -1152,7 +1152,7 @@ main > .section.guided-selling-section > div {
 
 .guided-selling .gs-empty-state {
   color: var(--gs-text-secondary);
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   line-height: 1.6;
   margin: 0;
   padding: 12px 0;
@@ -1164,7 +1164,7 @@ main > .section.guided-selling-section > div {
   border-radius: var(--gs-radius-md);
   bottom: 24px;
   box-shadow: var(--gs-shadow-soft);
-  max-width: 420px;
+  max-width: 480px;
   opacity: 0;
   padding: 18px 20px;
   pointer-events: none;
@@ -1184,14 +1184,14 @@ main > .section.guided-selling-section > div {
 
 .guided-selling .gs-toast-title {
   font-family: var(--gs-font-condensed);
-  font-size: 1.7rem;
+  font-size: 1.9rem;
   font-weight: 700;
   margin-bottom: 6px;
 }
 
 .guided-selling .gs-toast-subtitle {
   color: var(--gs-text-secondary);
-  font-size: 1.34rem;
+  font-size: 1.46rem;
   line-height: 1.5;
 }
 
@@ -1199,7 +1199,7 @@ main > .section.guided-selling-section > div {
   border: 1px solid var(--gs-border);
   border-radius: var(--gs-radius-md);
   color: var(--gs-text-secondary);
-  font-size: 1.4rem;
+  font-size: 1.55rem;
   line-height: 1.6;
   margin: 24px 0;
   padding: 24px 28px;

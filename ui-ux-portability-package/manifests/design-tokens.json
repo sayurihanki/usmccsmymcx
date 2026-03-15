@@ -3203,7 +3203,7 @@
     {
       "name": "--hiws-font-display",
       "prefix": "hiws",
-      "value": "\"Syne\", var(--type-base-font-family)",
+      "value": "\"Teko\", var(--type-base-font-family)",
       "definedIn": [
         "blocks/how-it-works-stats-2/how-it-works-stats-2.css"
       ],
@@ -3216,7 +3216,7 @@
     {
       "name": "--hiws-font-sora",
       "prefix": "hiws",
-      "value": "\"Sora\", var(--type-base-font-family)",
+      "value": "\"Barlow Condensed\", var(--type-base-font-family)",
       "definedIn": [
         "blocks/how-it-works-stats-2/how-it-works-stats-2.css",
         "blocks/how-it-works-stats/how-it-works-stats.css"
@@ -6205,7 +6205,7 @@
     {
       "name": "--qrm-body-font",
       "prefix": "qrm",
-      "value": "\"Avenir Next\", \"Trebuchet MS\", \"Lucida Sans Unicode\", sans-serif",
+      "value": "\"Barlow\", system-ui, sans-serif",
       "definedIn": [
         "blocks/quiz-router-mccs/quiz-router-mccs.css"
       ],
@@ -6476,7 +6476,7 @@
     {
       "name": "--quiz-router-font-body",
       "prefix": "quiz",
-      "value": "var(--type-base-font-family, \"Plus Jakarta Sans\", sans-serif)",
+      "value": "var(--type-base-font-family, \"Barlow\", system-ui, sans-serif)",
       "definedIn": [
         "blocks/quiz-router/quiz-router.css"
       ],
@@ -8755,7 +8755,7 @@
     {
       "name": "--type-base-font-family",
       "prefix": "type",
-      "value": "\"Plus Jakarta Sans\", \"DM Sans\", \"Sora\", system-ui, sans-serif",
+      "value": "\"Barlow\", system-ui, sans-serif",
       "definedIn": [
         "styles/styles.css"
       ],
@@ -9376,7 +9376,7 @@
     {
       "name": "--type-display-font-family",
       "prefix": "type",
-      "value": "\"Syne\", \"Sora\", var(--type-base-font-family)",
+      "value": "\"Teko\", var(--type-base-font-family)",
       "definedIn": [
         "styles/styles.css"
       ],
@@ -9603,7 +9603,7 @@
     {
       "name": "--type-price-font-family",
       "prefix": "type",
-      "value": "\"Sora\", \"Syne\", var(--type-base-font-family)",
+      "value": "\"Barlow Condensed\", var(--type-base-font-family)",
       "definedIn": [
         "styles/styles.css"
       ],

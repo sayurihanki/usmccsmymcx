@@ -73,6 +73,7 @@
 
 .live-block-premium .live-block-premium-kicker {
   color: color-mix(in srgb, var(--live-premium-accent), white 22%);
+  font-family: var(--font-tactical, 'Rajdhani', sans-serif);
   font-size: .74rem;
   font-weight: 700;
   letter-spacing: .08em;
@@ -82,7 +83,7 @@
 
 .live-block-premium .live-block-premium-header h2 {
   color: var(--live-premium-text);
-  font-family: var(--font-display, var(--type-display-font-family, 'Avenir Next', sans-serif));
+  font-family: var(--font-display, var(--type-display-font-family, 'Teko', 'Impact', sans-serif));
   font-size: clamp(1.16rem, 2.6vw, 1.78rem);
   font-weight: 780;
   letter-spacing: .01em;
@@ -103,6 +104,7 @@
   border: 1px solid color-mix(in srgb, var(--live-premium-accent), white 15%);
   border-radius: 999px;
   color: color-mix(in srgb, var(--live-premium-accent), white 40%);
+  font-family: var(--font-tactical, 'Rajdhani', sans-serif);
   font-size: .68rem;
   font-weight: 700;
   letter-spacing: .08em;
@@ -119,6 +121,7 @@
 .live-block-premium .live-block-premium-refresh,
 .live-block-premium .live-block-premium-cta {
   border-radius: 10px;
+  font-family: var(--font-condensed, var(--type-price-font-family, 'Barlow Condensed', sans-serif));
   font-size: .83rem;
   font-weight: 650;
   text-decoration: none;
@@ -185,6 +188,7 @@
 
 .live-block-premium .live-block-premium-metric-label {
   color: rgb(203 213 225 / 82%);
+  font-family: var(--font-tactical, 'Rajdhani', sans-serif);
   font-size: .73rem;
   text-transform: uppercase;
   letter-spacing: .04em;

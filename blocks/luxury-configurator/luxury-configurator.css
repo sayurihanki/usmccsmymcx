@@ -102,6 +102,7 @@
 
 .luxury-configurator .luxury-configurator__eyebrow {
   color: color-mix(in srgb, var(--luxury-accent), white 22%);
+  font-family: var(--font-tactical, 'Rajdhani', sans-serif);
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.18em;
@@ -110,7 +111,7 @@
 }
 
 .luxury-configurator .luxury-configurator__title {
-  font-family: var(--font-display, var(--type-display-font-family, "Avenir Next", sans-serif));
+  font-family: var(--font-display, var(--type-display-font-family, "Teko", "Impact", sans-serif));
   font-size: clamp(2.5rem, 4.8vw, 5.2rem);
   font-weight: 780;
   letter-spacing: -0.05em;
@@ -167,6 +168,7 @@
   border: 1px solid color-mix(in srgb, var(--luxury-accent), transparent 72%);
   border-radius: 999px;
   color: var(--luxury-accent-strong);
+  font-family: var(--font-tactical, 'Rajdhani', sans-serif);
   font-size: 0.76rem;
   font-weight: 800;
   letter-spacing: 0.14em;
@@ -217,7 +219,7 @@
 }
 
 .luxury-configurator .luxury-configurator__product-name {
-  font-family: var(--font-display, var(--type-display-font-family, "Avenir Next", sans-serif));
+  font-family: var(--font-display, var(--type-display-font-family, "Teko", "Impact", sans-serif));
   font-size: clamp(1.35rem, 2vw, 2rem);
   font-weight: 720;
   letter-spacing: -0.03em;
@@ -227,6 +229,7 @@
 
 .luxury-configurator .luxury-configurator__product-sku {
   color: var(--luxury-muted);
+  font-family: var(--font-tactical, 'Rajdhani', sans-serif);
   font-size: 0.84rem;
   letter-spacing: 0.08em;
   margin: 0;
@@ -242,7 +245,7 @@
 
 .luxury-configurator .luxury-configurator__price-final {
   color: var(--luxury-accent-strong);
-  font-family: var(--font-display, var(--type-display-font-family, "Avenir Next", sans-serif));
+  font-family: var(--type-price-font-family, "Barlow Condensed", sans-serif);
   font-size: clamp(1.8rem, 3vw, 2.7rem);
   font-weight: 760;
   line-height: 1;
@@ -271,7 +274,7 @@
 .luxury-configurator .luxury-configurator__panel-heading,
 .luxury-configurator .luxury-configurator__controls-title,
 .luxury-configurator .luxury-configurator__option-group-heading {
-  font-family: var(--font-display, var(--type-display-font-family, "Avenir Next", sans-serif));
+  font-family: var(--font-display, var(--type-display-font-family, "Teko", "Impact", sans-serif));
   font-size: clamp(1.1rem, 1.6vw, 1.45rem);
   font-weight: 720;
   letter-spacing: -0.03em;
@@ -306,6 +309,7 @@
 .luxury-configurator .luxury-configurator__summary-label,
 .luxury-configurator .luxury-configurator__highlight-label {
   color: var(--luxury-muted);
+  font-family: var(--font-tactical, 'Rajdhani', sans-serif);
   font-size: 0.84rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -436,7 +440,7 @@
   border: 1px solid rgb(255 255 255 / 12%);
   color: var(--luxury-accent-strong);
   display: inline-flex;
-  font-family: var(--font-display, var(--type-display-font-family, "Avenir Next", sans-serif));
+  font-family: var(--font-display, var(--type-display-font-family, "Teko", "Impact", sans-serif));
   font-size: 1.2rem;
   justify-content: center;
 }

@@ -294,9 +294,10 @@ body:is(.mcx, .mcx-preview) header .mcx-header .nav-bar {
   background: var(--mcx-header-nav-bg);
   border-top: 1px solid var(--mcx-header-line);
   border-bottom: 1px solid rgb(255 255 255 / 7%);
-  overflow-x: auto;
+  overflow: visible;
   position: relative;
   scrollbar-width: none;
+  z-index: 2;
 }
 
 body:is(.mcx, .mcx-preview) header .mcx-header .nav-bar::-webkit-scrollbar {
@@ -625,6 +626,10 @@ body:is(.mcx, .mcx-preview) header .mcx-header .mega-ft-tag:focus-visible {
   body:is(.mcx, .mcx-preview) header .mcx-header .nav-inner {
     min-height: 54px;
     width: max-content;
+  }
+
+  body:is(.mcx, .mcx-preview) header .mcx-header .nav-bar {
+    overflow: auto hidden;
   }
 
   body:is(.mcx, .mcx-preview) header .mcx-header .nav-link {

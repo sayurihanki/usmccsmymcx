@@ -15,7 +15,7 @@
   --qrm-radius-lg: 28px;
   --qrm-radius-md: 18px;
   --qrm-radius-sm: 12px;
-  --qrm-display-font: var(--font-display, var(--type-display-font-family, "Bebas Neue", "Impact", sans-serif));
+  --qrm-display-font: var(--font-display, var(--type-display-font-family, "Teko", "Impact", sans-serif));
   --qrm-body-font: var(--font-body, var(--type-base-font-family, "Barlow", sans-serif));
 
   width: 100vw;

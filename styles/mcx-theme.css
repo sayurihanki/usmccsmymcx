@@ -70,6 +70,30 @@ body:is(.mcx, .mcx-preview) main {
   background: var(--void);
 }
 
+/* Let the top homepage band escape centered shells and authoring canvases. */
+body:is(.mcx, .mcx-preview) main > :is(
+  .mcx-announcement-bar-container,
+  .mcx-hero-container,
+  .mcx-ticker-container,
+  .mcx-benefits-container
+) {
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  max-width: none;
+  width: 100vw;
+}
+
+body:is(.mcx, .mcx-preview) main > :is(
+  .mcx-announcement-bar-container,
+  .mcx-hero-container,
+  .mcx-ticker-container,
+  .mcx-benefits-container
+) > div {
+  margin: 0;
+  max-width: none;
+  padding: 0;
+}
+
 body:is(.mcx, .mcx-preview) a {
   color: inherit;
   text-decoration: none;

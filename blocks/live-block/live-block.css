@@ -101,7 +101,7 @@
   background: linear-gradient(135deg, #f1f5f9 20%, var(--live-accent) 80%, var(--live-accent-2) 100%);
   background-clip: text;
   color: transparent;
-  font-family: var(--font-display, var(--type-display-font-family, 'Avenir Next', sans-serif));
+  font-family: var(--font-display, var(--type-display-font-family, 'Teko', 'Impact', sans-serif));
   font-size: clamp(1.2rem, 2.6vw, 1.78rem);
   font-weight: 800;
   letter-spacing: -.01em;
@@ -113,6 +113,7 @@
 /* ── live pill with animated glow ──────────────────────────── */
 
 .live-block .live-block-pill {
+  font-family: var(--font-tactical, 'Rajdhani', sans-serif);
   background:
     linear-gradient(135deg, rgb(52 211 153 / 22%) 0%, rgb(129 140 248 / 18%) 100%);
   border: 1px solid rgb(52 211 153 / 36%);
@@ -160,6 +161,7 @@
   border-radius: 12px;
   color: #d1fae5;
   cursor: pointer;
+  font-family: var(--font-condensed, var(--type-price-font-family, 'Barlow Condensed', sans-serif));
   font-size: .82rem;
   font-weight: 650;
   padding: 8px 14px;
@@ -200,6 +202,7 @@
   border-radius: 12px;
   color: #020617;
   display: inline-flex;
+  font-family: var(--font-condensed, var(--type-price-font-family, 'Barlow Condensed', sans-serif));
   font-weight: 700;
   justify-content: center;
   max-width: 200px;

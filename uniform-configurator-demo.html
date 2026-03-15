@@ -15,7 +15,7 @@
   />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;700&family=Syne:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
   <script nonce="aem" type="importmap">
     {
       "imports": {
@@ -51,9 +51,10 @@
   <style>
     body.uniform-configurator-demo {
       background:
-        radial-gradient(circle at top left, rgb(201 168 76 / 10%), transparent 28%),
-        linear-gradient(180deg, #0a1017, #0f161f 48%, #131118);
-      color: #f6f0e7;
+        radial-gradient(circle at 12% 12%, rgb(193 18 31 / 8%), transparent 20%),
+        radial-gradient(circle at 84% 10%, rgb(201 168 76 / 16%), transparent 24%),
+        linear-gradient(180deg, #fbf6ef 0%, #f3ebdf 48%, #ece1d2 100%);
+      color: #152232;
     }
 
     .uniform-configurator-demo main {
@@ -69,7 +70,7 @@
     .uniform-configurator-demo .demo-intro {
       display: grid;
       gap: 1.2rem;
-      padding: 6.4rem 0 2.4rem;
+      padding: 5.4rem 0 2.4rem;
     }
 
     .uniform-configurator-demo .demo-intro h1,
@@ -77,8 +78,14 @@
       margin: 0;
     }
 
+    .uniform-configurator-demo .demo-intro h1 {
+      font-size: clamp(3.8rem, 6vw, 6rem);
+      line-height: 0.94;
+      letter-spacing: -0.04em;
+    }
+
     .uniform-configurator-demo .demo-intro p {
-      color: rgb(246 240 231 / 76%);
+      color: rgb(21 34 50 / 72%);
       max-width: 76rem;
     }
   </style>
