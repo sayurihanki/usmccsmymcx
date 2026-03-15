@@ -218,7 +218,10 @@ function notifyUI(event) {
 export function detectPageType() {
   if (document.body.querySelector('main .product-details')) {
     return 'Product';
-  } if (document.body.querySelector('main .product-list-page')) {
+  } if (
+    document.body.querySelector('main .product-list-page')
+    || document.body.querySelector('main .mcx-category-page')
+  ) {
     return 'Category';
   } if (document.body.querySelector('main .commerce-cart')) {
     return 'Cart';

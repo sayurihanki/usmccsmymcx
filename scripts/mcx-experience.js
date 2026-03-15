@@ -2,6 +2,7 @@ const MCX_CONTENT_BLOCKS = new Set([
   'mcx-announcement-bar',
   'mcx-benefits',
   'mcx-brands',
+  'mcx-category-page',
   'mcx-category-grid',
   'mcx-deal-countdown',
   'mcx-editorial-cards',

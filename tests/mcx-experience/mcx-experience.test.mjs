@@ -27,6 +27,12 @@ test('hasMcxContentBlock detects authored MCX block roots', () => {
   assert.equal(hasMcxContentBlock(main), true);
 });
 
+test('hasMcxContentBlock includes the MCX category page block', () => {
+  const { main } = createPageWithBlock('mcx-category-page');
+
+  assert.equal(hasMcxContentBlock(main), true);
+});
+
 test('hasMcxContentBlock ignores MCX helper data nodes', () => {
   const { main } = createPageWithBlock('mcx-nav-data');
 

@@ -13,6 +13,7 @@ const MCX_BLOCKS = [
   'mcx-benefits',
   'mcx-brands',
   'mcx-category-grid',
+  'mcx-category-page',
   'mcx-deal-countdown',
   'mcx-editorial-cards',
   'mcx-featured-collections',

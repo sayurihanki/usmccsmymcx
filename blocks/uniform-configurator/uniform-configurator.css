@@ -139,21 +139,6 @@ body.columns main > .section > div.uniform-configurator-wrapper {
 
 .uniform-configurator .cfg-hero {
   animation-delay: 0.05s;
-}
-
-.uniform-configurator .cfg-steps-nav {
-  animation-delay: 0.15s;
-}
-
-.uniform-configurator .cfg-preview {
-  animation-delay: 0.2s;
-}
-
-.uniform-configurator .cfg-form-area {
-  animation-delay: 0.25s;
-}
-
-.uniform-configurator .cfg-hero {
   position: relative;
   isolation: isolate;
   display: grid;
@@ -208,10 +193,11 @@ body.columns main > .section > div.uniform-configurator-wrapper {
   border: 1px solid rgb(201 162 39 / 28%);
   border-radius: 999px;
   background: rgb(255 255 255 / 88%);
-  font: var(--type-details-overline-font);
-  letter-spacing: 0.26em;
+  font: normal normal 600 clamp(1.55rem, 1.25vw, 1.95rem)/1 var(--uc-font-display);
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--uc-gold);
+  color: #8c6f14;
+  text-shadow: 0 1px 0 rgb(255 255 255 / 88%);
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 92%),
     0 4px 16px rgb(201 162 39 / 12%);
@@ -316,6 +302,7 @@ body.columns main > .section > div.uniform-configurator-wrapper {
 }
 
 .uniform-configurator .cfg-steps-nav {
+  animation-delay: 0.15s;
   width: min(100%, var(--uc-hero-max));
   margin: 0 auto clamp(2.2rem, 4vw, 3.2rem);
 }
@@ -505,6 +492,7 @@ body.columns main > .section > div.uniform-configurator-wrapper {
 }
 
 .uniform-configurator .cfg-preview {
+  animation-delay: 0.2s;
   position: static;
 }
 
@@ -716,6 +704,7 @@ body.columns main > .section > div.uniform-configurator-wrapper {
 }
 
 .uniform-configurator .cfg-form-area {
+  animation-delay: 0.25s;
   display: block;
   width: 100%;
   max-width: none;
