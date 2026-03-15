@@ -7,31 +7,36 @@
   --uc-font-body: 'Barlow', var(--font-body, system-ui, sans-serif);
   --uc-scarlet: #c1121f;
   --uc-scarlet-dark: #8b0000;
+  --uc-scarlet-glow: rgb(193 18 31 / 18%);
   --uc-gold: #c9a227;
   --uc-gold-light: #e2c261;
   --uc-gold-wash: rgb(201 162 39 / 16%);
-  --uc-ink: #132132;
-  --uc-ink-soft: #4e5d6d;
-  --uc-ink-muted: #8d99a7;
+  --uc-gold-glow: rgb(201 162 39 / 22%);
+  --uc-ink: #0f1a24;
+  --uc-ink-soft: #3d4d5e;
+  --uc-ink-muted: #7a8a9a;
   --uc-bg: #f8f4ee;
   --uc-bg-strong: #efe7db;
-  --uc-surface: rgb(255 252 247 / 94%);
+  --uc-surface: rgb(255 252 247 / 96%);
   --uc-surface-strong: #fffdfa;
   --uc-surface-muted: #f3ece3;
-  --uc-border: rgb(19 33 50 / 12%);
-  --uc-border-strong: rgb(201 162 39 / 24%);
-  --uc-border-soft: rgb(255 255 255 / 55%);
-  --uc-shadow-shell: 0 42px 110px rgb(78 55 24 / 11%);
-  --uc-shadow-card: 0 24px 56px rgb(78 55 24 / 10%);
-  --uc-shadow-card-hover: 0 28px 70px rgb(98 61 23 / 15%);
-  --uc-shadow-button: 0 16px 34px rgb(193 18 31 / 22%);
-  --uc-shadow-button-hover: 0 22px 42px rgb(193 18 31 / 28%);
-  --uc-shadow-gold: 0 16px 32px rgb(201 162 39 / 28%);
-  --uc-shadow-focus: 0 0 0 4px rgb(193 18 31 / 12%);
+  --uc-border: rgb(19 33 50 / 10%);
+  --uc-border-strong: rgb(201 162 39 / 28%);
+  --uc-border-soft: rgb(255 255 255 / 58%);
+  --uc-shadow-shell: 0 48px 120px rgb(45 35 20 / 14%), 0 16px 48px rgb(45 35 20 / 8%);
+  --uc-shadow-card: 0 24px 56px rgb(45 35 20 / 12%), 0 8px 24px rgb(45 35 20 / 6%);
+  --uc-shadow-card-hover: 0 32px 72px rgb(45 35 20 / 16%), 0 12px 32px rgb(45 35 20 / 10%);
+  --uc-shadow-button: 0 16px 36px rgb(193 18 31 / 24%), 0 6px 16px rgb(193 18 31 / 14%);
+  --uc-shadow-button-hover: 0 24px 48px rgb(193 18 31 / 30%), 0 8px 24px rgb(193 18 31 / 18%);
+  --uc-shadow-gold: 0 16px 36px rgb(201 162 39 / 30%), 0 6px 16px rgb(201 162 39 / 16%);
+  --uc-shadow-focus: 0 0 0 4px rgb(193 18 31 / 14%);
   --uc-shell-max: 1320px;
   --uc-hero-max: 1140px;
   --uc-layout-gap-mobile: clamp(1.8rem, 2vw, 2.2rem);
   --uc-layout-gap-desktop: clamp(2.4rem, 3vw, 3.6rem);
+  --uc-ease-out: var(--ease-out, cubic-bezier(0.4, 0, 0.2, 1));
+  --uc-ease-spring: var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1));
+  --uc-transition: 0.25s;
 
   position: relative;
   display: block;
@@ -91,9 +96,9 @@ body.columns main > .section > div.uniform-configurator-wrapper {
   padding: clamp(2rem, 3vw, 3rem);
   overflow: hidden;
   border: 1px solid var(--uc-border-soft);
-  border-radius: clamp(32px, 4vw, 56px);
+  border-radius: clamp(36px, 4.5vw, 60px);
   background:
-    linear-gradient(180deg, rgb(251 246 238 / 98%), rgb(239 231 219 / 98%));
+    linear-gradient(165deg, rgb(253 250 246 / 99%) 0%, rgb(247 242 234 / 98%) 40%, rgb(239 231 219 / 98%) 100%);
   box-shadow: var(--uc-shadow-shell);
 }
 
@@ -108,28 +113,44 @@ body.columns main > .section > div.uniform-configurator-wrapper {
 
 .uniform-configurator > .uniform-configurator__shell::before {
   background:
-    radial-gradient(circle at 18% 12%, rgb(193 18 31 / 8%), transparent 24%),
-    radial-gradient(circle at 82% 14%, rgb(201 162 39 / 15%), transparent 26%),
-    radial-gradient(circle at 50% 100%, rgb(201 162 39 / 10%), transparent 38%);
+    radial-gradient(ellipse 80% 50% at 15% 8%, var(--uc-scarlet-glow), transparent 32%),
+    radial-gradient(ellipse 70% 45% at 88% 10%, var(--uc-gold-glow), transparent 30%),
+    radial-gradient(ellipse 90% 60% at 50% 102%, rgb(201 162 39 / 8%), transparent 42%);
 }
 
 .uniform-configurator > .uniform-configurator__shell::after {
-  inset: 18px;
-  border: 1px solid rgb(255 255 255 / 56%);
+  inset: 20px;
+  border: 1px solid rgb(255 255 255 / 60%);
   border-radius: inherit;
   background:
-    linear-gradient(180deg, rgb(255 255 255 / 20%), transparent 22%),
-    linear-gradient(90deg, rgb(255 255 255 / 8%) 1px, transparent 1px),
-    linear-gradient(rgb(255 255 255 / 7%) 1px, transparent 1px);
-  background-size: auto, 72px 72px, 72px 72px;
-  opacity: 0.48;
+    linear-gradient(180deg, rgb(255 255 255 / 24%) 0%, transparent 20%),
+    linear-gradient(90deg, rgb(255 255 255 / 6%) 1px, transparent 1px),
+    linear-gradient(rgb(255 255 255 / 5%) 1px, transparent 1px);
+  background-size: auto, 64px 64px, 64px 64px;
+  opacity: 0.52;
 }
 
 .uniform-configurator .cfg-hero,
 .uniform-configurator .cfg-steps-nav,
 .uniform-configurator .cfg-preview,
 .uniform-configurator .cfg-form-area {
-  animation: fade-up 0.8s var(--ease-out) both;
+  animation: fade-up 0.7s var(--uc-ease-out) both;
+}
+
+.uniform-configurator .cfg-hero {
+  animation-delay: 0.05s;
+}
+
+.uniform-configurator .cfg-steps-nav {
+  animation-delay: 0.15s;
+}
+
+.uniform-configurator .cfg-preview {
+  animation-delay: 0.2s;
+}
+
+.uniform-configurator .cfg-form-area {
+  animation-delay: 0.25s;
 }
 
 .uniform-configurator .cfg-hero {
@@ -137,17 +158,18 @@ body.columns main > .section > div.uniform-configurator-wrapper {
   isolation: isolate;
   display: grid;
   justify-items: center;
-  gap: 1.3rem;
+  gap: 1.4rem;
   width: min(100%, var(--uc-hero-max));
-  margin: 0 auto clamp(2rem, 4vw, 3rem);
-  padding: clamp(2.6rem, 4vw, 4rem) clamp(1.4rem, 4vw, 3rem) clamp(2.2rem, 3.5vw, 3rem);
+  margin: 0 auto clamp(2.2rem, 4vw, 3.2rem);
+  padding: clamp(2.8rem, 4vw, 4.2rem) clamp(1.6rem, 4vw, 3.2rem) clamp(2.4rem, 3.5vw, 3.2rem);
   border: 1px solid var(--uc-border-soft);
-  border-radius: clamp(30px, 4vw, 44px);
+  border-radius: clamp(32px, 4vw, 48px);
   background:
-    linear-gradient(180deg, rgb(255 255 255 / 68%), rgb(255 249 242 / 34%));
+    linear-gradient(175deg, rgb(255 255 255 / 78%) 0%, rgb(255 250 245 / 42%) 50%, rgb(255 248 240 / 28%) 100%);
   box-shadow:
-    0 24px 56px rgb(78 55 24 / 8%),
-    inset 0 1px 0 rgb(255 255 255 / 82%);
+    0 28px 64px rgb(45 35 20 / 10%),
+    0 8px 24px rgb(45 35 20 / 6%),
+    inset 0 1px 0 rgb(255 255 255 / 88%);
   overflow: hidden;
   text-align: center;
 }
@@ -163,56 +185,65 @@ body.columns main > .section > div.uniform-configurator-wrapper {
 .uniform-configurator .cfg-hero::before {
   z-index: -2;
   background:
-    radial-gradient(circle at 18% 22%, rgb(193 18 31 / 12%), transparent 28%),
-    radial-gradient(circle at 82% 18%, rgb(201 162 39 / 18%), transparent 32%),
-    linear-gradient(135deg, rgb(201 162 39 / 6%), transparent 56%);
+    radial-gradient(ellipse 60% 40% at 16% 20%, rgb(193 18 31 / 10%), transparent 32%),
+    radial-gradient(ellipse 55% 35% at 84% 16%, rgb(201 162 39 / 16%), transparent 36%),
+    linear-gradient(140deg, rgb(201 162 39 / 4%) 0%, transparent 50%);
 }
 
 .uniform-configurator .cfg-hero::after {
-  inset: 14px;
+  inset: 16px;
   z-index: -1;
-  border: 1px solid rgb(255 255 255 / 42%);
+  border: 1px solid rgb(255 255 255 / 48%);
   border-radius: inherit;
-  background: linear-gradient(180deg, rgb(255 255 255 / 16%), transparent 100%);
+  background: linear-gradient(180deg, rgb(255 255 255 / 20%) 0%, transparent 100%);
 }
 
 .uniform-configurator .cfg-hero__eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 0.9rem;
+  gap: 1rem;
   width: fit-content;
   margin: 0;
-  padding: 0.8rem 1.4rem;
-  border: 1px solid rgb(201 162 39 / 24%);
+  padding: 0.7rem 1.5rem;
+  border: 1px solid rgb(201 162 39 / 28%);
   border-radius: 999px;
-  background: rgb(255 255 255 / 82%);
+  background: rgb(255 255 255 / 88%);
   font: var(--type-details-overline-font);
-  letter-spacing: 0.24em;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
   color: var(--uc-gold);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 88%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 92%),
+    0 4px 16px rgb(201 162 39 / 12%);
+  transition: box-shadow var(--uc-transition) var(--uc-ease-out);
+}
+
+.uniform-configurator .cfg-hero__eyebrow:hover {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 92%),
+    0 6px 24px rgb(201 162 39 / 18%);
 }
 
 .uniform-configurator .cfg-hero__eyebrow::before,
 .uniform-configurator .cfg-hero__eyebrow::after {
   content: '';
   display: block;
-  width: 2.8rem;
+  width: 2.4rem;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--uc-gold));
+  background: linear-gradient(90deg, transparent, rgb(201 162 39 / 70%));
 }
 
 .uniform-configurator .cfg-hero__eyebrow::after {
-  background: linear-gradient(90deg, var(--uc-gold), transparent);
+  background: linear-gradient(90deg, rgb(201 162 39 / 70%), transparent);
 }
 
 .uniform-configurator .cfg-hero__title {
   max-width: min(100%, 12ch);
   margin: 0;
   font: normal normal 700 clamp(4.4rem, 7vw, 7.6rem)/0.9 var(--uc-font-display);
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
   color: var(--uc-ink);
-  text-shadow: 0 12px 24px rgb(255 255 255 / 34%);
+  text-shadow: 0 2px 4px rgb(255 255 255 / 50%);
   text-wrap: balance;
 }
 
@@ -238,9 +269,13 @@ body.columns main > .section > div.uniform-configurator-wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.85rem;
   width: 100%;
 }
+
+.uniform-configurator .cfg-hero__chip:nth-child(1) { animation: fade-up 0.45s var(--uc-ease-out) 0.35s both; }
+.uniform-configurator .cfg-hero__chip:nth-child(2) { animation: fade-up 0.45s var(--uc-ease-out) 0.42s both; }
+.uniform-configurator .cfg-hero__chip:nth-child(3) { animation: fade-up 0.45s var(--uc-ease-out) 0.49s both; }
 
 .uniform-configurator .cfg-hero__chip,
 .uniform-configurator .cfg-preview__badge,
@@ -260,10 +295,24 @@ body.columns main > .section > div.uniform-configurator-wrapper {
 }
 
 .uniform-configurator .cfg-hero__chip {
-  border: 1px solid rgb(19 33 50 / 10%);
-  background: rgb(255 255 255 / 72%);
+  border: 1px solid rgb(19 33 50 / 8%);
+  background: rgb(255 255 255 / 78%);
   color: var(--uc-ink-soft);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 88%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 90%),
+    0 2px 8px rgb(19 33 50 / 6%);
+  transition:
+    transform var(--uc-transition) var(--uc-ease-spring),
+    box-shadow var(--uc-transition) var(--uc-ease-out),
+    border-color var(--uc-transition);
+}
+
+.uniform-configurator .cfg-hero__chip:hover {
+  transform: translateY(-2px);
+  border-color: rgb(201 162 39 / 20%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 90%),
+    0 6px 20px rgb(19 33 50 / 10%);
 }
 
 .uniform-configurator .cfg-steps-nav {
@@ -280,15 +329,15 @@ body.columns main > .section > div.uniform-configurator-wrapper {
 
   position: relative;
   display: flex;
-  gap: 0.55rem;
+  gap: 0.5rem;
   overflow-x: auto;
-  padding: 0.7rem;
+  padding: 0.6rem;
   border: 1px solid var(--uc-border-soft);
   border-radius: 999px;
-  background: rgb(255 255 255 / 82%);
+  background: rgb(255 255 255 / 88%);
   box-shadow:
-    0 18px 44px rgb(78 55 24 / 8%),
-    inset 0 1px 0 rgb(255 255 255 / 88%);
+    0 20px 48px rgb(45 35 20 / 9%),
+    inset 0 1px 0 rgb(255 255 255 / 90%);
   scrollbar-width: none;
 }
 
@@ -310,13 +359,14 @@ body.columns main > .section > div.uniform-configurator-wrapper {
 
 .uniform-configurator .steps-track::before {
   right: 1.8rem;
-  background: linear-gradient(90deg, rgb(19 33 50 / 10%), rgb(19 33 50 / 2%));
+  background: linear-gradient(90deg, rgb(19 33 50 / 8%), rgb(19 33 50 / 2%));
 }
 
 .uniform-configurator .steps-track::after {
   width: max(0px, calc(var(--uc-progress) - 3.6rem));
   background: linear-gradient(90deg, var(--uc-scarlet), var(--uc-gold));
-  box-shadow: 0 0 16px rgb(201 162 39 / 22%);
+  box-shadow: 0 0 20px rgb(201 162 39 / 25%);
+  transition: width 0.4s var(--uc-ease-out);
 }
 
 .uniform-configurator .step-btn {
@@ -328,22 +378,22 @@ body.columns main > .section > div.uniform-configurator-wrapper {
   justify-content: center;
   gap: 0.85rem;
   min-width: 0;
-  min-height: 4.6rem;
-  padding: 0.95rem 1.2rem;
+  min-height: 4.4rem;
+  padding: 0.9rem 1.2rem;
   border: 0;
   border-radius: 999px;
   background: transparent;
-  color: var(--uc-ink-soft);
+  color: var(--uc-ink-muted);
   cursor: pointer;
   transition:
-    transform var(--transition-fast),
-    background var(--transition-fast),
-    box-shadow var(--transition-fast),
-    color var(--transition-fast);
+    transform var(--uc-transition) var(--uc-ease-spring),
+    background var(--uc-transition) var(--uc-ease-out),
+    box-shadow var(--uc-transition) var(--uc-ease-out),
+    color var(--uc-transition);
 }
 
 .uniform-configurator .step-btn:hover {
-  background: rgb(19 33 50 / 4%);
+  background: rgb(19 33 50 / 5%);
   color: var(--uc-ink);
 }
 
@@ -354,11 +404,12 @@ body.columns main > .section > div.uniform-configurator-wrapper {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: rgb(19 33 50 / 7%);
+  background: rgb(19 33 50 / 6%);
   font: var(--type-details-caption-2-font);
-  color: var(--uc-ink-muted);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 78%);
+  color: inherit;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 80%);
   font-family: var(--uc-font-tactical);
+  transition: all var(--uc-transition) var(--uc-ease-out);
 }
 
 .uniform-configurator .step-btn__label {
@@ -370,20 +421,24 @@ body.columns main > .section > div.uniform-configurator-wrapper {
 }
 
 .uniform-configurator .step-btn.active {
-  background: linear-gradient(135deg, var(--uc-scarlet), #df3442);
+  background: linear-gradient(135deg, var(--uc-scarlet), #dd3a45);
   color: #fff;
   box-shadow: var(--uc-shadow-button);
 }
 
+.uniform-configurator .step-btn.active:hover {
+  box-shadow: var(--uc-shadow-button-hover);
+}
+
 .uniform-configurator .step-btn.active .step-btn__num {
-  background: rgb(255 255 255 / 18%);
+  background: rgb(255 255 255 / 22%);
   color: #fff;
 }
 
 .uniform-configurator .step-btn.completed:not(.active) {
-  background: linear-gradient(180deg, rgb(255 255 255 / 96%), rgb(248 240 226 / 94%));
+  background: linear-gradient(180deg, rgb(255 255 255 / 98%), rgb(250 244 232 / 96%));
   color: var(--uc-ink);
-  box-shadow: inset 0 0 0 1px rgb(201 162 39 / 18%);
+  box-shadow: inset 0 0 0 1px rgb(201 162 39 / 20%);
 }
 
 .uniform-configurator .step-btn.completed .step-btn__num {
@@ -410,13 +465,20 @@ body.columns main > .section > div.uniform-configurator-wrapper {
   position: relative;
   overflow: hidden;
   border: 1px solid var(--uc-border);
-  border-radius: 3.2rem;
+  border-radius: 2.8rem;
   background:
-    linear-gradient(180deg, rgb(255 255 255 / 96%), rgb(247 240 231 / 96%));
-  backdrop-filter: blur(16px);
+    linear-gradient(175deg, rgb(255 255 255 / 98%) 0%, rgb(249 244 237 / 98%) 100%);
+  backdrop-filter: blur(20px);
   box-shadow:
     var(--uc-shadow-card),
-    inset 0 1px 0 rgb(255 255 255 / 82%);
+    inset 0 1px 0 rgb(255 255 255 / 85%);
+  transition: box-shadow var(--uc-transition) var(--uc-ease-out);
+}
+
+.uniform-configurator .cfg-preview:hover {
+  box-shadow:
+    var(--uc-shadow-card-hover),
+    inset 0 1px 0 rgb(255 255 255 / 85%);
 }
 
 .uniform-configurator .cfg-preview::before,
@@ -427,11 +489,11 @@ body.columns main > .section > div.uniform-configurator-wrapper {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at top right, var(--uc-gold-wash), transparent 28%),
-    linear-gradient(135deg, rgb(255 255 255 / 42%), transparent 42%);
+    radial-gradient(ellipse 70% 50% at 100% 0%, var(--uc-gold-wash), transparent 32%),
+    linear-gradient(140deg, rgb(255 255 255 / 50%) 0%, transparent 40%);
   pointer-events: none;
   z-index: 0;
-  opacity: 0.68;
+  opacity: 0.72;
 }
 
 .uniform-configurator .cfg-preview > *,
@@ -650,7 +712,7 @@ body.columns main > .section > div.uniform-configurator-wrapper {
 
 .uniform-configurator .cfg-panel.active {
   display: block;
-  animation: panel-in 0.45s var(--ease-out) both;
+  animation: panel-in 0.4s var(--uc-ease-out) both;
 }
 
 .uniform-configurator .cfg-form-area {
@@ -689,8 +751,8 @@ body.columns .uniform-configurator .cfg-form-area {
   position: absolute;
   inset: 0 0 auto;
   height: 4px;
-  background: linear-gradient(90deg, var(--uc-scarlet), var(--uc-gold));
-  opacity: 0.9;
+  background: linear-gradient(90deg, var(--uc-scarlet) 0%, var(--uc-gold) 100%);
+  opacity: 0.92;
 }
 
 .uniform-configurator .cfg-section__title {
@@ -762,18 +824,19 @@ body.columns .uniform-configurator .cfg-form-area {
 .uniform-configurator .measure-field input {
   width: 100%;
   border: 1.5px solid var(--uc-border);
-  border-radius: 1.8rem;
+  border-radius: 1.6rem;
   background:
-    linear-gradient(180deg, rgb(255 253 249 / 96%), rgb(243 236 227 / 96%));
+    linear-gradient(175deg, rgb(255 254 250 / 98%) 0%, rgb(246 240 232 / 98%) 100%);
   color: var(--uc-ink);
   font: var(--type-body-2-default-font);
   outline: 0;
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 88%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 90%),
+    0 1px 3px rgb(19 33 50 / 3%);
   transition:
-    transform var(--transition-fast),
-    background var(--transition-fast),
-    border-color var(--transition-fast),
-    box-shadow var(--transition-fast);
+    background var(--uc-transition) var(--uc-ease-out),
+    border-color var(--uc-transition),
+    box-shadow var(--uc-transition) var(--uc-ease-out);
 }
 
 .uniform-configurator .field select,
@@ -875,44 +938,48 @@ body.columns .uniform-configurator .cfg-form-area {
 .uniform-configurator .rank-card {
   position: relative;
   display: block;
-  padding: 1.45rem 1rem;
+  padding: 1.4rem 1rem;
   border: 1.5px solid var(--uc-border);
-  border-radius: 2.2rem;
+  border-radius: 2rem;
   background:
-    linear-gradient(180deg, rgb(255 253 249 / 96%), rgb(243 236 227 / 96%));
+    linear-gradient(175deg, rgb(255 254 250 / 98%) 0%, rgb(246 240 230 / 98%) 100%);
   cursor: pointer;
   text-align: center;
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 85%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 88%),
+    0 2px 8px rgb(19 33 50 / 4%);
   transition:
-    transform var(--transition-fast),
-    background var(--transition-fast),
-    border-color var(--transition-fast),
-    box-shadow var(--transition-fast);
+    transform var(--uc-transition) var(--uc-ease-spring),
+    background var(--uc-transition) var(--uc-ease-out),
+    border-color var(--uc-transition),
+    box-shadow var(--uc-transition) var(--uc-ease-out);
 }
 
 .uniform-configurator .card-opt:hover,
 .uniform-configurator .rank-card:hover {
-  transform: translateY(-3px);
-  border-color: rgb(193 18 31 / 24%);
-  box-shadow: var(--uc-shadow-card-hover);
+  transform: translateY(-4px);
+  border-color: rgb(193 18 31 / 22%);
+  box-shadow:
+    var(--uc-shadow-card-hover),
+    inset 0 1px 0 rgb(255 255 255 / 88%);
 }
 
 .uniform-configurator .card-opt.selected,
 .uniform-configurator .rank-card.selected {
-  border-color: rgb(193 18 31 / 42%);
+  border-color: rgb(193 18 31 / 44%);
   background:
-    linear-gradient(180deg, rgb(255 252 250 / 98%), rgb(255 241 242 / 94%));
+    linear-gradient(175deg, rgb(255 252 250 / 99%) 0%, rgb(255 242 243 / 96%) 100%);
   box-shadow:
-    0 0 0 1px rgb(193 18 31 / 14%),
+    0 0 0 1px rgb(193 18 31 / 16%),
     var(--uc-shadow-card);
 }
 
 .uniform-configurator .rank-card.selected {
-  border-color: rgb(201 162 39 / 42%);
+  border-color: rgb(201 162 39 / 44%);
   background:
-    linear-gradient(180deg, rgb(255 252 247 / 98%), rgb(251 243 225 / 94%));
+    linear-gradient(175deg, rgb(255 253 248 / 99%) 0%, rgb(252 245 228 / 96%) 100%);
   box-shadow:
-    0 0 0 1px rgb(201 162 39 / 18%),
+    0 0 0 1px rgb(201 162 39 / 20%),
     var(--uc-shadow-card);
 }
 
@@ -1082,8 +1149,8 @@ body.columns .uniform-configurator .cfg-form-area {
   align-items: center;
   justify-content: center;
   gap: var(--spacing-xsmall);
-  min-height: 5.2rem;
-  padding: 1.2rem 2.4rem;
+  min-height: 5rem;
+  padding: 1.15rem 2.2rem;
   border: 0;
   border-radius: 999px;
   font: var(--type-button-2-font);
@@ -1092,10 +1159,11 @@ body.columns .uniform-configurator .cfg-form-area {
   cursor: pointer;
   font-family: var(--uc-font-condensed);
   transition:
-    transform var(--transition-fast) var(--ease-spring),
-    box-shadow var(--transition-fast),
-    background var(--transition-fast),
-    color var(--transition-fast);
+    transform var(--uc-transition) var(--uc-ease-spring),
+    box-shadow var(--uc-transition) var(--uc-ease-out),
+    background var(--uc-transition) var(--uc-ease-out),
+    color var(--uc-transition),
+    border-color var(--uc-transition);
 }
 
 .uniform-configurator .btn:disabled {
@@ -1105,31 +1173,46 @@ body.columns .uniform-configurator .cfg-form-area {
 
 .uniform-configurator .btn-primary {
   color: #fff;
-  background: linear-gradient(135deg, var(--uc-scarlet), #dd3943);
+  background: linear-gradient(135deg, var(--uc-scarlet) 0%, #dd3943 100%);
   box-shadow: var(--uc-shadow-button);
 }
 
-.uniform-configurator .btn-primary:hover,
-.uniform-configurator .btn-gold:hover,
-.uniform-configurator .btn-secondary:hover {
+.uniform-configurator .btn-primary:hover:not(:disabled),
+.uniform-configurator .btn-gold:hover:not(:disabled),
+.uniform-configurator .btn-secondary:hover:not(:disabled) {
   transform: translateY(-3px);
 }
 
-.uniform-configurator .btn-primary:hover {
+.uniform-configurator .btn-primary:hover:not(:disabled) {
   box-shadow: var(--uc-shadow-button-hover);
 }
 
 .uniform-configurator .btn-secondary {
   color: var(--uc-ink);
-  background: linear-gradient(180deg, rgb(255 254 251 / 96%), rgb(242 235 226 / 94%));
+  background: linear-gradient(180deg, rgb(255 254 252 / 98%) 0%, rgb(244 238 229 / 96%) 100%);
   border: 1px solid var(--uc-border);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 84%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 88%),
+    0 2px 8px rgb(19 33 50 / 4%);
+}
+
+.uniform-configurator .btn-secondary:hover:not(:disabled) {
+  border-color: rgb(19 33 50 / 18%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 88%),
+    0 6px 20px rgb(19 33 50 / 10%);
 }
 
 .uniform-configurator .btn-gold {
   color: var(--uc-ink);
-  background: linear-gradient(135deg, var(--uc-gold), var(--uc-gold-light));
+  background: linear-gradient(135deg, var(--uc-gold) 0%, var(--uc-gold-light) 100%);
   box-shadow: var(--uc-shadow-gold);
+}
+
+.uniform-configurator .btn-gold:hover:not(:disabled) {
+  box-shadow:
+    0 20px 44px rgb(201 162 39 / 32%),
+    0 8px 20px rgb(201 162 39 / 20%);
 }
 
 .uniform-configurator .order-summary {
@@ -1291,7 +1374,7 @@ body.columns .uniform-configurator .cfg-form-area {
 }
 
 .uniform-configurator .price-pulse {
-  animation: price-pulse 0.35s var(--ease-spring);
+  animation: price-pulse 0.35s var(--uc-ease-spring);
 }
 
 @keyframes fade-up {
