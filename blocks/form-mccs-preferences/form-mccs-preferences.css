@@ -39,7 +39,7 @@
   padding: 4.8rem 1.6rem 6.4rem;
   background: var(--mp-bg);
   color: var(--mp-text);
-  font: var(--type-body-1-default-font, 300 1.6rem/2.4rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+font: var(--type-body-1-default-font, 300 1.6rem/2.4rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
 }
 
 .form-mccs-preferences a {
@@ -174,7 +174,7 @@
   border-radius: 3.2rem;
   background: rgb(196 30 58 / 6%);
   color: var(--mp-a);
-  font: var(--type-details-overline-font, 600 1.2rem/1.6rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+font: var(--type-details-overline-font, 600 1.2rem/1.6rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
@@ -244,7 +244,7 @@
   gap: 0.8rem;
   margin-bottom: 1.2rem;
   color: var(--mp-a);
-  font: var(--type-details-overline-font, 600 1.2rem/1.6rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+  font: var(--type-details-overline-font, 600 1.2rem/1.6rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
@@ -260,7 +260,7 @@
 .form-mccs-preferences .mp-h1 {
   margin-bottom: 1.6rem;
   color: var(--mp-text);
-  font: var(--type-display-2-font, 300 4.8rem/5.6rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+font: var(--type-display-2-font, 300 4.8rem/5.6rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   letter-spacing: -0.03em;
 }
 
@@ -276,7 +276,7 @@
 .form-mccs-preferences .mp-hero-p {
   max-width: 52rem;
   color: var(--mp-dim);
-  font: var(--type-body-1-default-font, 300 1.6rem/2.4rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+  font: var(--type-body-1-default-font, 300 1.6rem/2.4rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
 }
 
 .form-mccs-preferences .mp-progress {
@@ -310,7 +310,7 @@
   border-radius: 50%;
   background: rgb(255 255 255 / 70%);
   color: var(--mp-dim);
-  font: var(--type-body-2-strong-font, 700 1.4rem/2rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+  font: var(--type-body-2-strong-font, 700 1.4rem/2rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   transition: all 0.4s var(--mp-spring);
 }
 
@@ -362,7 +362,7 @@
 .form-mccs-preferences .mp-slbl {
   margin-top: 0.8rem;
   color: var(--mp-dim);
-  font: var(--type-details-caption-2-font, 400 1.2rem/1.6rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+  font: var(--type-details-caption-2-font, 400 1.2rem/1.6rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   letter-spacing: 0.04em;
   text-align: center;
   text-transform: uppercase;
@@ -408,14 +408,14 @@
 .form-mccs-preferences .mp-stitle {
   margin-bottom: 0.4rem;
   color: var(--mp-text);
-  font: var(--type-headline-2-strong-font, 700 2rem/2.4rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+  font: var(--type-headline-2-strong-font, 700 2rem/2.4rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   letter-spacing: -0.01em;
 }
 
 .form-mccs-preferences .mp-ssub {
   margin-bottom: 3.2rem;
   color: var(--mp-dim);
-  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   line-height: 1.7;
 }
 
@@ -444,7 +444,7 @@
   gap: 0.6rem;
   margin-bottom: 0.8rem;
   color: var(--mp-lbl);
-  font: var(--type-details-caption-1-font, 500 1.2rem/1.6rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+  font: var(--type-details-caption-1-font, 500 1.2rem/1.6rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   letter-spacing: 0.08em;
   text-transform: uppercase;
   transition: color 0.2s;
@@ -488,7 +488,7 @@
   caret-color: var(--mp-a);
   appearance: none;
   backdrop-filter: blur(12px);
-  font: var(--type-body-1-default-font, 300 1.6rem/2.4rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+  font: var(--type-body-1-default-font, 300 1.6rem/2.4rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   transition: all 0.25s ease;
 }
 
@@ -544,7 +544,7 @@
   min-height: 1.4em;
   margin-top: 0.6rem;
   color: var(--mp-err);
-  font: var(--type-details-caption-2-font, 400 1.2rem/1.6rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+  font: var(--type-details-caption-2-font, 400 1.2rem/1.6rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   transition: all 0.2s;
 }
 
@@ -577,7 +577,7 @@
   cursor: pointer;
   user-select: none;
   backdrop-filter: blur(8px);
-  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   transition: all 0.2s;
 }
 
@@ -633,14 +633,14 @@
 
 .form-mccs-preferences .mp-ttitle {
   color: var(--mp-text);
-  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   font-weight: 400;
 }
 
 .form-mccs-preferences .mp-tsub {
   margin-top: 0.2rem;
   color: var(--mp-dim);
-  font: var(--type-details-caption-2-font, 400 1.2rem/1.6rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+  font: var(--type-details-caption-2-font, 400 1.2rem/1.6rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
 }
 
 .form-mccs-preferences .mp-tswitch {
@@ -712,7 +712,7 @@
 .form-mccs-preferences .mp-divider span {
   color: var(--mp-gold);
   white-space: nowrap;
-  font: var(--type-details-caption-1-font, 500 1.1rem/1.6rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+  font: var(--type-details-caption-1-font, 500 1.1rem/1.6rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -735,7 +735,7 @@
   background: none;
   color: var(--mp-dim);
   cursor: pointer;
-  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   font-weight: 400;
   transition: all 0.2s;
 }
@@ -763,7 +763,7 @@
   box-shadow: 0 4px 24px rgb(196 30 58 / 25%);
   color: #fff;
   cursor: pointer;
-  font: var(--type-button-2-font, 400 1.6rem/2.4rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+  font: var(--type-button-2-font, 400 1.6rem/2.4rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   font-weight: 600;
   letter-spacing: 0.03em;
   text-transform: uppercase;
@@ -890,7 +890,7 @@
 .form-mccs-preferences .mp-success__title {
   margin-bottom: 0.8rem;
   color: var(--mp-text);
-  font: var(--type-display-3-font, 300 3.4rem/4rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+  font: var(--type-display-3-font, 300 3.4rem/4rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   font-weight: 700;
   letter-spacing: -0.03em;
 }
@@ -899,7 +899,7 @@
   max-width: 42rem;
   margin: 0 auto 4rem;
   color: var(--mp-dim);
-  font: var(--type-body-1-default-font, 300 1.6rem/2.4rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+  font: var(--type-body-1-default-font, 300 1.6rem/2.4rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   line-height: 1.7;
 }
 
@@ -921,7 +921,7 @@
   border-radius: 3.2rem;
   background: rgb(196 30 58 / 5%);
   color: var(--mp-text);
-  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
 }
 
 .form-mccs-preferences .mp-chip-svg {
@@ -971,13 +971,13 @@
   align-items: center;
   justify-content: center;
   color: var(--mp-a);
-  font: var(--type-headline-1-font, 400 2.4rem/3.2rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+  font: var(--type-headline-1-font, 400 2.4rem/3.2rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   font-weight: 700;
 }
 
 .form-mccs-preferences .mp-clbl {
   color: var(--mp-dim);
-  font: var(--type-details-caption-1-font, 500 1.2rem/1.6rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+  font: var(--type-details-caption-1-font, 500 1.2rem/1.6rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   letter-spacing: 0.04em;
 }
 
@@ -988,7 +988,7 @@
   background: none;
   color: var(--mp-a);
   cursor: pointer;
-  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "DM Sans", "Plus Jakarta Sans", system-ui, sans-serif));
+  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   font-weight: 500;
   letter-spacing: 0.03em;
   text-transform: uppercase;

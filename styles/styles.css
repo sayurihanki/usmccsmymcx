@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow:wght@300;400;500;600&family=Rajdhani:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Rajdhani:wght@500;600;700&display=swap');
 
 /* stylelint-disable no-empty-source */
 :root, .dropin-design {
@@ -30,7 +30,7 @@
   --gs-text-muted: #3e4e60;
   --gs-border: rgb(255 255 255 / 7%);
   --gs-border-gold: rgb(201 162 39 / 22%);
-  --gs-font-display: "Bebas Neue", "Impact", sans-serif;
+  --gs-font-display: "Teko", "Arial Black", sans-serif;
   --gs-font-condensed: "Barlow Condensed", "Arial Narrow", sans-serif;
   --gs-font-tactical: "Rajdhani", "Barlow", sans-serif;
   --gs-font-body: "Barlow", system-ui, sans-serif;
@@ -153,12 +153,12 @@
   --type-price-default-font: normal normal 700 2.4rem/2.4rem var(--type-price-font-family);
   --type-price-strong-font: normal normal 700 2.4rem/2.4rem var(--type-price-font-family);
   --type-price-letter-spacing: 0.01em;
-  --type-display-1-font: normal normal 400 clamp(5.2rem, 8vw, 9.6rem)/0.88 var(--type-display-font-family);
-  --type-display-1-letter-spacing: 0.02em;
-  --type-display-2-font: normal normal 400 clamp(4rem, 5.5vw, 6.4rem)/0.9 var(--type-display-font-family);
-  --type-display-2-letter-spacing: 0.02em;
-  --type-display-3-font: normal normal 400 3.8rem/0.94 var(--type-display-font-family);
-  --type-display-3-letter-spacing: 0.02em;
+  --type-display-1-font: normal normal 600 clamp(5.2rem, 8vw, 9.6rem)/0.88 var(--type-display-font-family);
+  --type-display-1-letter-spacing: 0.015em;
+  --type-display-2-font: normal normal 600 clamp(4rem, 5.5vw, 6.4rem)/0.9 var(--type-display-font-family);
+  --type-display-2-letter-spacing: 0.015em;
+  --type-display-3-font: normal normal 500 3.8rem/0.94 var(--type-display-font-family);
+  --type-display-3-letter-spacing: 0.015em;
   --type-headline-1-font: normal normal 700 2.8rem/1.1 var(--gs-font-condensed);
   --type-headline-1-letter-spacing: 0.05em;
   --type-headline-2-default-font: normal normal 700 2rem/1.1 var(--gs-font-condensed);

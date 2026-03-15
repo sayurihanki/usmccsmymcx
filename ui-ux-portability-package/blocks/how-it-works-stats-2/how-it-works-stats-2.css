@@ -12,8 +12,8 @@
   --hiws-ink-500: #9cb7a8;
   --hiws-ink-400: #7b9788;
   --hiws-white: #fff;
-  --hiws-font-sora: "Sora", var(--type-base-font-family);
-  --hiws-font-display: "Syne", var(--type-base-font-family);
+  --hiws-font-display: var(--font-display, var(--type-display-font-family, sans-serif));
+  --hiws-font-ui: var(--font-condensed, var(--type-base-font-family, sans-serif));
 }
 
 .how-it-works-stats-2-container {
@@ -172,7 +172,7 @@ main > .section.appear > div > .how-it-works-stats-2-wrapper {
   top: 24px;
   right: 24px;
   color: rgb(46 190 122 / 16%);
-  font-family: var(--hiws-font-sora);
+  font-family: var(--hiws-font-display);
   font-size: 64px;
   font-weight: 700;
   letter-spacing: -0.06em;
@@ -189,7 +189,7 @@ main > .section.appear > div > .how-it-works-stats-2-wrapper {
 .how-it-works-stats-2 .hiws-step-title {
   margin: 0 0 10px;
   color: var(--hiws-white);
-  font-family: var(--hiws-font-sora);
+  font-family: var(--hiws-font-ui);
   font-size: 18px;
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -310,7 +310,7 @@ main > .section.appear > div > .how-it-works-stats-2-wrapper {
 .how-it-works-stats-2 .hiws-stat-value {
   margin-bottom: 8px;
   color: var(--hiws-white);
-  font-family: var(--hiws-font-sora);
+  font-family: var(--hiws-font-display);
   font-size: 52px;
   font-weight: 700;
   letter-spacing: -0.03em;
@@ -324,7 +324,7 @@ main > .section.appear > div > .how-it-works-stats-2-wrapper {
 
 .how-it-works-stats-2 .hiws-stat-label {
   color: var(--hiws-green-300);
-  font-family: var(--hiws-font-sora);
+  font-family: var(--hiws-font-ui);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -351,7 +351,7 @@ main > .section.appear > div > .how-it-works-stats-2-wrapper {
   gap: 9px;
   border-radius: 12px;
   padding: 12px 22px;
-  font-family: var(--hiws-font-sora);
+  font-family: var(--hiws-font-ui);
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.015em;

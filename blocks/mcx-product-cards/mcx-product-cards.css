@@ -223,7 +223,7 @@ body:is(.mcx, .mcx-preview) main .mcx-product-cards .p-current {
   color: var(--text-bright);
   font-family: var(--font-hero);
   font-size: 24px;
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1;
 }
 

@@ -33,7 +33,7 @@ body:is(.mcx, .mcx-preview) main .mcx-deal-countdown .deal-title {
   color: var(--text-bright);
   font-family: var(--font-hero);
   font-size: 52px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 0.92;
 }
@@ -65,7 +65,7 @@ body:is(.mcx, .mcx-preview) main .mcx-deal-countdown .cd-num {
   color: var(--text-bright);
   font-family: var(--font-hero);
   font-size: 56px;
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1;
   min-width: 68px;
   position: relative;

@@ -13,7 +13,8 @@
   --hiws-ink-500: #4f6559;
   --hiws-ink-400: #6d8376;
   --hiws-white: #fff;
-  --hiws-font-sora: "Sora", var(--type-base-font-family);
+  --hiws-font-display: var(--font-display, var(--type-display-font-family, sans-serif));
+  --hiws-font-ui: var(--font-condensed, var(--type-base-font-family, sans-serif));
 }
 
 .how-it-works-stats-container {
@@ -98,7 +99,7 @@ main > .section.appear > div > .how-it-works-stats-wrapper {
   max-width: 720px;
   margin: 0;
   color: var(--hiws-ink-900);
-  font-family: var(--hiws-font-sora);
+  font-family: var(--hiws-font-display);
   font-size: clamp(32px, 4.2vw, 54px);
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -144,7 +145,7 @@ main > .section.appear > div > .how-it-works-stats-wrapper {
   top: 24px;
   right: 24px;
   color: rgb(37 119 75 / 20%);
-  font-family: var(--hiws-font-sora);
+  font-family: var(--hiws-font-display);
   font-size: 64px;
   font-weight: 700;
   letter-spacing: -0.06em;
@@ -161,7 +162,7 @@ main > .section.appear > div > .how-it-works-stats-wrapper {
 .how-it-works-stats .hiws-step-title {
   margin: 0 0 10px;
   color: var(--hiws-ink-900);
-  font-family: var(--hiws-font-sora);
+  font-family: var(--hiws-font-ui);
   font-size: 18px;
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -274,7 +275,7 @@ main > .section.appear > div > .how-it-works-stats-wrapper {
 .how-it-works-stats .hiws-stat-value {
   margin-bottom: 8px;
   color: var(--hiws-ink-900);
-  font-family: var(--hiws-font-sora);
+  font-family: var(--hiws-font-display);
   font-size: 52px;
   font-weight: 700;
   letter-spacing: -0.03em;
@@ -288,7 +289,7 @@ main > .section.appear > div > .how-it-works-stats-wrapper {
 
 .how-it-works-stats .hiws-stat-label {
   color: var(--hiws-ink-700);
-  font-family: var(--hiws-font-sora);
+  font-family: var(--hiws-font-ui);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -315,7 +316,7 @@ main > .section.appear > div > .how-it-works-stats-wrapper {
   gap: 9px;
   border-radius: 12px;
   padding: 12px 22px;
-  font-family: var(--hiws-font-sora);
+  font-family: var(--hiws-font-ui);
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.015em;

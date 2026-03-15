@@ -160,7 +160,7 @@ body:is(.mcx, .mcx-preview) .sec-title {
   color: var(--text-bright);
   font-family: var(--font-hero);
   font-size: clamp(42px, 5vw, 62px);
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 0.9;
 }

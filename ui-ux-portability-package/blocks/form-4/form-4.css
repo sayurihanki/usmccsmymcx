@@ -28,7 +28,7 @@
   place-items: center;
   padding: 4.8rem 1.6rem 6.4rem;
   overflow: hidden;
-  font: var(--type-body-1-default-font, 300 1.6rem/2.4rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+font: var(--type-body-1-default-font, 300 1.6rem/2.4rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   color: var(--f4-text);
 }
 
@@ -162,7 +162,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.8rem;
-  font: var(--type-details-overline-font, 600 1.2rem/1.6rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+font: var(--type-details-overline-font, 600 1.2rem/1.6rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--f4-a);
@@ -236,7 +236,7 @@
 }
 
 .form-4 .f4-eyebrow {
-  font: var(--type-details-overline-font, 600 1.2rem/1.6rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-details-overline-font, 600 1.2rem/1.6rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--f4-a2);
@@ -255,7 +255,7 @@
 }
 
 .form-4 .f4-h1 {
-  font: var(--type-display-2-font, 300 4.8rem/5.6rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+font: var(--type-display-2-font, 300 4.8rem/5.6rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   letter-spacing: -0.03em;
   color: var(--f4-text);
   margin-bottom: 1.6rem;
@@ -270,7 +270,7 @@
 }
 
 .form-4 .f4-hero-p {
-  font: var(--type-body-1-default-font, 300 1.6rem/2.4rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-body-1-default-font, 300 1.6rem/2.4rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   color: var(--f4-dim);
   max-width: 52rem;
 }
@@ -302,7 +302,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font: var(--type-body-2-strong-font, 700 1.4rem/2rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-body-2-strong-font, 700 1.4rem/2rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   border: 2px solid rgb(0 0 0 / 8%);
   background: rgb(255 255 255 / 70%);
   color: var(--f4-dim);
@@ -358,7 +358,7 @@
 }
 
 .form-4 .f4-slbl {
-  font: var(--type-details-caption-2-font, 400 1.2rem/1.6rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-details-caption-2-font, 400 1.2rem/1.6rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--f4-dim);
@@ -415,14 +415,14 @@
 }
 
 .form-4 .f4-stitle {
-  font: var(--type-headline-2-strong-font, 700 2rem/2.4rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-headline-2-strong-font, 700 2rem/2.4rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   color: var(--f4-text);
   margin-bottom: 0.4rem;
   letter-spacing: -0.01em;
 }
 
 .form-4 .f4-ssub {
-  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   color: var(--f4-dim);
   margin-bottom: 3.2rem;
   line-height: 1.7;
@@ -465,7 +465,7 @@
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  font: var(--type-details-caption-1-font, 500 1.2rem/1.6rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-details-caption-1-font, 500 1.2rem/1.6rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--f4-lbl);
@@ -512,7 +512,7 @@
   border: 1px solid var(--f4-gb);
   border-radius: var(--f4-rs);
   color: var(--f4-text);
-  font: var(--type-body-1-default-font, 300 1.6rem/2.4rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-body-1-default-font, 300 1.6rem/2.4rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   padding: 1.2rem 1.6rem;
   outline: none;
   transition: all 0.25s ease;
@@ -600,7 +600,7 @@
 }
 
 .form-4 .f4-fmsg {
-  font: var(--type-details-caption-2-font, 400 1.2rem/1.6rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-details-caption-2-font, 400 1.2rem/1.6rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   margin-top: 0.6rem;
   min-height: 1.4em;
   color: var(--f4-err);
@@ -636,7 +636,7 @@
   border: 1px solid var(--f4-gb);
   background: var(--f4-glass);
   color: var(--f4-dim);
-  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   cursor: pointer;
   transition: all 0.2s;
   user-select: none;
@@ -708,14 +708,14 @@
 .form-4 .f4-slabels {
   display: flex;
   justify-content: space-between;
-  font: var(--type-details-caption-2-font, 400 1.2rem/1.6rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-details-caption-2-font, 400 1.2rem/1.6rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   color: var(--f4-dim);
   margin-top: 0.8rem;
 }
 
 .form-4 .f4-sval {
   text-align: center;
-  font: var(--type-headline-2-strong-font, 700 2rem/2.4rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-headline-2-strong-font, 700 2rem/2.4rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   color: var(--f4-a);
   margin-top: 1.2rem;
   letter-spacing: -0.02em;
@@ -750,13 +750,13 @@
 }
 
 .form-4 .f4-ttitle {
-  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   font-weight: 400;
   color: var(--f4-text);
 }
 
 .form-4 .f4-tsub {
-  font: var(--type-details-caption-2-font, 400 1.2rem/1.6rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-details-caption-2-font, 400 1.2rem/1.6rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   color: var(--f4-dim);
   margin-top: 0.2rem;
 }
@@ -845,7 +845,7 @@
 }
 
 .form-4 .f4-dztitle {
-  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   color: var(--f4-dim);
 }
 
@@ -855,7 +855,7 @@
 }
 
 .form-4 .f4-dzsub {
-  font: var(--type-details-caption-2-font, 400 1.2rem/1.6rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-details-caption-2-font, 400 1.2rem/1.6rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   color: var(--f4-dim);
   margin-top: 0.4rem;
   opacity: 0.6;
@@ -873,7 +873,7 @@
   background: rgb(83 130 76 / 8%);
   border: 1px solid rgb(83 130 76 / 15%);
   border-radius: 3.2rem;
-  font: var(--type-details-caption-2-font, 400 1.2rem/1.6rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-details-caption-2-font, 400 1.2rem/1.6rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   color: var(--f4-ok);
   margin: 0.4rem;
 }
@@ -884,7 +884,7 @@
   position: absolute;
   bottom: 1rem;
   right: 1.2rem;
-  font: var(--type-details-caption-2-font, 400 1.2rem/1.6rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-details-caption-2-font, 400 1.2rem/1.6rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   color: var(--f4-dim);
   pointer-events: none;
   transition: color 0.2s;
@@ -949,7 +949,7 @@
 }
 
 .form-4 .f4-cpick-label {
-  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   color: var(--f4-dim);
   margin-left: 0.4rem;
 }
@@ -990,7 +990,7 @@
   border: 1px solid rgb(0 0 0 / 10%);
   color: var(--f4-dim);
   border-radius: var(--f4-rs);
-  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   font-weight: 400;
   padding: 1.2rem 2rem;
   cursor: pointer;
@@ -1021,7 +1021,7 @@
   color: #fff;
   border: none;
   border-radius: var(--f4-rs);
-  font: var(--type-button-2-font, 400 1.6rem/2.4rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-button-2-font, 400 1.6rem/2.4rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   font-weight: 600;
   letter-spacing: 0.03em;
   text-transform: uppercase;
@@ -1170,7 +1170,7 @@
 }
 
 .form-4 .f4-sh {
-  font: var(--type-display-3-font, 300 3.4rem/4rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-display-3-font, 300 3.4rem/4rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   font-weight: 700;
   letter-spacing: -0.03em;
   color: var(--f4-text);
@@ -1178,7 +1178,7 @@
 }
 
 .form-4 .f4-ssb {
-  font: var(--type-body-1-default-font, 300 1.6rem/2.4rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-body-1-default-font, 300 1.6rem/2.4rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   color: var(--f4-dim);
   line-height: 1.7;
   max-width: 42rem;
@@ -1201,7 +1201,7 @@
   background: rgb(46 190 122 / 5%);
   border: 1px solid rgb(46 190 122 / 12%);
   border-radius: 3.2rem;
-  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   color: var(--f4-text);
 }
 
@@ -1251,13 +1251,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font: var(--type-headline-1-font, 400 2.4rem/3.2rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-headline-1-font, 400 2.4rem/3.2rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   font-weight: 700;
   color: var(--f4-a);
 }
 
 .form-4 .f4-clbl {
-  font: var(--type-details-caption-1-font, 500 1.2rem/1.6rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-details-caption-1-font, 500 1.2rem/1.6rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   color: var(--f4-dim);
   letter-spacing: 0.04em;
 }
@@ -1267,7 +1267,7 @@
   border: 1px solid rgb(46 190 122 / 25%);
   color: var(--f4-a);
   border-radius: 3.2rem;
-  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif));
+  font: var(--type-body-2-default-font, 300 1.4rem/2rem var(--type-base-font-family, "Barlow", system-ui, sans-serif));
   font-weight: 500;
   letter-spacing: 0.03em;
   text-transform: uppercase;

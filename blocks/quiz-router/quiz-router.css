@@ -7,7 +7,7 @@
   --quiz-router-option-font-size: clamp(1.08rem, 1.4vw, 1.35rem);
   --quiz-router-question-font-size: clamp(2.4rem, 4.8vw, 5rem);
   --quiz-router-progress-font-size: clamp(1rem, 1.3vw, 1.3rem);
-  --quiz-router-font-body: var(--type-base-font-family, "Plus Jakarta Sans", sans-serif);
+  --quiz-router-font-body: var(--type-base-font-family, "Barlow", sans-serif);
   --quiz-router-font-display: var(--font-display, var(--type-display-font-family, sans-serif));
   --quiz-router-ease: var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
   --quiz-router-ease-spring: var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1));
