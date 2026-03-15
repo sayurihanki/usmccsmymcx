@@ -177,7 +177,62 @@ function emitRuntimeEvent(runtime, eventName, payload = {}) {
 }
 
 function formatHeading(title) {
-  return escapeHtml(title).replace(/\n/g, '<br>');
+  const lines = String(title || '')
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  if (!lines.length) {
+    return '';
+  }
+
+  return lines.map((line, index) => {
+    const accentClass = lines.length > 1 && index === lines.length - 1
+      ? ' cfg-hero__title-line--accent'
+      : '';
+    return `<span class="cfg-hero__title-line${accentClass}">${escapeHtml(line)}</span>`;
+  }).join('');
+}
+
+function createMonogram(label, maxLetters = 2) {
+  const words = String(label || '')
+    .trim()
+    .split(/[^A-Za-z0-9]+/)
+    .filter(Boolean);
+
+  if (!words.length) {
+    return '';
+  }
+
+  if (words.length === 1) {
+    return words[0].slice(0, maxLetters).toUpperCase();
+  }
+
+  return words
+    .slice(0, maxLetters)
+    .map((word) => word.charAt(0).toUpperCase())
+    .join('');
+}
+
+function renderHeroHighlights(commerceMode) {
+  const items = [
+    'Regulation Ready',
+    'Live Package Total',
+    commerceMode ? 'Cart-Ready Checkout' : 'Tailoring Review',
+  ];
+
+  return items.map((item) => (
+    `<span class="cfg-hero__chip">${escapeHtml(item)}</span>`
+  )).join('');
+}
+
+function renderPanelLead(meta, label) {
+  return `
+    <div class="cfg-panel__meta">
+      <span class="cfg-panel__step">Step ${meta.step}</span>
+      <span class="cfg-panel__kicker">${escapeHtml(label)}</span>
+    </div>
+  `;
 }
 
 function renderSelectOptions(options, selectedValue = '') {
@@ -300,7 +355,7 @@ function renderBuckleCards(data, state) {
           value="${escapeHtml(style.id)}"
           ${selected ? 'checked' : ''}
         >
-        <span class="card-opt__icon">${escapeHtml(style.icon)}</span>
+        <span class="card-opt__icon card-opt__icon--metric">${escapeHtml(createMonogram(style.label, style.label.length <= 3 ? 3 : 2))}</span>
         <span class="card-opt__name">${escapeHtml(style.label)}</span>
         <span class="card-opt__price">
           ${style.price ? `+${formatCurrency(style.price, data.currency)}` : escapeHtml(style.description)}
@@ -345,6 +400,7 @@ function renderMedalCards(data, state) {
   return data.medalPackages.map((pkg) => {
     const selected = state.selections.medalPackage === pkg.id;
     const displayPrice = pkg.price ? formatCurrency(pkg.price, data.currency) : '$0';
+    const previewLabel = pkg.previewCount ? String(pkg.previewCount).padStart(2, '0') : '00';
 
     return `
       <label class="card-opt${selected ? ' selected' : ''}">
@@ -354,7 +410,7 @@ function renderMedalCards(data, state) {
           value="${escapeHtml(pkg.id)}"
           ${selected ? 'checked' : ''}
         >
-        <span class="card-opt__icon">${escapeHtml(pkg.previewCount ? '🎖️' : '—')}</span>
+        <span class="card-opt__icon card-opt__icon--metric">${escapeHtml(previewLabel)}</span>
         <span class="card-opt__name">${escapeHtml(pkg.label)}</span>
         <span class="card-opt__price">${escapeHtml(displayPrice)}</span>
       </label>
@@ -534,7 +590,7 @@ function createShell(runtime) {
   const submitLabel = commerceMode ? 'Add Package to Cart' : 'Place Order';
   const contactSection = commerceMode ? '' : `
             <div class="cfg-section">
-              <div class="cfg-section__title"><span class="cfg-section__icon">📋</span> Contact Information</div>
+              <div class="cfg-section__title"><span class="cfg-section__icon">CT</span> Contact Information</div>
               <div class="field-grid field-grid--2">
                 ${renderInputField({
     key: 'firstName',
@@ -633,6 +689,9 @@ function createShell(runtime) {
         <div class="cfg-hero__eyebrow">${escapeHtml(config.eyebrow)}</div>
         <h1 class="cfg-hero__title">${formatHeading(config.title)}</h1>
         <p class="cfg-hero__sub">${escapeHtml(config.subtitle)}</p>
+        <div class="cfg-hero__highlights" aria-label="Configurator highlights">
+          ${renderHeroHighlights(commerceMode)}
+        </div>
       </header>
 
       <nav class="cfg-steps-nav" aria-label="Configuration steps">
@@ -663,11 +722,12 @@ function createShell(runtime) {
           <div class="cfg-fatal-error" id="uc-contract-error" hidden></div>
 
           <section class="cfg-panel active" data-panel="1" role="tabpanel">
+            ${renderPanelLead(stepMeta[0], stepLabels[0])}
             <h2 class="cfg-panel__title">${escapeHtml(stepMeta[0].title)}</h2>
             <p class="cfg-panel__sub">${escapeHtml(stepMeta[0].subtitle)}</p>
 
             <div class="cfg-section">
-              <div class="cfg-section__title"><span class="cfg-section__icon">🧥</span> Dress Coat</div>
+              <div class="cfg-section__title"><span class="cfg-section__icon">DC</span> Dress Coat</div>
               <div class="field-grid field-grid--2">
                 ${renderSelectField({
     key: 'coatLength',
@@ -684,11 +744,11 @@ function createShell(runtime) {
     value: state.selections.coatSize,
   })}
               </div>
-              ${renderNotice(data.notices.coat, '⚠️')}
+              ${renderNotice(data.notices.coat, '!')}
             </div>
 
             <div class="cfg-section">
-              <div class="cfg-section__title"><span class="cfg-section__icon">👖</span> Dress Trousers</div>
+              <div class="cfg-section__title"><span class="cfg-section__icon">DT</span> Dress Trousers</div>
               <div class="field-grid field-grid--2">
                 ${renderSelectField({
     key: 'trouserWaist',
@@ -716,7 +776,7 @@ function createShell(runtime) {
             </div>
 
             <div class="cfg-section">
-              <div class="cfg-section__title"><span class="cfg-section__icon">👔</span> Dress Shirt &amp; Collar</div>
+              <div class="cfg-section__title"><span class="cfg-section__icon">SC</span> Dress Shirt &amp; Collar</div>
               <div class="field-grid field-grid--3">
                 ${renderSelectField({
     key: 'shirtNeck',
@@ -749,11 +809,12 @@ function createShell(runtime) {
           </section>
 
           <section class="cfg-panel" data-panel="2" role="tabpanel" hidden>
+            ${renderPanelLead(stepMeta[1], stepLabels[1])}
             <h2 class="cfg-panel__title">${escapeHtml(stepMeta[1].title)}</h2>
             <p class="cfg-panel__sub">${escapeHtml(stepMeta[1].subtitle)}</p>
 
             <div class="cfg-section">
-              <div class="cfg-section__title"><span class="cfg-section__icon">👞</span> Oxford Dress Shoes</div>
+              <div class="cfg-section__title"><span class="cfg-section__icon">OX</span> Oxford Dress Shoes</div>
               <div class="field-grid field-grid--2">
                 ${renderSelectField({
     key: 'shoeSize',
@@ -773,7 +834,7 @@ function createShell(runtime) {
             </div>
 
             <div class="cfg-section">
-              <div class="cfg-section__title"><span class="cfg-section__icon">⬛</span> Belt &amp; Buckle</div>
+              <div class="cfg-section__title"><span class="cfg-section__icon">BB</span> Belt &amp; Buckle</div>
               <div class="field-grid field-grid--2">
                 ${renderSelectField({
     key: 'beltSize',
@@ -793,7 +854,7 @@ function createShell(runtime) {
             </div>
 
             <div class="cfg-section">
-              <div class="cfg-section__title"><span class="cfg-section__icon">🎩</span> Officer Service Cover</div>
+              <div class="cfg-section__title"><span class="cfg-section__icon">CV</span> Officer Service Cover</div>
               <div class="field-grid field-grid--2">
                 ${renderSelectField({
     key: 'coverSize',
@@ -820,16 +881,17 @@ function createShell(runtime) {
           </section>
 
           <section class="cfg-panel" data-panel="3" role="tabpanel" hidden>
+            ${renderPanelLead(stepMeta[2], stepLabels[2])}
             <h2 class="cfg-panel__title">${escapeHtml(stepMeta[2].title)}</h2>
             <p class="cfg-panel__sub">${escapeHtml(stepMeta[2].subtitle)}</p>
 
             <div class="cfg-section">
-              <div class="cfg-section__title"><span class="cfg-section__icon">🎖️</span> Officer Rank</div>
+              <div class="cfg-section__title"><span class="cfg-section__icon">RK</span> Officer Rank</div>
               <div class="rank-grid" data-field="rank">
                 ${renderRankCards(data, state)}
               </div>
               ${renderFieldError('rank')}
-              ${renderNotice(data.notices.rank, '📋')}
+              ${renderNotice(data.notices.rank, '§')}
             </div>
 
             <div class="cfg-actions">
@@ -839,18 +901,19 @@ function createShell(runtime) {
           </section>
 
           <section class="cfg-panel" data-panel="4" role="tabpanel" hidden>
+            ${renderPanelLead(stepMeta[3], stepLabels[3])}
             <h2 class="cfg-panel__title">${escapeHtml(stepMeta[3].title)}</h2>
             <p class="cfg-panel__sub">${escapeHtml(stepMeta[3].subtitle)}</p>
 
             <div class="cfg-section">
-              <div class="cfg-section__title"><span class="cfg-section__icon">🏅</span> Medal Package</div>
+              <div class="cfg-section__title"><span class="cfg-section__icon">MD</span> Medal Package</div>
               <div class="card-selector card-selector--medals">
                 ${renderMedalCards(data, state)}
               </div>
             </div>
 
             <div class="cfg-section">
-              <div class="cfg-section__title"><span class="cfg-section__icon">🔵</span> Additional Insignia</div>
+              <div class="cfg-section__title"><span class="cfg-section__icon">AI</span> Additional Insignia</div>
               ${renderExtraToggles(data, state)}
             </div>
 
@@ -861,11 +924,12 @@ function createShell(runtime) {
           </section>
 
           <section class="cfg-panel" data-panel="5" role="tabpanel" hidden>
+            ${renderPanelLead(stepMeta[4], stepLabels[4])}
             <h2 class="cfg-panel__title">${escapeHtml(stepMeta[4].title)}</h2>
             <p class="cfg-panel__sub">${escapeHtml(stepMeta[4].subtitle)}</p>
 
             <div class="cfg-section">
-              <div class="cfg-section__title"><span class="cfg-section__icon">📐</span> Body Measurements</div>
+              <div class="cfg-section__title"><span class="cfg-section__icon">MT</span> Body Measurements</div>
               <p class="cfg-inline-copy">Measurements are optional in v1, but any values entered must be within the allowed range.</p>
               <div class="measure-grid">
                 ${renderMeasurementFields(data, state)}
@@ -889,6 +953,7 @@ function createShell(runtime) {
           </section>
 
           <section class="cfg-panel" data-panel="6" role="tabpanel" hidden>
+            ${renderPanelLead(stepMeta[5], stepLabels[5])}
             <h2 class="cfg-panel__title">${escapeHtml(stepMeta[5].title)}</h2>
             <p class="cfg-panel__sub">${escapeHtml(stepMeta[5].subtitle)}</p>
 
@@ -905,7 +970,7 @@ function createShell(runtime) {
             </div>
 
             <div class="cfg-section">
-              <div class="cfg-section__title"><span class="cfg-section__icon">📦</span> Fulfillment</div>
+              <div class="cfg-section__title"><span class="cfg-section__icon">QA</span> Fulfillment</div>
               <div class="toggle-row toggle-row--locked">
                 <div class="toggle-info">
                   <div class="toggle-info__title">Standard Processing</div>
@@ -917,7 +982,7 @@ function createShell(runtime) {
               ${renderRushToggle(data, state)}
             </div>
 
-            ${renderNotice(data.notices.fulfillment, '🎖️')}
+            ${renderNotice(data.notices.fulfillment, '✦')}
 
             <p class="cfg-submit-error" id="uc-submit-error" hidden></p>
 
@@ -939,6 +1004,7 @@ function updateStepUi(runtime) {
   const stepButtons = root.querySelectorAll('.step-btn');
   const panels = root.querySelectorAll('.cfg-panel');
   const success = root.querySelector('#uc-success');
+  const trackEl = root.querySelector('.steps-track');
 
   stepButtons.forEach((button, index) => {
     const step = index + 1;
@@ -950,6 +1016,14 @@ function updateStepUi(runtime) {
     button.classList.toggle('completed', completed);
     button.setAttribute('aria-selected', step === runtime.state.step ? 'true' : 'false');
   });
+
+  if (trackEl) {
+    const totalSteps = stepButtons.length || 1;
+    const progressStep = runtime.state.submissionState === 'success'
+      ? totalSteps
+      : runtime.state.step;
+    trackEl.style.setProperty('--uc-progress', `${(progressStep / totalSteps) * 100}%`);
+  }
 
   panels.forEach((panel) => {
     const panelStep = Number(panel.dataset.panel);
