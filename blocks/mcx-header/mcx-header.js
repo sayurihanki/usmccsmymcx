@@ -13,6 +13,27 @@ function iconMarkup(name) {
   return icons[name] || '';
 }
 
+function normalizePath(value = '/') {
+  try {
+    const url = new URL(value, window.location.origin);
+    const path = url.pathname.replace(/\/+$/, '');
+    return path || '/';
+  } catch {
+    const path = String(value).trim().replace(/\/+$/, '');
+    return path || '/';
+  }
+}
+
+function resolveActiveIndex(navItems) {
+  const currentPath = normalizePath(window.location.pathname);
+  const matchIndex = navItems.findIndex(({ url }) => {
+    const itemPath = normalizePath(url);
+    return itemPath !== '/' && currentPath.startsWith(itemPath);
+  });
+
+  return matchIndex >= 0 ? matchIndex : 0;
+}
+
 function createLogo() {
   const link = document.createElement('a');
   link.className = 'logo';
@@ -253,6 +274,8 @@ function buildMegaMenu(item) {
 
   const mega = document.createElement('div');
   mega.className = 'mega';
+  mega.setAttribute('role', 'group');
+  mega.setAttribute('aria-label', `${item.label} categories`);
 
   const columns = document.createElement('div');
   columns.className = 'mega-cols';
@@ -300,16 +323,20 @@ function buildMegaMenu(item) {
 function buildHeaderDom(data) {
   const shell = document.createElement('div');
   shell.className = 'header';
+  const activeIndex = resolveActiveIndex(data.navItems);
 
   const mainBar = document.createElement('div');
   mainBar.className = 'hdr-main';
   mainBar.append(createLogo());
 
-  const search = document.createElement('div');
+  const search = document.createElement('form');
   search.className = 'hdr-search';
+  search.setAttribute('role', 'search');
+  search.action = '/search';
+  search.method = 'get';
   search.innerHTML = `
     <span class="search-icon" aria-hidden="true">${iconMarkup('search')}</span>
-    <input type="text" data-mcx-search-input="true" placeholder="${data.configs.searchPlaceholder}">
+    <input type="search" name="q" aria-label="Search products" data-mcx-search-input="true" placeholder="${data.configs.searchPlaceholder}">
     <span class="search-shortcut" aria-hidden="true">Ctrl K</span>
   `;
   mainBar.append(search);
@@ -335,9 +362,16 @@ function buildHeaderDom(data) {
     navItem.className = 'nav-item';
 
     const link = document.createElement('a');
-    link.className = `nav-link${index === 0 ? ' on' : ''}`;
+    const isActive = index === activeIndex;
+    link.className = `nav-link${isActive ? ' on' : ''}`;
     link.href = item.url;
     link.innerHTML = `${item.label}${item.groups.length ? iconMarkup('chevron') : ''}`;
+    if (isActive) link.setAttribute('aria-current', 'page');
+    if (item.groups.length) {
+      navItem.classList.add('has-mega');
+      link.setAttribute('aria-haspopup', 'true');
+      link.setAttribute('aria-expanded', 'false');
+    }
     navItem.append(link);
 
     const mega = buildMegaMenu(item);
@@ -362,6 +396,35 @@ function buildHeaderDom(data) {
   return shell;
 }
 
+function syncMegaOffsets(block) {
+  const navInner = block.querySelector('.nav-inner');
+  if (!navInner) return;
+
+  navInner.querySelectorAll('.nav-item.has-mega').forEach((item) => {
+    item.style.setProperty('--mega-shift', `${item.offsetLeft}px`);
+  });
+}
+
+function bindMegaState(block) {
+  const navItems = [...block.querySelectorAll('.nav-item.has-mega')];
+
+  const setItemOpen = (item, open) => {
+    item.classList.toggle('is-open', open);
+    item.querySelector('.nav-link')?.setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
+
+  navItems.forEach((item) => {
+    item.addEventListener('mouseenter', () => setItemOpen(item, true));
+    item.addEventListener('mouseleave', () => setItemOpen(item, false));
+    item.addEventListener('focusin', () => setItemOpen(item, true));
+    item.addEventListener('focusout', (event) => {
+      if (!item.contains(event.relatedTarget)) {
+        setItemOpen(item, false);
+      }
+    });
+  });
+}
+
 export default async function decorate(block) {
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/fragments/mcx-nav';
@@ -375,4 +438,7 @@ export default async function decorate(block) {
   }
 
   block.replaceChildren(buildHeaderDom(data));
+  bindMegaState(block);
+  syncMegaOffsets(block);
+  window.addEventListener('resize', () => syncMegaOffsets(block), { passive: true });
 }
