@@ -9,7 +9,7 @@ body:is(.mcx, .mcx-preview) main .mcx-editorial-cards .ed-grid {
 }
 
 body:is(.mcx, .mcx-preview) main .mcx-editorial-cards .ed-card {
-  cursor: none;
+  cursor: pointer;
   overflow: hidden;
   position: relative;
 }

@@ -8,6 +8,7 @@ body:is(.mcx, .mcx-preview) header .mcx-header .header {
   backdrop-filter: blur(28px) saturate(1.4);
   background: rgb(6 16 26 / 88%);
   border-bottom: 1px solid var(--rim);
+  visibility: visible;
   transition: box-shadow var(--t-mid);
 }
 

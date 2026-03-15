@@ -9,7 +9,7 @@ body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-tile {
   background: var(--surface-3);
   border: 1px solid var(--rim);
   border-radius: var(--r-xl);
-  cursor: none;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 10px;

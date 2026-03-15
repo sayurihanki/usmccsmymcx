@@ -44,6 +44,9 @@
           "...": "../blocks/fragment/_*.json#/definitions"
         },
         {
+          "...": "../blocks/guided-selling/_*.json#/definitions"
+        },
+        {
           "...": "../blocks/form-mccs-preferences/_*.json#/definitions"
         },
         {

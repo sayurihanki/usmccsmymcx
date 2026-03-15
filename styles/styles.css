@@ -10,71 +10,98 @@
  * governing permissions and limitations under the License.
  */
 
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow:wght@300;400;500;600&family=Rajdhani:wght@400;500;600;700&display=swap');
+
 /* stylelint-disable no-empty-source */
 :root, .dropin-design {
-  /* Editorial premium palette */
-  --green-900: #0a2918;
-  --green-800: #0f3d24;
-  --green-700: #155230;
-  --green-600: #1a6640;
-  --green-500: #1f7a4d;
-  --green-400: #26a067;
-  --green-300: #2ebe7a;
-  --green-200: #5fd49f;
-  --green-100: #a8edcc;
-  --green-50: #e8faf2;
-  --ink-950: #080c0a;
-  --ink-900: #0e1410;
-  --ink-800: #161d18;
-  --ink-700: #1f2b22;
-  --ink-600: #2d3d30;
-  --ink-500: #3d5342;
-  --ink-400: #5a7060;
-  --ink-300: #7f9985;
-  --ink-200: #b0c5b5;
-  --ink-100: #d8e5da;
-  --ink-50: #f2f7f3;
-  --gold: #c9a84c;
-  --gold-light: #e8c97a;
-  --cream: #faf8f3;
+  --gs-scarlet: #c1121f;
+  --gs-scarlet-dark: #8b0000;
+  --gs-scarlet-glow: rgb(193 18 31 / 20%);
+  --gs-gold: #c9a227;
+  --gs-gold-light: #e2c261;
+  --gs-gold-dim: rgb(201 162 39 / 12%);
+  --gs-bg: #060a0d;
+  --gs-s1: #0d1520;
+  --gs-s2: #111d2a;
+  --gs-s3: #192333;
+  --gs-s4: #1f2d3e;
+  --gs-text-primary: #f2ede5;
+  --gs-text-secondary: #8595a6;
+  --gs-text-muted: #3e4e60;
+  --gs-border: rgb(255 255 255 / 7%);
+  --gs-border-gold: rgb(201 162 39 / 22%);
+  --gs-font-display: "Bebas Neue", "Impact", sans-serif;
+  --gs-font-condensed: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --gs-font-tactical: "Rajdhani", "Barlow", sans-serif;
+  --gs-font-body: "Barlow", system-ui, sans-serif;
 
-  /* Primary brand token */
-  --main-color-accent: var(--green-400);
+  /* Legacy alias palette, remapped to the MCX tactical system */
+  --green-900: #4a0608;
+  --green-800: #6b0b12;
+  --green-700: var(--gs-scarlet-dark);
+  --green-600: #a10f1a;
+  --green-500: var(--gs-scarlet);
+  --green-400: #d4202e;
+  --green-300: #e63946;
+  --green-200: #ff9ca3;
+  --green-100: #ffd6d8;
+  --green-50: rgb(193 18 31 / 8%);
+  --ink-950: #030507;
+  --ink-900: var(--gs-bg);
+  --ink-800: #0a1118;
+  --ink-700: var(--gs-s1);
+  --ink-600: var(--gs-s2);
+  --ink-500: var(--gs-s3);
+  --ink-400: #506276;
+  --ink-300: #6f8294;
+  --ink-200: #9aabba;
+  --ink-100: #d5dbe2;
+  --ink-50: var(--gs-text-primary);
+  --gold: var(--gs-gold);
+  --gold-light: var(--gs-gold-light);
+  --cream: #0a1017;
+
+  --main-color-accent: var(--gs-scarlet);
 
   /* Adobe Commerce Dropin design tokens */
-  --color-brand-300: var(--ink-500);
-  --color-brand-500: var(--ink-700);
-  --color-brand-600: var(--ink-800);
-  --color-brand-700: var(--ink-900);
-  --color-neutral-50: #fff;
-  --color-neutral-100: var(--ink-50);
-  --color-neutral-200: #e8efe9;
-  --color-neutral-300: var(--ink-100);
-  --color-neutral-400: var(--ink-200);
-  --color-neutral-500: var(--ink-300);
-  --color-neutral-600: var(--ink-400);
-  --color-neutral-700: var(--ink-500);
-  --color-neutral-800: var(--ink-700);
-  --color-neutral-900: var(--ink-900);
-  --color-positive-200: var(--green-50);
-  --color-positive-500: var(--green-300);
-  --color-positive-800: var(--green-600);
-  --color-informational-200: #eeeffb;
-  --color-informational-500: #6978d9;
-  --color-informational-800: #5d6dd6;
-  --color-warning-200: #fdf3e9;
-  --color-warning-500: var(--gold-light);
-  --color-warning-800: var(--gold);
-  --color-alert-200: #ffebeb;
-  --color-alert-500: #db7070;
-  --color-alert-800: #c35050;
-  --color-button-active: var(--color-brand-700);
-  --color-button-focus: var(--color-neutral-400);
-  --color-button-hover: var(--color-brand-600);
-  --color-action-button-active: var(--color-neutral-50);
-  --color-action-button-hover: var(--color-neutral-300);
-  --color-opacity-16: rgb(255 255 255 / 16%);
-  --color-opacity-24: rgb(255 255 255 / 24%);
+  --color-brand-100: rgb(193 18 31 / 10%);
+  --color-brand-200: #6b0b12;
+  --color-brand-300: #8b0000;
+  --color-brand-400: #a10f1a;
+  --color-brand-500: #b91c1c;
+  --color-brand-600: var(--gs-scarlet);
+  --color-brand-700: #d4202e;
+  --color-brand-800: #e63946;
+  --color-brand-900: #ff9ca3;
+  --color-neutral-50: var(--gs-bg);
+  --color-neutral-100: var(--gs-s1);
+  --color-neutral-200: var(--gs-s2);
+  --color-neutral-300: var(--gs-s3);
+  --color-neutral-400: var(--gs-s4);
+  --color-neutral-500: #506276;
+  --color-neutral-600: #697b8f;
+  --color-neutral-700: var(--gs-text-secondary);
+  --color-neutral-800: #d5dbe2;
+  --color-neutral-900: var(--gs-text-primary);
+  --color-positive-200: rgb(52 198 120 / 12%);
+  --color-positive-500: #34c678;
+  --color-positive-800: #1f8e53;
+  --color-informational-200: rgb(110 153 255 / 10%);
+  --color-informational-500: #6e99ff;
+  --color-informational-800: #4d73d9;
+  --color-warning-200: rgb(201 162 39 / 12%);
+  --color-warning-500: var(--gs-gold-light);
+  --color-warning-800: var(--gs-gold);
+  --color-alert-200: rgb(193 18 31 / 12%);
+  --color-alert-500: #ff6b74;
+  --color-alert-800: #ff9aa0;
+  --color-button-active: var(--gs-scarlet);
+  --color-button-focus: rgb(193 18 31 / 35%);
+  --color-button-hover: var(--gs-scarlet-dark);
+  --color-action-button-active: #fff;
+  --color-action-button-hover: #fff;
+  --color-opacity-16: rgb(255 255 255 / 10%);
+  --color-opacity-24: rgb(255 255 255 / 20%);
   --grid-1-columns: 4;
   --grid-1-margins: 0;
   --grid-1-gutters: 16px;
@@ -90,16 +117,16 @@
   --grid-5-columns: 12;
   --grid-5-margins: 0;
   --grid-5-gutters: 24px;
-  --shape-border-radius-1: 3px;
+  --shape-border-radius-1: 4px;
   --shape-border-radius-2: 8px;
-  --shape-border-radius-3: 24px;
+  --shape-border-radius-3: 22px;
   --shape-border-width-1: 1px;
   --shape-border-width-2: 1.5px;
   --shape-border-width-3: 2px;
   --shape-border-width-4: 4px;
-  --shape-shadow-1: 0 0 16px 0 rgb(0 0 0 / 16%);
-  --shape-shadow-2: 0 2px 16px 0 rgb(0 0 0 / 16%);
-  --shape-shadow-3: 0 2px 3px 0 rgb(0 0 0 / 16%);
+  --shape-shadow-1: 0 10px 30px rgb(0 0 0 / 32%);
+  --shape-shadow-2: 0 18px 48px rgb(0 0 0 / 40%);
+  --shape-shadow-3: 0 6px 18px rgb(0 0 0 / 24%);
   --shape-icon-stroke-1: 1px;
   --shape-icon-stroke-2: 1.5px;
   --shape-icon-stroke-3: 2px;
@@ -117,79 +144,78 @@
   --spacing-huge: 120px;
   --spacing-xhuge: 144px;
   --spacing-xxhuge: 192px;
-  --type-base-font-family: "Plus Jakarta Sans", "DM Sans", "Sora", system-ui, sans-serif;
-  --type-display-font-family: "Syne", "Sora", var(--type-base-font-family);
+  --type-base-font-family: var(--gs-font-body);
+  --type-display-font-family: var(--gs-font-display);
   --font-display: var(--type-display-font-family);
-  --type-price-font-family: "Sora", "Syne", var(--type-base-font-family);
-  --type-price-default-font: normal normal 600 2.4rem/2.4rem var(--type-price-font-family);
-  --type-price-strong-font: normal normal 600 2.4rem/2.4rem var(--type-price-font-family);
-  --type-price-letter-spacing: -0.01em;
-  --type-display-1-font: normal normal 700 6rem/6.3rem var(--type-display-font-family);
-  --type-display-1-letter-spacing: -0.03em;
-  --type-display-2-font: normal normal 700 4.8rem/5.28rem var(--type-display-font-family);
-  --type-display-2-letter-spacing: -0.02em;
-  --type-display-3-font: normal normal 500 3.4rem/4.08rem var(--type-display-font-family);
-  --type-display-3-letter-spacing: -0.01em;
-  --type-headline-1-font: normal normal 400 2.4rem/3.12rem var(--type-display-font-family);
-  --type-headline-1-letter-spacing: 0;
-  --type-headline-2-default-font: normal normal 600 2rem/2.2rem var(--type-display-font-family);
-  --type-headline-2-default-letter-spacing: -0.01em;
-  --type-headline-2-strong-font: normal normal 700 2rem/2.2rem var(--type-display-font-family);
-  --type-headline-2-strong-letter-spacing: -0.02em;
-  --type-body-1-default-font: normal normal 500 1.8rem/2.88rem var(--type-base-font-family);
+  --font-body: var(--gs-font-body);
+  --font-condensed: var(--gs-font-condensed);
+  --font-tactical: var(--gs-font-tactical);
+  --type-price-font-family: var(--gs-font-condensed);
+  --type-price-default-font: normal normal 700 2.4rem/2.4rem var(--type-price-font-family);
+  --type-price-strong-font: normal normal 700 2.4rem/2.4rem var(--type-price-font-family);
+  --type-price-letter-spacing: 0.01em;
+  --type-display-1-font: normal normal 400 clamp(5.2rem, 8vw, 9.6rem)/0.88 var(--type-display-font-family);
+  --type-display-1-letter-spacing: 0.02em;
+  --type-display-2-font: normal normal 400 clamp(4rem, 5.5vw, 6.4rem)/0.9 var(--type-display-font-family);
+  --type-display-2-letter-spacing: 0.02em;
+  --type-display-3-font: normal normal 400 3.8rem/0.94 var(--type-display-font-family);
+  --type-display-3-letter-spacing: 0.02em;
+  --type-headline-1-font: normal normal 700 2.8rem/1.1 var(--gs-font-condensed);
+  --type-headline-1-letter-spacing: 0.05em;
+  --type-headline-2-default-font: normal normal 700 2rem/1.1 var(--gs-font-condensed);
+  --type-headline-2-default-letter-spacing: 0.08em;
+  --type-headline-2-strong-font: normal normal 700 2rem/1.1 var(--gs-font-condensed);
+  --type-headline-2-strong-letter-spacing: 0.08em;
+  --type-body-1-default-font: normal normal 500 1.6rem/2.7rem var(--type-base-font-family);
   --type-body-1-default-letter-spacing: 0;
-  --type-body-1-strong-font: normal normal 600 1.8rem/2.88rem var(--type-base-font-family);
+  --type-body-1-strong-font: normal normal 600 1.6rem/2.7rem var(--type-base-font-family);
   --type-body-1-strong-letter-spacing: 0;
-  --type-body-1-emphasized-font: normal normal 600 1.8rem/2.88rem var(--type-base-font-family);
+  --type-body-1-emphasized-font: normal normal 600 1.6rem/2.7rem var(--type-base-font-family);
   --type-body-1-emphasized-letter-spacing: 0;
-  --type-body-2-default-font: normal normal 500 1.6rem/2.56rem var(--type-base-font-family);
+  --type-body-2-default-font: normal normal 500 1.4rem/2.2rem var(--type-base-font-family);
   --type-body-2-default-letter-spacing: 0;
-  --type-body-2-strong-font: normal normal 600 1.6rem/2.56rem var(--type-base-font-family);
+  --type-body-2-strong-font: normal normal 600 1.4rem/2.2rem var(--type-base-font-family);
   --type-body-2-strong-letter-spacing: 0;
-  --type-body-2-emphasized-font: normal normal 600 1.6rem/2.56rem var(--type-base-font-family);
+  --type-body-2-emphasized-font: normal normal 600 1.4rem/2.2rem var(--type-base-font-family);
   --type-body-2-emphasized-letter-spacing: 0;
   --type-body-1-default-font-family: var(--type-base-font-family);
   --type-body-2-default-font-family: var(--type-base-font-family);
-  --type-button-1-font: normal normal 500 2rem/2.8rem var(--type-base-font-family);
-  --type-button-1-letter-spacing: 0.08em;
-  --type-button-2-font: normal normal 500 1.6rem/2.24rem var(--type-base-font-family);
-  --type-button-2-letter-spacing: 0.08em;
-  --type-details-caption-1-font: normal normal 500 1.4rem/2.1rem var(--type-base-font-family);
-  --type-details-caption-1-letter-spacing: 0.01em;
-  --type-details-caption-2-font: normal normal 500 1.4rem/2.1rem var(--type-base-font-family);
-  --type-details-caption-2-letter-spacing: 0.01em;
-  --type-details-overline-font: normal normal 500 1.2rem/1.68rem var(--type-base-font-family);
-  --type-details-overline-letter-spacing: 0.08em;
+  --type-button-1-font: normal normal 700 1.6rem/2rem var(--gs-font-condensed);
+  --type-button-1-letter-spacing: 0.14em;
+  --type-button-2-font: normal normal 700 1.4rem/1.8rem var(--gs-font-condensed);
+  --type-button-2-letter-spacing: 0.16em;
+  --type-details-caption-1-font: normal normal 600 1.2rem/1.8rem var(--gs-font-tactical);
+  --type-details-caption-1-letter-spacing: 0.08em;
+  --type-details-caption-2-font: normal normal 600 1.2rem/1.8rem var(--gs-font-tactical);
+  --type-details-caption-2-letter-spacing: 0.08em;
+  --type-details-overline-font: normal normal 700 1.1rem/1.7rem var(--gs-font-tactical);
+  --type-details-overline-letter-spacing: 0.22em;
 
   /* Additional tokens */
   --type-fixed-font-family: ui-monospace, "SFMono-Regular", menlo, consolas, "Liberation Mono", monospace, system-ui, sans-serif;
-  --background-color: var(--cream);
-  --nav-height: 6.4rem;
+  --background-color: var(--gs-bg);
+  --nav-height: 7.2rem;
+  --accent-1: var(--gs-scarlet);
+  --accent-2: var(--gs-scarlet-dark);
+  --accent-3: var(--gs-gold);
+  --shadow-glass: 0 18px 48px rgb(0 0 0 / 38%);
+  --shadow-glass-hover: 0 24px 60px rgb(0 0 0 / 46%);
+  --shadow-button: 0 8px 32px var(--gs-scarlet-glow);
+  --shadow-button-hover: 0 14px 44px rgb(193 18 31 / 45%);
+  --shadow-focus: 0 0 0 1px rgb(255 255 255 / 8%), 0 0 0 4px rgb(193 18 31 / 28%);
 
-  /* Accent & shadow tokens (derived from --main-color-accent) */
-  --accent-1: var(--main-color-accent);
-  --accent-2: var(--green-500);
-  --accent-3: var(--gold);
-  --shadow-glass: 0 8px 32px rgb(0 0 0 / 10%);
-  --shadow-glass-hover: 0 12px 40px rgb(0 0 0 / 14%);
-  --shadow-button: 0 4px 14px rgb(31 122 77 / 36%);
-  --shadow-button-hover: 0 6px 20px rgb(31 122 77 / 48%);
-  --shadow-focus: 0 0 0 3px var(--color-neutral-50), 0 0 0 5px rgb(46 190 122 / 45%);
-
-  /* Glassmorphic design system */
-  --glass-bg: rgb(255 255 255 / 58%);
-  --glass-bg-hover: rgb(255 255 255 / 72%);
-  --glass-bg-strong: rgb(255 255 255 / 84%);
-  --glass-border: rgb(255 255 255 / 74%);
-  --glass-border-subtle: rgb(15 61 36 / 12%);
+  --glass-bg: rgb(17 29 42 / 78%);
+  --glass-bg-hover: rgb(25 35 51 / 86%);
+  --glass-bg-strong: rgb(31 45 62 / 90%);
+  --glass-border: var(--gs-border);
+  --glass-border-subtle: var(--gs-border);
   --glass-blur: blur(24px);
-  --glass-blur-sm: blur(12px);
-  --glass-blur-xs: blur(8px);
-  --glass-saturate: saturate(160%);
+  --glass-blur-sm: blur(16px);
+  --glass-blur-xs: blur(10px);
+  --glass-saturate: saturate(140%);
 
-  /* Motion & easing */
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
   --transition-fast: 0.2s;
   --transition-medium: 0.4s;
   --transition-slow: 0.6s;
@@ -201,6 +227,7 @@ html, body {
 
 html {
   font-size: 62.5%;
+  color-scheme: dark;
 }
 
 body {
@@ -208,7 +235,10 @@ body {
   letter-spacing: var(--type-body-1-default-letter-spacing);
   margin: 0;
   color: var(--color-neutral-800);
-  background-color: var(--background-color);
+  background:
+    radial-gradient(circle at 20% 20%, rgb(193 18 31 / 12%), transparent 30%),
+    radial-gradient(circle at 85% 15%, rgb(201 162 39 / 8%), transparent 25%),
+    linear-gradient(180deg, #05080c 0%, var(--gs-bg) 22%, var(--gs-s1) 100%);
   display: grid;
   grid-template-rows: auto 1fr auto;
   grid-template-columns: 100%;
@@ -248,9 +278,18 @@ h3,
 h4,
 h5,
 h6 {
+  color: var(--color-neutral-900);
+  font-family: var(--type-display-font-family);
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   scroll-margin: 40px;
+  text-transform: uppercase;
+}
+
+h4,
+h5,
+h6 {
+  font-family: var(--font-condensed);
 }
 
 h1 {

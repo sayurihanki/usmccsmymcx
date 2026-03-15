@@ -6,7 +6,7 @@ body:is(.mcx, .mcx-preview) main .mcx-featured-collections .feat-layout {
 
 body:is(.mcx, .mcx-preview) main .mcx-featured-collections .feat-card {
   border-radius: var(--r-xl);
-  cursor: none;
+  cursor: pointer;
   overflow: hidden;
   position: relative;
 }

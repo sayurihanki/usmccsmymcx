@@ -228,6 +228,16 @@
           }
         },
         {
+          "title": "Guided Selling",
+          "id": "guided-selling",
+          "model": "guided-selling",
+          "plugins": {
+            "da": {
+              "type": "key-value-block"
+            }
+          }
+        },
+        {
           "title": "Form MCCS Preferences",
           "id": "form-mccs-preferences",
           "plugins": {

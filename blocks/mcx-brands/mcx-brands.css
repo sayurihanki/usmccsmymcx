@@ -33,7 +33,7 @@ body:is(.mcx, .mcx-preview) main .mcx-brands .brands-row {
 body:is(.mcx, .mcx-preview) main .mcx-brands .brand-pill {
   align-items: center;
   border-right: 1px solid var(--rim);
-  cursor: none;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   padding: 18px 12px;

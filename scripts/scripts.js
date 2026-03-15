@@ -1,5 +1,6 @@
 import {
   buildBlock,
+  getMetadata,
   loadHeader,
   loadFooter,
   decorateButtons,
@@ -24,16 +25,37 @@ import {
   IS_DA,
 } from './commerce.js';
 import { runExperimentation } from './experiment-loader.js';
+import { applyMcxExperienceFallback, hasMcxContentBlock } from './mcx-experience.js';
+import {
+  getMcxLibraryPreviewBlockName,
+  isMcxLibraryPreviewPath,
+} from './mcx-preview.js';
 
-const isMcxPage = () => document.body.classList.contains('mcx');
-const isMcxLibraryPreview = () => /\/(?:\.da\/library\/blocks|blocks)\/mcx-[^/]+\/?$/.test(window.location.pathname);
+const isMcxPage = () => (
+  document.body.classList.contains('mcx')
+  || hasMcxContentBlock(document.querySelector('main'))
+);
+const isMcxLibraryPreview = () => isMcxLibraryPreviewPath(window.location.pathname);
 const usesMcxExperience = () => isMcxPage() || isMcxLibraryPreview();
 
-/** Block name for current library preview path (e.g. "mcx-hero") or null. */
-const getLibraryPreviewBlockName = () => {
-  const match = window.location.pathname.match(/\/(?:\.da\/library\/blocks|library\/blocks)\/(mcx-[^/]+)\/?$/);
-  return match ? match[1] : null;
-};
+function ensureMetadata(name, content) {
+  if (!content || getMetadata(name)) return;
+  const meta = document.createElement('meta');
+  meta.name = name;
+  meta.content = content;
+  document.head.append(meta);
+}
+
+function applyMcxLibraryPreviewShell() {
+  if (!isMcxLibraryPreview()) return;
+
+  ensureMetadata('template', 'mcx-home');
+  ensureMetadata('theme', 'mcx');
+  ensureMetadata('nav', '/fragments/mcx-nav');
+  ensureMetadata('footer', '/fragments/mcx-footer');
+
+  document.body.classList.add('mcx', 'mcx-preview', 'mcx-home');
+}
 
 /**
  * Build default table rows for mcx-hero when shown on the block library preview
@@ -65,9 +87,6 @@ function getMcxHeroLibraryPreviewRows() {
     ['image', imgCell],
     ['primary-cta', primaryCtaCell],
     ['secondary-cta', secondaryCtaCell],
-    ['status-badge-1', 'SYS: MCX-2026'],
-    ['status-badge-2', 'STATUS: ACTIVE'],
-    ['status-badge-3', 'PATRON: AUTHORIZED'],
     ['stat-1-value', '20%+'],
     ['stat-1-label', 'Average Savings'],
     ['stat-2-value', '33M+'],
@@ -145,7 +164,7 @@ function buildAutoBlocks(main) {
     // Block library preview: if the doc has no block table, the page has no mcx-hero block.
     // Inject a section with mcx-hero and default content so the preview renders.
     if (usesMcxExperience() && isMcxLibraryPreview()) {
-      const blockName = getLibraryPreviewBlockName();
+      const blockName = getMcxLibraryPreviewBlockName(window.location.pathname);
       if (blockName === 'mcx-hero' && !main.querySelector('.mcx-hero')) {
         const section = document.createElement('div');
         const heroBlock = buildBlock('mcx-hero', getMcxHeroLibraryPreviewRows());
@@ -201,6 +220,8 @@ const experimentationConfig = {
  */
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
+  applyMcxLibraryPreviewShell();
+  applyMcxExperienceFallback(doc, ensureMetadata);
   decorateTemplateAndTheme();
   if (!isMcxPage() && isMcxLibraryPreview()) {
     document.body.classList.add('mcx-preview');

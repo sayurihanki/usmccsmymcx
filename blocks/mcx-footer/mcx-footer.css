@@ -2,6 +2,7 @@ body:is(.mcx, .mcx-preview) footer .mcx-footer .footer {
   background: var(--surface-1);
   border-top: 1px solid var(--rim);
   padding: 72px 48px 36px;
+  visibility: visible;
 }
 
 body:is(.mcx, .mcx-preview) footer .mcx-footer .foot-inner {

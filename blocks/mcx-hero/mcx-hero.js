@@ -6,8 +6,8 @@ import {
   parseFieldRows,
   cellText,
 } from '../../scripts/mcx-block-utils.js';
+import { isMcxLibraryPreviewPath } from '../../scripts/mcx-preview.js';
 
-const LIBRARY_PREVIEW_PATTERN = /\/(?:\.da\/library\/blocks|library\/blocks)\/mcx-hero\/?(\?|$)/;
 const STAT_KEYS = ['1', '2', '3', '4'];
 const LIBRARY_PREVIEW_DEFAULTS = {
   eyebrow: 'Spring Collection - 2026 - Tax-Free',
@@ -29,9 +29,6 @@ const LIBRARY_PREVIEW_DEFAULTS = {
     href: '#deals',
     text: 'View Deals',
   },
-  'status-badge-1': 'SYS: MCX-2026',
-  'status-badge-2': 'STATUS: ACTIVE',
-  'status-badge-3': 'PATRON: AUTHORIZED',
   'stat-1-value': '20%+',
   'stat-1-label': 'Average Savings',
   'stat-2-value': '33M+',
@@ -42,10 +39,7 @@ const LIBRARY_PREVIEW_DEFAULTS = {
   'stat-4-label': 'Store Locations',
 };
 
-const isLibraryPreview = () => {
-  const currentPath = window.location.pathname + (window.location.search || '?');
-  return LIBRARY_PREVIEW_PATTERN.test(currentPath);
-};
+const isLibraryPreview = () => isMcxLibraryPreviewPath(window.location.pathname);
 
 function createSvgArrow() {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -109,9 +103,6 @@ function getDefaultLibraryFields() {
       LIBRARY_PREVIEW_DEFAULTS['secondary-cta'].href,
       LIBRARY_PREVIEW_DEFAULTS['secondary-cta'].text,
     ),
-    'status-badge-1': createFieldCell(LIBRARY_PREVIEW_DEFAULTS['status-badge-1']),
-    'status-badge-2': createFieldCell(LIBRARY_PREVIEW_DEFAULTS['status-badge-2']),
-    'status-badge-3': createFieldCell(LIBRARY_PREVIEW_DEFAULTS['status-badge-3']),
     'stat-1-value': createFieldCell(LIBRARY_PREVIEW_DEFAULTS['stat-1-value']),
     'stat-1-label': createFieldCell(LIBRARY_PREVIEW_DEFAULTS['stat-1-label']),
     'stat-2-value': createFieldCell(LIBRARY_PREVIEW_DEFAULTS['stat-2-value']),
