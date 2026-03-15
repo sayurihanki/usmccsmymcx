@@ -624,6 +624,16 @@ function resolveFooterBlockName() {
   return document.body.matches('.mcx, .mcx-preview') ? 'mcx-footer' : 'footer';
 }
 
+function moveMcxAnnouncementBarToHeader(header) {
+  const main = document.querySelector('main');
+  const announcementSection = [...(main?.children || [])]
+    .find((section) => section.classList?.contains('mcx-announcement-bar-container'));
+  if (!announcementSection) return null;
+
+  header.prepend(announcementSection);
+  return announcementSection;
+}
+
 /**
  * Loads a block named 'header' into header
  * @param {Element} header header element
@@ -632,8 +642,13 @@ function resolveFooterBlockName() {
 async function loadHeader(header) {
   const usesMcxShell = document.body.matches('.mcx, .mcx-preview');
   const isMcxLibraryPreviewRoute = isMcxLibraryPreviewPath(window.location.pathname);
+  const authoredAnnouncementSection = usesMcxShell
+    ? moveMcxAnnouncementBarToHeader(header)
+    : null;
 
-  if (usesMcxShell && isMcxLibraryPreviewRoute) {
+  if (authoredAnnouncementSection) {
+    await loadSection(authoredAnnouncementSection);
+  } else if (usesMcxShell && isMcxLibraryPreviewRoute) {
     const announcementBlock = buildBlock('mcx-announcement-bar', [
       ['dismissible', 'true'],
       ['🎖 Free Shipping $50+'],
@@ -736,6 +751,7 @@ export {
   loadCSS,
   loadFooter,
   loadHeader,
+  moveMcxAnnouncementBarToHeader,
   resolveFooterBlockName,
   resolveHeaderBlockName,
   loadScript,

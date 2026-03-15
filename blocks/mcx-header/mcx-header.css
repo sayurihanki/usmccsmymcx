@@ -39,6 +39,14 @@ header .mcx-header {
   z-index: 900;
 }
 
+html {
+  scroll-padding-top: calc(var(--mcx-header-offset, 0px) + 16px);
+}
+
+body:is(.mcx, .mcx-preview) main :is(.section, [id]) {
+  scroll-margin-top: calc(var(--mcx-header-offset, 0px) + 16px);
+}
+
 header .mcx-header .header {
   backdrop-filter: blur(20px) saturate(1.3);
   background: var(--mcx-header-top-bg);
@@ -80,7 +88,7 @@ header .mcx-header .hdr-main {
   gap: 32px;
   min-height: 102px;
   position: relative;
-  z-index: 1;
+  z-index: 4;
 }
 
 header .mcx-header .hdr-main::after {
@@ -420,7 +428,7 @@ header .mcx-header .hdr-actions {
   flex: 0 0 auto;
   gap: 8px;
   position: relative;
-  z-index: 1;
+  z-index: 5;
 }
 
 header .mcx-header .hdr-act {
@@ -492,6 +500,11 @@ header .mcx-header .cart-dot[hidden] {
 header .mcx-header .hdr-storefront,
 header .mcx-header .hdr-account {
   position: relative;
+}
+
+header .mcx-header .hdr-storefront.is-open,
+header .mcx-header .hdr-account.is-open {
+  z-index: 6;
 }
 
 header .mcx-header .store-switcher-toggle {
@@ -743,7 +756,7 @@ header .mcx-header .nav-bar {
   overflow: visible;
   position: relative;
   scrollbar-width: none;
-  z-index: 2;
+  z-index: 3;
 }
 
 header .mcx-header .nav-bar::-webkit-scrollbar {

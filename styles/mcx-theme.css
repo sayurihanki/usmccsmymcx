@@ -70,6 +70,21 @@ body:is(.mcx, .mcx-preview) main {
   background: var(--void);
 }
 
+body:is(.mcx, .mcx-preview) header > .mcx-announcement-bar-container {
+  --mcx-band-gutter: clamp(16px, 1.8vw, 28px);
+
+  margin-left: calc(50% - 50vw + var(--mcx-band-gutter));
+  margin-right: calc(50% - 50vw + var(--mcx-band-gutter));
+  max-width: none;
+  width: calc(100vw - (var(--mcx-band-gutter) * 2));
+}
+
+body:is(.mcx, .mcx-preview) header > .mcx-announcement-bar-container > div {
+  margin: 0;
+  max-width: none;
+  padding: 0;
+}
+
 /* Let the top homepage band escape centered shells without feeling truly edge-to-edge. */
 body:is(.mcx, .mcx-preview) main > :is(
   .mcx-announcement-bar-container,
