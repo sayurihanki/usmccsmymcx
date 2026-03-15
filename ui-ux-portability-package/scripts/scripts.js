@@ -25,19 +25,6 @@ import {
 } from './commerce.js';
 import { runExperimentation } from './experiment-loader.js';
 
-function revealPageShell() {
-  if (window.hlx?.pageShellReady) {
-    window.hlx.pageShellReady();
-    return;
-  }
-
-  if (document.body) {
-    document.body.classList.add('appear');
-  }
-
-  document.documentElement.dataset.pageState = 'ready';
-}
-
 /**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
@@ -156,16 +143,8 @@ async function loadEager(doc) {
       console.error('Error initializing commerce configuration:', e);
       loadErrorPage(418);
     }
-    try {
-      const firstSection = main.querySelector('.section');
-      if (firstSection) {
-        await loadSection(firstSection, waitForFirstImage);
-      }
-    } finally {
-      revealPageShell();
-    }
-  } else {
-    revealPageShell();
+    document.body.classList.add('appear');
+    await loadSection(main.querySelector('.section'), waitForFirstImage);
   }
 
   try {
@@ -210,13 +189,9 @@ function loadDelayed() {
 }
 
 async function loadPage() {
-  try {
-    await loadEager(document);
-    await loadLazy(document);
-    loadDelayed();
-  } finally {
-    revealPageShell();
-  }
+  await loadEager(document);
+  await loadLazy(document);
+  loadDelayed();
 }
 
 // UE Editor support before page load

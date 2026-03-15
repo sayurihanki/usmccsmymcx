@@ -38,19 +38,6 @@ const isMcxPage = () => (
 const isMcxLibraryPreview = () => isMcxLibraryPreviewPath(window.location.pathname);
 const usesMcxExperience = () => isMcxPage() || isMcxLibraryPreview();
 
-function revealPageShell() {
-  if (window.hlx?.pageShellReady) {
-    window.hlx.pageShellReady();
-    return;
-  }
-
-  if (document.body) {
-    document.body.classList.add('appear');
-  }
-
-  document.documentElement.dataset.pageState = 'ready';
-}
-
 function ensureMetadata(name, content) {
   if (!content || getMetadata(name)) return;
   const meta = document.createElement('meta');
@@ -254,16 +241,8 @@ async function loadEager(doc) {
       if (!isMcxLibraryPreview()) loadErrorPage(418);
       else decorateMain(main);
     }
-    try {
-      const firstSection = main.querySelector('.section');
-      if (firstSection) {
-        await loadSection(firstSection, waitForFirstImage);
-      }
-    } finally {
-      revealPageShell();
-    }
-  } else {
-    revealPageShell();
+    document.body.classList.add('appear');
+    await loadSection(main.querySelector('.section'), waitForFirstImage);
   }
 
   try {
@@ -312,13 +291,9 @@ function loadDelayed() {
 }
 
 async function loadPage() {
-  try {
-    await loadEager(document);
-    await loadLazy(document);
-    loadDelayed();
-  } finally {
-    revealPageShell();
-  }
+  await loadEager(document);
+  await loadLazy(document);
+  loadDelayed();
 }
 
 // UE Editor support before page load
