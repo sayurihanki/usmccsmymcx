@@ -1,6 +1,7 @@
 import {
   cellText,
   createLink,
+  extractLink,
   parseFieldRows,
 } from '../../scripts/mcx-block-utils.js';
 
@@ -19,10 +20,11 @@ export default function decorate(block) {
     </div>
   `;
 
+  const ctaData = extractLink(fields.cta, 'Shop Clearance');
   const cta = createLink(
     'btn-promo reveal',
-    fields.cta?.querySelector('a')?.href || '#',
-    fields.cta?.querySelector('a')?.textContent.trim() || 'Shop Clearance',
+    ctaData.href,
+    ctaData.text || 'Shop Clearance',
   );
   cta.innerHTML = `
     <span>${cta.textContent}</span>

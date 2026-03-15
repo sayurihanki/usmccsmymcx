@@ -6,7 +6,14 @@ import {
 
 export default function decorate(block) {
   const items = getRows(block)
-    .map(([cell]) => cellText(cell))
+    .map(([firstCell, secondCell]) => {
+      const firstText = cellText(firstCell);
+      const secondText = cellText(secondCell);
+      if (firstText && secondText && !firstText.includes('|')) {
+        return `${firstText}|${secondText}`;
+      }
+      return firstText || secondText;
+    })
     .filter(Boolean);
 
   const wrap = document.createElement('div');

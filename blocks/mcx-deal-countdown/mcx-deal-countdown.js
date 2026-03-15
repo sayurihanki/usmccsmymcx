@@ -1,6 +1,7 @@
 import {
   cellText,
   createLink,
+  extractLink,
   parseFieldRows,
 } from '../../scripts/mcx-block-utils.js';
 
@@ -13,7 +14,8 @@ export default function decorate(block) {
   strip.dataset.endedText = cellText(fields['ended-text']) || 'Ended';
   strip.dataset.hideCtaWhenEnded = cellText(fields['hide-cta-when-ended']) || 'false';
 
-  const cta = createLink('btn-deal', fields.cta?.querySelector('a')?.href || '#', fields.cta?.querySelector('a')?.textContent.trim() || 'Shop All Deals');
+  const ctaData = extractLink(fields.cta, 'Shop All Deals');
+  const cta = createLink('btn-deal', ctaData.href, ctaData.text || 'Shop All Deals');
   cta.innerHTML = `
     <span>${cta.textContent}</span>
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">

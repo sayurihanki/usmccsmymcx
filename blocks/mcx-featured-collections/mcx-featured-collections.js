@@ -10,7 +10,7 @@ function buildCard(row, className) {
   const [imageCell, tagCell, titleCell, ctaCell] = row;
   const card = document.createElement('article');
   card.className = `feat-card ${className}`;
-  const ctaHref = ctaCell?.querySelector('a')?.href || '#';
+  const ctaData = extractLink(ctaCell, 'Shop Now');
 
   const picture = createPictureFromCell(imageCell, false, [{ media: '(min-width: 900px)', width: '1200' }, { width: '700' }]);
   if (picture) card.append(picture);
@@ -26,7 +26,7 @@ function buildCard(row, className) {
     <div class="feat-name">${cellText(titleCell)}</div>
   `;
 
-  const cta = createLink('feat-link', ctaHref, ctaCell?.querySelector('a')?.textContent.trim() || 'Shop Now');
+  const cta = createLink('feat-link', ctaData.href, ctaData.text || 'Shop Now');
   cta.innerHTML = `${cta.textContent} <span aria-hidden="true">&rarr;</span>`;
   body.append(cta);
   card.append(body);

@@ -60,6 +60,15 @@ body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-emoji {
   width: 58px;
 }
 
+body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-emoji picture,
+body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-emoji img {
+  border-radius: inherit;
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
 body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-tile:hover .cat-emoji,
 body:is(.mcx, .mcx-preview) main .mcx-category-grid .cat-tile:focus-visible .cat-emoji {
   background: var(--scarlet);

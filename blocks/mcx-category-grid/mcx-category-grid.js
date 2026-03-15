@@ -1,5 +1,6 @@
 import {
   cellText,
+  createPictureFromCell,
   extractLink,
   createLink,
   getRows,
@@ -18,14 +19,30 @@ export default function decorate(block) {
       return;
     }
 
-    const link = createLink('cat-tile reveal reveal-delay-1', linkCell?.querySelector('a')?.href || '#', '');
+    const linkData = extractLink(linkCell, `Shop ${cellText(nameCell)}`);
+    const link = createLink('cat-tile reveal reveal-delay-1', linkData.href, '');
     link.style.setProperty('--cat-delay', String(index % 4));
     link.className = `cat-tile reveal reveal-delay-${(index % 4) + 1}`;
-    link.innerHTML = `
-      <div class="cat-emoji">${cellText(iconCell)}</div>
-      <div class="cat-name">${cellText(nameCell)}</div>
-      <div class="cat-count">${cellText(countCell)}</div>
-    `;
+
+    const icon = document.createElement('div');
+    icon.className = 'cat-emoji';
+    const iconPicture = createPictureFromCell(iconCell, false, [{ width: '120' }]);
+    if (iconPicture) {
+      iconPicture.className = 'cat-emoji-art';
+      icon.append(iconPicture);
+    } else {
+      icon.textContent = cellText(iconCell) || '•';
+    }
+
+    const name = document.createElement('div');
+    name.className = 'cat-name';
+    name.textContent = cellText(nameCell);
+
+    const count = document.createElement('div');
+    count.className = 'cat-count';
+    count.textContent = cellText(countCell);
+
+    link.replaceChildren(icon, name, count);
     grid.append(link);
   });
 
