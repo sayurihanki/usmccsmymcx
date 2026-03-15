@@ -1,4 +1,18 @@
+import { tryRenderAemAssetsImage } from '@dropins/tools/lib/aem/assets.js';
+
 import { getMetadata, toClassName } from '../../scripts/aem.js';
+import {
+  fetchPlaceholders,
+  getProductLink,
+  getSearchContext,
+  rootLink,
+} from '../../scripts/commerce.js';
+
+const LIVE_SEARCH_PAGE_SIZE = 5;
+const LIVE_SEARCH_MIN_QUERY_LENGTH = 2;
+const LIVE_SEARCH_DEBOUNCE_MS = 90;
+
+let liveSearchCounter = 0;
 
 function iconMarkup(name) {
   const icons = {
@@ -22,6 +36,20 @@ function normalizePath(value = '/') {
     const path = String(value).trim().replace(/\/+$/, '');
     return path || '/';
   }
+}
+
+function getSafeAemAlias(product) {
+  const rawAlias = product?.urlKey || product?.sku || 'product-image';
+  return encodeURIComponent(rawAlias);
+}
+
+function getUniqueLiveSearchScope() {
+  if (window.crypto?.randomUUID) {
+    return `mcx-header-live-${window.crypto.randomUUID()}`;
+  }
+
+  liveSearchCounter += 1;
+  return `mcx-header-live-${liveSearchCounter}`;
 }
 
 function resolveActiveIndex(navItems) {
@@ -56,6 +84,49 @@ function createLogo() {
     </div>
   `;
   return link;
+}
+
+function createSearchForm(placeholder) {
+  const search = document.createElement('form');
+  search.className = 'hdr-search';
+  search.setAttribute('role', 'search');
+  search.setAttribute('action', rootLink('/search'));
+  search.setAttribute('method', 'get');
+  search.setAttribute('aria-expanded', 'false');
+  search.dataset.searchStatus = 'idle';
+
+  const icon = document.createElement('span');
+  icon.className = 'search-icon';
+  icon.setAttribute('aria-hidden', 'true');
+  icon.innerHTML = iconMarkup('search');
+
+  const input = document.createElement('input');
+  input.type = 'search';
+  input.name = 'q';
+  input.setAttribute('aria-label', 'Search products');
+  input.setAttribute('data-mcx-search-input', 'true');
+  input.placeholder = placeholder;
+
+  const shortcut = document.createElement('span');
+  shortcut.className = 'search-shortcut';
+  shortcut.setAttribute('aria-hidden', 'true');
+  shortcut.textContent = 'Ctrl K';
+
+  const results = document.createElement('div');
+  results.className = 'hdr-search-results';
+  results.setAttribute('aria-hidden', 'true');
+  results.setAttribute('aria-busy', 'false');
+  results.setAttribute('data-mcx-live-search', 'true');
+  results.setAttribute('hidden', '');
+
+  const liveRegion = document.createElement('div');
+  liveRegion.className = 'hdr-search-status';
+  liveRegion.setAttribute('role', 'status');
+  liveRegion.setAttribute('aria-live', 'polite');
+  liveRegion.setAttribute('aria-atomic', 'true');
+
+  search.append(icon, input, shortcut, results, liveRegion);
+  return search;
 }
 
 function getDefaultData() {
@@ -329,16 +400,7 @@ function buildHeaderDom(data) {
   mainBar.className = 'hdr-main';
   mainBar.append(createLogo());
 
-  const search = document.createElement('form');
-  search.className = 'hdr-search';
-  search.setAttribute('role', 'search');
-  search.action = '/search';
-  search.method = 'get';
-  search.innerHTML = `
-    <span class="search-icon" aria-hidden="true">${iconMarkup('search')}</span>
-    <input type="search" name="q" aria-label="Search products" data-mcx-search-input="true" placeholder="${data.configs.searchPlaceholder}">
-    <span class="search-shortcut" aria-hidden="true">Ctrl K</span>
-  `;
+  const search = createSearchForm(data.configs.searchPlaceholder);
   mainBar.append(search);
 
   const actions = document.createElement('div');
@@ -425,6 +487,323 @@ function bindMegaState(block) {
   });
 }
 
+function setOpenState(searchForm, resultsPanel, isOpen) {
+  searchForm.classList.toggle('is-open', isOpen);
+  if (isOpen) {
+    searchForm.classList.add('expanded');
+    searchForm.setAttribute('aria-expanded', 'true');
+    resultsPanel.classList.add('is-open');
+    resultsPanel.removeAttribute('hidden');
+    resultsPanel.setAttribute('aria-hidden', 'false');
+    return;
+  }
+
+  searchForm.classList.remove('expanded');
+  searchForm.setAttribute('aria-expanded', 'false');
+  resultsPanel.classList.remove('is-open');
+  resultsPanel.setAttribute('hidden', '');
+  resultsPanel.setAttribute('aria-hidden', 'true');
+}
+
+async function enhanceLiveSearch(block) {
+  const searchForm = block.querySelector('.hdr-search');
+  const searchInput = searchForm?.querySelector('[data-mcx-search-input]');
+  const resultsPanel = searchForm?.querySelector('[data-mcx-live-search]');
+  const liveRegion = searchForm?.querySelector('.hdr-search-status');
+
+  if (!searchForm || !searchInput || !resultsPanel || !liveRegion) {
+    return;
+  }
+
+  const initialQuery = new URLSearchParams(window.location.search).get('q');
+  if (initialQuery && !searchInput.value) {
+    searchInput.value = initialQuery;
+  }
+
+  const searchScope = getUniqueLiveSearchScope();
+  const resultsId = `${searchScope}-results`;
+  resultsPanel.id = resultsId;
+  resultsPanel.setAttribute('role', 'region');
+  resultsPanel.setAttribute('aria-label', 'Live search results');
+  searchInput.setAttribute('aria-controls', resultsId);
+  searchInput.setAttribute('aria-expanded', 'false');
+  searchInput.setAttribute('autocomplete', 'off');
+  searchInput.setAttribute('spellcheck', 'false');
+
+  let announceTimer;
+  let debounceTimer;
+  let latestTypedPhrase = '';
+  let dispatchedPhrase = '';
+  let latestResultCount = 0;
+  let viewAllWrapper;
+  let searchApi;
+  let initializePromise;
+
+  const announce = (message = '') => {
+    if (announceTimer) {
+      window.clearTimeout(announceTimer);
+    }
+
+    liveRegion.textContent = message;
+
+    if (!message) {
+      return;
+    }
+
+    announceTimer = window.setTimeout(() => {
+      liveRegion.textContent = '';
+    }, 1000);
+  };
+
+  const syncViewAllVisibility = () => {
+    if (!viewAllWrapper) {
+      return;
+    }
+
+    if (latestResultCount > 0) {
+      viewAllWrapper.removeAttribute('hidden');
+      return;
+    }
+
+    viewAllWrapper.setAttribute('hidden', '');
+  };
+
+  const closeResults = (message = '') => {
+    resultsPanel.setAttribute('aria-busy', 'false');
+    setOpenState(searchForm, resultsPanel, false);
+    searchInput.setAttribute('aria-expanded', 'false');
+
+    if (message) {
+      announce(message);
+    }
+  };
+
+  const ensureLiveSearch = async () => {
+    if (searchApi) {
+      return;
+    }
+
+    if (initializePromise) {
+      await initializePromise;
+      return;
+    }
+
+    initializePromise = (async () => {
+      searchForm.dataset.searchStatus = 'loading';
+
+      await import('../../scripts/initializers/search.js');
+
+      const [
+        { search },
+        { render },
+        { SearchResults },
+        { events },
+        labels,
+      ] = await Promise.all([
+        import('@dropins/storefront-product-discovery/api.js'),
+        import('@dropins/storefront-product-discovery/render.js'),
+        import('@dropins/storefront-product-discovery/containers/SearchResults.js'),
+        import('@dropins/tools/event-bus.js'),
+        fetchPlaceholders().catch(() => ({})),
+      ]);
+
+      searchApi = search;
+
+      const uiText = {
+        searchViewAll: labels.Global?.SearchViewAll || 'View all results',
+        resultFound: labels.Global?.SearchResultFound || 'result found',
+        resultsFound: labels.Global?.SearchResultsFound || 'results found',
+        searchError: labels.Global?.SearchError || 'Search is temporarily unavailable',
+        noResults: labels.Global?.SearchNoResults || 'No results found',
+        resultsClosed: labels.Global?.SearchResultsClosed || 'Search results closed',
+      };
+
+      render.render(SearchResults, {
+        scope: searchScope,
+        skeletonCount: LIVE_SEARCH_PAGE_SIZE,
+        imageWidth: 112,
+        imageHeight: 112,
+        routeProduct: ({ urlKey, sku }) => getProductLink(urlKey, sku),
+        onSearchResult: (results) => {
+          if (latestTypedPhrase !== dispatchedPhrase) {
+            return;
+          }
+
+          latestResultCount = Array.isArray(results) ? results.length : 0;
+          resultsPanel.setAttribute('aria-busy', 'false');
+          setOpenState(searchForm, resultsPanel, true);
+          searchInput.setAttribute('aria-expanded', 'true');
+          syncViewAllVisibility();
+
+          if (latestResultCount > 0) {
+            announce(`${latestResultCount} ${latestResultCount === 1 ? uiText.resultFound : uiText.resultsFound}`);
+            return;
+          }
+
+          announce(uiText.noResults);
+        },
+        slots: {
+          ProductImage: (ctx) => {
+            const { product, defaultImageProps } = ctx;
+            const anchorWrapper = document.createElement('a');
+            anchorWrapper.href = getProductLink(product.urlKey, product.sku);
+
+            if (!defaultImageProps?.src) {
+              ctx.replaceWith(anchorWrapper);
+              return;
+            }
+
+            tryRenderAemAssetsImage(ctx, {
+              alias: getSafeAemAlias(product),
+              imageProps: defaultImageProps,
+              wrapper: anchorWrapper,
+              params: {
+                width: defaultImageProps.width,
+                height: defaultImageProps.height,
+              },
+            });
+          },
+          Footer: (ctx) => {
+            viewAllWrapper = document.createElement('div');
+            viewAllWrapper.className = 'hdr-search-footer';
+
+            const viewAllLink = document.createElement('a');
+            viewAllLink.className = 'hdr-search-view-all';
+            viewAllLink.href = rootLink('/search');
+            viewAllLink.textContent = uiText.searchViewAll;
+
+            viewAllWrapper.append(viewAllLink);
+            viewAllWrapper.setAttribute('hidden', '');
+            ctx.appendChild(viewAllWrapper);
+
+            ctx.onChange((next) => {
+              viewAllLink.href = `${rootLink('/search')}?q=${encodeURIComponent(next.variables?.phrase || '')}`;
+            });
+
+            syncViewAllVisibility();
+          },
+        },
+      })(resultsPanel);
+
+      events.on('search/error', () => {
+        if (!latestTypedPhrase || latestTypedPhrase.length < LIVE_SEARCH_MIN_QUERY_LENGTH) {
+          return;
+        }
+
+        resultsPanel.setAttribute('aria-busy', 'false');
+        setOpenState(searchForm, resultsPanel, true);
+        searchInput.setAttribute('aria-expanded', 'true');
+        latestResultCount = 0;
+        syncViewAllVisibility();
+        announce(uiText.searchError);
+      }, { scope: searchScope });
+
+      searchForm.dataset.searchStatus = 'ready';
+    })().catch((error) => {
+      searchForm.dataset.searchStatus = 'fallback';
+      closeResults();
+      // eslint-disable-next-line no-console
+      console.error('mcx-header: live search unavailable. Falling back to submit-only mode.', error);
+      throw error;
+    });
+
+    await initializePromise;
+  };
+
+  const scheduleSearch = async (rawPhrase) => {
+    latestTypedPhrase = rawPhrase.trim();
+
+    if (debounceTimer) {
+      window.clearTimeout(debounceTimer);
+      debounceTimer = undefined;
+    }
+
+    if (!latestTypedPhrase) {
+      latestResultCount = 0;
+      syncViewAllVisibility();
+      if (searchApi) {
+        searchApi(null, { scope: searchScope });
+      }
+      closeResults();
+      return;
+    }
+
+    if (latestTypedPhrase.length < LIVE_SEARCH_MIN_QUERY_LENGTH) {
+      closeResults();
+      return;
+    }
+
+    try {
+      await ensureLiveSearch();
+    } catch {
+      return;
+    }
+
+    debounceTimer = window.setTimeout(() => {
+      if (!searchApi) {
+        return;
+      }
+
+      dispatchedPhrase = latestTypedPhrase;
+      latestResultCount = 0;
+      syncViewAllVisibility();
+      resultsPanel.setAttribute('aria-busy', 'true');
+      setOpenState(searchForm, resultsPanel, true);
+      searchInput.setAttribute('aria-expanded', 'true');
+
+      searchApi({
+        phrase: dispatchedPhrase,
+        pageSize: LIVE_SEARCH_PAGE_SIZE,
+        filter: [
+          { attribute: 'visibility', in: ['Search', 'Catalog, Search'] },
+        ],
+        context: getSearchContext(),
+      }, { scope: searchScope });
+    }, LIVE_SEARCH_DEBOUNCE_MS);
+  };
+
+  searchForm.addEventListener('submit', () => {
+    closeResults();
+  });
+
+  searchInput.addEventListener('input', (event) => {
+    scheduleSearch(event.target.value || '');
+  });
+
+  searchInput.addEventListener('focus', () => {
+    if (searchInput.value.trim().length >= LIVE_SEARCH_MIN_QUERY_LENGTH) {
+      scheduleSearch(searchInput.value);
+      return;
+    }
+
+    searchForm.classList.add('expanded');
+  });
+
+  searchInput.addEventListener('blur', () => {
+    if (!searchForm.classList.contains('is-open')) {
+      searchForm.classList.remove('expanded');
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    const targetSearchForm = event.target?.closest?.('.hdr-search');
+    if (targetSearchForm === searchForm) {
+      return;
+    }
+
+    closeResults();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || !searchForm.classList.contains('is-open')) {
+      return;
+    }
+
+    closeResults('Search results closed');
+    searchInput.blur();
+  });
+}
+
 export default async function decorate(block) {
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/fragments/mcx-nav';
@@ -439,6 +818,7 @@ export default async function decorate(block) {
 
   block.replaceChildren(buildHeaderDom(data));
   bindMegaState(block);
+  await enhanceLiveSearch(block);
   syncMegaOffsets(block);
   window.addEventListener('resize', () => syncMegaOffsets(block), { passive: true });
 }

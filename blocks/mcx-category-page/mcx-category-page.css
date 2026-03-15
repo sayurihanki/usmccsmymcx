@@ -1,3 +1,11 @@
+body:is(.mcx, .mcx-preview) main > .section.mcx-category-page-container > div,
+body:is(.mcx, .mcx-preview) main .mcx-category-page-wrapper {
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  width: 100%;
+}
+
 body:is(.mcx, .mcx-preview) main .mcx-category-page {
   margin: 0;
   max-width: none;

@@ -76,6 +76,7 @@ For `link` rows, the `parent` column must use the exact format `Item > Group`.
 - It looks for a `.mcx-nav-data` table inside the fragment.
 - If the fragment request fails or the fragment does not contain `.mcx-nav-data`, the block uses bundled default nav data.
 - Mega menus only render for items that have at least one authored `group`.
+- The visible MCX search field now lazy-loads Adobe Commerce live search and shows real product previews, images, and prices directly in the header dropdown.
 - The search field participates in the MCX keyboard shortcut from `scripts/mcx-ui.js`: `Ctrl+K` or `Cmd+K` focuses the input on MCX pages and MCX block-library previews.
 - The cart button is wired to the demo drawer via `data-mcx-cart-toggle`.
 - The first top-level nav item is marked active by default in the current implementation.

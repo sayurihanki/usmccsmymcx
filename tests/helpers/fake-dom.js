@@ -546,10 +546,14 @@ export class FakeDocument extends FakeEventTarget {
 }
 
 function createLocation(overrides = {}) {
+  const seedHref = overrides.href || 'https://example.com/';
+  const resolvedUrl = new URL(seedHref);
   const location = {
-    href: 'https://example.com/',
-    pathname: '/',
-    search: '',
+    href: resolvedUrl.href,
+    pathname: resolvedUrl.pathname,
+    search: resolvedUrl.search,
+    hostname: resolvedUrl.hostname,
+    origin: resolvedUrl.origin,
     toString() {
       return this.href;
     },
