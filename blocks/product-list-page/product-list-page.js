@@ -85,6 +85,18 @@ function formatMoney(value = 0, currency = 'USD') {
   }
 }
 
+function formatMoneyRange(minimum, maximum, currency = 'USD') {
+  if (minimum === undefined && maximum === undefined) {
+    return formatMoney(0, currency);
+  }
+
+  if (minimum === undefined || maximum === undefined || Number(minimum) === Number(maximum)) {
+    return formatMoney(minimum ?? maximum ?? 0, currency);
+  }
+
+  return `${formatMoney(minimum, currency)} - ${formatMoney(maximum, currency)}`;
+}
+
 function isColorValue(value = '') {
   return /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(value)
     || /^(rgb|hsl)a?\(/i.test(value)
@@ -141,6 +153,79 @@ function getProductFlags(product = {}) {
 
 function getProductTitle(product = {}) {
   return decodeHtml(product.name || '') || product.sku || 'MCX Product';
+}
+
+function getProductEyebrow(product = {}) {
+  return String(product?.sku || 'MCX Official')
+    .trim()
+    .replace(/[_-]+/g, ' ')
+    .slice(0, 32);
+}
+
+function getProductAvailabilityCopy(product = {}) {
+  if (!product.inStock) {
+    return {
+      label: 'Out of Stock',
+      detail: product.typename === 'ComplexProductView' ? 'Check product details for options' : '',
+    };
+  }
+
+  if (product.typename === 'ComplexProductView') {
+    return {
+      label: 'Select Options',
+      detail: 'Choose size or color on the product page',
+    };
+  }
+
+  return {
+    label: 'In Stock',
+    detail: '',
+  };
+}
+
+function getProductPriceSummary(product = {}) {
+  if (product.typename === 'ComplexProductView') {
+    const currency = product?.priceRange?.minimum?.regular?.amount?.currency
+      || product?.priceRange?.minimum?.final?.amount?.currency
+      || 'USD';
+    const minimumFinal = product?.priceRange?.minimum?.final?.amount?.value;
+    const minimumRegular = product?.priceRange?.minimum?.regular?.amount?.value;
+    const maximumFinal = product?.priceRange?.maximum?.final?.amount?.value;
+    const maximumRegular = product?.priceRange?.maximum?.regular?.amount?.value;
+    const discounted = minimumFinal !== undefined
+      && minimumRegular !== undefined
+      && maximumFinal !== undefined
+      && maximumRegular !== undefined
+      && (minimumFinal < minimumRegular || maximumFinal < maximumRegular);
+
+    return {
+      current: formatMoneyRange(
+        minimumFinal ?? minimumRegular,
+        maximumFinal ?? maximumRegular,
+        currency,
+      ),
+      original: discounted
+        ? formatMoneyRange(minimumRegular, maximumRegular, currency)
+        : '',
+      discounted,
+    };
+  }
+
+  const currency = product?.price?.regular?.amount?.currency
+    || product?.price?.final?.amount?.currency
+    || 'USD';
+  const current = product?.price?.final?.amount?.value
+    ?? product?.price?.regular?.amount?.value;
+  const original = product?.price?.regular?.amount?.value;
+  const discounted = current !== undefined
+    && original !== undefined
+    && Number(current) < Number(original);
+
+  return {
+    current: formatMoney(current ?? original ?? 0, currency),
+    original: discounted ? formatMoney(original, currency) : '',
+    discounted,
+  };
 }
 
 function getProductSwatches(product = {}) {
@@ -304,16 +389,26 @@ function renderResultInfo(target, payload, config) {
   const categoryLabel = getCategoryLabel(config);
   const prefix = phrase ? 'Results for' : 'Explore';
   const title = phrase ? `"${phrase}"` : categoryLabel;
+  const inlineCount = phrase
+    ? `${totalCount} ${getItemCopy(totalCount)} found`
+    : `${totalCount} ${getItemCopy(totalCount)} available`;
   const helper = phrase
     ? `${totalCount} ${getItemCopy(totalCount)} found across current MCX results`
     : `${totalCount} ${getItemCopy(totalCount)} available in ${categoryLabel}`;
+  const legacySummary = phrase
+    ? `${totalCount} results found for "${phrase}".`
+    : `${totalCount} results found in ${categoryLabel}.`;
 
   target.innerHTML = `
-    <div class="search__hero-heading">
-      <span class="search__hero-prefix">${escapeHtml(prefix)}</span>
-      <span class="search__hero-query">${escapeHtml(title)}</span>
+    <div class="search__hero-heading-wrap">
+      <div class="search__hero-heading">
+        <span class="search__hero-prefix">${escapeHtml(prefix)}</span>
+        <span class="search__hero-query">${escapeHtml(title)}</span>
+      </div>
+      <span class="search__hero-inline-count">${escapeHtml(inlineCount)}</span>
     </div>
     <p class="search__hero-count">${escapeHtml(helper)}</p>
+    <p class="search__legacy-summary">${escapeHtml(legacySummary)}</p>
   `;
 }
 
@@ -441,7 +536,10 @@ export default async function decorate(block) {
               <div class="search__active-filters" hidden></div>
             </div>
             <div class="search__hero-actions">
-              <div class="search__product-sort"></div>
+              <div class="search__sort-group">
+                <span class="search__sort-label">Sort By</span>
+                <div class="search__product-sort"></div>
+              </div>
               <div class="search__view-toggle" role="group" aria-label="Results view">
                 <button class="search__view-button is-active" type="button" data-view="grid" aria-pressed="true" aria-label="Grid view">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -721,6 +819,11 @@ export default async function decorate(block) {
           const wrapper = document.createElement('div');
           wrapper.className = 'product-discovery-product-title';
 
+          const eyebrow = document.createElement('div');
+          eyebrow.className = 'product-discovery-product-title__eyebrow';
+          eyebrow.textContent = getProductEyebrow(ctx.product);
+          wrapper.append(eyebrow);
+
           const title = document.createElement('a');
           title.className = 'product-discovery-product-title__link';
           title.href = getProductLink(ctx.product.urlKey, ctx.product.sku);
@@ -746,21 +849,75 @@ export default async function decorate(block) {
 
           ctx.replaceWith(wrapper);
         },
+        ProductPrice: (ctx) => {
+          const pricing = getProductPriceSummary(ctx.product);
+          const availability = getProductAvailabilityCopy(ctx.product);
+          const wrapper = document.createElement('div');
+          wrapper.className = 'product-discovery-product-pricing';
+
+          const stock = document.createElement('div');
+          stock.className = 'product-discovery-product-pricing__stock';
+          stock.textContent = availability.label;
+          wrapper.append(stock);
+
+          if (availability.detail) {
+            const stockDetail = document.createElement('div');
+            stockDetail.className = 'product-discovery-product-pricing__stock-detail';
+            stockDetail.textContent = availability.detail;
+            wrapper.append(stockDetail);
+          }
+
+          const priceRow = document.createElement('div');
+          priceRow.className = 'product-discovery-product-pricing__row';
+
+          const current = document.createElement('span');
+          current.className = 'product-discovery-product-price-current';
+          current.textContent = pricing.current;
+          priceRow.append(current);
+
+          if (pricing.original) {
+            const original = document.createElement('span');
+            original.className = 'product-discovery-product-price-original';
+            original.textContent = pricing.original;
+            priceRow.append(original);
+          }
+
+          if (pricing.discounted) {
+            const pill = document.createElement('span');
+            pill.className = 'product-discovery-product-price-pill';
+            pill.textContent = 'Sale';
+            priceRow.append(pill);
+          }
+
+          wrapper.append(priceRow);
+          ctx.replaceWith(wrapper);
+        },
         ProductActions: async (ctx) => {
           const actionsWrapper = document.createElement('div');
           actionsWrapper.className = 'product-discovery-product-actions';
 
+          const primaryAction = document.createElement('div');
+          primaryAction.className = 'product-discovery-product-actions__primary';
+
           const addToCartBtn = getAddToCartButton(ctx.product);
           addToCartBtn.className = 'product-discovery-product-actions__add-to-cart';
+          primaryAction.append(addToCartBtn);
+          actionsWrapper.append(primaryAction);
+
+          const utilityRail = document.createElement('div');
+          utilityRail.className = 'product-discovery-product-actions__utility-rail';
 
           const wishlistToggle = document.createElement('div');
-          wishlistToggle.classList.add('product-discovery-product-actions__wishlist-toggle');
+          wishlistToggle.classList.add(
+            'product-discovery-product-actions__wishlist-toggle',
+            'product-discovery-product-actions__utility',
+          );
           wishlistRender.render(WishlistToggle, {
             product: ctx.product,
             variant: 'tertiary',
           })(wishlistToggle);
 
-          actionsWrapper.append(addToCartBtn, wishlistToggle);
+          utilityRail.append(wishlistToggle);
 
           try {
             const { initializeRequisitionList } = await import('./requisition-list.js');
@@ -769,12 +926,16 @@ export default async function decorate(block) {
               labels,
             });
 
-            reqListContainer.classList.add('product-discovery-product-actions__requisition-list-names');
-            actionsWrapper.append(reqListContainer);
+            reqListContainer.classList.add(
+              'product-discovery-product-actions__requisition-list-names',
+              'product-discovery-product-actions__utility',
+            );
+            utilityRail.append(reqListContainer);
           } catch (error) {
             console.warn('Requisition list module not available:', error);
           }
 
+          actionsWrapper.append(utilityRail);
           ctx.replaceWith(actionsWrapper);
         },
       },
