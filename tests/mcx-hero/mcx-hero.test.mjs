@@ -344,6 +344,8 @@ test('mcx-hero renders authored content', async () => {
     assert.equal(hero.querySelector('.btn-hero')?.href, '#products');
     assert.equal(hero.querySelector('.btn-ghost')?.href, '#deals');
     assert.equal(hero.querySelector('.hero-photo')?.querySelector('img')?.alt, 'Marine Corps collection hero');
+    assert.equal(hero.querySelector('.hero-rank'), null);
+    assert.equal(hero.querySelector('.hero-scroll'), null);
 
     const heading = hero.querySelector('.hero-h1');
     assert.equal(heading?.children.length, 3);

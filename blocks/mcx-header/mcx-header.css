@@ -76,6 +76,11 @@ body:is(.mcx, .mcx-preview) header .mcx-header .hdr-search {
   flex: 1;
   max-width: 500px;
   position: relative;
+  transition: max-width var(--t-slow) var(--ease);
+}
+
+body:is(.mcx, .mcx-preview) header .mcx-header .hdr-search.expanded {
+  max-width: 660px;
 }
 
 body:is(.mcx, .mcx-preview) header .mcx-header .hdr-search input {
@@ -85,7 +90,7 @@ body:is(.mcx, .mcx-preview) header .mcx-header .hdr-search input {
   color: var(--text-bright);
   font-size: 13.5px;
   outline: none;
-  padding: 10px 72px 10px 16px;
+  padding: 10px 72px 10px 42px;
   transition: var(--t-mid) var(--ease);
   width: 100%;
 }
@@ -110,8 +115,8 @@ body:is(.mcx, .mcx-preview) header .mcx-header .search-shortcut {
 
 body:is(.mcx, .mcx-preview) header .mcx-header .search-icon {
   color: var(--text-dim);
+  left: 14px;
   pointer-events: none;
-  right: 48px;
 }
 
 body:is(.mcx, .mcx-preview) header .mcx-header .search-icon svg {

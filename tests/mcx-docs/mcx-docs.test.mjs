@@ -178,11 +178,11 @@ test('MCX product cards example keeps config rows and product row key-value cell
   const { title, rows } = await loadTable('docs/mcx-examples/mcx-product-cards.table.txt');
 
   assert.equal(title, 'mcx-product-cards');
-  ['label', 'title', 'view-link', 'tabs', 'default-tab'].forEach((field) => {
+  ['label', 'title', 'view-link'].forEach((field) => {
     assert.ok(hasField(rows, field), `product cards example is missing ${field}`);
   });
 
-  const productRows = rows.filter((row) => !['label', 'title', 'view-link', 'tabs', 'default-tab'].includes(row[0]));
+  const productRows = rows.filter((row) => !['label', 'title', 'view-link'].includes(row[0]));
   assert.ok(productRows.length >= 4);
   productRows.forEach((row) => {
     assert.equal(row.length, 4);

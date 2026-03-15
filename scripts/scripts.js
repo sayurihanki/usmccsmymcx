@@ -29,6 +29,56 @@ const isMcxPage = () => document.body.classList.contains('mcx');
 const isMcxLibraryPreview = () => /\/(?:\.da\/library\/blocks|blocks)\/mcx-[^/]+\/?$/.test(window.location.pathname);
 const usesMcxExperience = () => isMcxPage() || isMcxLibraryPreview();
 
+/** Block name for current library preview path (e.g. "mcx-hero") or null. */
+const getLibraryPreviewBlockName = () => {
+  const match = window.location.pathname.match(/\/(?:\.da\/library\/blocks|library\/blocks)\/(mcx-[^/]+)\/?$/);
+  return match ? match[1] : null;
+};
+
+/**
+ * Build default table rows for mcx-hero when shown on the block library preview
+ * and the doc has no block table. Returns a 2D array for buildBlock(blockName, rows).
+ * Uses safe DOM creation (no innerHTML) for image and link cells.
+ */
+function getMcxHeroLibraryPreviewRows() {
+  const imgCell = document.createElement('div');
+  const img = document.createElement('img');
+  img.src = 'https://images.unsplash.com/photo-1519415943484-9fa1873496d4?w=1200&q=80';
+  img.alt = 'Marine Corps collection hero';
+  imgCell.appendChild(img);
+  const primaryCtaCell = document.createElement('div');
+  const primaryLink = document.createElement('a');
+  primaryLink.href = '#products';
+  primaryLink.textContent = 'Shop Now';
+  primaryCtaCell.appendChild(primaryLink);
+  const secondaryCtaCell = document.createElement('div');
+  const secondaryLink = document.createElement('a');
+  secondaryLink.href = '#deals';
+  secondaryLink.textContent = 'View Deals';
+  secondaryCtaCell.appendChild(secondaryLink);
+  return [
+    ['eyebrow', 'Spring Collection - 2026 - Tax-Free'],
+    ['heading-line-1', 'OUTFITTED'],
+    ['heading-line-2', 'FOR THE'],
+    ['heading-line-3', 'mission & beyond'],
+    ['description', 'Serving Marines and their families since 1897. Premium brands, exclusive savings, and tax-free shopping - exclusively for those who serve.'],
+    ['image', imgCell],
+    ['primary-cta', primaryCtaCell],
+    ['secondary-cta', secondaryCtaCell],
+    ['status-badge-1', 'SYS: MCX-2026'],
+    ['status-badge-2', 'STATUS: ACTIVE'],
+    ['status-badge-3', 'PATRON: AUTHORIZED'],
+    ['stat-1-value', '20%+'],
+    ['stat-1-label', 'Average Savings'],
+    ['stat-2-value', '33M+'],
+    ['stat-2-label', 'Yearly Transactions'],
+    ['stat-3-value', 'Tax Free'],
+    ['stat-3-label', 'Exclusive Benefit'],
+    ['stat-4-value', '127+'],
+    ['stat-4-label', 'Store Locations'],
+  ];
+}
+
 /**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
@@ -91,6 +141,18 @@ function buildAutoBlocks(main) {
     }
 
     if (!usesMcxExperience() && !main.querySelector('.hero')) buildHeroBlock(main);
+
+    // Block library preview: if the doc has no block table, the page has no mcx-hero block.
+    // Inject a section with mcx-hero and default content so the preview renders.
+    if (usesMcxExperience() && isMcxLibraryPreview()) {
+      const blockName = getLibraryPreviewBlockName();
+      if (blockName === 'mcx-hero' && !main.querySelector('.mcx-hero')) {
+        const section = document.createElement('div');
+        const heroBlock = buildBlock('mcx-hero', getMcxHeroLibraryPreviewRows());
+        section.appendChild(heroBlock);
+        main.prepend(section);
+      }
+    }
   } catch (error) {
     console.error('Auto Blocking failed', error);
   }
@@ -155,7 +217,8 @@ async function loadEager(doc) {
       await loadCommerceEager();
     } catch (e) {
       console.error('Error initializing commerce configuration:', e);
-      loadErrorPage(418);
+      if (!isMcxLibraryPreview()) loadErrorPage(418);
+      else decorateMain(main);
     }
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);

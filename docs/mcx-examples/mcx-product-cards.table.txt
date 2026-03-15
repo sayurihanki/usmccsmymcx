@@ -2,8 +2,6 @@ mcx-product-cards
 label | Curated For You |  |
 title | NEW ARRIVALS |  |
 view-link | [View All Products](/products) |  |
-tabs | All Items|all, Apparel|apparel, Electronics|electronics, Footwear|footwear, Tactical|tactical, Sports|sports |  |
-default-tab | all |  |
 ![Tactical boot](https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=75) | Danner<br>Tachyon 8 Tactical Boot GTX | rating: 5<br>reviews: 248<br>price: 189.99<br>original: 239.99<br>chip: Save $50 | category: footwear<br>flags: New<br>emoji: 🥾<br>sizes: 8, 9, 10, 11, 12
 ![Sony headphones](https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=75) | Sony<br>WH-1000XM5 Noise Canceling Headphones | rating: 5<br>reviews: 1024<br>price: 279.99<br>original: 349.99<br>chip: Save $70 | category: electronics<br>flags: Sale<br>emoji: 🎧
 ![Under Armour vest](https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=500&q=75) | Under Armour<br>UA Storm ColdGear Reactor Vest | rating: 4<br>reviews: 187<br>price: 89.99<br>original: 120.00<br>chip: Save 25% | category: apparel<br>flags: MCX Exclusive, New<br>emoji: 🧥<br>sizes: XS, S, M, L, XL

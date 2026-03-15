@@ -4,6 +4,8 @@
 
 This runbook defines the authored composition for the MCX tactical homepage at `/index`, the shell fragments it depends on, and the copy-paste table files that content authors can use in DA.live.
 
+The shared storefront theme now follows the same guided-selling conventions across MCX and shopper-facing flows: dark-default surfaces, scoped block tokens, scarlet and gold accents, and tactical display and condensed typography.
+
 ## Page Metadata For `/index`
 
 Apply this metadata to the homepage document:
@@ -82,3 +84,5 @@ The repo now includes a full local preview harness:
 - `theme: mcx` is the switch that loads the MCX style package and shell.
 - Section styling for the category, product, and featured rows is controlled by the section metadata example files above.
 - `mcx-header` and `mcx-footer` are shell blocks. Authors should edit the fragment docs, not inline blocks on the homepage.
+- `mcx-hero` still accepts legacy `status-badge-*` rows for backward compatibility, but the redesigned hero no longer renders them. Do not add them to new docs.
+- `mcx-product-cards` still accepts legacy `tabs` and `default-tab` rows for backward compatibility, but the redesigned product grid no longer renders tabs. Do not add them to new docs.

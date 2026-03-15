@@ -19,33 +19,6 @@ function renderStars(value) {
   return `${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}`;
 }
 
-function buildTabs(config) {
-  const tabs = document.createElement('div');
-  tabs.className = 'prod-tabs reveal';
-
-  const items = (config.tabs || 'All Items|all')
-    .split(',')
-    .map((entry) => entry.trim())
-    .filter(Boolean)
-    .map((entry) => {
-      const [label, key] = entry.split('|').map((part) => part.trim());
-      return { label, key: key || label.toLowerCase() };
-    });
-
-  const defaultTab = (config['default-tab'] || items[0]?.key || 'all').trim();
-
-  items.forEach((item) => {
-    const button = document.createElement('button');
-    button.className = `ptab${item.key === defaultTab ? ' on' : ''}`;
-    button.dataset.tab = item.key;
-    button.type = 'button';
-    button.textContent = item.label;
-    tabs.append(button);
-  });
-
-  return tabs;
-}
-
 function buildCard(row) {
   const [imageCell, infoCell, metricsCell, configCell] = row;
   const details = parseLines(infoCell);
@@ -78,12 +51,12 @@ function buildCard(row) {
   if (picture) {
     picture.className = 'prod-img';
     imgZone.append(picture);
+  } else {
+    const placeholder = document.createElement('div');
+    placeholder.className = 'prod-img-ph';
+    placeholder.textContent = config.emoji || '◆';
+    imgZone.append(placeholder);
   }
-
-  const placeholder = document.createElement('div');
-  placeholder.className = 'prod-img-ph';
-  placeholder.textContent = config.emoji || '◆';
-  imgZone.append(placeholder);
 
   const flagWrap = document.createElement('div');
   flagWrap.className = 'prod-flags';
@@ -107,17 +80,12 @@ function buildCard(row) {
   love.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>';
   imgZone.append(love);
 
-  const quick = document.createElement('button');
-  quick.className = 'prod-quick';
-  quick.type = 'button';
-  quick.innerHTML = `
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-      <circle cx="12" cy="12" r="3"></circle>
-    </svg>
-    <span>Quick View</span>
-  `;
-  imgZone.append(quick);
+  const addToCart = document.createElement('button');
+  addToCart.className = 'prod-atc';
+  addToCart.type = 'button';
+  addToCart.setAttribute('aria-label', `Add ${name} to cart`);
+  addToCart.textContent = '+ Add to Cart';
+  imgZone.append(addToCart);
   card.append(imgZone);
 
   const info = document.createElement('div');
@@ -175,8 +143,6 @@ export default function decorate(block) {
 
     wrapper.append(head);
   }
-
-  wrapper.append(buildTabs(config));
 
   const grid = document.createElement('div');
   grid.className = 'prod-grid';

@@ -1,10 +1,5 @@
 const CART_STORAGE_KEY = 'mcx-demo-cart';
 
-function formatPrice(value) {
-  const amount = Number.parseFloat(value);
-  return Number.isNaN(amount) ? '$0.00' : `$${amount.toFixed(2)}`;
-}
-
 function getProductData(card) {
   return {
     brand: card.dataset.brand || '',
@@ -99,101 +94,6 @@ function createBackToTopButton() {
   return button;
 }
 
-function createCursor() {
-  if (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    return;
-  }
-
-  const dot = document.createElement('div');
-  dot.id = 'cursor-dot';
-  const ring = document.createElement('div');
-  ring.id = 'cursor-ring';
-  document.body.append(dot, ring);
-
-  let mouseX = 0;
-  let mouseY = 0;
-  let ringX = 0;
-  let ringY = 0;
-
-  document.addEventListener('mousemove', (event) => {
-    mouseX = event.clientX;
-    mouseY = event.clientY;
-    dot.style.left = `${mouseX}px`;
-    dot.style.top = `${mouseY}px`;
-  });
-
-  (function animateRing() {
-    ringX += (mouseX - ringX) * 0.12;
-    ringY += (mouseY - ringY) * 0.12;
-    ring.style.left = `${ringX}px`;
-    ring.style.top = `${ringY}px`;
-    window.requestAnimationFrame(animateRing);
-  }());
-
-  document.addEventListener('mouseover', (event) => {
-    if (event.target.closest('a, button, input, .prod-card, .cat-tile, .brand-pill, .soc')) {
-      document.body.classList.add('cursor-hover');
-    }
-  });
-
-  document.addEventListener('mouseout', (event) => {
-    if (event.target.closest('a, button, input, .prod-card, .cat-tile, .brand-pill, .soc')) {
-      document.body.classList.remove('cursor-hover');
-    }
-  });
-
-  document.addEventListener('mousedown', () => document.body.classList.add('cursor-click'));
-  document.addEventListener('mouseup', () => document.body.classList.remove('cursor-click'));
-}
-
-function createCartElements() {
-  const overlay = document.createElement('div');
-  overlay.className = 'drawer-overlay';
-  overlay.setAttribute('data-mcx-drawer-overlay', 'true');
-
-  const drawer = document.createElement('aside');
-  drawer.className = 'cart-drawer';
-  drawer.setAttribute('aria-hidden', 'true');
-  drawer.innerHTML = `
-    <div class="drawer-head">
-      <h3>Your Cart <span class="drawer-count" data-mcx-drawer-count="true">(0)</span></h3>
-      <button class="drawer-close" type="button" aria-label="Close cart drawer">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"></path></svg>
-      </button>
-    </div>
-    <div class="drawer-items" data-mcx-drawer-items="true"></div>
-    <div class="drawer-foot">
-      <div class="cart-subtotal">
-        <span>Subtotal</span>
-        <strong data-mcx-drawer-total="true">$0.00</strong>
-      </div>
-      <button class="btn-checkout" type="button">Checkout - Tax Free</button>
-      <button class="btn-continue" type="button">Continue Shopping</button>
-    </div>
-  `;
-
-  document.body.append(overlay, drawer);
-  return { overlay, drawer };
-}
-
-function createModalElements() {
-  const modalBg = document.createElement('div');
-  modalBg.className = 'modal-bg';
-  modalBg.setAttribute('aria-hidden', 'true');
-  modalBg.innerHTML = `
-    <div class="modal-box" role="dialog" aria-modal="true" aria-label="Quick view">
-      <div class="modal-img" data-mcx-modal-image="true">
-        <button class="modal-close" type="button" aria-label="Close quick view">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"></path></svg>
-        </button>
-      </div>
-      <div class="modal-content" data-mcx-modal-content="true"></div>
-    </div>
-  `;
-  document.body.append(modalBg);
-  return modalBg;
-}
-
 function updateCartCount(cart) {
   const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
   document.querySelectorAll('[data-mcx-cart-count]').forEach((node) => {
@@ -203,181 +103,18 @@ function updateCartCount(cart) {
       node.style.transform = '';
     }, 300);
   });
-
-  const drawerCount = document.querySelector('[data-mcx-drawer-count]');
-  if (drawerCount) drawerCount.textContent = `(${totalQty})`;
 }
 
-function renderCart(cart) {
-  const items = document.querySelector('[data-mcx-drawer-items]');
-  const total = document.querySelector('[data-mcx-drawer-total]');
-  if (!items || !total) return;
-
-  updateCartCount(cart);
-  total.textContent = formatPrice(cart.reduce((sum, item) => sum + (item.price * item.qty), 0));
-
-  if (!cart.length) {
-    items.replaceChildren(Object.assign(document.createElement('div'), {
-      className: 'mcx-empty-state',
-      textContent: 'CART IS EMPTY',
-    }));
-    return;
+function updateCart(cartRef, product) {
+  const existing = cartRef.items.find((item) => item.name === product.name);
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    cartRef.items.push({ ...product, qty: 1 });
   }
 
-  const fragment = document.createDocumentFragment();
-  cart.forEach((item, index) => {
-    const line = document.createElement('div');
-    line.className = 'cart-line';
-    line.innerHTML = `
-      <div class="cart-thumb"><div class="thumb-ph">${item.emoji}</div></div>
-      <div class="cart-meta">
-        <div class="cart-brand">${item.brand}</div>
-        <div class="cart-name">${item.name}</div>
-        <div class="cart-row">
-          <div class="cart-qty">
-            <button class="qty-btn" type="button" data-mcx-qty="${index}" data-mcx-delta="-1">-</button>
-            <span class="qty-val">${item.qty}</span>
-            <button class="qty-btn" type="button" data-mcx-qty="${index}" data-mcx-delta="1">+</button>
-          </div>
-          <span class="cart-price">${formatPrice(item.price * item.qty)}</span>
-        </div>
-      </div>
-    `;
-    fragment.append(line);
-  });
-  items.replaceChildren(fragment);
-}
-
-function initDrawer(cartRef) {
-  const { overlay, drawer } = createCartElements();
-  const closeButtons = [drawer.querySelector('.drawer-close'), drawer.querySelector('.btn-continue')];
-
-  function openCart() {
-    drawer.classList.add('open');
-    overlay.classList.add('on');
-    drawer.setAttribute('aria-hidden', 'false');
-  }
-
-  function closeCart() {
-    drawer.classList.remove('open');
-    overlay.classList.remove('on');
-    drawer.setAttribute('aria-hidden', 'true');
-  }
-
-  document.addEventListener('click', (event) => {
-    const toggle = event.target.closest('[data-mcx-cart-toggle]');
-    if (toggle) {
-      openCart();
-    }
-
-    if (event.target.closest('.drawer-overlay')) {
-      closeCart();
-    }
-
-    if (event.target.closest('.drawer-close') || event.target.closest('.btn-continue')) {
-      closeCart();
-    }
-
-    const qtyButton = event.target.closest('[data-mcx-qty]');
-    if (qtyButton) {
-      const index = Number.parseInt(qtyButton.dataset.mcxQty, 10);
-      const delta = Number.parseInt(qtyButton.dataset.mcxDelta, 10);
-      cartRef.items[index].qty = Math.max(0, cartRef.items[index].qty + delta);
-      if (cartRef.items[index].qty === 0) cartRef.items.splice(index, 1);
-      persistCart(cartRef.items);
-      renderCart(cartRef.items);
-    }
-  });
-
-  closeButtons.forEach((button) => button?.addEventListener('click', closeCart));
-  overlay.addEventListener('click', closeCart);
-
-  window.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') closeCart();
-  });
-
-  return { openCart, closeCart };
-}
-
-function initModal(cartRef) {
-  const modal = createModalElements();
-  const modalContent = modal.querySelector('[data-mcx-modal-content]');
-  const modalImage = modal.querySelector('[data-mcx-modal-image]');
-
-  function closeModal() {
-    modal.classList.remove('on');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
-
-  function addToCart(product) {
-    const existing = cartRef.items.find((item) => item.name === product.name);
-    if (existing) existing.qty += 1;
-    else cartRef.items.push({ ...product, qty: 1 });
-
-    persistCart(cartRef.items);
-    renderCart(cartRef.items);
-    showToast('Added to Cart!', product.name);
-    closeModal();
-  }
-
-  function openModal(card) {
-    const product = getProductData(card);
-    const { category, sizes: configuredSizes } = product;
-    modalImage.querySelector('img')?.remove();
-
-    if (product.image) {
-      const image = document.createElement('img');
-      image.alt = product.name;
-      image.src = product.image;
-      modalImage.prepend(image);
-    }
-
-    let sizes = configuredSizes;
-    if (!sizes.length && ['apparel', 'footwear'].includes(category)) {
-      sizes = ['XS', 'S', 'M', 'L', 'XL'];
-    }
-
-    modalContent.innerHTML = `
-      <div class="modal-brand">${product.brand}</div>
-      <div class="modal-name">${product.name}</div>
-      <div class="modal-stars">
-        <span style="color: var(--gold)">${'★'.repeat(Math.round(Number.parseFloat(product.rating) || 5))}</span>
-        <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim)">${product.reviews} reviews</span>
-      </div>
-      <div class="modal-price">${formatPrice(product.price)}${product.original ? `<span>${formatPrice(product.original)}</span>` : ''}</div>
-      ${product.chip ? `<div class="p-chip">${product.chip}</div>` : ''}
-      <div class="modal-desc">Premium quality from a trusted brand - available tax-free exclusively for authorized MCX patrons. Ships in 3 to 5 business days or pick up at your nearest MCX location.</div>
-      ${sizes.length ? `<div><div class="sec-label">Select Size</div><div class="modal-sizes">${sizes.map((size, index) => `<button class="size-btn${index === 2 ? ' on' : ''}" type="button">${size}</button>`).join('')}</div></div>` : ''}
-      <button class="modal-atc" type="button">Add to Cart - ${formatPrice(product.price)}</button>
-      <div style="font-family: var(--font-mono); font-size: 9.5px; color: var(--text-dim); text-align: center; letter-spacing: 0.12em;">TAX-FREE - FREE SHIP $50+ - EASY RETURNS</div>
-    `;
-
-    modal.querySelector('.modal-atc')?.addEventListener('click', () => addToCart(product), { once: true });
-    modal.querySelectorAll('.size-btn').forEach((button) => {
-      button.addEventListener('click', () => {
-        modal.querySelectorAll('.size-btn').forEach((node) => node.classList.remove('on'));
-        button.classList.add('on');
-      });
-    });
-
-    modal.classList.add('on');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    modal.querySelector('.modal-close')?.focus();
-  }
-
-  modal.addEventListener('click', (event) => {
-    if (event.target === modal || event.target.closest('.modal-close')) {
-      closeModal();
-    }
-  });
-
-  window.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') closeModal();
-  });
-
-  return { openModal, closeModal };
+  persistCart(cartRef.items);
+  updateCartCount(cartRef.items);
 }
 
 function initScrollEffects(backToTop) {
@@ -423,24 +160,6 @@ function initHeroDots() {
   });
 
   window.setInterval(() => activate((current + 1) % dots.length), 4500);
-}
-
-function initTabs() {
-  document.querySelectorAll('.mcx-product-cards').forEach((block) => {
-    const buttons = [...block.querySelectorAll('.ptab')];
-    const cards = [...block.querySelectorAll('.prod-card')];
-    buttons.forEach((button) => {
-      button.addEventListener('click', () => {
-        buttons.forEach((node) => node.classList.remove('on'));
-        button.classList.add('on');
-        const category = button.dataset.tab;
-        cards.forEach((card) => {
-          const match = category === 'all' || card.dataset.cat === category;
-          card.style.display = match ? '' : 'none';
-        });
-      });
-    });
-  });
 }
 
 function initCountdown() {
@@ -497,12 +216,31 @@ function initCountdown() {
 function initSearchShortcut() {
   const input = document.querySelector('[data-mcx-search-input]');
   if (!input) return;
+  const searchWrap = input.closest('.hdr-search');
 
   document.addEventListener('keydown', (event) => {
     if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
       event.preventDefault();
       input.focus();
+      searchWrap?.classList.add('expanded');
     }
+  });
+
+  input.addEventListener('focus', () => {
+    searchWrap?.classList.add('expanded');
+  });
+
+  input.addEventListener('blur', () => {
+    searchWrap?.classList.remove('expanded');
+  });
+}
+
+function initNavState() {
+  document.querySelectorAll('.mcx-header .nav-link').forEach((link) => {
+    link.addEventListener('click', () => {
+      document.querySelectorAll('.mcx-header .nav-link').forEach((node) => node.classList.remove('on'));
+      link.classList.add('on');
+    });
   });
 }
 
@@ -516,37 +254,44 @@ function initNewsletter() {
   });
 }
 
-function initProductInteractions(modalApi, cartRef) {
+function initProductInteractions(cartRef) {
   const cards = getCards();
+  cartRef.items = readCart(cards);
+  persistCart(cartRef.items);
+  updateCartCount(cartRef.items);
 
   document.addEventListener('click', (event) => {
-    const quickButton = event.target.closest('.prod-quick');
-    if (quickButton) {
-      const card = quickButton.closest('.prod-card');
-      if (card) modalApi.openModal(card);
-      return;
-    }
-
     const loveButton = event.target.closest('.prod-love');
     if (loveButton) {
+      event.preventDefault?.();
       loveButton.classList.toggle('loved');
       const card = loveButton.closest('.prod-card');
       showToast(
-        loveButton.classList.contains('loved') ? 'Saved to Wishlist' : 'Removed from Wishlist',
+        loveButton.classList.contains('loved') ? 'Saved to Wishlist ♥' : 'Removed from Wishlist',
         card?.dataset.name || '',
         loveButton.classList.contains('loved') ? 'red' : 'green',
       );
       return;
     }
 
-    const card = event.target.closest('.prod-card');
-    if (card && !event.target.closest('.prod-love')) {
-      modalApi.openModal(card);
+    const addButton = event.target.closest('.prod-atc');
+    if (addButton) {
+      event.preventDefault?.();
+      const card = addButton.closest('.prod-card');
+      if (!card) return;
+      const product = getProductData(card);
+      const originalText = addButton.dataset.originalLabel || addButton.textContent;
+      addButton.dataset.originalLabel = originalText;
+      addButton.textContent = '✓ Added!';
+      addButton.classList.add('is-added');
+      updateCart(cartRef, product);
+      showToast('Added to Cart!', product.name);
+      window.setTimeout(() => {
+        addButton.textContent = originalText;
+        addButton.classList.remove('is-added');
+      }, 2200);
     }
   });
-
-  cartRef.items = readCart(cards);
-  persistCart(cartRef.items);
 }
 
 export default function initMcxUi() {
@@ -555,18 +300,13 @@ export default function initMcxUi() {
   const cartRef = { items: [] };
   const backToTop = createBackToTopButton();
   createToastStack();
-  createCursor();
-
-  initDrawer(cartRef);
-  const modalApi = initModal(cartRef);
 
   initRevealObserver();
   initScrollEffects(backToTop);
   initHeroDots();
-  initTabs();
   initCountdown();
   initSearchShortcut();
+  initNavState();
   initNewsletter();
-  initProductInteractions(modalApi, cartRef);
-  renderCart(cartRef.items);
+  initProductInteractions(cartRef);
 }

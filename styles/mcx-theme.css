@@ -1,44 +1,44 @@
 body:is(.mcx, .mcx-preview) {
-  --scarlet: #c1121f;
-  --scarlet-deep: #8b000d;
-  --scarlet-bright: #e8172a;
-  --scarlet-glow: rgb(193 18 31 / 18%);
+  --scarlet: var(--gs-scarlet);
+  --scarlet-deep: var(--gs-scarlet-dark);
+  --scarlet-bright: #e63946;
+  --scarlet-glow: var(--gs-scarlet-glow);
   --scarlet-glow2: rgb(193 18 31 / 8%);
-  --gold: #c9a227;
-  --gold-lt: #e4c265;
-  --gold-dim: rgb(201 162 39 / 12%);
-  --gold-border: rgb(201 162 39 / 22%);
-  --teal: #00c4a7;
-  --teal-dim: rgb(0 196 167 / 8%);
-  --void: #040810;
-  --ink: #06101a;
-  --surface-1: #080f1b;
-  --surface-2: #0c1623;
-  --surface-3: #111e2e;
-  --surface-4: #172437;
-  --surface-5: #1e2f42;
-  --rim: rgb(255 255 255 / 5.5%);
-  --rim-gold: rgb(201 162 39 / 18%);
-  --text-bright: #f0eae0;
-  --text-body: #a8b8ca;
-  --text-dim: #4a5d72;
+  --gold: var(--gs-gold);
+  --gold-lt: var(--gs-gold-light);
+  --gold-dim: var(--gs-gold-dim);
+  --gold-border: var(--gs-border-gold);
+  --teal: #34c678;
+  --teal-dim: rgb(52 198 120 / 10%);
+  --void: var(--gs-bg);
+  --ink: var(--gs-s1);
+  --surface-1: var(--gs-s1);
+  --surface-2: var(--gs-s2);
+  --surface-3: var(--gs-s3);
+  --surface-4: var(--gs-s4);
+  --surface-5: #263446;
+  --rim: var(--gs-border);
+  --rim-gold: var(--gs-border-gold);
+  --text-bright: var(--gs-text-primary);
+  --text-body: var(--gs-text-secondary);
+  --text-dim: var(--gs-text-muted);
   --text-ghost: rgb(255 255 255 / 4%);
-  --font-hero: "Big Shoulders Display", sans-serif;
-  --font-ui: "Barlow Condensed", sans-serif;
-  --font-body: "DM Sans", sans-serif;
-  --font-mono: "Share Tech Mono", monospace;
-  --r-sm: 3px;
-  --r-md: 8px;
-  --r-lg: 14px;
-  --r-xl: 22px;
-  --r-pill: 100px;
-  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --font-hero: var(--gs-font-display);
+  --font-ui: var(--gs-font-condensed);
+  --font-body: var(--gs-font-body);
+  --font-mono: var(--gs-font-tactical);
+  --r-sm: var(--gs-r-sm);
+  --r-md: var(--gs-r-md);
+  --r-lg: var(--gs-r-lg);
+  --r-xl: var(--gs-r-xl);
+  --r-pill: var(--gs-r-pill);
+  --ease: var(--gs-ease);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --t-fast: 0.18s;
   --t-mid: 0.32s;
   --t-slow: 0.55s;
-  --shadow-card: 0 16px 48px rgb(0 0 0 / 55%);
-  --shadow-red: 0 0 32px rgb(193 18 31 / 30%), 0 8px 24px rgb(193 18 31 / 15%);
+  --shadow-card: 0 16px 48px rgb(0 0 0 / 45%);
+  --shadow-red: 0 0 32px rgb(193 18 31 / 28%), 0 8px 24px rgb(193 18 31 / 16%);
   --shadow-gold: 0 0 24px rgb(201 162 39 / 22%);
 
   background: var(--void);
@@ -46,7 +46,7 @@ body:is(.mcx, .mcx-preview) {
   display: block;
   font-family: var(--font-body);
   overflow-x: hidden;
-  cursor: none;
+  cursor: auto;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -91,7 +91,7 @@ body:is(.mcx, .mcx-preview) textarea {
 body:is(.mcx, .mcx-preview) button {
   background: none;
   border: 0;
-  cursor: none;
+  cursor: pointer;
   padding: 0;
 }
 

@@ -221,17 +221,14 @@ function parseNavData(main) {
 }
 
 function createActionButton(kind, label, href = '#') {
-  const isLink = kind === 'signin';
+  const linkKinds = new Set(['stores', 'wishlist', 'cart', 'signin']);
+  const isLink = linkKinds.has(kind);
   const element = document.createElement(isLink ? 'a' : 'button');
   element.className = `hdr-act${kind === 'signin' ? ' hdr-signin' : ''}`;
   if (isLink) {
     element.href = href || '#';
   } else {
     element.type = 'button';
-  }
-
-  if (kind === 'cart') {
-    element.setAttribute('data-mcx-cart-toggle', 'true');
   }
 
   let iconName = kind;
@@ -311,8 +308,8 @@ function buildHeaderDom(data) {
   const search = document.createElement('div');
   search.className = 'hdr-search';
   search.innerHTML = `
-    <input type="text" data-mcx-search-input="true" placeholder="${data.configs.searchPlaceholder}">
     <span class="search-icon" aria-hidden="true">${iconMarkup('search')}</span>
+    <input type="text" data-mcx-search-input="true" placeholder="${data.configs.searchPlaceholder}">
     <span class="search-shortcut" aria-hidden="true">Ctrl K</span>
   `;
   mainBar.append(search);
@@ -320,9 +317,9 @@ function buildHeaderDom(data) {
   const actions = document.createElement('div');
   actions.className = 'hdr-actions';
   actions.append(
-    createActionButton('stores', 'Stores'),
-    createActionButton('wishlist', ''),
-    createActionButton('cart', ''),
+    createActionButton('stores', 'Stores', '/stores'),
+    createActionButton('wishlist', '', '/wishlist'),
+    createActionButton('cart', '', '/cart'),
     createActionButton('signin', data.configs.signInLabel, data.configs.signInUrl),
   );
   mainBar.append(actions);

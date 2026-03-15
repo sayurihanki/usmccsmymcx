@@ -1,38 +1,3 @@
-body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 36px;
-}
-
-body:is(.mcx, .mcx-preview) main .mcx-product-cards .ptab {
-  background: var(--surface-3);
-  border: 1px solid var(--rim);
-  border-radius: var(--r-pill);
-  color: var(--text-dim);
-  cursor: none;
-  font-family: var(--font-ui);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  padding: 8px 20px;
-  text-transform: uppercase;
-  transition: var(--t-fast);
-}
-
-body:is(.mcx, .mcx-preview) main .mcx-product-cards .ptab:hover,
-body:is(.mcx, .mcx-preview) main .mcx-product-cards .ptab:focus-visible {
-  border-color: rgb(255 255 255 / 10%);
-  color: var(--text-body);
-}
-
-body:is(.mcx, .mcx-preview) main .mcx-product-cards .ptab.on {
-  background: var(--scarlet);
-  border-color: transparent;
-  box-shadow: var(--shadow-red);
-  color: #fff;
-}
-
 body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-grid {
   display: grid;
   gap: 18px;
@@ -43,7 +8,7 @@ body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-card {
   background: var(--surface-2);
   border: 1px solid var(--rim);
   border-radius: var(--r-xl);
-  cursor: none;
+  cursor: default;
   overflow: hidden;
   position: relative;
   transition: transform var(--t-mid), border-color var(--t-mid), box-shadow var(--t-mid), opacity 0.25s, display 0.25s;
@@ -135,7 +100,7 @@ body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-love {
   border: 1px solid var(--rim);
   border-radius: 50%;
   color: var(--text-dim);
-  cursor: none;
+  cursor: pointer;
   display: flex;
   height: 36px;
   justify-content: center;
@@ -160,12 +125,16 @@ body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-love.loved {
   color: var(--scarlet);
 }
 
+body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-love.loved svg {
+  fill: currentcolor;
+}
+
 body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-card:hover .prod-love,
 body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-card:focus-within .prod-love {
   opacity: 1;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-quick {
+body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-atc {
   align-items: center;
   background: var(--scarlet);
   color: #fff;
@@ -173,7 +142,6 @@ body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-quick {
   font-family: var(--font-ui);
   font-size: 12.5px;
   font-weight: 700;
-  gap: 8px;
   inset: auto 0 0;
   justify-content: center;
   letter-spacing: 0.15em;
@@ -187,14 +155,20 @@ body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-quick {
   z-index: 3;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-card .prod-quick:hover,
-body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-card .prod-quick:focus-visible {
+body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-card .prod-atc:hover,
+body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-card .prod-atc:focus-visible {
   background: var(--scarlet-bright);
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-card:hover .prod-quick,
-body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-card:focus-within .prod-quick {
+body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-card:hover .prod-atc,
+body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-card:focus-within .prod-atc {
   transform: translateY(0);
+}
+
+body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-atc.is-added,
+body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-card .prod-atc.is-added:hover,
+body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-card .prod-atc.is-added:focus-visible {
+  background: #166534;
 }
 
 body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-info {

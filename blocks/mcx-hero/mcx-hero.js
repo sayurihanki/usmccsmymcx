@@ -8,7 +8,6 @@ import {
 } from '../../scripts/mcx-block-utils.js';
 
 const LIBRARY_PREVIEW_PATTERN = /\/(?:\.da\/library\/blocks|library\/blocks)\/mcx-hero\/?(\?|$)/;
-const STATUS_BADGE_KEYS = ['status-badge-1', 'status-badge-2', 'status-badge-3'];
 const STAT_KEYS = ['1', '2', '3', '4'];
 const LIBRARY_PREVIEW_DEFAULTS = {
   eyebrow: 'Spring Collection - 2026 - Tax-Free',
@@ -140,21 +139,6 @@ function appendHeadingLine(heading, className, text) {
   heading.append(line);
 }
 
-function createStatusBadges(fields) {
-  const rank = document.createElement('div');
-  rank.className = 'hero-rank';
-
-  STATUS_BADGE_KEYS.forEach((key) => {
-    const text = cellText(fields[key]);
-    if (!text) return;
-    const badge = document.createElement('span');
-    badge.textContent = text;
-    rank.append(badge);
-  });
-
-  return rank.children.length ? rank : null;
-}
-
 function createEyebrow(text) {
   if (!text) return null;
 
@@ -215,18 +199,6 @@ function createHeroNavigation() {
   return heroNav;
 }
 
-function createHeroScroll() {
-  const scroll = document.createElement('div');
-  scroll.className = 'hero-scroll';
-
-  scroll.append(
-    createTextElement('div', 'scroll-line'),
-    createTextElement('span', 'scroll-txt', 'Scroll to explore'),
-  );
-
-  return scroll;
-}
-
 export default function decorate(block) {
   let fields = parseFieldRows(block);
   const hasContent = fields['heading-line-1'] && cellText(fields['heading-line-1']).trim();
@@ -261,9 +233,6 @@ export default function decorate(block) {
   fade.className = 'hero-photo-fade';
   hero.append(fade);
 
-  const rank = createStatusBadges(fields);
-  if (rank) hero.append(rank);
-
   const content = document.createElement('div');
   content.className = 'hero-content';
 
@@ -294,7 +263,7 @@ export default function decorate(block) {
   if (stats) content.append(stats);
   hero.append(content);
 
-  hero.append(createHeroScroll(), createHeroNavigation());
+  hero.append(createHeroNavigation());
 
   block.replaceChildren(hero);
 }

@@ -93,8 +93,9 @@ test('mcx announcement, benefits, brands, and ticker blocks render their example
     decorateBrands(brandsBlock);
     decorateTicker(tickerBlock);
 
-    assert.equal(announcementBlock.querySelectorAll('.ann-item').length, 10);
-    assert.equal(announcementBlock.querySelector('.ann-close')?.textContent, 'X');
+    assert.equal(announcementBlock.querySelectorAll('.ann-item').length, 5);
+    assert.equal(announcementBlock.querySelectorAll('.ann-dot').length, 4);
+    assert.equal(announcementBlock.querySelector('.ann-close')?.textContent, '✕');
     announcementBlock.querySelector('.ann-close')?.dispatchEvent({ type: 'click' });
     assert.equal(document.body.querySelector('.mcx-announcement-bar'), null);
 
@@ -170,7 +171,7 @@ test('mcx deal countdown, newsletter, and promo strip expose the authored data n
   });
 });
 
-test('mcx product cards parse tabs, merchandising data, and pricing from the example table', async () => {
+test('mcx product cards render the reference product grid and ignore legacy tab config rows', async () => {
   await withFakeDom(async ({ document }) => {
     const block = await createBlockFromTable(document, 'docs/mcx-examples/mcx-product-cards.table.txt');
     document.body.append(block);
@@ -178,20 +179,51 @@ test('mcx product cards parse tabs, merchandising data, and pricing from the exa
     const { default: decorate } = await import('../../blocks/mcx-product-cards/mcx-product-cards.js');
     decorate(block);
 
-    const tabs = block.querySelectorAll('.ptab');
     const cards = block.querySelectorAll('.prod-card');
     const firstCard = cards[0];
 
     assert.equal(block.querySelector('.sec-title')?.textContent, 'NEW ARRIVALS');
-    assert.equal(tabs.length, 6);
-    assert.equal(tabs[0]?.classList.contains('on'), true);
+    assert.equal(block.querySelectorAll('.ptab').length, 0);
     assert.equal(cards.length, 8);
     assert.equal(firstCard?.dataset.cat, 'footwear');
     assert.equal(firstCard?.dataset.brand, 'Danner');
     assert.equal(firstCard?.dataset.price, '189.99');
     assert.equal(firstCard?.querySelector('.p-current')?.textContent, '$189.99');
     assert.equal(firstCard?.querySelector('.p-chip')?.textContent, 'Save $50');
-    assert.equal(firstCard?.querySelector('.prod-quick span')?.textContent, 'Quick View');
+    assert.equal(firstCard?.querySelector('.prod-atc')?.textContent, '+ Add to Cart');
+  });
+});
+
+test('mcx product cards tolerate legacy tab rows without rendering tab UI', async () => {
+  await withFakeDom(async ({ document }) => {
+    const block = document.createElement('div');
+    block.className = 'mcx-product-cards';
+
+    [
+      ['label', 'Curated For You', '', ''],
+      ['title', 'NEW ARRIVALS', '', ''],
+      ['tabs', 'All Items|all, Footwear|footwear', '', ''],
+      ['default-tab', 'footwear', '', ''],
+      [
+        '![Tactical boot](https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=75)',
+        'Danner<br>Tachyon 8 Tactical Boot GTX',
+        'rating: 5<br>reviews: 248<br>price: 189.99<br>original: 239.99<br>chip: Save $50',
+        'category: footwear<br>flags: New<br>emoji: 🥾<br>sizes: 8, 9, 10, 11, 12',
+      ],
+    ].forEach((cells) => {
+      const row = document.createElement('div');
+      cells.forEach((cellValue) => row.append(createCell(document, cellValue)));
+      block.append(row);
+    });
+
+    document.body.append(block);
+
+    const { default: decorate } = await import('../../blocks/mcx-product-cards/mcx-product-cards.js');
+    decorate(block);
+
+    assert.equal(block.querySelectorAll('.ptab').length, 0);
+    assert.equal(block.querySelectorAll('.prod-card').length, 1);
+    assert.equal(block.querySelector('.prod-card')?.dataset.cat, 'footwear');
   });
 });
 
@@ -221,7 +253,7 @@ test('mcx header renders the nav fragment into the shell block', async () => {
     assert.equal(block.querySelector('.nav-hot')?.textContent, 'Deals & Offers');
     assert.equal(block.querySelectorAll('.nav-item').length, 7);
     assert.equal(block.querySelectorAll('.mega-col').length >= 3, true);
-    assert.equal(block.querySelector('[data-mcx-cart-toggle]')?.tagName, 'BUTTON');
+    assert.equal(block.querySelector('[data-mcx-cart-count]')?.closest('a')?.href, '/cart');
   });
 });
 

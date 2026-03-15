@@ -72,7 +72,7 @@ async function createBlockFromTable(document, relativePath) {
   return block;
 }
 
-test('initMcxUi wires tabs, search, cart, newsletter, and quick view on MCX pages', async () => {
+test('initMcxUi wires search, cart badge updates, wishlist, and newsletter feedback on MCX pages', async () => {
   await withFakeDom(async ({
     document,
     setFetchImplementation,
@@ -110,11 +110,11 @@ test('initMcxUi wires tabs, search, cart, newsletter, and quick view on MCX page
 
     const cartCount = document.querySelector('[data-mcx-cart-count]');
     assert.equal(cartCount?.textContent, '3');
+    assert.equal(document.querySelector('.cart-drawer'), null);
+    assert.equal(document.querySelector('.modal-bg'), null);
 
     const drawer = document.querySelector('.cart-drawer');
-    const cartToggle = document.querySelector('[data-mcx-cart-toggle]');
-    document.dispatchEvent({ type: 'click', target: cartToggle });
-    assert.equal(drawer?.classList.contains('open'), true);
+    assert.equal(drawer, null);
 
     const searchInput = document.querySelector('[data-mcx-search-input]');
     let prevented = false;
@@ -129,27 +129,17 @@ test('initMcxUi wires tabs, search, cart, newsletter, and quick view on MCX page
     });
     assert.equal(prevented, true);
     assert.equal(document.activeElement, searchInput);
+    assert.equal(searchInput.closest('.hdr-search')?.classList.contains('expanded'), true);
 
-    const electronicsTab = [...document.querySelectorAll('.ptab')]
-      .find((button) => button.dataset.tab === 'electronics');
-    electronicsTab.dispatchEvent({ type: 'click', target: electronicsTab });
-    const electronicsCard = [...document.querySelectorAll('.prod-card')]
-      .find((card) => card.dataset.cat === 'electronics');
-    const apparelCard = [...document.querySelectorAll('.prod-card')]
-      .find((card) => card.dataset.cat === 'apparel');
-    assert.equal(electronicsCard?.style.display || '', '');
-    assert.equal(apparelCard?.style.display, 'none');
+    const wishlistButton = document.querySelector('.prod-love');
+    document.dispatchEvent({ type: 'click', target: wishlistButton, preventDefault() {} });
+    assert.equal(wishlistButton?.classList.contains('loved'), true);
 
-    const quickViewButton = document.querySelector('.prod-quick');
-    document.dispatchEvent({ type: 'click', target: quickViewButton });
-    const modal = document.querySelector('.modal-bg');
-    assert.equal(modal?.classList.contains('on'), true);
-    assert.equal(document.querySelector('.modal-name')?.textContent.length > 0, true);
-
-    const addToCartButton = document.querySelector('.modal-atc');
-    addToCartButton.dispatchEvent({ type: 'click', target: addToCartButton });
+    const addToCartButton = document.querySelector('.prod-atc');
+    document.dispatchEvent({ type: 'click', target: addToCartButton, preventDefault() {} });
     assert.equal(document.querySelector('[data-mcx-cart-count]')?.textContent, '4');
-    assert.equal(modal?.classList.contains('on'), false);
+    assert.equal(addToCartButton?.classList.contains('is-added'), true);
+    assert.equal(addToCartButton?.textContent, '✓ Added!');
 
     const newsletterInput = document.querySelector('.nl-input');
     newsletterInput.value = 'marine@example.com';
@@ -162,6 +152,8 @@ test('initMcxUi wires tabs, search, cart, newsletter, and quick view on MCX page
     assert.equal(newsletterInput.value, '');
     const toastTitles = [...document.querySelectorAll('#mcx-toast-stack .t-title')]
       .map((node) => node.textContent);
+    assert.equal(toastTitles.includes('Saved to Wishlist ♥'), true);
+    assert.equal(toastTitles.includes('Added to Cart!'), true);
     assert.equal(toastTitles.includes('Subscribed!'), true);
   }, {
     window: {
