@@ -7,8 +7,35 @@ export function getRows(block) {
   return [...block.children].map((row) => [...row.children]);
 }
 
+function collectCellText(node, parts = []) {
+  if (!node) return parts;
+
+  if (node.nodeType === 3) {
+    parts.push(node.textContent || '');
+    return parts;
+  }
+
+  if (node.nodeType !== 1 && node.nodeType !== 11) {
+    return parts;
+  }
+
+  if (node.tagName?.toLowerCase() === 'br') {
+    parts.push('\n');
+    return parts;
+  }
+
+  [...(node.childNodes || [])].forEach((child) => collectCellText(child, parts));
+  return parts;
+}
+
 export function cellText(cell) {
-  return cell?.textContent?.trim() || '';
+  return collectCellText(cell, [])
+    .join('')
+    .replace(/\r/g, '')
+    .replace(/[ \t]+\n/g, '\n')
+    .replace(/\n[ \t]+/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
 }
 
 export function parseLines(cell) {
@@ -58,14 +85,36 @@ function createFallbackPicture(img, eager = false) {
   return picture;
 }
 
-export function createPictureFromCell(
-  cell,
-  eager = false,
-  breakpoints = [{ media: '(min-width: 600px)', width: '1400' }, { width: '700' }],
-) {
-  const img = cell?.querySelector('img');
-  if (!img) return null;
+export function extractMarkdownImage(text = '') {
+  const match = text.match(/!\[([^\]]*)\]\(([^)]+)\)/);
+  if (!match) return null;
 
+  const [, alt, src] = match;
+  return {
+    alt: alt.trim(),
+    src: src.trim(),
+  };
+}
+
+export function extractMarkdownLink(text = '') {
+  const match = text.match(/(?:^|[^!])\[([^\]]+)\]\(([^)]+)\)/);
+  if (!match) return null;
+
+  const [, label, href] = match;
+  return {
+    href: href.trim(),
+    text: label.trim(),
+  };
+}
+
+function createImageElement(src, alt = '') {
+  const img = document.createElement('img');
+  img.src = src;
+  img.alt = alt;
+  return img;
+}
+
+function createPictureFromImage(img, eager, breakpoints) {
   try {
     const url = new URL(img.src, window.location.href);
     const isLocal = url.origin === window.location.origin
@@ -81,6 +130,24 @@ export function createPictureFromCell(
   }
 }
 
+export function createPictureFromCell(
+  cell,
+  eager = false,
+  breakpoints = [{ media: '(min-width: 600px)', width: '1400' }, { width: '700' }],
+) {
+  let img = cell?.querySelector('img');
+
+  if (!img) {
+    const markdownImage = extractMarkdownImage(cellText(cell));
+    if (markdownImage?.src) {
+      img = createImageElement(markdownImage.src, markdownImage.alt);
+    }
+  }
+
+  if (!img) return null;
+  return createPictureFromImage(img, eager, breakpoints);
+}
+
 export function extractLink(cell, fallbackText = '') {
   const anchor = cell?.querySelector('a');
   if (anchor) {
@@ -88,6 +155,11 @@ export function extractLink(cell, fallbackText = '') {
       href: anchor.href,
       text: anchor.textContent.trim(),
     };
+  }
+
+  const markdownLink = extractMarkdownLink(cellText(cell));
+  if (markdownLink) {
+    return markdownLink;
   }
 
   return {
