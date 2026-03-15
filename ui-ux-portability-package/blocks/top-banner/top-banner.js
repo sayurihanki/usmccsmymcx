@@ -757,6 +757,23 @@ function buildConfig(block, rowGroups) {
 export default function decorate(block) {
   cleanupInstance(block);
 
+  if (block.dataset.topbannerDisabled !== 'false') {
+    const wrapper = block.parentElement?.classList.contains('top-banner-wrapper')
+      ? block.parentElement
+      : null;
+    const sourceSection = block.closest('.section');
+
+    // The top banner is intentionally disabled sitewide.
+    block.remove();
+    if (wrapper && !wrapper.childElementCount) wrapper.remove();
+    if (sourceSection && !sourceSection.querySelector('.block')) {
+      sourceSection.style.display = 'none';
+      sourceSection.dataset.topBannerMounted = 'true';
+    }
+    updateAllHeaderOffsets();
+    return;
+  }
+
   const rows = parseRows(block);
   if (!rows.length) return;
 
