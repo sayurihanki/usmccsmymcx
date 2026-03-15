@@ -154,6 +154,7 @@ test('MCX hero, deal countdown, newsletter, and promo examples include required 
     'secondary-cta',
   ].forEach((field) => assert.ok(hasField(hero.rows, field), `hero example is missing ${field}`));
   assert.ok(hero.rows.every((row) => row.length === 2));
+  assert.equal(hero.rows.some((row) => row[0].startsWith('status-badge-')), false);
 
   assert.equal(countdown.title, 'mcx-deal-countdown');
   ['label', 'title', 'description', 'end-datetime', 'cta'].forEach((field) => {
@@ -181,6 +182,8 @@ test('MCX product cards example keeps config rows and product row key-value cell
   ['label', 'title', 'view-link'].forEach((field) => {
     assert.ok(hasField(rows, field), `product cards example is missing ${field}`);
   });
+  assert.equal(hasField(rows, 'tabs'), false);
+  assert.equal(hasField(rows, 'default-tab'), false);
 
   const productRows = rows.filter((row) => !['label', 'title', 'view-link'].includes(row[0]));
   assert.ok(productRows.length >= 4);

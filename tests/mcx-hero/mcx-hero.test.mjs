@@ -346,6 +346,7 @@ test('mcx-hero renders authored content', async () => {
     assert.equal(hero.querySelector('.hero-photo')?.querySelector('img')?.alt, 'Marine Corps collection hero');
     assert.equal(hero.querySelector('.hero-rank'), null);
     assert.equal(hero.querySelector('.hero-scroll'), null);
+    assert.equal(hero.textContent.includes('SYS: MCX-2026'), false);
 
     const heading = hero.querySelector('.hero-h1');
     assert.equal(heading?.children.length, 3);
@@ -358,8 +359,8 @@ test('mcx-hero renders authored content', async () => {
 test('mcx-hero falls back to library preview defaults', async () => {
   await withFakeDom(async ({ document, window }) => {
     const { default: decorate } = await import('../../blocks/mcx-hero/mcx-hero.js');
-    window.location.pathname = '/library/blocks/mcx-hero';
-    window.location.href = 'https://example.com/library/blocks/mcx-hero';
+    window.location.pathname = '/library/blocks/mcx-hero.plain.html';
+    window.location.href = 'https://example.com/library/blocks/mcx-hero.plain.html';
 
     const section = document.createElement('div');
     section.className = 'section';
@@ -374,5 +375,6 @@ test('mcx-hero falls back to library preview defaults', async () => {
     assert.equal(hero.querySelector('.hero-eyebrow-txt')?.textContent, 'Spring Collection - 2026 - Tax-Free');
     assert.equal(hero.querySelector('.btn-hero')?.textContent.includes('Shop Now'), true);
     assert.equal(hero.querySelectorAll('.h-stat').length, 4);
+    assert.equal(hero.textContent.includes('STATUS: ACTIVE'), false);
   });
 });

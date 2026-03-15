@@ -60,7 +60,6 @@
   --gold: var(--gs-gold);
   --gold-light: var(--gs-gold-light);
   --cream: #0a1017;
-
   --main-color-accent: var(--gs-scarlet);
 
   /* Adobe Commerce Dropin design tokens */
@@ -203,7 +202,6 @@
   --shadow-button: 0 8px 32px var(--gs-scarlet-glow);
   --shadow-button-hover: 0 14px 44px rgb(193 18 31 / 45%);
   --shadow-focus: 0 0 0 1px rgb(255 255 255 / 8%), 0 0 0 4px rgb(193 18 31 / 28%);
-
   --glass-bg: rgb(17 29 42 / 78%);
   --glass-bg-hover: rgb(25 35 51 / 86%);
   --glass-bg-strong: rgb(31 45 62 / 90%);
@@ -213,7 +211,6 @@
   --glass-blur-sm: blur(16px);
   --glass-blur-xs: blur(10px);
   --glass-saturate: saturate(140%);
-
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
   --transition-fast: 0.2s;

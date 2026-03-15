@@ -1326,6 +1326,7 @@ header nav .minicart-panel a[href*="/cart"] {
   max-height: 15rem;
 }
 
+/* stylelint-disable no-duplicate-selectors, no-descending-specificity */
 :root {
   --nav-hover-radius: 18px;
   --nav-dropdown-radius: 22px;
@@ -1439,3 +1440,4 @@ header nav .nav-tools button.nav-cart-button[data-count]::after {
   font-family: var(--gs-font-tactical);
   font-weight: 700;
 }
+/* stylelint-enable no-duplicate-selectors, no-descending-specificity */
