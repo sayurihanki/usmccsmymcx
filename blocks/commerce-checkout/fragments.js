@@ -118,8 +118,6 @@ export function createCheckoutFragment() {
                 <div class="checkout__review-panel">
                   <div class="checkout__review-summary"></div>
                 </div>
-                <div class="checkout__terms-and-conditions ${CHECKOUT_BLOCK}"></div>
-                <div class="checkout__place-order ${CHECKOUT_BLOCK}"></div>
                 <div class="checkout__stage-actions checkout__stage-actions--review">
                   <button
                     type="button"
@@ -135,6 +133,17 @@ export function createCheckoutFragment() {
           <div class="checkout__aside-shell">
             <div class="checkout__aside">
               <div class="checkout__order-summary ${CHECKOUT_BLOCK}"></div>
+              <div class="checkout__review-commit ${CHECKOUT_BLOCK}">
+                <div class="checkout__review-commit-head">
+                  <div class="checkout__review-commit-eyebrow">Finalize</div>
+                  <h2 class="checkout__review-commit-title">Confirm and place the order</h2>
+                  <p class="checkout__review-commit-copy">
+                    Accept the checkout terms, then send the live order through to confirmation.
+                  </p>
+                </div>
+                <div class="checkout__terms-and-conditions ${CHECKOUT_BLOCK}"></div>
+                <div class="checkout__place-order ${CHECKOUT_BLOCK}"></div>
+              </div>
               <div class="checkout__gift-options ${CHECKOUT_BLOCK}"></div>
               <div class="checkout__cart-summary ${CHECKOUT_BLOCK}"></div>
               <div class="checkout__benefit">

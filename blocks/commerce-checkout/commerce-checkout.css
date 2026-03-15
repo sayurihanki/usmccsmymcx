@@ -596,6 +596,63 @@ button.checkout-progress__link[disabled] {
   gap: 18px;
 }
 
+.checkout__review-commit {
+  display: none;
+  gap: 16px;
+  padding: 22px;
+  border: 1px solid rgb(193 18 31 / 18%);
+  border-radius: var(--r-lg);
+  background:
+    linear-gradient(145deg, rgb(193 18 31 / 10%), rgb(25 35 51 / 96%));
+  box-shadow: var(--shadow-card);
+}
+
+.checkout__shell[data-active-stage='review'] .checkout__review-commit {
+  display: grid;
+}
+
+.checkout__review-commit-head {
+  display: grid;
+  gap: 8px;
+}
+
+.checkout__review-commit-eyebrow {
+  color: var(--scarlet);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.checkout__review-commit-title {
+  margin: 0;
+  color: var(--text-bright);
+  font-family: var(--font-ui);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.checkout__review-commit-copy {
+  margin: 0;
+  color: var(--text-body);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.checkout__review-commit .checkout__terms-and-conditions,
+.checkout__review-commit .checkout__place-order {
+  display: grid;
+}
+
+.checkout__review-commit .checkout__place-order .checkout-place-order,
+.checkout__review-commit .checkout__place-order .dropin-button,
+.checkout__review-commit .checkout__place-order button[class*='checkout-place-order__button'] {
+  width: 100%;
+}
+
 .checkout__benefit {
   display: grid;
   gap: 10px;
@@ -666,6 +723,17 @@ button.checkout-progress__link[disabled] {
 .checkout__out-of-stock .dropin-card {
   background: linear-gradient(180deg, rgb(17 29 42 / 96%), rgb(13 21 32 / 98%));
   border-color: rgb(255 255 255 / 8%);
+}
+
+.checkout__review-commit .checkout__terms-and-conditions .dropin-card,
+.checkout__review-commit .checkout__terms-and-conditions .dropin-card__content {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.checkout__review-commit .checkout__terms-and-conditions .dropin-card__content {
+  padding: 0;
 }
 
 .cart-summary-list__heading {

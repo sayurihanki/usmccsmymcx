@@ -552,7 +552,9 @@ export const renderPlaceOrder = async (container, options = {}) => renderContain
     slots: {
       Content: (placeOrderCtx) => {
         const spanElement = document.createElement('span');
-        spanElement.innerText = options.b2bIsPoEnabled ? 'Place Purchase Order' : 'Place Order';
+        spanElement.innerText = options.b2bIsPoEnabled
+          ? 'Place Purchase Order'
+          : 'Confirm & Place Order';
         placeOrderCtx.replaceWith(spanElement);
       },
     },
