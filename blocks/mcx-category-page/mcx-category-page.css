@@ -199,6 +199,7 @@ body:is(.mcx, .mcx-preview) main .mcx-category-page .cat-tab.on {
 
 body:is(.mcx, .mcx-preview) main .mcx-category-page .shop-wrap {
   align-items: start;
+  box-sizing: border-box;
   display: grid;
   gap: 32px;
   grid-template-columns: 290px minmax(0, 1fr);
@@ -206,6 +207,7 @@ body:is(.mcx, .mcx-preview) main .mcx-category-page .shop-wrap {
   max-width: 1500px;
   padding: 36px 48px 88px;
   position: relative;
+  width: min(1500px, 100%);
 }
 
 body:is(.mcx, .mcx-preview) main .mcx-category-page .mcx-category-page__drawer-scrim {
@@ -222,9 +224,17 @@ body:is(.mcx, .mcx-preview) main .mcx-category-page .filter-panel {
   background: var(--surface-2);
   border: 1px solid var(--rim);
   border-radius: var(--r-xl);
+  grid-column: 1;
   overflow: hidden;
   position: sticky;
   top: 118px;
+  width: 100%;
+}
+
+body:is(.mcx, .mcx-preview) main .mcx-category-page .mcx-category-page__main {
+  grid-column: 2;
+  min-width: 0;
+  width: 100%;
 }
 
 body:is(.mcx, .mcx-preview) main .mcx-category-page .fp-head {
@@ -996,6 +1006,11 @@ body:is(.mcx, .mcx-preview) main .mcx-category-page .mcx-category-page__skeleton
 
   body:is(.mcx, .mcx-preview) main .mcx-category-page .shop-wrap {
     grid-template-columns: 1fr;
+  }
+
+  body:is(.mcx, .mcx-preview) main .mcx-category-page .filter-panel,
+  body:is(.mcx, .mcx-preview) main .mcx-category-page .mcx-category-page__main {
+    grid-column: auto;
   }
 
   body:is(.mcx, .mcx-preview) main .mcx-category-page .filter-panel {

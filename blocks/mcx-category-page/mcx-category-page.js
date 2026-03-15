@@ -140,7 +140,7 @@ function buildScaffold(config) {
           </div>
           <div class="mcx-category-page__facets" data-role="facets"></div>
         </aside>
-        <main class="shop-main mcx-category-page__main">
+        <div class="shop-main mcx-category-page__main">
           <div class="sort-bar mcx-category-page__toolbar">
             <button class="mcx-category-page__filters-toggle" type="button" data-role="open-filters">
               Filters
@@ -171,7 +171,7 @@ function buildScaffold(config) {
           <div class="mcx-category-page__status" data-role="status"></div>
           <div class="prod-grid grid-3" data-role="products"></div>
           <div class="pagination mcx-category-page__pagination" data-role="pagination"></div>
-        </main>
+        </div>
       </div>
     `);
 }
