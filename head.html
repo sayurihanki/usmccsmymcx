@@ -4,6 +4,138 @@
   move-to-http-header="true"
 >
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+  html {
+    background: #05080c;
+  }
+
+  body {
+    transition: opacity 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  html[data-page-state="loading"] body {
+    opacity: 0;
+  }
+
+  html::before,
+  html::after {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    position: fixed;
+    transition:
+      opacity 320ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s linear 320ms;
+  }
+
+  html::before {
+    content: '';
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 20%, rgb(193 18 31 / 16%), transparent 28%),
+      radial-gradient(circle at 78% 18%, rgb(201 162 39 / 14%), transparent 24%),
+      linear-gradient(180deg, #05080c 0%, #0a1118 56%, #121b24 100%);
+    transform: scale(1.03);
+    z-index: 9998;
+  }
+
+  html::after {
+    content: 'Preparing the storefront';
+    left: 50%;
+    top: 50%;
+    min-width: 24rem;
+    padding: 1.6rem 2.4rem;
+    border: 1px solid rgb(255 255 255 / 12%);
+    border-radius: 999px;
+    background:
+      linear-gradient(135deg, rgb(193 18 31 / 20%), rgb(255 255 255 / 8%), rgb(201 162 39 / 18%));
+    color: rgb(247 241 228 / 94%);
+    font: 600 1.4rem/1 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+    box-shadow:
+      0 24px 60px rgb(0 0 0 / 42%),
+      inset 0 1px 0 rgb(255 255 255 / 12%);
+    backdrop-filter: blur(18px);
+    z-index: 9999;
+    transform: translate(-50%, calc(-50% + 1.2rem));
+    animation: page-shell-pulse 1.7s ease-in-out infinite;
+  }
+
+  html[data-page-state="loading"]::before,
+  html[data-page-state="loading"]::after {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  html[data-page-state="loading"]::after {
+    transform: translate(-50%, -50%);
+  }
+
+  html[data-page-state="ready"]::before {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.05);
+  }
+
+  html[data-page-state="ready"]::after {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, calc(-50% - 0.8rem));
+  }
+
+  @keyframes page-shell-pulse {
+    0%,
+    100% {
+      box-shadow:
+        0 24px 60px rgb(0 0 0 / 42%),
+        inset 0 1px 0 rgb(255 255 255 / 12%);
+    }
+
+    50% {
+      box-shadow:
+        0 28px 72px rgb(0 0 0 / 48%),
+        0 0 24px rgb(201 162 39 / 10%),
+        inset 0 1px 0 rgb(255 255 255 / 18%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html::before,
+    html::after,
+    body {
+      transition: none;
+    }
+
+    html::after {
+      animation: none;
+    }
+  }
+</style>
+<script nonce="aem">
+  window.hlx = window.hlx || {};
+  document.documentElement.dataset.pageState = 'loading';
+
+  window.hlx.pageShellReady = () => {
+    if (document.body) {
+      document.body.classList.add('appear');
+    }
+
+    document.documentElement.dataset.pageState = 'ready';
+
+    if (window.hlx.pageShellTimer) {
+      window.clearTimeout(window.hlx.pageShellTimer);
+      delete window.hlx.pageShellTimer;
+    }
+  };
+
+  window.hlx.pageShellTimer = window.setTimeout(() => {
+    window.hlx.pageShellReady();
+  }, 5000);
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="/styles/mcx-fonts.css" />
