@@ -1,10 +1,12 @@
 # MCX Hero
 
-The `mcx-hero` block is a tactical homepage hero for the MCX experience.
+## Overview
+
+The `mcx-hero` block is the flagship MCX homepage hero. It supports a multi-line headline, tactical eyebrow, hero image, two CTAs, optional status badges, and up to four KPI stats. On MCX block-library preview URLs, the block can fall back to built-in demo content when no authored 2-column table is present so the preview still renders.
 
 ## Live Example
 
-The table below is a real block instance, so the block library page can render an actual preview instead of just showing field names.
+The table below is a real block instance so the block library page can render an actual preview instead of only showing field names.
 
 | mcx-hero | |
 | --- | --- |
@@ -39,25 +41,36 @@ Use a 2-column table.
 
 Supported fields:
 
-- `eyebrow`
-- `heading-line-1`
-- `heading-line-2`
-- `heading-line-3`
-- `description`
-- `image`
-- `primary-cta`
-- `secondary-cta`
-- `status-badge-1`
-- `status-badge-2`
-- `status-badge-3`
-- `stat-1-value` through `stat-4-value`
-- `stat-1-label` through `stat-4-label`
+| Field | Required | Purpose |
+| --- | --- | --- |
+| `eyebrow` | Yes | Small tactical eyebrow above the headline |
+| `heading-line-1` | Yes | First headline line |
+| `heading-line-2` | Yes | Second headline line |
+| `heading-line-3` | Yes | Third headline line |
+| `description` | Yes | Supporting body copy |
+| `image` | Yes | Hero image |
+| `primary-cta` | Yes | Primary CTA link |
+| `secondary-cta` | Yes | Secondary CTA link |
+| `status-badge-1` to `status-badge-3` | No | Small badge chips in the hero corner |
+| `stat-1-value` to `stat-4-value` | No | KPI values |
+| `stat-1-label` to `stat-4-label` | No | KPI labels paired with the values |
 
-## Notes
+## Rendering And Behavior
+
+- The block adds `mcx-hero-section` to the containing section for MCX-specific styling.
+- If the page is an MCX block-library preview URL and no authored `heading-line-1` exists, the block swaps in built-in demo field values.
+- The hero image is converted into a responsive `picture` when a real image is present.
+- CTA rows are resolved as links; if a link is missing, the block falls back to the default CTA text and an empty destination.
+- Status badges only render for the authored rows that contain text.
+- KPI stats only render when both the value and matching label are present.
+- The dot navigation is decorative UI tied to `scripts/mcx-ui.js`. It cycles the active dot state but does not swap hero content today.
+
+## Common Gotchas
 
 - The image cell must contain a real image, not pasted plain text.
-- CTA cells should contain real links.
-- **Why the block library preview doesn’t render:** The block expects a **2-column table** (field name | value). If the DA library doc at `/.da/library/blocks/mcx-hero` only has library metadata, or the content was pasted as **plain text** or a single column, the block gets no key/value rows and nothing renders. Fix: ensure the library doc contains a proper **table** whose first row is `mcx-hero | (empty)` and subsequent rows are two columns (e.g. `eyebrow | Spring Collection - 2026 - Tax-Free`). If the table is missing, the block uses built-in demo content on the library preview URL so a preview still appears.
+- CTA cells should contain real links, not just URL text.
+- If the hero preview appears empty outside the dedicated MCX library preview route, verify that the authored content is a true 2-column table. The fallback content only activates on the MCX library preview URL pattern.
+- Keep each stat as a matched value/label pair. A value without a label, or a label without a value, is skipped.
 
 ## DA Library Metadata Table
 

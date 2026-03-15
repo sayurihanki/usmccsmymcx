@@ -385,6 +385,21 @@ body:is(.mcx, .mcx-preview) main .mcx-hero .scroll-txt {
     display: none;
   }
 
+  body:is(.mcx, .mcx-preview) main .mcx-hero .hero-rank {
+    align-items: flex-start;
+    flex-flow: row wrap;
+    font-size: 8px;
+    gap: 8px;
+    left: 20px;
+    letter-spacing: 0.16em;
+    right: 20px;
+    top: 20px;
+  }
+
+  body:is(.mcx, .mcx-preview) main .mcx-hero .hero-rank span {
+    padding: 3px 8px;
+  }
+
   body:is(.mcx, .mcx-preview) main .mcx-hero .hero-photo-fade {
     width: 100%;
   }
