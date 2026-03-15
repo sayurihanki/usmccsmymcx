@@ -28,7 +28,7 @@
 header .nav-wrapper {
   background-color: var(--background-color);
   width: 100%;
-  z-index: 1000;
+  z-index: 3;
   position: fixed;
   border-bottom: 1px solid var(--color-neutral-300);
 }
@@ -451,10 +451,6 @@ header nav .store-switcher-wrapper {
   position: relative;
 }
 
-header nav .store-switcher-wrapper.is-open {
-  z-index: 102;
-}
-
 header nav .store-switcher-wrapper > .store-switcher-toggle {
   align-items: center;
   background: transparent;
@@ -589,8 +585,7 @@ header nav .nav-tools {
   gap: var(--spacing-small);
   align-items: center;
   background: var(--background-color);
-  position: relative;
-  z-index: 4;
+  z-index: 3;
 }
 
 header nav .nav-tools-wrapper > button {
@@ -1334,7 +1329,7 @@ header nav .minicart-panel a[href*="/cart"] {
   display: none;
   inset: 0;
   position: fixed;
-  z-index: 990;
+  z-index: 2;
   backdrop-filter: blur(var(--nav-overlay-blur));
   transition: background-color var(--nav-interaction-speed) ease-out;
 }

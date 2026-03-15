@@ -83,6 +83,10 @@ header .mcx-header .hdr-main {
   z-index: 1;
 }
 
+header .mcx-header .header:has(.hdr-storefront.is-open, .hdr-account.is-open, .hdr-search.is-open) .hdr-main {
+  z-index: 3;
+}
+
 header .mcx-header .hdr-main::after {
   background: linear-gradient(90deg, rgb(255 255 255 / 0%) 0%, var(--mcx-header-line) 8%, var(--mcx-header-line) 92%, rgb(255 255 255 / 0%) 100%);
   bottom: 0;
@@ -492,6 +496,11 @@ header .mcx-header .cart-dot[hidden] {
 header .mcx-header .hdr-storefront,
 header .mcx-header .hdr-account {
   position: relative;
+}
+
+header .mcx-header .hdr-storefront.is-open,
+header .mcx-header .hdr-account.is-open {
+  z-index: 36;
 }
 
 header .mcx-header .store-switcher-toggle {
