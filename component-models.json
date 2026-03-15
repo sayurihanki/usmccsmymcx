@@ -746,6 +746,37 @@
     ]
   },
   {
+    "id": "form-mccs-preferences-next",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Form Title",
+        "description": "Heading displayed on the left briefing panel. Use a newline to split the title across two lines.",
+        "value": "Personalize\nyour MCCS experience",
+        "required": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "subtitle",
+        "label": "Form Subtitle",
+        "description": "Supporting copy shown beneath the heading.",
+        "value": "Tell us about your military life, interests, and preferences. We will tailor shopping, events, and family programs around your world.",
+        "required": false
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "redirect",
+        "label": "Redirect URL",
+        "description": "Optional page to navigate to after successful submission.",
+        "required": false
+      }
+    ]
+  },
+  {
     "id": "form-mccs-preferences",
     "fields": [
       {
@@ -1799,6 +1830,46 @@
   {
     "id": "mcx-category-grid",
     "fields": []
+  },
+  {
+    "id": "mcx-category-page",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "urlPath",
+        "label": "URL Path",
+        "value": "apparel-footwear"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "eyebrow",
+        "label": "Eyebrow",
+        "value": "Apparel & Footwear"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": "GEAR UP.\\nDRESS RIGHT."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description",
+        "value": "Built for training, off-duty, and everyday mission support."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "hero-image-alt",
+        "label": "Hero Image Alt",
+        "value": "Apparel & Footwear category hero"
+      }
+    ]
   },
   {
     "id": "mcx-deal-countdown",

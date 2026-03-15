@@ -634,7 +634,58 @@ button.checkout-progress__link[disabled] {
 
 .checkout__aside {
   display: grid;
+  gap: 20px;
+}
+
+.checkout__aside > * {
+  min-width: 0;
+}
+
+.checkout__aside .cart-order-summary__content,
+.checkout__aside .cart-cart-summary-list__content {
+  display: grid;
   gap: 18px;
+}
+
+.checkout__aside .cart-cart-summary-list__heading {
+  padding-top: 0;
+}
+
+.checkout__aside .cart-cart-summary-list__heading,
+.checkout__aside .cart-order-summary__heading {
+  gap: 12px;
+}
+
+.checkout__aside .cart-cart-summary-list__heading-divider,
+.checkout__aside .cart-order-summary__divider-primary,
+.checkout__aside .cart-order-summary__divider-secondary {
+  margin: 0;
+}
+
+.checkout__aside .cart-order-summary__entry,
+.checkout__aside .cart-order-summary__taxEntry {
+  gap: 14px;
+  padding-block: 2px;
+}
+
+.checkout__aside .cart-order-summary__total {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgb(255 255 255 / 8%);
+}
+
+.checkout__aside .dropin-accordion-section__title-container {
+  align-items: center;
+}
+
+.checkout__aside .coupon-code-form__action {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.checkout__aside .coupon-code-form__action .dropin-input-container {
+  margin-right: 0;
 }
 
 .checkout__review-commit {
@@ -810,6 +861,16 @@ button.checkout-progress__link[disabled] {
   margin-top: var(--spacing-small);
 }
 
+.checkout__aside .cart-summary-list__heading {
+  gap: 12px;
+}
+
+.checkout__aside .dropin-accordion-section__heading {
+  margin: 0;
+  padding: 18px 0;
+  width: 100%;
+}
+
 [data-testid='default-cart-heading'] {
   display: none;
 }
@@ -828,9 +889,33 @@ button.checkout-progress__link[disabled] {
   }
 }
 
+@media (max-width: 1360px) {
+  .checkout__progress-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .checkout__progress-brand,
+  .checkout__progress-trust {
+    grid-auto-flow: column;
+    justify-content: space-between;
+    gap: 12px 20px;
+  }
+
+  .checkout__progress-trust {
+    justify-items: start;
+    text-align: left;
+  }
+}
+
 @media (max-width: 900px) {
   .checkout__progress-shell {
     grid-template-columns: 1fr;
+  }
+
+  .checkout__progress-brand,
+  .checkout__progress-trust {
+    grid-auto-flow: row;
+    justify-content: start;
   }
 
   .checkout-progress {
@@ -875,7 +960,8 @@ button.checkout-progress__link[disabled] {
   .checkout__main .dropin-card__content,
   .checkout__aside .dropin-card__content,
   .checkout__main .account-address-form-wrapper__form,
-  .checkout__aside .cart-cart-summary-list {
+  .checkout__aside .cart-cart-summary-list,
+  .checkout__aside .cart-order-summary__container {
     padding: 18px;
   }
 }

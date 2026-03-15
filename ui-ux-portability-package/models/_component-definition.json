@@ -44,10 +44,19 @@
           "...": "../blocks/fragment/_*.json#/definitions"
         },
         {
+          "...": "../blocks/guided-selling/_*.json#/definitions"
+        },
+        {
           "...": "../blocks/form-mccs-preferences/_*.json#/definitions"
         },
         {
+          "...": "../blocks/form-mccs-preferences-next/_*.json#/definitions"
+        },
+        {
           "...": "../blocks/hero/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/mcx-*/_*.json#/definitions"
         },
         {
           "...": "../blocks/vip-hero-block/_*.json#/definitions"

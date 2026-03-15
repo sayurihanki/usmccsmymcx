@@ -249,6 +249,17 @@
           }
         },
         {
+          "title": "Form MCCS Preferences Next",
+          "id": "form-mccs-preferences-next",
+          "plugins": {
+            "da": {
+              "name": "form-mccs-preferences-next",
+              "rows": 3,
+              "columns": 1
+            }
+          }
+        },
+        {
           "title": "Hero",
           "id": "hero",
           "model": "hero",
@@ -312,6 +323,18 @@
           "plugins": {
             "da": {
               "name": "mcx-category-grid",
+              "rows": 12,
+              "columns": 4
+            }
+          }
+        },
+        {
+          "title": "MCX Category Page",
+          "id": "mcx-category-page",
+          "model": "mcx-category-page",
+          "plugins": {
+            "da": {
+              "name": "mcx-category-page",
               "rows": 12,
               "columns": 4
             }

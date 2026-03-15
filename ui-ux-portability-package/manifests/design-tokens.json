@@ -1,83 +1,110 @@
 {
-  "generatedAt": "2026-03-14T09:37:33.999Z",
+  "generatedAt": "2026-03-15T19:02:55.027Z",
   "summary": {
-    "totalTokens": 713,
-    "definedTokens": 660,
-    "unresolvedTokens": 53,
+    "totalTokens": 909,
+    "definedTokens": 857,
+    "unresolvedTokens": 52,
     "byPrefix": {
-      "accent": 3,
+      "accent": 4,
+      "auth": 5,
+      "back": 1,
       "background": 2,
       "blogpost": 1,
       "body": 4,
       "circle": 4,
-      "color": 63,
+      "color": 66,
       "column": 1,
       "cream": 1,
       "d": 1,
       "desktop": 5,
       "dialog": 1,
-      "ease": 3,
+      "ease": 4,
       "f2": 15,
       "f3": 15,
       "f4": 20,
       "featured": 1,
       "float": 1,
-      "font": 2,
+      "font": 7,
       "gap": 1,
       "glass": 9,
-      "gold": 2,
+      "gold": 5,
       "green": 10,
       "grid": 15,
+      "gs": 43,
       "header": 1,
       "hero": 34,
       "hiws": 22,
-      "ink": 11,
+      "ink": 12,
       "light": 1,
       "live": 21,
       "luxury": 14,
       "main": 1,
+      "mcx": 17,
+      "mega": 1,
       "minifiedView": 1,
       "mp": 23,
+      "mpn": 41,
       "mrc": 9,
-      "nav": 17,
+      "nav": 26,
       "newsletter": 28,
       "no": 1,
       "pcl": 5,
       "pp": 14,
+      "primary": 1,
       "product": 11,
       "promotional": 51,
       "qrm": 19,
       "quiz": 11,
+      "r": 5,
       "readonly": 1,
+      "rim": 2,
+      "scarlet": 5,
       "search": 26,
+      "secondary": 1,
       "sel": 1,
-      "shadow": 5,
+      "shadow": 8,
       "shape": 15,
       "sl": 70,
       "slide": 1,
       "spacing": 13,
       "store": 3,
+      "surface": 5,
+      "t": 3,
+      "teal": 2,
       "tertiary": 1,
-      "text": 1,
+      "text": 5,
       "top": 7,
       "transition": 3,
       "type": 48,
-      "uc": 4,
+      "uc": 37,
       "vip": 34,
       "vmb": 3,
+      "void": 1,
       "width": 1,
       "yes": 1
     }
   },
   "tokens": [
     {
+      "name": "--accent",
+      "prefix": "accent",
+      "value": "hover {\n  background: linear-gradient(135deg, var(--mpn-gold-light) 0%, #d4202e 100%)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
       "name": "--accent-1",
       "prefix": "accent",
-      "value": "var(--main-color-accent)",
+      "value": "var(--gs-scarlet)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 56,
+      "usageCount": 44,
       "usedIn": [
         "blocks/accordion/accordion.css",
         "blocks/form/form.css",
@@ -87,7 +114,6 @@
         "blocks/product-teaser/product-teaser.css",
         "blocks/search-bar/search-bar.css",
         "blocks/search/search.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
         "blocks/vip-hero-block/vip-hero-block.css",
         "styles/styles.css"
       ],
@@ -96,11 +122,12 @@
     {
       "name": "--accent-2",
       "prefix": "accent",
-      "value": "var(--green-500)",
+      "value": "var(--gs-scarlet-dark)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 24,
+      "usageCount": 20,
       "usedIn": [
         "blocks/form/form.css",
         "blocks/header/header.css",
@@ -108,7 +135,6 @@
         "blocks/newsletter/newsletter.css",
         "blocks/product-teaser/product-teaser.css",
         "blocks/search/search.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
         "blocks/vip-hero-block/vip-hero-block.css",
         "styles/styles.css"
       ],
@@ -117,8 +143,9 @@
     {
       "name": "--accent-3",
       "prefix": "accent",
-      "value": "var(--gold)",
+      "value": "var(--gs-gold)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 7,
@@ -132,18 +159,104 @@
       "status": "defined"
     },
     {
-      "name": "--background-color",
-      "prefix": "background",
-      "value": "var(--cream)",
+      "name": "--auth-field-bg",
+      "prefix": "auth",
+      "value": "linear-gradient(180deg, rgb(19 31 45 / 98%) 0%, rgb(17 27 40 / 100%) 100%)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 8,
+      "usageCount": 3,
+      "usedIn": [
+        "blocks/header/header.css",
+        "styles/storefront-reference.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--auth-field-border",
+      "prefix": "auth",
+      "value": "rgb(111 130 148 / 28%)",
+      "definedIn": [
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 3,
+      "usedIn": [
+        "blocks/header/header.css",
+        "styles/storefront-reference.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--auth-shell-bg",
+      "prefix": "auth",
+      "value": "linear-gradient(180deg, rgb(8 12 18 / 96%) 0%, rgb(13 21 32 / 98%) 100%)",
+      "definedIn": [
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 3,
+      "usedIn": [
+        "blocks/header/header.css",
+        "styles/storefront-reference.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--auth-shell-border",
+      "prefix": "auth",
+      "value": "rgb(111 130 148 / 18%)",
+      "definedIn": [
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 3,
+      "usedIn": [
+        "blocks/header/header.css",
+        "styles/storefront-reference.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--auth-shell-radius",
+      "prefix": "auth",
+      "value": "30px",
+      "definedIn": [
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/header/header.css",
+        "styles/storefront-reference.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--back",
+      "prefix": "back",
+      "value": "hover,\n.checkout__stage-button--back:focus-visible {\n  border-color: rgb(201 162 39 / 24%)",
+      "definedIn": [
+        "blocks/commerce-checkout/commerce-checkout.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--background-color",
+      "prefix": "background",
+      "value": "var(--gs-bg)",
+      "definedIn": [
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 7,
       "usedIn": [
         "blocks/cards/cards.css",
         "blocks/header/header.css",
-        "blocks/hero/hero.css",
-        "styles/styles.css"
+        "blocks/hero/hero.css"
       ],
       "status": "defined"
     },
@@ -274,8 +387,9 @@
     {
       "name": "--color-action-button-active",
       "prefix": "color",
-      "value": "var(--color-neutral-50)",
+      "value": "#fff",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 0,
@@ -285,8 +399,9 @@
     {
       "name": "--color-action-button-hover",
       "prefix": "color",
-      "value": "var(--color-neutral-300)",
+      "value": "#fff",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 0,
@@ -296,8 +411,9 @@
     {
       "name": "--color-alert-200",
       "prefix": "color",
-      "value": "#ffebeb",
+      "value": "rgb(193 18 31 / 12%)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 0,
@@ -307,8 +423,9 @@
     {
       "name": "--color-alert-500",
       "prefix": "color",
-      "value": "#db7070",
+      "value": "#ff6b74",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 1,
@@ -320,8 +437,9 @@
     {
       "name": "--color-alert-800",
       "prefix": "color",
-      "value": "#c35050",
+      "value": "#ff9aa0",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 10,
@@ -353,18 +471,43 @@
     {
       "name": "--color-brand-100",
       "prefix": "color",
-      "value": null,
-      "definedIn": [],
+      "value": "rgb(193 18 31 / 10%)",
+      "definedIn": [
+        "styles/styles.css"
+      ],
       "usageCount": 1,
       "usedIn": [
         "blocks/store-locator/store-locator.css"
       ],
-      "status": "referenced-without-definition"
+      "status": "defined"
+    },
+    {
+      "name": "--color-brand-200",
+      "prefix": "color",
+      "value": "#6b0b12",
+      "definedIn": [
+        "styles/styles.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
     },
     {
       "name": "--color-brand-300",
       "prefix": "color",
-      "value": "var(--ink-500)",
+      "value": "#8b0000",
+      "definedIn": [
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--color-brand-400",
+      "prefix": "color",
+      "value": "#a10f1a",
       "definedIn": [
         "styles/styles.css"
       ],
@@ -386,15 +529,15 @@
     {
       "name": "--color-brand-500",
       "prefix": "color",
-      "value": "var(--ink-700)",
+      "value": "#a10f1a",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 20,
+      "usageCount": 19,
       "usedIn": [
         "blocks/blog-post/blog-post.css",
         "blocks/circle-carousel/circle-carousel.css",
-        "blocks/commerce-checkout-success/commerce-checkout-success.css",
         "blocks/hero-cta/hero-cta.css",
         "blocks/newsletter/newsletter.css",
         "blocks/promotional-hero/promotional-hero.css",
@@ -406,53 +549,67 @@
     {
       "name": "--color-brand-600",
       "prefix": "color",
-      "value": "var(--ink-800)",
+      "value": "#c1121f",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 3,
+      "usageCount": 2,
       "usedIn": [
         "blocks/modal/modal.css",
-        "blocks/store-locator/store-locator.css",
-        "styles/styles.css"
+        "blocks/store-locator/store-locator.css"
       ],
       "status": "defined"
     },
     {
       "name": "--color-brand-700",
       "prefix": "color",
-      "value": "var(--ink-900)",
+      "value": "#d4202e",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 10,
+      "usageCount": 9,
       "usedIn": [
         "blocks/age-gate/age-gate.css",
         "blocks/age-verification/age-verification.css",
         "blocks/header/header.css",
         "blocks/product-list-page/product-list-page.css",
-        "scripts/components/pdp-input-options/pdp-input-options.css",
-        "styles/styles.css"
+        "scripts/components/pdp-input-options/pdp-input-options.css"
       ],
       "status": "defined"
     },
     {
       "name": "--color-brand-800",
       "prefix": "color",
-      "value": null,
-      "definedIn": [],
+      "value": "#e63946",
+      "definedIn": [
+        "styles/styles.css"
+      ],
       "usageCount": 2,
       "usedIn": [
         "blocks/age-gate/age-gate.css",
         "blocks/age-verification/age-verification.css"
       ],
-      "status": "referenced-without-definition"
+      "status": "defined"
+    },
+    {
+      "name": "--color-brand-900",
+      "prefix": "color",
+      "value": "#ff9ca3",
+      "definedIn": [
+        "styles/styles.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
     },
     {
       "name": "--color-button-active",
       "prefix": "color",
-      "value": "var(--color-brand-700)",
+      "value": "var(--gs-scarlet)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 2,
@@ -476,8 +633,9 @@
     {
       "name": "--color-button-focus",
       "prefix": "color",
-      "value": "var(--color-neutral-400)",
+      "value": "rgb(193 18 31 / 35%)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 0,
@@ -487,8 +645,9 @@
     {
       "name": "--color-button-hover",
       "prefix": "color",
-      "value": "var(--color-brand-600)",
+      "value": "var(--gs-scarlet-dark)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 1,
@@ -668,8 +827,9 @@
     {
       "name": "--color-informational-200",
       "prefix": "color",
-      "value": "#eeeffb",
+      "value": "rgb(110 153 255 / 10%)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 0,
@@ -679,8 +839,9 @@
     {
       "name": "--color-informational-500",
       "prefix": "color",
-      "value": "#6978d9",
+      "value": "#6e99ff",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 3,
@@ -694,8 +855,9 @@
     {
       "name": "--color-informational-800",
       "prefix": "color",
-      "value": "#5d6dd6",
+      "value": "#4d73d9",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 0,
@@ -812,8 +974,9 @@
     {
       "name": "--color-neutral-100",
       "prefix": "color",
-      "value": "var(--ink-50)",
+      "value": "var(--gs-s1)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 14,
@@ -834,8 +997,9 @@
     {
       "name": "--color-neutral-200",
       "prefix": "color",
-      "value": "#e8efe9",
+      "value": "var(--gs-s2)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 22,
@@ -854,11 +1018,12 @@
     {
       "name": "--color-neutral-300",
       "prefix": "color",
-      "value": "var(--ink-100)",
+      "value": "var(--gs-s3)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 18,
+      "usageCount": 17,
       "usedIn": [
         "blocks/blog-post/blog-post.css",
         "blocks/circle-carousel/circle-carousel.css",
@@ -876,32 +1041,32 @@
     {
       "name": "--color-neutral-400",
       "prefix": "color",
-      "value": "var(--ink-200)",
+      "value": "var(--gs-s4)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 13,
+      "usageCount": 9,
       "usedIn": [
         "blocks/age-gate/age-gate.css",
         "blocks/carousel/carousel.css",
         "blocks/commerce-account-nav/commerce-account-nav.css",
         "blocks/commerce-b2b-quote-checkout/commerce-b2b-quote-checkout.css",
-        "blocks/commerce-checkout/commerce-checkout.css",
         "blocks/header/header.css",
         "blocks/hero-cta/hero-cta.css",
-        "blocks/modal/modal.css",
-        "styles/styles.css"
+        "blocks/modal/modal.css"
       ],
       "status": "defined"
     },
     {
       "name": "--color-neutral-50",
       "prefix": "color",
-      "value": "#fff",
+      "value": "var(--gs-bg)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 66,
+      "usageCount": 63,
       "usedIn": [
         "blocks/age-gate/age-gate.css",
         "blocks/age-verification/age-verification.css",
@@ -910,7 +1075,6 @@
         "blocks/catalog-highlights/catalog-highlights.css",
         "blocks/circle-carousel/circle-carousel.css",
         "blocks/commerce-b2b-quote-checkout/commerce-b2b-quote-checkout.css",
-        "blocks/commerce-checkout/commerce-checkout.css",
         "blocks/features-grid/features-grid.css",
         "blocks/form/form.css",
         "blocks/header/header.css",
@@ -931,8 +1095,9 @@
     {
       "name": "--color-neutral-500",
       "prefix": "color",
-      "value": "var(--ink-300)",
+      "value": "#506276",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 13,
@@ -954,8 +1119,9 @@
     {
       "name": "--color-neutral-600",
       "prefix": "color",
-      "value": "var(--ink-400)",
+      "value": "#697b8f",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 13,
@@ -977,11 +1143,12 @@
     {
       "name": "--color-neutral-700",
       "prefix": "color",
-      "value": "var(--ink-500)",
+      "value": "var(--gs-text-secondary)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 40,
+      "usageCount": 39,
       "usedIn": [
         "blocks/accordion/accordion.css",
         "blocks/age-gate/age-gate.css",
@@ -993,7 +1160,6 @@
         "blocks/commerce-b2b-quote-checkout/commerce-b2b-quote-checkout.css",
         "blocks/commerce-b2b-requisition-list-view/commerce-b2b-requisition-list-view.css",
         "blocks/commerce-b2b-requisition-list/commerce-b2b-requisition-list.css",
-        "blocks/commerce-checkout-success/commerce-checkout-success.css",
         "blocks/commerce-company-credit/commerce-company-credit.css",
         "blocks/commerce-company-roles-permissions/commerce-company-roles-permissions.css",
         "blocks/commerce-company-structure/commerce-company-structure.css",
@@ -1013,17 +1179,17 @@
     {
       "name": "--color-neutral-800",
       "prefix": "color",
-      "value": "var(--ink-700)",
+      "value": "#d5dbe2",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 17,
+      "usageCount": 14,
       "usedIn": [
         "blocks/accordion/accordion.css",
         "blocks/age-gate/age-gate.css",
         "blocks/blog-post/blog-post.css",
         "blocks/commerce-b2b-quote-checkout/commerce-b2b-quote-checkout.css",
-        "blocks/commerce-checkout/commerce-checkout.css",
         "blocks/commerce-company-credit/commerce-company-credit.css",
         "blocks/hero-cta/hero-cta.css",
         "blocks/product-details/product-details.css",
@@ -1036,11 +1202,12 @@
     {
       "name": "--color-neutral-900",
       "prefix": "color",
-      "value": "var(--ink-900)",
+      "value": "var(--gs-text-primary)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 48,
+      "usageCount": 49,
       "usedIn": [
         "blocks/accordion/accordion.css",
         "blocks/blog-post/blog-post.css",
@@ -1066,7 +1233,8 @@
         "blocks/top-banner/top-banner.css",
         "blocks/vip-hero-block/vip-hero-block.css",
         "scripts/components/commerce-mini-pdp/commerce-mini-pdp.css",
-        "scripts/components/pdp-input-options/pdp-input-options.css"
+        "scripts/components/pdp-input-options/pdp-input-options.css",
+        "styles/styles.css"
       ],
       "status": "defined"
     },
@@ -1075,6 +1243,7 @@
       "prefix": "color",
       "value": "rgb(255 255 255 / 16%)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 0,
@@ -1086,6 +1255,7 @@
       "prefix": "color",
       "value": "rgb(255 255 255 / 24%)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 0,
@@ -1095,8 +1265,9 @@
     {
       "name": "--color-positive-200",
       "prefix": "color",
-      "value": "var(--green-50)",
+      "value": "rgb(52 198 120 / 12%)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 2,
@@ -1109,8 +1280,9 @@
     {
       "name": "--color-positive-500",
       "prefix": "color",
-      "value": "var(--green-300)",
+      "value": "#34c678",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 2,
@@ -1134,8 +1306,9 @@
     {
       "name": "--color-positive-800",
       "prefix": "color",
-      "value": "var(--green-600)",
+      "value": "#1f8e53",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 4,
@@ -1150,8 +1323,9 @@
     {
       "name": "--color-warning-200",
       "prefix": "color",
-      "value": "#fdf3e9",
+      "value": "rgb(201 162 39 / 12%)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 0,
@@ -1161,8 +1335,9 @@
     {
       "name": "--color-warning-500",
       "prefix": "color",
-      "value": "var(--gold-light)",
+      "value": "var(--gs-gold-light)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 1,
@@ -1174,8 +1349,9 @@
     {
       "name": "--color-warning-800",
       "prefix": "color",
-      "value": "var(--gold)",
+      "value": "var(--gs-gold)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 1,
@@ -1210,14 +1386,13 @@
     {
       "name": "--cream",
       "prefix": "cream",
-      "value": "#faf8f3",
+      "value": "#0a1017",
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 2,
+      "usageCount": 1,
       "usedIn": [
-        "blocks/catalog-highlights/catalog-highlights.css",
-        "styles/styles.css"
+        "blocks/catalog-highlights/catalog-highlights.css"
       ],
       "status": "defined"
     },
@@ -1315,13 +1490,37 @@
       "status": "defined"
     },
     {
+      "name": "--ease",
+      "prefix": "ease",
+      "value": "var(--gs-ease)",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css",
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 26,
+      "usedIn": [
+        "blocks/commerce-cart/commerce-cart.css",
+        "blocks/commerce-checkout/commerce-checkout.css",
+        "blocks/mcx-category-grid/mcx-category-grid.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-editorial-cards/mcx-editorial-cards.css",
+        "blocks/mcx-featured-collections/mcx-featured-collections.css",
+        "blocks/mcx-header/mcx-header.css",
+        "blocks/mcx-hero/mcx-hero.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css",
+        "styles/mcx-theme.css"
+      ],
+      "status": "defined"
+    },
+    {
       "name": "--ease-out",
       "prefix": "ease",
-      "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "value": "var(--gs-ease)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 122,
+      "usageCount": 121,
       "usedIn": [
         "blocks/accordion/accordion.css",
         "blocks/catalog-highlights/catalog-highlights.css",
@@ -1371,13 +1570,18 @@
       "prefix": "ease",
       "value": "cubic-bezier(0.34, 1.56, 0.64, 1)",
       "definedIn": [
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 21,
+      "usageCount": 25,
       "usedIn": [
         "blocks/catalog-highlights/catalog-highlights.css",
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
         "blocks/form/form.css",
         "blocks/hero-3/hero-3.css",
+        "blocks/mcx-category-grid/mcx-category-grid.css",
+        "blocks/mcx-header/mcx-header.css",
         "blocks/newsletter/newsletter.css",
         "blocks/product-highlights/product-highlights.css",
         "blocks/product-teaser/product-teaser.css",
@@ -1388,6 +1592,7 @@
         "blocks/video/video.css",
         "blocks/vip-hero-block/vip-hero-block.css",
         "blocks/vip-member-block/vip-member-block.css",
+        "styles/mcx-theme.css",
         "styles/styles.css"
       ],
       "status": "defined"
@@ -2060,23 +2265,65 @@
       "status": "defined"
     },
     {
-      "name": "--font-display",
+      "name": "--font-body",
       "prefix": "font",
-      "value": "var(--type-display-font-family)",
+      "value": "var(--gs-font-body)",
       "definedIn": [
+        "blocks/mcx-header/mcx-header.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 47,
+      "usageCount": 9,
+      "usedIn": [
+        "blocks/mcx-header/mcx-header.css",
+        "blocks/quiz-router-mccs/quiz-router-mccs.css",
+        "blocks/uniform-configurator/uniform-configurator.css",
+        "styles/mcx-theme.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--font-condensed",
+      "prefix": "font",
+      "value": "var(--gs-font-condensed)",
+      "definedIn": [
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 9,
+      "usedIn": [
+        "blocks/how-it-works-stats-2/how-it-works-stats-2.css",
+        "blocks/how-it-works-stats/how-it-works-stats.css",
+        "blocks/live-block-premium/live-block-premium.css",
+        "blocks/live-block/live-block.css",
+        "blocks/store-locator/store-locator.css",
+        "styles/styles.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--font-display",
+      "prefix": "font",
+      "value": "var(--gs-font-display)",
+      "definedIn": [
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 49,
       "usedIn": [
         "blocks/accordion/accordion.css",
         "blocks/features-grid/features-grid.css",
         "blocks/hero-5/hero-5.css",
+        "blocks/how-it-works-stats-2/how-it-works-stats-2.css",
+        "blocks/how-it-works-stats/how-it-works-stats.css",
         "blocks/live-block-premium/live-block-premium.css",
         "blocks/live-block/live-block.css",
         "blocks/luxury-configurator/luxury-configurator.css",
         "blocks/medal-rack-configurator/medal-rack-configurator.css",
         "blocks/product-highlights/product-highlights.css",
         "blocks/product-technical-details/product-technical-details.css",
+        "blocks/quiz-router-mccs/quiz-router-mccs.css",
         "blocks/quiz-router/quiz-router.css",
         "blocks/uniform-configurator/uniform-configurator.css",
         "blocks/vip-hero-block/vip-hero-block.css",
@@ -2087,15 +2334,108 @@
       "status": "defined"
     },
     {
+      "name": "--font-hero",
+      "prefix": "font",
+      "value": "var(--gs-font-display)",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css",
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 20,
+      "usedIn": [
+        "blocks/commerce-cart/commerce-cart.css",
+        "blocks/commerce-checkout-success/commerce-checkout-success.css",
+        "blocks/commerce-checkout/commerce-checkout.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-deal-countdown/mcx-deal-countdown.css",
+        "blocks/mcx-editorial-cards/mcx-editorial-cards.css",
+        "blocks/mcx-featured-collections/mcx-featured-collections.css",
+        "blocks/mcx-footer/mcx-footer.css",
+        "blocks/mcx-header/mcx-header.css",
+        "blocks/mcx-hero/mcx-hero.css",
+        "blocks/mcx-newsletter/mcx-newsletter.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css",
+        "blocks/mcx-promo-strip/mcx-promo-strip.css",
+        "styles/mcx-theme.css"
+      ],
+      "status": "defined"
+    },
+    {
       "name": "--font-mono",
       "prefix": "font",
-      "value": null,
-      "definedIn": [],
-      "usageCount": 1,
-      "usedIn": [
-        "blocks/accordion/accordion.css"
+      "value": "var(--gs-font-tactical)",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css",
+        "styles/mcx-theme.css"
       ],
-      "status": "referenced-without-definition"
+      "usageCount": 57,
+      "usedIn": [
+        "blocks/accordion/accordion.css",
+        "blocks/commerce-cart/commerce-cart.css",
+        "blocks/commerce-checkout-success/commerce-checkout-success.css",
+        "blocks/commerce-checkout/commerce-checkout.css",
+        "blocks/mcx-brands/mcx-brands.css",
+        "blocks/mcx-category-grid/mcx-category-grid.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-deal-countdown/mcx-deal-countdown.css",
+        "blocks/mcx-editorial-cards/mcx-editorial-cards.css",
+        "blocks/mcx-featured-collections/mcx-featured-collections.css",
+        "blocks/mcx-footer/mcx-footer.css",
+        "blocks/mcx-header/mcx-header.css",
+        "blocks/mcx-hero/mcx-hero.css",
+        "blocks/mcx-newsletter/mcx-newsletter.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css",
+        "blocks/mcx-promo-strip/mcx-promo-strip.css",
+        "blocks/mcx-ticker/mcx-ticker.css",
+        "styles/mcx-theme.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--font-tactical",
+      "prefix": "font",
+      "value": "var(--gs-font-tactical)",
+      "definedIn": [
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 9,
+      "usedIn": [
+        "blocks/live-block-premium/live-block-premium.css",
+        "blocks/live-block/live-block.css",
+        "blocks/luxury-configurator/luxury-configurator.css",
+        "blocks/mcx-announcement-bar/mcx-announcement-bar.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--font-ui",
+      "prefix": "font",
+      "value": "var(--gs-font-condensed)",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css",
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 43,
+      "usedIn": [
+        "blocks/commerce-cart/commerce-cart.css",
+        "blocks/commerce-checkout-success/commerce-checkout-success.css",
+        "blocks/commerce-checkout/commerce-checkout.css",
+        "blocks/mcx-benefits/mcx-benefits.css",
+        "blocks/mcx-brands/mcx-brands.css",
+        "blocks/mcx-category-grid/mcx-category-grid.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-deal-countdown/mcx-deal-countdown.css",
+        "blocks/mcx-editorial-cards/mcx-editorial-cards.css",
+        "blocks/mcx-featured-collections/mcx-featured-collections.css",
+        "blocks/mcx-header/mcx-header.css",
+        "blocks/mcx-hero/mcx-hero.css",
+        "blocks/mcx-newsletter/mcx-newsletter.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css",
+        "blocks/mcx-promo-strip/mcx-promo-strip.css",
+        "styles/mcx-theme.css"
+      ],
+      "status": "defined"
     },
     {
       "name": "--gap",
@@ -2111,11 +2451,12 @@
     {
       "name": "--glass-bg",
       "prefix": "glass",
-      "value": "rgb(255 255 255 / 58%)",
+      "value": "rgb(17 29 42 / 78%)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 20,
+      "usageCount": 18,
       "usedIn": [
         "blocks/accordion/accordion.css",
         "blocks/commerce-account-hub/commerce-account-hub.css",
@@ -2126,7 +2467,6 @@
         "blocks/newsletter/newsletter.css",
         "blocks/search-bar/search-bar.css",
         "blocks/search/search.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
         "blocks/vip-hero-block/vip-hero-block.css",
         "styles/styles.css"
       ],
@@ -2135,18 +2475,18 @@
     {
       "name": "--glass-bg-hover",
       "prefix": "glass",
-      "value": "rgb(255 255 255 / 72%)",
+      "value": "rgb(25 35 51 / 86%)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 11,
+      "usageCount": 9,
       "usedIn": [
         "blocks/accordion/accordion.css",
         "blocks/commerce-account-hub/commerce-account-hub.css",
         "blocks/form/form.css",
         "blocks/newsletter/newsletter.css",
         "blocks/search/search.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
         "blocks/vip-hero-block/vip-hero-block.css",
         "styles/styles.css"
       ],
@@ -2155,11 +2495,12 @@
     {
       "name": "--glass-bg-strong",
       "prefix": "glass",
-      "value": "rgb(255 255 255 / 84%)",
+      "value": "rgb(31 45 62 / 90%)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 26,
+      "usageCount": 24,
       "usedIn": [
         "blocks/commerce-account-hub/commerce-account-hub.css",
         "blocks/commerce-account-sidebar/commerce-account-sidebar.css",
@@ -2178,7 +2519,6 @@
         "blocks/hero-3/hero-3.css",
         "blocks/newsletter/newsletter.css",
         "blocks/search/search.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
         "blocks/vip-hero-block/vip-hero-block.css",
         "styles/styles.css"
       ],
@@ -2189,9 +2529,10 @@
       "prefix": "glass",
       "value": "blur(24px)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 9,
+      "usageCount": 8,
       "usedIn": [
         "blocks/header/header.css",
         "blocks/hero-3/hero-3.css",
@@ -2199,7 +2540,6 @@
         "blocks/product-teaser/product-teaser.css",
         "blocks/search-bar/search-bar.css",
         "blocks/search/search.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
         "styles/styles.css"
       ],
       "status": "defined"
@@ -2207,11 +2547,12 @@
     {
       "name": "--glass-blur-sm",
       "prefix": "glass",
-      "value": "blur(12px)",
+      "value": "blur(16px)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 13,
+      "usageCount": 12,
       "usedIn": [
         "blocks/accordion/accordion.css",
         "blocks/commerce-account-hub/commerce-account-hub.css",
@@ -2222,7 +2563,6 @@
         "blocks/hero-3/hero-3.css",
         "blocks/newsletter/newsletter.css",
         "blocks/search/search.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
         "blocks/vip-hero-block/vip-hero-block.css",
         "styles/styles.css"
       ],
@@ -2231,8 +2571,9 @@
     {
       "name": "--glass-blur-xs",
       "prefix": "glass",
-      "value": "blur(8px)",
+      "value": "blur(10px)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 13,
@@ -2254,8 +2595,9 @@
     {
       "name": "--glass-border",
       "prefix": "glass",
-      "value": "rgb(255 255 255 / 74%)",
+      "value": "var(--gs-border)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 15,
@@ -2276,8 +2618,9 @@
     {
       "name": "--glass-border-subtle",
       "prefix": "glass",
-      "value": "rgb(15 61 36 / 12%)",
+      "value": "var(--gs-border)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 29,
@@ -2307,8 +2650,9 @@
     {
       "name": "--glass-saturate",
       "prefix": "glass",
-      "value": "saturate(160%)",
+      "value": "saturate(140%)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 21,
@@ -2337,40 +2681,91 @@
     {
       "name": "--gold",
       "prefix": "gold",
-      "value": "#c9a84c",
+      "value": "var(--gs-gold)",
       "definedIn": [
+        "blocks/mcx-header/mcx-header.css",
+        "styles/mcx-theme.css",
         "styles/styles.css"
       ],
-      "usageCount": 21,
+      "usageCount": 37,
       "usedIn": [
         "blocks/catalog-highlights/catalog-highlights.css",
+        "blocks/commerce-cart/commerce-cart.css",
+        "blocks/commerce-checkout-success/commerce-checkout-success.css",
+        "blocks/commerce-checkout/commerce-checkout.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-deal-countdown/mcx-deal-countdown.css",
+        "blocks/mcx-featured-collections/mcx-featured-collections.css",
+        "blocks/mcx-footer/mcx-footer.css",
+        "blocks/mcx-header/mcx-header.css",
+        "blocks/mcx-hero/mcx-hero.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css",
+        "blocks/mcx-promo-strip/mcx-promo-strip.css",
         "blocks/medal-rack-configurator/medal-rack-configurator.css",
         "blocks/product-configurator-luxe/product-configurator-luxe.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
-        "styles/styles.css"
+        "styles/mcx-theme.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gold-border",
+      "prefix": "gold",
+      "value": "var(--gs-border-gold)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/mcx-hero/mcx-hero.css",
+        "styles/mcx-theme.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gold-dim",
+      "prefix": "gold",
+      "value": "var(--gs-gold-dim)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/mcx-hero/mcx-hero.css"
       ],
       "status": "defined"
     },
     {
       "name": "--gold-light",
       "prefix": "gold",
-      "value": "#e8c97a",
+      "value": "var(--gs-gold-light)",
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 4,
+      "usageCount": 2,
       "usedIn": [
         "blocks/medal-rack-configurator/medal-rack-configurator.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
-        "blocks/vip-member-block/vip-member-block.css",
-        "styles/styles.css"
+        "blocks/vip-member-block/vip-member-block.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gold-lt",
+      "prefix": "gold",
+      "value": "var(--gs-gold-light)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/mcx-deal-countdown/mcx-deal-countdown.css",
+        "styles/mcx-theme.css"
       ],
       "status": "defined"
     },
     {
       "name": "--green-100",
       "prefix": "green",
-      "value": "#a8edcc",
+      "value": "#ffd6d8",
       "definedIn": [
         "styles/styles.css"
       ],
@@ -2386,13 +2781,12 @@
     {
       "name": "--green-200",
       "prefix": "green",
-      "value": "#5fd49f",
+      "value": "#ff9ca3",
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 5,
+      "usageCount": 4,
       "usedIn": [
-        "blocks/footer/footer.css",
         "blocks/hero-6/hero-6.css",
         "blocks/quiz-router/quiz-router.css"
       ],
@@ -2401,96 +2795,89 @@
     {
       "name": "--green-300",
       "prefix": "green",
-      "value": "#2ebe7a",
+      "value": "#e63946",
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 14,
+      "usageCount": 13,
       "usedIn": [
         "blocks/commerce-account-hub/commerce-account-hub.css",
         "blocks/hero-6/hero-6.css",
-        "blocks/quiz-router/quiz-router.css",
-        "styles/styles.css"
+        "blocks/quiz-router/quiz-router.css"
       ],
       "status": "defined"
     },
     {
       "name": "--green-400",
       "prefix": "green",
-      "value": "#26a067",
+      "value": "#d4202e",
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 21,
+      "usageCount": 20,
       "usedIn": [
         "blocks/catalog-highlights/catalog-highlights.css",
         "blocks/hero-6/hero-6.css",
         "blocks/product-configurator-luxe/product-configurator-luxe.css",
         "blocks/quiz-router/quiz-router.css",
-        "blocks/vip-member-block/vip-member-block.css",
-        "styles/styles.css"
+        "blocks/vip-member-block/vip-member-block.css"
       ],
       "status": "defined"
     },
     {
       "name": "--green-50",
       "prefix": "green",
-      "value": "#e8faf2",
-      "definedIn": [
-        "styles/styles.css"
-      ],
-      "usageCount": 16,
-      "usedIn": [
-        "blocks/catalog-highlights/catalog-highlights.css",
-        "blocks/quiz-router/quiz-router.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
-        "blocks/vip-member-block-real-v2/vip-member-block-real-v2.css",
-        "blocks/vip-member-block/vip-member-block.css",
-        "styles/styles.css"
-      ],
-      "status": "defined"
-    },
-    {
-      "name": "--green-500",
-      "prefix": "green",
-      "value": "#1f7a4d",
-      "definedIn": [
-        "styles/styles.css"
-      ],
-      "usageCount": 33,
-      "usedIn": [
-        "blocks/catalog-highlights/catalog-highlights.css",
-        "blocks/commerce-account-hub/commerce-account-hub.css",
-        "blocks/header/header.css",
-        "blocks/quiz-router/quiz-router.css",
-        "blocks/vip-member-block-real-v2/vip-member-block-real-v2.css",
-        "blocks/vip-member-block/vip-member-block.css",
-        "styles/styles.css"
-      ],
-      "status": "defined"
-    },
-    {
-      "name": "--green-600",
-      "prefix": "green",
-      "value": "#1a6640",
+      "value": "rgb(193 18 31 / 8%)",
       "definedIn": [
         "styles/styles.css"
       ],
       "usageCount": 13,
       "usedIn": [
         "blocks/catalog-highlights/catalog-highlights.css",
+        "blocks/quiz-router/quiz-router.css",
+        "blocks/vip-member-block-real-v2/vip-member-block-real-v2.css",
+        "blocks/vip-member-block/vip-member-block.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--green-500",
+      "prefix": "green",
+      "value": "var(--gs-scarlet)",
+      "definedIn": [
+        "styles/styles.css"
+      ],
+      "usageCount": 32,
+      "usedIn": [
+        "blocks/catalog-highlights/catalog-highlights.css",
+        "blocks/commerce-account-hub/commerce-account-hub.css",
         "blocks/header/header.css",
         "blocks/quiz-router/quiz-router.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
-        "blocks/vip-member-block/vip-member-block.css",
+        "blocks/vip-member-block-real-v2/vip-member-block-real-v2.css",
+        "blocks/vip-member-block/vip-member-block.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--green-600",
+      "prefix": "green",
+      "value": "#a10f1a",
+      "definedIn": [
         "styles/styles.css"
+      ],
+      "usageCount": 10,
+      "usedIn": [
+        "blocks/catalog-highlights/catalog-highlights.css",
+        "blocks/header/header.css",
+        "blocks/quiz-router/quiz-router.css",
+        "blocks/vip-member-block/vip-member-block.css"
       ],
       "status": "defined"
     },
     {
       "name": "--green-700",
       "prefix": "green",
-      "value": "#155230",
+      "value": "var(--gs-scarlet-dark)",
       "definedIn": [
         "styles/styles.css"
       ],
@@ -2506,7 +2893,7 @@
     {
       "name": "--green-800",
       "prefix": "green",
-      "value": "#0f3d24",
+      "value": "#6b0b12",
       "definedIn": [
         "styles/styles.css"
       ],
@@ -2519,14 +2906,12 @@
     {
       "name": "--green-900",
       "prefix": "green",
-      "value": "#0a2918",
+      "value": "#4a0608",
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 1,
-      "usedIn": [
-        "blocks/uniform-configurator/uniform-configurator.css"
-      ],
+      "usageCount": 0,
+      "usedIn": [],
       "status": "defined"
     },
     {
@@ -2536,9 +2921,8 @@
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 5,
+      "usageCount": 4,
       "usedIn": [
-        "blocks/commerce-checkout-success/commerce-checkout-success.css",
         "blocks/product-details/product-details.css",
         "scripts/components/commerce-mini-pdp/commerce-mini-pdp.css"
       ],
@@ -2650,11 +3034,9 @@
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 3,
+      "usageCount": 1,
       "usedIn": [
-        "blocks/commerce-b2b-quote-checkout/commerce-b2b-quote-checkout.css",
-        "blocks/commerce-checkout-success/commerce-checkout-success.css",
-        "blocks/commerce-checkout/commerce-checkout.css"
+        "blocks/commerce-b2b-quote-checkout/commerce-b2b-quote-checkout.css"
       ],
       "status": "defined"
     },
@@ -2665,12 +3047,10 @@
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 5,
+      "usageCount": 3,
       "usedIn": [
         "blocks/commerce-b2b-quote-checkout/commerce-b2b-quote-checkout.css",
         "blocks/commerce-cart/commerce-cart.css",
-        "blocks/commerce-checkout-success/commerce-checkout-success.css",
-        "blocks/commerce-checkout/commerce-checkout.css",
         "styles/styles.css"
       ],
       "status": "defined"
@@ -2717,6 +3097,688 @@
       ],
       "usageCount": 0,
       "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-bg",
+      "prefix": "gs",
+      "value": "#060a0d",
+      "definedIn": [
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 12,
+      "usedIn": [
+        "blocks/footer/footer.css",
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-black",
+      "prefix": "gs",
+      "value": "#060a0d",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "usageCount": 4,
+      "usedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-border",
+      "prefix": "gs",
+      "value": "rgb(255 255 255 / 7%)",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 35,
+      "usedIn": [
+        "blocks/footer/footer.css",
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "blocks/guided-selling/guided-selling.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-border-gold",
+      "prefix": "gs",
+      "value": "rgb(201 162 39 / 22%)",
+      "definedIn": [
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 4,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-border-strong",
+      "prefix": "gs",
+      "value": "rgb(201 162 39 / 24%)",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-ease",
+      "prefix": "gs",
+      "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "definedIn": [
+        "styles/storefront-reference.css"
+      ],
+      "usageCount": 6,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "blocks/mcx-header/mcx-header.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-font-body",
+      "prefix": "gs",
+      "value": "\"Barlow\", system-ui, sans-serif",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 18,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "blocks/guided-selling/guided-selling.css",
+        "blocks/header/header.css",
+        "blocks/mcx-header/mcx-header.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-font-condensed",
+      "prefix": "gs",
+      "value": "\"Barlow Condensed\", \"Arial Narrow\", sans-serif",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 33,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "blocks/guided-selling/guided-selling.css",
+        "blocks/header/header.css",
+        "blocks/mcx-header/mcx-header.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-font-display",
+      "prefix": "gs",
+      "value": "\"Teko\", \"Impact\", sans-serif",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 14,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "blocks/guided-selling/guided-selling.css",
+        "blocks/header/header.css",
+        "blocks/mcx-header/mcx-header.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-font-tactical",
+      "prefix": "gs",
+      "value": "\"Rajdhani\", \"Barlow\", sans-serif",
+      "definedIn": [
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 16,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "blocks/header/header.css",
+        "blocks/mcx-header/mcx-header.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-font-tech",
+      "prefix": "gs",
+      "value": "'Rajdhani', 'Barlow', sans-serif",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "usageCount": 11,
+      "usedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-gold",
+      "prefix": "gs",
+      "value": "#c9a227",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 22,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "blocks/guided-selling/guided-selling.css",
+        "blocks/header/header.css",
+        "blocks/mcx-header/mcx-header.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-gold-dim",
+      "prefix": "gs",
+      "value": "rgb(201 162 39 / 12%)",
+      "definedIn": [
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-gold-light",
+      "prefix": "gs",
+      "value": "#e2c261",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 18,
+      "usedIn": [
+        "blocks/footer/footer.css",
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "blocks/guided-selling/guided-selling.css",
+        "blocks/header/header.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-r-lg",
+      "prefix": "gs",
+      "value": "14px",
+      "definedIn": [
+        "styles/storefront-reference.css"
+      ],
+      "usageCount": 5,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-r-md",
+      "prefix": "gs",
+      "value": "8px",
+      "definedIn": [
+        "styles/storefront-reference.css"
+      ],
+      "usageCount": 3,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-r-pill",
+      "prefix": "gs",
+      "value": "50px",
+      "definedIn": [
+        "styles/storefront-reference.css"
+      ],
+      "usageCount": 4,
+      "usedIn": [
+        "blocks/header/header.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-r-sm",
+      "prefix": "gs",
+      "value": "4px",
+      "definedIn": [
+        "styles/storefront-reference.css"
+      ],
+      "usageCount": 3,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-r-xl",
+      "prefix": "gs",
+      "value": "22px",
+      "definedIn": [
+        "styles/storefront-reference.css"
+      ],
+      "usageCount": 4,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-radius-lg",
+      "prefix": "gs",
+      "value": "18px",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-radius-md",
+      "prefix": "gs",
+      "value": "14px",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-radius-pill",
+      "prefix": "gs",
+      "value": "999px",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "usageCount": 10,
+      "usedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-radius-sm",
+      "prefix": "gs",
+      "value": "8px",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-s1",
+      "prefix": "gs",
+      "value": "#0d1520",
+      "definedIn": [
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 15,
+      "usedIn": [
+        "blocks/footer/footer.css",
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-s2",
+      "prefix": "gs",
+      "value": "#111d2a",
+      "definedIn": [
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 12,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-s3",
+      "prefix": "gs",
+      "value": "#192333",
+      "definedIn": [
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 9,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-s4",
+      "prefix": "gs",
+      "value": "#1f2d3e",
+      "definedIn": [
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 5,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-scarlet",
+      "prefix": "gs",
+      "value": "#c1121f",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 43,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "blocks/guided-selling/guided-selling.css",
+        "blocks/header/header.css",
+        "blocks/mcx-header/mcx-header.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-scarlet-dark",
+      "prefix": "gs",
+      "value": "#8b0000",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 7,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-scarlet-glow",
+      "prefix": "gs",
+      "value": "rgb(193 18 31 / 20%)",
+      "definedIn": [
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 3,
+      "usedIn": [
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-shadow-glow",
+      "prefix": "gs",
+      "value": "0 12px 34px rgb(193 18 31 / 24%)",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-shadow-soft",
+      "prefix": "gs",
+      "value": "0 14px 40px rgb(0 0 0 / 35%)",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-success",
+      "prefix": "gs",
+      "value": "#34c678",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-surface-1",
+      "prefix": "gs",
+      "value": "#0d1520",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-surface-2",
+      "prefix": "gs",
+      "value": "#111d2a",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-surface-3",
+      "prefix": "gs",
+      "value": "#192333",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "usageCount": 5,
+      "usedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-surface-4",
+      "prefix": "gs",
+      "value": "#1f2d3e",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "usageCount": 6,
+      "usedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-t",
+      "prefix": "gs",
+      "value": "0.28s var(--gs-ease)",
+      "definedIn": [
+        "styles/storefront-reference.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-t-slow",
+      "prefix": "gs",
+      "value": "0.55s var(--gs-ease)",
+      "definedIn": [
+        "styles/storefront-reference.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-text-muted",
+      "prefix": "gs",
+      "value": "#3e4e60",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 10,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "blocks/guided-selling/guided-selling.css",
+        "styles/mcx-theme.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-text-primary",
+      "prefix": "gs",
+      "value": "#f2ede5",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 42,
+      "usedIn": [
+        "blocks/footer/footer.css",
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "blocks/guided-selling/guided-selling.css",
+        "blocks/header/header.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-text-secondary",
+      "prefix": "gs",
+      "value": "#8595a6",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 30,
+      "usedIn": [
+        "blocks/footer/footer.css",
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "blocks/guided-selling/guided-selling.css",
+        "styles/mcx-theme.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--gs-transition",
+      "prefix": "gs",
+      "value": "0.28s cubic-bezier(0.4, 0, 0.2, 1)",
+      "definedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
+      "usageCount": 17,
+      "usedIn": [
+        "blocks/guided-selling/guided-selling.css"
+      ],
       "status": "defined"
     },
     {
@@ -3203,25 +4265,27 @@
     {
       "name": "--hiws-font-display",
       "prefix": "hiws",
-      "value": "\"Teko\", var(--type-base-font-family)",
-      "definedIn": [
-        "blocks/how-it-works-stats-2/how-it-works-stats-2.css"
-      ],
-      "usageCount": 1,
-      "usedIn": [
-        "blocks/how-it-works-stats-2/how-it-works-stats-2.css"
-      ],
-      "status": "defined"
-    },
-    {
-      "name": "--hiws-font-sora",
-      "prefix": "hiws",
-      "value": "\"Barlow Condensed\", var(--type-base-font-family)",
+      "value": "var(--font-display, var(--type-display-font-family, sans-serif))",
       "definedIn": [
         "blocks/how-it-works-stats-2/how-it-works-stats-2.css",
         "blocks/how-it-works-stats/how-it-works-stats.css"
       ],
-      "usageCount": 11,
+      "usageCount": 6,
+      "usedIn": [
+        "blocks/how-it-works-stats-2/how-it-works-stats-2.css",
+        "blocks/how-it-works-stats/how-it-works-stats.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--hiws-font-ui",
+      "prefix": "hiws",
+      "value": "var(--font-condensed, var(--type-base-font-family, sans-serif))",
+      "definedIn": [
+        "blocks/how-it-works-stats-2/how-it-works-stats-2.css",
+        "blocks/how-it-works-stats/how-it-works-stats.css"
+      ],
+      "usageCount": 6,
       "usedIn": [
         "blocks/how-it-works-stats-2/how-it-works-stats-2.css",
         "blocks/how-it-works-stats/how-it-works-stats.css"
@@ -3456,123 +4520,123 @@
       "status": "defined"
     },
     {
+      "name": "--ink",
+      "prefix": "ink",
+      "value": "var(--gs-s1)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 6,
+      "usedIn": [
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-hero/mcx-hero.css"
+      ],
+      "status": "defined"
+    },
+    {
       "name": "--ink-100",
       "prefix": "ink",
-      "value": "#d8e5da",
+      "value": "#d5dbe2",
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 6,
+      "usageCount": 5,
       "usedIn": [
         "blocks/catalog-highlights/catalog-highlights.css",
         "blocks/hero-6/hero-6.css",
         "blocks/quiz-router/quiz-router.css",
-        "blocks/vip-hero-block/vip-hero-block.css",
-        "styles/styles.css"
+        "blocks/vip-hero-block/vip-hero-block.css"
       ],
       "status": "defined"
     },
     {
       "name": "--ink-200",
       "prefix": "ink",
-      "value": "#b0c5b5",
+      "value": "#9aabba",
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 4,
-      "usedIn": [
-        "blocks/footer/footer.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
-        "styles/styles.css"
-      ],
+      "usageCount": 0,
+      "usedIn": [],
       "status": "defined"
     },
     {
       "name": "--ink-300",
       "prefix": "ink",
-      "value": "#7f9985",
+      "value": "#6f8294",
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 19,
+      "usageCount": 15,
       "usedIn": [
         "blocks/catalog-highlights/catalog-highlights.css",
-        "blocks/footer/footer.css",
         "blocks/hero-6/hero-6.css",
         "blocks/quiz-router/quiz-router.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
         "blocks/vip-hero-block/vip-hero-block.css",
         "blocks/vip-member-block-real-v2/vip-member-block-real-v2.css",
-        "blocks/vip-member-block/vip-member-block.css",
-        "styles/styles.css"
+        "blocks/vip-member-block/vip-member-block.css"
       ],
       "status": "defined"
     },
     {
       "name": "--ink-400",
       "prefix": "ink",
-      "value": "#5a7060",
+      "value": "#506276",
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 25,
+      "usageCount": 20,
       "usedIn": [
         "blocks/catalog-highlights/catalog-highlights.css",
         "blocks/hero-6/hero-6.css",
         "blocks/product-configurator-luxe/product-configurator-luxe.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
         "blocks/vip-member-block-real-v2/vip-member-block-real-v2.css",
-        "blocks/vip-member-block/vip-member-block.css",
-        "styles/styles.css"
+        "blocks/vip-member-block/vip-member-block.css"
       ],
       "status": "defined"
     },
     {
       "name": "--ink-50",
       "prefix": "ink",
-      "value": "#f2f7f3",
+      "value": "var(--gs-text-primary)",
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 8,
+      "usageCount": 7,
       "usedIn": [
         "blocks/catalog-highlights/catalog-highlights.css",
         "blocks/hero-6/hero-6.css",
-        "blocks/vip-member-block/vip-member-block.css",
-        "styles/styles.css"
+        "blocks/vip-member-block/vip-member-block.css"
       ],
       "status": "defined"
     },
     {
       "name": "--ink-500",
       "prefix": "ink",
-      "value": "#3d5342",
+      "value": "var(--gs-s3)",
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 21,
+      "usageCount": 17,
       "usedIn": [
         "blocks/product-configurator-luxe/product-configurator-luxe.css",
         "blocks/quiz-router/quiz-router.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
         "blocks/vip-member-block-real-v2/vip-member-block-real-v2.css",
-        "blocks/vip-member-block/vip-member-block.css",
-        "styles/styles.css"
+        "blocks/vip-member-block/vip-member-block.css"
       ],
       "status": "defined"
     },
     {
       "name": "--ink-600",
       "prefix": "ink",
-      "value": "#2d3d30",
+      "value": "var(--gs-s2)",
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 10,
+      "usageCount": 6,
       "usedIn": [
         "blocks/header/header.css",
         "blocks/product-configurator-luxe/product-configurator-luxe.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
         "blocks/vip-hero-block/vip-hero-block.css",
         "blocks/vip-member-block/vip-member-block.css"
       ],
@@ -3581,62 +4645,56 @@
     {
       "name": "--ink-700",
       "prefix": "ink",
-      "value": "#1f2b22",
+      "value": "var(--gs-s1)",
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 12,
+      "usageCount": 8,
       "usedIn": [
         "blocks/header/header.css",
         "blocks/medal-rack-configurator/medal-rack-configurator.css",
-        "blocks/product-configurator-luxe/product-configurator-luxe.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
-        "styles/styles.css"
+        "blocks/product-configurator-luxe/product-configurator-luxe.css"
       ],
       "status": "defined"
     },
     {
       "name": "--ink-800",
       "prefix": "ink",
-      "value": "#161d18",
+      "value": "#0a1118",
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 19,
+      "usageCount": 12,
       "usedIn": [
         "blocks/header/header.css",
         "blocks/product-configurator-luxe/product-configurator-luxe.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
         "blocks/vip-hero-block/vip-hero-block.css",
-        "blocks/vip-member-block/vip-member-block.css",
-        "styles/styles.css"
+        "blocks/vip-member-block/vip-member-block.css"
       ],
       "status": "defined"
     },
     {
       "name": "--ink-900",
       "prefix": "ink",
-      "value": "#0e1410",
+      "value": "var(--gs-bg)",
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 38,
+      "usageCount": 32,
       "usedIn": [
         "blocks/catalog-highlights/catalog-highlights.css",
         "blocks/product-configurator-luxe/product-configurator-luxe.css",
         "blocks/quiz-router/quiz-router.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
         "blocks/vip-hero-block/vip-hero-block.css",
         "blocks/vip-member-block-real-v2/vip-member-block-real-v2.css",
-        "blocks/vip-member-block/vip-member-block.css",
-        "styles/styles.css"
+        "blocks/vip-member-block/vip-member-block.css"
       ],
       "status": "defined"
     },
     {
       "name": "--ink-950",
       "prefix": "ink",
-      "value": "#080c0a",
+      "value": "#030507",
       "definedIn": [
         "styles/styles.css"
       ],
@@ -4119,11 +5177,12 @@
     {
       "name": "--main-color-accent",
       "prefix": "main",
-      "value": "var(--green-400)",
+      "value": "var(--gs-scarlet)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 16,
+      "usageCount": 15,
       "usedIn": [
         "blocks/commerce-account-hub/commerce-account-hub.css",
         "blocks/commerce-account-sidebar/commerce-account-sidebar.css",
@@ -4134,10 +5193,240 @@
         "blocks/commerce-company-structure/commerce-company-structure.css",
         "blocks/commerce-company-users/commerce-company-users.css",
         "blocks/form-4/form-4.css",
-        "blocks/promo-popup/promo-popup.css",
-        "styles/styles.css"
+        "blocks/promo-popup/promo-popup.css"
       ],
       "status": "defined"
+    },
+    {
+      "name": "--mcx-band-gutter",
+      "prefix": "mcx",
+      "value": "clamp(16px, 1.8vw, 28px)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 3,
+      "usedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mcx-header-copy-bright",
+      "prefix": "mcx",
+      "value": "rgb(249 251 255 / 98%)",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "usageCount": 10,
+      "usedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mcx-header-copy-muted",
+      "prefix": "mcx",
+      "value": "rgb(220 227 238 / 44%)",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "usageCount": 4,
+      "usedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mcx-header-copy-soft",
+      "prefix": "mcx",
+      "value": "rgb(228 234 242 / 76%)",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "usageCount": 3,
+      "usedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mcx-header-line",
+      "prefix": "mcx",
+      "value": "rgb(255 255 255 / 10%)",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "usageCount": 5,
+      "usedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mcx-header-line-strong",
+      "prefix": "mcx",
+      "value": "rgb(255 255 255 / 16%)",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "usageCount": 3,
+      "usedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mcx-header-max",
+      "prefix": "mcx",
+      "value": "1500px",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mcx-header-nav-bg",
+      "prefix": "mcx",
+      "value": "linear-gradient(180deg, rgb(15 24 36 / 98%) 0%, rgb(14 21 32 / 96%) 100%)",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mcx-header-pad",
+      "prefix": "mcx",
+      "value": "48px",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "usageCount": 6,
+      "usedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mcx-header-panel-bg",
+      "prefix": "mcx",
+      "value": "linear-gradient(180deg, rgb(21 31 45 / 99%) 0%, rgb(16 26 39 / 99%) 100%)",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mcx-header-panel-shadow",
+      "prefix": "mcx",
+      "value": "0 34px 92px rgb(0 0 0 / 58%),\n    0 1px 0 rgb(255 255 255 / 6%) inset",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mcx-header-search-bg",
+      "prefix": "mcx",
+      "value": "linear-gradient(180deg, rgb(29 41 60 / 98%) 0%, rgb(24 35 52 / 96%) 100%)",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mcx-header-search-card-bg",
+      "prefix": "mcx",
+      "value": "linear-gradient(180deg, rgb(25 36 51 / 98%) 0%, rgb(18 27 40 / 96%) 100%)",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mcx-header-search-card-border",
+      "prefix": "mcx",
+      "value": "rgb(255 255 255 / 8%)",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mcx-header-search-shortcut-bg",
+      "prefix": "mcx",
+      "value": "rgb(255 255 255 / 6%)",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mcx-header-shell-height",
+      "prefix": "mcx",
+      "value": null,
+      "definedIn": [],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "styles/mcx-theme.css"
+      ],
+      "status": "referenced-without-definition"
+    },
+    {
+      "name": "--mcx-header-top-bg",
+      "prefix": "mcx",
+      "value": "linear-gradient(180deg, rgb(6 13 21 / 98%) 0%, rgb(7 15 24 / 96%) 100%)",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mega-shift",
+      "prefix": "mega",
+      "value": null,
+      "definedIn": [],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "status": "referenced-without-definition"
     },
     {
       "name": "--minifiedView",
@@ -4442,6 +5731,513 @@
       "status": "defined"
     },
     {
+      "name": "--mpn-bg",
+      "prefix": "mpn",
+      "value": "var(--gs-bg, #060a0d)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-border",
+      "prefix": "mpn",
+      "value": "var(--gs-border, rgb(255 255 255 / 7%))",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-border-gold",
+      "prefix": "mpn",
+      "value": "var(--gs-border-gold, rgb(201 162 39 / 22%))",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-border-strong",
+      "prefix": "mpn",
+      "value": "rgb(255 255 255 / 16%)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-count-progress",
+      "prefix": "mpn",
+      "value": "1",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-danger",
+      "prefix": "mpn",
+      "value": "#ff98a0",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-ease",
+      "prefix": "mpn",
+      "value": "var(--gs-ease, cubic-bezier(0.4, 0, 0.2, 1))",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 3,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-field-bg",
+      "prefix": "mpn",
+      "value": "linear-gradient(180deg, rgb(19 31 45 / 96%) 0%, rgb(14 24 36 / 100%) 100%)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-field-bg-hover",
+      "prefix": "mpn",
+      "value": "linear-gradient(180deg, rgb(23 38 55 / 98%) 0%, rgb(17 27 40 / 100%) 100%)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-font-body",
+      "prefix": "mpn",
+      "value": "var(--gs-font-body, \"Barlow\", system-ui, sans-serif)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 11,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-font-display",
+      "prefix": "mpn",
+      "value": "var(--gs-font-display, \"Teko\", \"Impact\", sans-serif)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 5,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-font-mono",
+      "prefix": "mpn",
+      "value": "var(--gs-font-tactical, \"Rajdhani\", \"Barlow\", sans-serif)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 8,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-font-ui",
+      "prefix": "mpn",
+      "value": "var(--gs-font-condensed, \"Barlow Condensed\", \"Arial Narrow\", sans-serif)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 4,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-gold",
+      "prefix": "mpn",
+      "value": "var(--gs-gold, #c9a227)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 3,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-gold-light",
+      "prefix": "mpn",
+      "value": "var(--gs-gold-light, #e2c261)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 12,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-panel-bg",
+      "prefix": "mpn",
+      "value": "linear-gradient(180deg, rgb(18 29 42 / 92%) 0%, rgb(11 18 29 / 96%) 100%)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-r-lg",
+      "prefix": "mpn",
+      "value": "var(--gs-r-lg, 14px)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-r-md",
+      "prefix": "mpn",
+      "value": "var(--gs-r-md, 8px)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-r-shell",
+      "prefix": "mpn",
+      "value": "30px",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-r-sm",
+      "prefix": "mpn",
+      "value": "var(--gs-r-sm, 4px)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-r-xl",
+      "prefix": "mpn",
+      "value": "var(--gs-r-xl, 22px)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-scarlet",
+      "prefix": "mpn",
+      "value": "var(--gs-scarlet, #c1121f)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 5,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-scarlet-bright",
+      "prefix": "mpn",
+      "value": "#e03b47",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 3,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-scarlet-deep",
+      "prefix": "mpn",
+      "value": "var(--gs-scarlet-dark, #8b0000)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-shadow-card",
+      "prefix": "mpn",
+      "value": "0 22px 56px rgb(0 0 0 / 32%)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-shadow-gold",
+      "prefix": "mpn",
+      "value": "0 16px 40px rgb(201 162 39 / 15%)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 4,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-shadow-red",
+      "prefix": "mpn",
+      "value": "0 18px 44px rgb(193 18 31 / 24%)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 7,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-shadow-shell",
+      "prefix": "mpn",
+      "value": "0 32px 120px rgb(0 0 0 / 48%)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-shell-bg",
+      "prefix": "mpn",
+      "value": "linear-gradient(180deg, rgb(8 12 18 / 96%) 0%, rgb(13 21 32 / 98%) 100%)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-spring",
+      "prefix": "mpn",
+      "value": "var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1))",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-success",
+      "prefix": "mpn",
+      "value": "#3fd084",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-surface-1",
+      "prefix": "mpn",
+      "value": "var(--gs-s1, #0d1520)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-surface-2",
+      "prefix": "mpn",
+      "value": "var(--gs-s2, #111d2a)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-surface-3",
+      "prefix": "mpn",
+      "value": "var(--gs-s3, #192333)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-surface-4",
+      "prefix": "mpn",
+      "value": "var(--gs-s4, #1f2d3e)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-t-fast",
+      "prefix": "mpn",
+      "value": "0.2s var(--mpn-ease)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 5,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-t-mid",
+      "prefix": "mpn",
+      "value": "0.34s var(--mpn-ease)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 24,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-t-slow",
+      "prefix": "mpn",
+      "value": "0.6s var(--mpn-ease)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-text",
+      "prefix": "mpn",
+      "value": "var(--gs-text-primary, #f2ede5)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 16,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-text-dim",
+      "prefix": "mpn",
+      "value": "var(--gs-text-muted, #3e4e60)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--mpn-text-soft",
+      "prefix": "mpn",
+      "value": "var(--gs-text-secondary, #8595a6)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 12,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "status": "defined"
+    },
+    {
       "name": "--mrc-accent",
       "prefix": "mrc",
       "value": "var(--gold)",
@@ -4578,7 +6374,7 @@
       "definedIn": [
         "blocks/header/header.css"
       ],
-      "usageCount": 3,
+      "usageCount": 4,
       "usedIn": [
         "blocks/header/header.css"
       ],
@@ -4591,7 +6387,7 @@
       "definedIn": [
         "blocks/header/header.css"
       ],
-      "usageCount": 3,
+      "usageCount": 4,
       "usedIn": [
         "blocks/header/header.css"
       ],
@@ -4604,7 +6400,7 @@
       "definedIn": [
         "blocks/header/header.css"
       ],
-      "usageCount": 3,
+      "usageCount": 4,
       "usedIn": [
         "blocks/header/header.css"
       ],
@@ -4613,11 +6409,11 @@
     {
       "name": "--nav-height",
       "prefix": "nav",
-      "value": "6.4rem",
+      "value": "7.2rem",
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 21,
+      "usageCount": 23,
       "usedIn": [
         "blocks/blog-post/blog-post.css",
         "blocks/header/header.css",
@@ -4626,6 +6422,7 @@
         "blocks/medal-rack-configurator/medal-rack-configurator.css",
         "blocks/product-configurator-luxe/product-configurator-luxe.css",
         "blocks/store-locator/store-locator.css",
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "status": "defined"
@@ -4637,7 +6434,7 @@
       "definedIn": [
         "blocks/header/header.css"
       ],
-      "usageCount": 6,
+      "usageCount": 7,
       "usedIn": [
         "blocks/header/header.css"
       ],
@@ -4663,7 +6460,7 @@
       "definedIn": [
         "blocks/header/header.css"
       ],
-      "usageCount": 7,
+      "usageCount": 8,
       "usedIn": [
         "blocks/header/header.css"
       ],
@@ -4676,7 +6473,7 @@
       "definedIn": [
         "blocks/header/header.css"
       ],
-      "usageCount": 5,
+      "usageCount": 6,
       "usedIn": [
         "blocks/header/header.css"
       ],
@@ -4702,7 +6499,7 @@
       "definedIn": [
         "blocks/header/header.css"
       ],
-      "usageCount": 29,
+      "usageCount": 37,
       "usedIn": [
         "blocks/header/header.css"
       ],
@@ -4781,6 +6578,123 @@
         "blocks/header/header.css"
       ],
       "usageCount": 1,
+      "usedIn": [
+        "blocks/header/header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--nav-pill-bg",
+      "prefix": "nav",
+      "value": "linear-gradient(180deg, rgb(8 31 60 / 90%) 0%, rgb(8 24 47 / 84%) 100%)",
+      "definedIn": [
+        "blocks/header/header.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/header/header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--nav-pill-bg-hover",
+      "prefix": "nav",
+      "value": "linear-gradient(180deg, rgb(11 44 83 / 96%) 0%, rgb(9 31 59 / 90%) 100%)",
+      "definedIn": [
+        "blocks/header/header.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/header/header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--nav-pill-border",
+      "prefix": "nav",
+      "value": "rgb(117 150 198 / 18%)",
+      "definedIn": [
+        "blocks/header/header.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/header/header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--nav-pill-shadow",
+      "prefix": "nav",
+      "value": "0 1px 0 rgb(255 255 255 / 10%) inset,\n    0 18px 32px rgb(0 0 0 / 26%)",
+      "definedIn": [
+        "blocks/header/header.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/header/header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--nav-shell-glow",
+      "prefix": "nav",
+      "value": "radial-gradient(circle at 14% 0%, rgb(255 255 255 / 12%) 0%, rgb(255 255 255 / 0%) 36%),\n    radial-gradient(circle at 84% 0%, rgb(226 185 55 / 18%) 0%, rgb(226 185 55 / 0%) 28%)",
+      "definedIn": [
+        "blocks/header/header.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/header/header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--nav-tool-bg",
+      "prefix": "nav",
+      "value": "linear-gradient(180deg, rgb(255 255 255 / 12%) 0%, rgb(255 255 255 / 5%) 100%)",
+      "definedIn": [
+        "blocks/header/header.css"
+      ],
+      "usageCount": 3,
+      "usedIn": [
+        "blocks/header/header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--nav-tool-bg-hover",
+      "prefix": "nav",
+      "value": "linear-gradient(180deg, rgb(255 255 255 / 18%) 0%, rgb(255 255 255 / 8%) 100%)",
+      "definedIn": [
+        "blocks/header/header.css"
+      ],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/header/header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--nav-tool-border",
+      "prefix": "nav",
+      "value": "rgb(255 255 255 / 14%)",
+      "definedIn": [
+        "blocks/header/header.css"
+      ],
+      "usageCount": 3,
+      "usedIn": [
+        "blocks/header/header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--nav-tool-shadow",
+      "prefix": "nav",
+      "value": "0 1px 0 rgb(255 255 255 / 10%) inset,\n    0 18px 32px rgb(0 0 0 / 26%)",
+      "definedIn": [
+        "blocks/header/header.css"
+      ],
+      "usageCount": 3,
       "usedIn": [
         "blocks/header/header.css"
       ],
@@ -5400,6 +7314,17 @@
       "usedIn": [
         "blocks/promo-popup/promo-popup.css"
       ],
+      "status": "defined"
+    },
+    {
+      "name": "--primary",
+      "prefix": "primary",
+      "value": "hover {\n  background: linear-gradient(135deg, #d4202e 0%, var(--mpn-scarlet-bright) 100%)",
+      "definedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
       "status": "defined"
     },
     {
@@ -6205,7 +8130,7 @@
     {
       "name": "--qrm-body-font",
       "prefix": "qrm",
-      "value": "\"Barlow\", system-ui, sans-serif",
+      "value": "var(--font-body, var(--type-base-font-family, \"Barlow\", sans-serif))",
       "definedIn": [
         "blocks/quiz-router-mccs/quiz-router-mccs.css"
       ],
@@ -6244,7 +8169,7 @@
     {
       "name": "--qrm-display-font",
       "prefix": "qrm",
-      "value": "\"Iowan Old Style\", \"Palatino Linotype\", \"Book Antiqua\", georgia, serif",
+      "value": "var(--font-display, var(--type-display-font-family, \"Teko\", \"Impact\", sans-serif))",
       "definedIn": [
         "blocks/quiz-router-mccs/quiz-router-mccs.css"
       ],
@@ -6476,7 +8401,7 @@
     {
       "name": "--quiz-router-font-body",
       "prefix": "quiz",
-      "value": "var(--type-base-font-family, \"Barlow\", system-ui, sans-serif)",
+      "value": "var(--type-base-font-family, \"Barlow\", sans-serif)",
       "definedIn": [
         "blocks/quiz-router/quiz-router.css"
       ],
@@ -6591,12 +8516,231 @@
       "status": "defined"
     },
     {
+      "name": "--r-lg",
+      "prefix": "r",
+      "value": "var(--gs-r-lg)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 16,
+      "usedIn": [
+        "blocks/commerce-cart/commerce-cart.css",
+        "blocks/commerce-checkout-success/commerce-checkout-success.css",
+        "blocks/commerce-checkout/commerce-checkout.css",
+        "blocks/mcx-benefits/mcx-benefits.css",
+        "blocks/mcx-category-grid/mcx-category-grid.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "styles/mcx-theme.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--r-md",
+      "prefix": "r",
+      "value": "var(--gs-r-md)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 6,
+      "usedIn": [
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-footer/mcx-footer.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--r-pill",
+      "prefix": "r",
+      "value": "var(--gs-r-pill)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 9,
+      "usedIn": [
+        "blocks/commerce-cart/commerce-cart.css",
+        "blocks/commerce-checkout-success/commerce-checkout-success.css",
+        "blocks/commerce-checkout/commerce-checkout.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-promo-strip/mcx-promo-strip.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--r-sm",
+      "prefix": "r",
+      "value": "var(--gs-r-sm)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 12,
+      "usedIn": [
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-deal-countdown/mcx-deal-countdown.css",
+        "blocks/mcx-featured-collections/mcx-featured-collections.css",
+        "blocks/mcx-hero/mcx-hero.css",
+        "blocks/mcx-newsletter/mcx-newsletter.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css",
+        "blocks/mcx-promo-strip/mcx-promo-strip.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--r-xl",
+      "prefix": "r",
+      "value": "var(--gs-r-xl)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 11,
+      "usedIn": [
+        "blocks/commerce-cart/commerce-cart.css",
+        "blocks/commerce-checkout-success/commerce-checkout-success.css",
+        "blocks/commerce-checkout/commerce-checkout.css",
+        "blocks/mcx-category-grid/mcx-category-grid.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-deal-countdown/mcx-deal-countdown.css",
+        "blocks/mcx-featured-collections/mcx-featured-collections.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css"
+      ],
+      "status": "defined"
+    },
+    {
       "name": "--readonly",
       "prefix": "readonly",
       "value": "empty) {\n    display: none",
       "definedIn": [
-        "blocks/commerce-b2b-quote-checkout/commerce-b2b-quote-checkout.css",
-        "blocks/commerce-checkout/commerce-checkout.css"
+        "blocks/commerce-b2b-quote-checkout/commerce-b2b-quote-checkout.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--rim",
+      "prefix": "rim",
+      "value": "var(--gs-border)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 42,
+      "usedIn": [
+        "blocks/mcx-benefits/mcx-benefits.css",
+        "blocks/mcx-brands/mcx-brands.css",
+        "blocks/mcx-category-grid/mcx-category-grid.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-deal-countdown/mcx-deal-countdown.css",
+        "blocks/mcx-footer/mcx-footer.css",
+        "blocks/mcx-hero/mcx-hero.css",
+        "blocks/mcx-newsletter/mcx-newsletter.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css",
+        "blocks/mcx-ticker/mcx-ticker.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--rim-gold",
+      "prefix": "rim",
+      "value": "var(--gs-border-gold)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 3,
+      "usedIn": [
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css",
+        "styles/mcx-theme.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--scarlet",
+      "prefix": "scarlet",
+      "value": "var(--gs-scarlet)",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css",
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 55,
+      "usedIn": [
+        "blocks/commerce-cart/commerce-cart.css",
+        "blocks/commerce-checkout-success/commerce-checkout-success.css",
+        "blocks/commerce-checkout/commerce-checkout.css",
+        "blocks/mcx-announcement-bar/mcx-announcement-bar.css",
+        "blocks/mcx-benefits/mcx-benefits.css",
+        "blocks/mcx-category-grid/mcx-category-grid.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-deal-countdown/mcx-deal-countdown.css",
+        "blocks/mcx-editorial-cards/mcx-editorial-cards.css",
+        "blocks/mcx-featured-collections/mcx-featured-collections.css",
+        "blocks/mcx-footer/mcx-footer.css",
+        "blocks/mcx-header/mcx-header.css",
+        "blocks/mcx-hero/mcx-hero.css",
+        "blocks/mcx-newsletter/mcx-newsletter.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css",
+        "blocks/mcx-promo-strip/mcx-promo-strip.css",
+        "blocks/mcx-ticker/mcx-ticker.css",
+        "styles/mcx-theme.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--scarlet-bright",
+      "prefix": "scarlet",
+      "value": "#e63946",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 16,
+      "usedIn": [
+        "blocks/commerce-cart/commerce-cart.css",
+        "blocks/commerce-checkout-success/commerce-checkout-success.css",
+        "blocks/commerce-checkout/commerce-checkout.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-hero/mcx-hero.css",
+        "blocks/mcx-newsletter/mcx-newsletter.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css",
+        "styles/mcx-theme.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--scarlet-deep",
+      "prefix": "scarlet",
+      "value": "var(--gs-scarlet-dark)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/mcx-announcement-bar/mcx-announcement-bar.css",
+        "blocks/mcx-promo-strip/mcx-promo-strip.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--scarlet-glow",
+      "prefix": "scarlet",
+      "value": "var(--gs-scarlet-glow)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 8,
+      "usedIn": [
+        "blocks/mcx-benefits/mcx-benefits.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-footer/mcx-footer.css",
+        "blocks/mcx-newsletter/mcx-newsletter.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css",
+        "styles/mcx-theme.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--scarlet-glow2",
+      "prefix": "scarlet",
+      "value": "rgb(193 18 31 / 8%)",
+      "definedIn": [
+        "styles/mcx-theme.css"
       ],
       "usageCount": 0,
       "usedIn": [],
@@ -6941,6 +9085,18 @@
       "status": "defined"
     },
     {
+      "name": "--secondary",
+      "prefix": "secondary",
+      "value": "hover,\n.checkout__aside .dropin-button--secondary:hover {\n  border-color: rgb(201 162 39 / 28%)",
+      "definedIn": [
+        "blocks/commerce-checkout/commerce-checkout.css",
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
       "name": "--sel",
       "prefix": "sel",
       "value": ":after {\n  content: '\\2713'",
@@ -6954,26 +9110,9 @@
     {
       "name": "--shadow-button",
       "prefix": "shadow",
-      "value": "0 4px 14px rgb(31 122 77 / 36%)",
+      "value": "0 8px 32px var(--gs-scarlet-glow)",
       "definedIn": [
-        "styles/styles.css"
-      ],
-      "usageCount": 8,
-      "usedIn": [
-        "blocks/form/form.css",
-        "blocks/hero-3/hero-3.css",
-        "blocks/newsletter/newsletter.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
-        "blocks/vip-hero-block/vip-hero-block.css",
-        "styles/styles.css"
-      ],
-      "status": "defined"
-    },
-    {
-      "name": "--shadow-button-hover",
-      "prefix": "shadow",
-      "value": "0 6px 20px rgb(31 122 77 / 48%)",
-      "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 6,
@@ -6981,25 +9120,61 @@
         "blocks/form/form.css",
         "blocks/hero-3/hero-3.css",
         "blocks/newsletter/newsletter.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
+        "blocks/vip-hero-block/vip-hero-block.css",
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--shadow-button-hover",
+      "prefix": "shadow",
+      "value": "0 14px 44px rgb(193 18 31 / 45%)",
+      "definedIn": [
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 5,
+      "usedIn": [
+        "blocks/form/form.css",
+        "blocks/hero-3/hero-3.css",
+        "blocks/newsletter/newsletter.css",
         "blocks/vip-hero-block/vip-hero-block.css",
         "styles/styles.css"
       ],
       "status": "defined"
     },
     {
-      "name": "--shadow-focus",
+      "name": "--shadow-card",
       "prefix": "shadow",
-      "value": "0 0 0 3px var(--color-neutral-50), 0 0 0 5px rgb(46 190 122 / 45%)",
+      "value": "0 16px 48px rgb(0 0 0 / 45%)",
       "definedIn": [
-        "styles/styles.css"
+        "styles/mcx-theme.css"
       ],
       "usageCount": 8,
+      "usedIn": [
+        "blocks/commerce-cart/commerce-cart.css",
+        "blocks/commerce-checkout-success/commerce-checkout-success.css",
+        "blocks/commerce-checkout/commerce-checkout.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css",
+        "styles/mcx-theme.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--shadow-focus",
+      "prefix": "shadow",
+      "value": "0 0 0 1px rgb(255 255 255 / 8%), 0 0 0 4px rgb(193 18 31 / 28%)",
+      "definedIn": [
+        "styles/storefront-reference.css",
+        "styles/styles.css"
+      ],
+      "usageCount": 7,
       "usedIn": [
         "blocks/form/form.css",
         "blocks/newsletter/newsletter.css",
         "blocks/search/search.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
         "blocks/vip-hero-block/vip-hero-block.css",
         "styles/styles.css"
       ],
@@ -7008,11 +9183,12 @@
     {
       "name": "--shadow-glass",
       "prefix": "shadow",
-      "value": "0 8px 32px rgb(0 0 0 / 10%)",
+      "value": "0 18px 48px rgb(0 0 0 / 38%)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 10,
+      "usageCount": 7,
       "usedIn": [
         "blocks/commerce-account-hub/commerce-account-hub.css",
         "blocks/commerce-account-sidebar/commerce-account-sidebar.css",
@@ -7020,7 +9196,6 @@
         "blocks/header/header.css",
         "blocks/hero-3/hero-3.css",
         "blocks/newsletter/newsletter.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
         "styles/styles.css"
       ],
       "status": "defined"
@@ -7028,25 +9203,61 @@
     {
       "name": "--shadow-glass-hover",
       "prefix": "shadow",
-      "value": "0 12px 40px rgb(0 0 0 / 14%)",
+      "value": "0 24px 60px rgb(0 0 0 / 46%)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 2,
+      "usageCount": 1,
       "usedIn": [
-        "blocks/hero-3/hero-3.css",
-        "blocks/uniform-configurator/uniform-configurator.css"
+        "blocks/hero-3/hero-3.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--shadow-gold",
+      "prefix": "shadow",
+      "value": "0 0 24px rgb(201 162 39 / 22%)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/mcx-deal-countdown/mcx-deal-countdown.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--shadow-red",
+      "prefix": "shadow",
+      "value": "0 0 32px rgb(193 18 31 / 28%), 0 8px 24px rgb(193 18 31 / 16%)",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css",
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 12,
+      "usedIn": [
+        "blocks/commerce-cart/commerce-cart.css",
+        "blocks/commerce-checkout-success/commerce-checkout-success.css",
+        "blocks/commerce-checkout/commerce-checkout.css",
+        "blocks/mcx-benefits/mcx-benefits.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-header/mcx-header.css",
+        "blocks/mcx-hero/mcx-hero.css",
+        "blocks/mcx-newsletter/mcx-newsletter.css",
+        "styles/mcx-theme.css"
       ],
       "status": "defined"
     },
     {
       "name": "--shape-border-radius-1",
       "prefix": "shape",
-      "value": "3px",
+      "value": "var(--gs-r-sm)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 27,
+      "usageCount": 26,
       "usedIn": [
         "blocks/age-gate/age-gate.css",
         "blocks/age-verification/age-verification.css",
@@ -7056,7 +9267,6 @@
         "blocks/hero-cta/hero-cta.css",
         "blocks/modal/modal.css",
         "blocks/top-banner/top-banner.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
         "blocks/vip-hero-block/vip-hero-block.css",
         "blocks/vip-member-block-real-v2/vip-member-block-real-v2.css",
         "blocks/vip-member-block/vip-member-block.css",
@@ -7068,11 +9278,12 @@
     {
       "name": "--shape-border-radius-2",
       "prefix": "shape",
-      "value": "8px",
+      "value": "var(--gs-r-md)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 57,
+      "usageCount": 52,
       "usedIn": [
         "blocks/age-gate/age-gate.css",
         "blocks/age-verification/age-verification.css",
@@ -7095,7 +9306,6 @@
         "blocks/form-4/form-4.css",
         "blocks/form-mccs-preferences/form-mccs-preferences.css",
         "blocks/form/form.css",
-        "blocks/header/header.css",
         "blocks/hero-3/hero-3.css",
         "blocks/hero-cta/hero-cta.css",
         "blocks/modal/modal.css",
@@ -7105,7 +9315,6 @@
         "blocks/search-bar/search-bar.css",
         "blocks/search/search.css",
         "blocks/store-locator/store-locator.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
         "blocks/vip-hero-block/vip-hero-block.css",
         "blocks/vip-member-block-real-v2/vip-member-block-real-v2.css",
         "blocks/vip-member-block/vip-member-block.css",
@@ -7116,11 +9325,12 @@
     {
       "name": "--shape-border-radius-3",
       "prefix": "shape",
-      "value": "24px",
+      "value": "var(--gs-r-xl)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 32,
+      "usageCount": 30,
       "usedIn": [
         "blocks/accordion/accordion.css",
         "blocks/commerce-account-hub/commerce-account-hub.css",
@@ -7137,7 +9347,6 @@
         "blocks/newsletter/newsletter.css",
         "blocks/product-teaser/product-teaser.css",
         "blocks/search-bar/search-bar.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
         "blocks/video/video.css",
         "styles/styles.css"
       ],
@@ -7199,11 +9408,10 @@
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 11,
+      "usageCount": 8,
       "usedIn": [
         "blocks/age-verification/age-verification.css",
         "blocks/commerce-b2b-quote-checkout/commerce-b2b-quote-checkout.css",
-        "blocks/commerce-checkout/commerce-checkout.css",
         "blocks/hero-cta/hero-cta.css",
         "blocks/promotional-hero/promotional-hero.css",
         "styles/styles.css"
@@ -7268,8 +9476,9 @@
     {
       "name": "--shape-shadow-1",
       "prefix": "shape",
-      "value": "0 0 16px 0 rgb(0 0 0 / 16%)",
+      "value": "0 10px 30px rgb(0 0 0 / 32%)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 3,
@@ -7283,8 +9492,9 @@
     {
       "name": "--shape-shadow-2",
       "prefix": "shape",
-      "value": "0 2px 16px 0 rgb(0 0 0 / 16%)",
+      "value": "0 18px 48px rgb(0 0 0 / 40%)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 2,
@@ -7297,8 +9507,9 @@
     {
       "name": "--shape-shadow-3",
       "prefix": "shape",
-      "value": "0 2px 3px 0 rgb(0 0 0 / 16%)",
+      "value": "0 6px 18px rgb(0 0 0 / 24%)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 0,
@@ -8201,12 +10412,11 @@
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 58,
+      "usageCount": 53,
       "usedIn": [
         "blocks/age-verification/age-verification.css",
         "blocks/blog-post/blog-post.css",
         "blocks/commerce-b2b-quote-checkout/commerce-b2b-quote-checkout.css",
-        "blocks/commerce-checkout/commerce-checkout.css",
         "blocks/hero-cta/hero-cta.css",
         "blocks/medal-rack-configurator/medal-rack-configurator.css",
         "blocks/newsletter/newsletter.css",
@@ -8240,12 +10450,11 @@
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 30,
+      "usageCount": 27,
       "usedIn": [
         "blocks/blog-post/blog-post.css",
         "blocks/commerce-b2b-po-checkout-success/commerce-b2b-po-checkout-success.css",
         "blocks/commerce-b2b-po-header/commerce-b2b-po-header.css",
-        "blocks/commerce-cart/commerce-cart.css",
         "blocks/commerce-create-return/commerce-create-return.css",
         "blocks/commerce-order-header/commerce-order-header.css",
         "blocks/commerce-return-header/commerce-return-header.css",
@@ -8254,7 +10463,6 @@
         "blocks/promotional-hero/promotional-hero.css",
         "blocks/quiz-router/quiz-router.css",
         "blocks/store-locator/store-locator.css",
-        "blocks/uniform-configurator/uniform-configurator.css",
         "blocks/vip-hero-block/vip-hero-block.css",
         "blocks/vip-member-block/vip-member-block.css",
         "styles/styles.css"
@@ -8268,7 +10476,7 @@
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 153,
+      "usageCount": 146,
       "usedIn": [
         "blocks/age-gate/age-gate.css",
         "blocks/age-verification/age-verification.css",
@@ -8285,8 +10493,6 @@
         "blocks/commerce-b2b-quote-checkout/commerce-b2b-quote-checkout.css",
         "blocks/commerce-b2b-requisition-list-view/commerce-b2b-requisition-list-view.css",
         "blocks/commerce-cart/commerce-cart.css",
-        "blocks/commerce-checkout-success/commerce-checkout-success.css",
-        "blocks/commerce-checkout/commerce-checkout.css",
         "blocks/commerce-company-credit/commerce-company-credit.css",
         "blocks/commerce-company-profile/commerce-company-profile.css",
         "blocks/commerce-company-roles-permissions/commerce-company-roles-permissions.css",
@@ -8321,7 +10527,7 @@
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 253,
+      "usageCount": 247,
       "usedIn": [
         "blocks/age-gate/age-gate.css",
         "blocks/age-verification/age-verification.css",
@@ -8340,7 +10546,6 @@
         "blocks/commerce-b2b-requisition-list-view/commerce-b2b-requisition-list-view.css",
         "blocks/commerce-b2b-requisition-list/commerce-b2b-requisition-list.css",
         "blocks/commerce-cart/commerce-cart.css",
-        "blocks/commerce-checkout-success/commerce-checkout-success.css",
         "blocks/commerce-checkout/commerce-checkout.css",
         "blocks/commerce-company-credit/commerce-company-credit.css",
         "blocks/commerce-company-profile/commerce-company-profile.css",
@@ -8388,15 +10593,13 @@
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 39,
+      "usageCount": 29,
       "usedIn": [
         "blocks/age-gate/age-gate.css",
         "blocks/age-verification/age-verification.css",
         "blocks/cards-list/cards-list.css",
         "blocks/cards/cards.css",
         "blocks/commerce-b2b-quote-checkout/commerce-b2b-quote-checkout.css",
-        "blocks/commerce-checkout-success/commerce-checkout-success.css",
-        "blocks/commerce-checkout/commerce-checkout.css",
         "blocks/footer/footer.css",
         "blocks/header/header.css",
         "blocks/promotional-hero/promotional-hero.css",
@@ -8426,7 +10629,7 @@
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 3,
+      "usageCount": 2,
       "usedIn": [
         "blocks/product-list-page/product-list-page.css",
         "blocks/uniform-configurator/uniform-configurator.css"
@@ -8440,7 +10643,7 @@
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 99,
+      "usageCount": 94,
       "usedIn": [
         "blocks/age-gate/age-gate.css",
         "blocks/age-verification/age-verification.css",
@@ -8454,7 +10657,6 @@
         "blocks/commerce-b2b-requisition-list-view/commerce-b2b-requisition-list-view.css",
         "blocks/commerce-b2b-requisition-list/commerce-b2b-requisition-list.css",
         "blocks/commerce-cart/commerce-cart.css",
-        "blocks/commerce-checkout/commerce-checkout.css",
         "blocks/commerce-company-credit/commerce-company-credit.css",
         "blocks/commerce-company-profile/commerce-company-profile.css",
         "blocks/commerce-company-roles-permissions/commerce-company-roles-permissions.css",
@@ -8514,10 +10716,9 @@
       "definedIn": [
         "styles/styles.css"
       ],
-      "usageCount": 6,
+      "usageCount": 5,
       "usedIn": [
         "blocks/carousel/carousel.css",
-        "blocks/commerce-checkout-success/commerce-checkout-success.css",
         "blocks/store-locator/store-locator.css",
         "scripts/components/commerce-mini-pdp/commerce-mini-pdp.css"
       ],
@@ -8585,6 +10786,175 @@
       "status": "defined"
     },
     {
+      "name": "--surface-1",
+      "prefix": "surface",
+      "value": "var(--gs-s1)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 8,
+      "usedIn": [
+        "blocks/mcx-benefits/mcx-benefits.css",
+        "blocks/mcx-brands/mcx-brands.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-footer/mcx-footer.css",
+        "blocks/mcx-hero/mcx-hero.css",
+        "styles/mcx-theme.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--surface-2",
+      "prefix": "surface",
+      "value": "var(--gs-s2)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 12,
+      "usedIn": [
+        "blocks/mcx-brands/mcx-brands.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-deal-countdown/mcx-deal-countdown.css",
+        "blocks/mcx-newsletter/mcx-newsletter.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css",
+        "blocks/mcx-ticker/mcx-ticker.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--surface-3",
+      "prefix": "surface",
+      "value": "var(--gs-s3)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 14,
+      "usedIn": [
+        "blocks/mcx-category-grid/mcx-category-grid.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-editorial-cards/mcx-editorial-cards.css",
+        "blocks/mcx-footer/mcx-footer.css",
+        "blocks/mcx-newsletter/mcx-newsletter.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css",
+        "styles/mcx-theme.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--surface-4",
+      "prefix": "surface",
+      "value": "var(--gs-s4)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 3,
+      "usedIn": [
+        "blocks/mcx-category-grid/mcx-category-grid.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--surface-5",
+      "prefix": "surface",
+      "value": "#263446",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/mcx-category-page/mcx-category-page.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--t-fast",
+      "prefix": "t",
+      "value": "0.18s",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css",
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 64,
+      "usedIn": [
+        "blocks/mcx-announcement-bar/mcx-announcement-bar.css",
+        "blocks/mcx-brands/mcx-brands.css",
+        "blocks/mcx-category-grid/mcx-category-grid.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-footer/mcx-footer.css",
+        "blocks/mcx-header/mcx-header.css",
+        "blocks/mcx-newsletter/mcx-newsletter.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--t-mid",
+      "prefix": "t",
+      "value": "0.32s",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css",
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 42,
+      "usedIn": [
+        "blocks/commerce-cart/commerce-cart.css",
+        "blocks/commerce-checkout/commerce-checkout.css",
+        "blocks/mcx-benefits/mcx-benefits.css",
+        "blocks/mcx-category-grid/mcx-category-grid.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-deal-countdown/mcx-deal-countdown.css",
+        "blocks/mcx-featured-collections/mcx-featured-collections.css",
+        "blocks/mcx-header/mcx-header.css",
+        "blocks/mcx-hero/mcx-hero.css",
+        "blocks/mcx-newsletter/mcx-newsletter.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css",
+        "blocks/mcx-promo-strip/mcx-promo-strip.css",
+        "styles/mcx-theme.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--t-slow",
+      "prefix": "t",
+      "value": "0.55s",
+      "definedIn": [
+        "blocks/mcx-header/mcx-header.css",
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/mcx-header/mcx-header.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--teal",
+      "prefix": "teal",
+      "value": "#34c678",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--teal-dim",
+      "prefix": "teal",
+      "value": "rgb(52 198 120 / 10%)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
       "name": "--tertiary",
       "prefix": "tertiary",
       "value": "hover {\n    background: rgb(46 190 122 / 16%)",
@@ -8593,6 +10963,55 @@
       ],
       "usageCount": 0,
       "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--text-body",
+      "prefix": "text",
+      "value": "var(--gs-text-secondary)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 29,
+      "usedIn": [
+        "blocks/commerce-cart/commerce-cart.css",
+        "blocks/commerce-checkout-success/commerce-checkout-success.css",
+        "blocks/commerce-checkout/commerce-checkout.css",
+        "blocks/mcx-brands/mcx-brands.css",
+        "blocks/mcx-category-grid/mcx-category-grid.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-deal-countdown/mcx-deal-countdown.css",
+        "blocks/mcx-footer/mcx-footer.css",
+        "blocks/mcx-hero/mcx-hero.css",
+        "blocks/mcx-newsletter/mcx-newsletter.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css",
+        "blocks/mcx-ticker/mcx-ticker.css",
+        "styles/mcx-theme.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--text-bright",
+      "prefix": "text",
+      "value": "var(--gs-text-primary)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 39,
+      "usedIn": [
+        "blocks/commerce-cart/commerce-cart.css",
+        "blocks/commerce-checkout-success/commerce-checkout-success.css",
+        "blocks/commerce-checkout/commerce-checkout.css",
+        "blocks/mcx-benefits/mcx-benefits.css",
+        "blocks/mcx-category-grid/mcx-category-grid.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-deal-countdown/mcx-deal-countdown.css",
+        "blocks/mcx-footer/mcx-footer.css",
+        "blocks/mcx-hero/mcx-hero.css",
+        "blocks/mcx-newsletter/mcx-newsletter.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css",
+        "styles/mcx-theme.css"
+      ],
       "status": "defined"
     },
     {
@@ -8605,6 +11024,41 @@
         "blocks/accordion/accordion.css"
       ],
       "status": "referenced-without-definition"
+    },
+    {
+      "name": "--text-dim",
+      "prefix": "text",
+      "value": "var(--gs-text-muted)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 38,
+      "usedIn": [
+        "blocks/commerce-checkout/commerce-checkout.css",
+        "blocks/mcx-benefits/mcx-benefits.css",
+        "blocks/mcx-brands/mcx-brands.css",
+        "blocks/mcx-category-grid/mcx-category-grid.css",
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-deal-countdown/mcx-deal-countdown.css",
+        "blocks/mcx-footer/mcx-footer.css",
+        "blocks/mcx-hero/mcx-hero.css",
+        "blocks/mcx-newsletter/mcx-newsletter.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css",
+        "blocks/mcx-ticker/mcx-ticker.css",
+        "styles/mcx-theme.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--text-ghost",
+      "prefix": "text",
+      "value": "rgb(255 255 255 / 4%)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
     },
     {
       "name": "--top-banner-bg",
@@ -8702,9 +11156,10 @@
       "prefix": "transition",
       "value": "0.2s",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 89,
+      "usageCount": 76,
       "usedIn": [
         "blocks/commerce-account-hub/commerce-account-hub.css",
         "blocks/commerce-account-sidebar/commerce-account-sidebar.css",
@@ -8731,6 +11186,7 @@
       "prefix": "transition",
       "value": "0.4s",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 7,
@@ -8746,6 +11202,7 @@
       "prefix": "transition",
       "value": "0.6s",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 0,
@@ -8755,11 +11212,12 @@
     {
       "name": "--type-base-font-family",
       "prefix": "type",
-      "value": "\"Barlow\", system-ui, sans-serif",
+      "value": "var(--gs-font-body)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 86,
+      "usageCount": 83,
       "usedIn": [
         "blocks/accordion/accordion.css",
         "blocks/age-gate/age-gate.css",
@@ -8770,6 +11228,7 @@
         "blocks/how-it-works-stats-2/how-it-works-stats-2.css",
         "blocks/how-it-works-stats/how-it-works-stats.css",
         "blocks/promo-popup/promo-popup.css",
+        "blocks/quiz-router-mccs/quiz-router-mccs.css",
         "blocks/quiz-router/quiz-router.css",
         "blocks/store-locator/store-locator.css",
         "scripts/components/commerce-mini-pdp/commerce-mini-pdp.css",
@@ -8780,16 +11239,18 @@
     {
       "name": "--type-body-1-default-font",
       "prefix": "type",
-      "value": "normal normal 500 1.8rem/2.88rem var(--type-base-font-family)",
+      "value": "normal normal 500 1.7rem/2.8rem var(--gs-font-body)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 29,
+      "usageCount": 33,
       "usedIn": [
         "blocks/age-gate/age-gate.css",
         "blocks/circle-carousel/circle-carousel.css",
         "blocks/commerce-b2b-quote-checkout/commerce-b2b-quote-checkout.css",
         "blocks/form-4/form-4.css",
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
         "blocks/form-mccs-preferences/form-mccs-preferences.css",
         "blocks/header/header.css",
         "blocks/newsletter/newsletter.css",
@@ -8801,6 +11262,7 @@
         "blocks/vip-hero-block/vip-hero-block.css",
         "scripts/components/commerce-mini-pdp/commerce-mini-pdp.css",
         "scripts/components/pdp-input-options/pdp-input-options.css",
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "status": "defined"
@@ -8821,6 +11283,7 @@
       "prefix": "type",
       "value": "0",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 16,
@@ -8842,8 +11305,9 @@
     {
       "name": "--type-body-1-emphasized-font",
       "prefix": "type",
-      "value": "normal normal 600 1.8rem/2.88rem var(--type-base-font-family)",
+      "value": "normal normal 700 1.7rem/2.8rem var(--gs-font-body)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 1,
@@ -8857,6 +11321,7 @@
       "prefix": "type",
       "value": "0",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 0,
@@ -8866,8 +11331,9 @@
     {
       "name": "--type-body-1-strong-font",
       "prefix": "type",
-      "value": "normal normal 600 1.8rem/2.88rem var(--type-base-font-family)",
+      "value": "normal normal 700 1.7rem/2.8rem var(--gs-font-body)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 19,
@@ -8894,6 +11360,7 @@
       "prefix": "type",
       "value": "0",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 13,
@@ -8912,11 +11379,12 @@
     {
       "name": "--type-body-2-default-font",
       "prefix": "type",
-      "value": "normal normal 500 1.6rem/2.56rem var(--type-base-font-family)",
+      "value": "normal normal 500 1.5rem/2.4rem var(--gs-font-body)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 65,
+      "usageCount": 71,
       "usedIn": [
         "blocks/age-gate/age-gate.css",
         "blocks/blog-post/blog-post.css",
@@ -8926,11 +11394,11 @@
         "blocks/commerce-account-sidebar/commerce-account-sidebar.css",
         "blocks/commerce-b2b-quote-checkout/commerce-b2b-quote-checkout.css",
         "blocks/commerce-b2b-requisition-list-view/commerce-b2b-requisition-list-view.css",
-        "blocks/commerce-checkout-success/commerce-checkout-success.css",
         "blocks/commerce-company-users/commerce-company-users.css",
         "blocks/commerce-mini-cart/commerce-mini-cart.css",
         "blocks/footer/footer.css",
         "blocks/form-4/form-4.css",
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
         "blocks/form-mccs-preferences/form-mccs-preferences.css",
         "blocks/hero-cta/hero-cta.css",
         "blocks/medal-rack-configurator/medal-rack-configurator.css",
@@ -8967,15 +11435,15 @@
       "prefix": "type",
       "value": "0",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 24,
+      "usageCount": 23,
       "usedIn": [
         "blocks/age-gate/age-gate.css",
         "blocks/blog-post/blog-post.css",
         "blocks/circle-carousel/circle-carousel.css",
         "blocks/commerce-b2b-quote-checkout/commerce-b2b-quote-checkout.css",
-        "blocks/commerce-checkout-success/commerce-checkout-success.css",
         "blocks/commerce-mini-cart/commerce-mini-cart.css",
         "blocks/footer/footer.css",
         "blocks/hero-cta/hero-cta.css",
@@ -8993,8 +11461,9 @@
     {
       "name": "--type-body-2-emphasized-font",
       "prefix": "type",
-      "value": "normal normal 600 1.6rem/2.56rem var(--type-base-font-family)",
+      "value": "normal normal 700 1.5rem/2.4rem var(--gs-font-body)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 4,
@@ -9011,6 +11480,7 @@
       "prefix": "type",
       "value": "0",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 3,
@@ -9024,20 +11494,20 @@
     {
       "name": "--type-body-2-strong-font",
       "prefix": "type",
-      "value": "normal normal 600 1.6rem/2.56rem var(--type-base-font-family)",
+      "value": "normal normal 700 1.5rem/2.4rem var(--gs-font-body)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 22,
+      "usageCount": 21,
       "usedIn": [
         "blocks/blog-post/blog-post.css",
         "blocks/commerce-account-hub/commerce-account-hub.css",
         "blocks/commerce-b2b-quote-checkout/commerce-b2b-quote-checkout.css",
         "blocks/commerce-b2b-requisition-list-view/commerce-b2b-requisition-list-view.css",
-        "blocks/commerce-checkout-success/commerce-checkout-success.css",
-        "blocks/commerce-checkout/commerce-checkout.css",
         "blocks/commerce-company-structure/commerce-company-structure.css",
         "blocks/form-4/form-4.css",
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
         "blocks/form-mccs-preferences/form-mccs-preferences.css",
         "blocks/header/header.css",
         "blocks/medal-rack-configurator/medal-rack-configurator.css",
@@ -9052,14 +11522,13 @@
       "prefix": "type",
       "value": "0",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 5,
+      "usageCount": 3,
       "usedIn": [
         "blocks/blog-post/blog-post.css",
         "blocks/commerce-b2b-quote-checkout/commerce-b2b-quote-checkout.css",
-        "blocks/commerce-checkout-success/commerce-checkout-success.css",
-        "blocks/commerce-checkout/commerce-checkout.css",
         "blocks/header/header.css"
       ],
       "status": "defined"
@@ -9067,41 +11536,53 @@
     {
       "name": "--type-button-1-font",
       "prefix": "type",
-      "value": "normal normal 500 2rem/2.8rem var(--type-base-font-family)",
+      "value": "normal normal 700 1.6rem/2rem var(--gs-font-condensed)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 1,
+      "usageCount": 4,
       "usedIn": [
-        "blocks/product-configurator-luxe/product-configurator-luxe.css"
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "blocks/header/header.css",
+        "blocks/product-configurator-luxe/product-configurator-luxe.css",
+        "styles/storefront-reference.css"
       ],
       "status": "defined"
     },
     {
       "name": "--type-button-1-letter-spacing",
       "prefix": "type",
-      "value": "0.08em",
+      "value": "0.14em",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 0,
-      "usedIn": [],
+      "usageCount": 3,
+      "usedIn": [
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
+        "blocks/header/header.css",
+        "styles/storefront-reference.css"
+      ],
       "status": "defined"
     },
     {
       "name": "--type-button-2-font",
       "prefix": "type",
-      "value": "normal normal 500 1.6rem/2.24rem var(--type-base-font-family)",
+      "value": "normal normal 700 1.4rem/1.8rem var(--gs-font-condensed)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 20,
+      "usageCount": 23,
       "usedIn": [
         "blocks/age-gate/age-gate.css",
         "blocks/age-verification/age-verification.css",
         "blocks/commerce-account-hub/commerce-account-hub.css",
         "blocks/form-4/form-4.css",
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
         "blocks/form-mccs-preferences/form-mccs-preferences.css",
+        "blocks/header/header.css",
         "blocks/hero-cta/hero-cta.css",
         "blocks/medal-rack-configurator/medal-rack-configurator.css",
         "blocks/newsletter/newsletter.css",
@@ -9120,14 +11601,16 @@
     {
       "name": "--type-button-2-letter-spacing",
       "prefix": "type",
-      "value": "0.08em",
+      "value": "0.14em",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 11,
+      "usageCount": 12,
       "usedIn": [
         "blocks/age-gate/age-gate.css",
         "blocks/age-verification/age-verification.css",
+        "blocks/header/header.css",
         "blocks/hero-cta/hero-cta.css",
         "blocks/product-teaser/product-teaser.css",
         "blocks/promotional-hero/promotional-hero.css",
@@ -9153,15 +11636,17 @@
     {
       "name": "--type-details-caption-1-font",
       "prefix": "type",
-      "value": "normal normal 500 1.4rem/2.1rem var(--type-base-font-family)",
+      "value": "normal normal 500 1.2rem/1.8rem var(--gs-font-tactical)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 40,
+      "usageCount": 42,
       "usedIn": [
         "blocks/blog-post/blog-post.css",
         "blocks/commerce-account-hub/commerce-account-hub.css",
         "blocks/form-4/form-4.css",
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
         "blocks/form-mccs-preferences/form-mccs-preferences.css",
         "blocks/medal-rack-configurator/medal-rack-configurator.css",
         "blocks/product-configurator-luxe/product-configurator-luxe.css",
@@ -9180,8 +11665,9 @@
     {
       "name": "--type-details-caption-1-letter-spacing",
       "prefix": "type",
-      "value": "0.01em",
+      "value": "0.1em",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 18,
@@ -9199,11 +11685,12 @@
     {
       "name": "--type-details-caption-2-font",
       "prefix": "type",
-      "value": "normal normal 500 1.4rem/2.1rem var(--type-base-font-family)",
+      "value": "normal normal 500 1.2rem/1.8rem var(--gs-font-tactical)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 32,
+      "usageCount": 35,
       "usedIn": [
         "blocks/blog-post/blog-post.css",
         "blocks/commerce-account-hub/commerce-account-hub.css",
@@ -9212,6 +11699,7 @@
         "blocks/commerce-company-credit/commerce-company-credit.css",
         "blocks/commerce-company-structure/commerce-company-structure.css",
         "blocks/form-4/form-4.css",
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
         "blocks/form-mccs-preferences/form-mccs-preferences.css",
         "blocks/hero-cta/hero-cta.css",
         "blocks/medal-rack-configurator/medal-rack-configurator.css",
@@ -9223,8 +11711,9 @@
     {
       "name": "--type-details-caption-2-letter-spacing",
       "prefix": "type",
-      "value": "0.01em",
+      "value": "0.1em",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 8,
@@ -9239,11 +11728,12 @@
     {
       "name": "--type-details-overline-font",
       "prefix": "type",
-      "value": "normal normal 500 1.2rem/1.68rem var(--type-base-font-family)",
+      "value": "normal normal 700 1.15rem/1.65rem var(--gs-font-tactical)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 42,
+      "usageCount": 49,
       "usedIn": [
         "blocks/commerce-account-hub/commerce-account-hub.css",
         "blocks/commerce-b2b-requisition-list-view/commerce-b2b-requisition-list-view.css",
@@ -9251,36 +11741,43 @@
         "blocks/commerce-company-roles-permissions/commerce-company-roles-permissions.css",
         "blocks/commerce-company-users/commerce-company-users.css",
         "blocks/form-4/form-4.css",
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
         "blocks/form-mccs-preferences/form-mccs-preferences.css",
+        "blocks/header/header.css",
         "blocks/medal-rack-configurator/medal-rack-configurator.css",
         "blocks/product-configurator-luxe/product-configurator-luxe.css",
         "blocks/uniform-configurator/uniform-configurator.css",
         "blocks/vip-hero-block/vip-hero-block.css",
         "blocks/vip-hero-mccs/vip-hero-mccs.css",
         "blocks/vip-member-block-real-v2/vip-member-block-real-v2.css",
-        "blocks/vip-member-block/vip-member-block.css"
+        "blocks/vip-member-block/vip-member-block.css",
+        "styles/storefront-reference.css"
       ],
       "status": "defined"
     },
     {
       "name": "--type-details-overline-letter-spacing",
       "prefix": "type",
-      "value": "0.08em",
+      "value": "0.18em",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 10,
+      "usageCount": 13,
       "usedIn": [
+        "blocks/header/header.css",
         "blocks/vip-hero-block/vip-hero-block.css",
-        "blocks/vip-member-block/vip-member-block.css"
+        "blocks/vip-member-block/vip-member-block.css",
+        "styles/storefront-reference.css"
       ],
       "status": "defined"
     },
     {
       "name": "--type-display-1-font",
       "prefix": "type",
-      "value": "normal normal 700 6rem/6.3rem var(--type-display-font-family)",
+      "value": "normal normal 700 clamp(6.8rem, 8.8vw, 10.8rem)/0.82 var(--type-display-font-family)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 1,
@@ -9292,8 +11789,9 @@
     {
       "name": "--type-display-1-letter-spacing",
       "prefix": "type",
-      "value": "-0.03em",
+      "value": "0.012em",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 1,
@@ -9305,14 +11803,16 @@
     {
       "name": "--type-display-2-font",
       "prefix": "type",
-      "value": "normal normal 700 4.8rem/5.28rem var(--type-display-font-family)",
+      "value": "normal normal 700 clamp(4.8rem, 6vw, 7rem)/0.84 var(--type-display-font-family)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 8,
+      "usageCount": 9,
       "usedIn": [
         "blocks/blog-post/blog-post.css",
         "blocks/form-4/form-4.css",
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
         "blocks/form-mccs-preferences/form-mccs-preferences.css",
         "blocks/medal-rack-configurator/medal-rack-configurator.css",
         "blocks/uniform-configurator/uniform-configurator.css",
@@ -9323,8 +11823,9 @@
     {
       "name": "--type-display-2-letter-spacing",
       "prefix": "type",
-      "value": "-0.02em",
+      "value": "0.016em",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 4,
@@ -9339,14 +11840,16 @@
     {
       "name": "--type-display-3-font",
       "prefix": "type",
-      "value": "normal normal 500 3.4rem/4.08rem var(--type-display-font-family)",
+      "value": "normal normal 700 4rem/0.88 var(--type-display-font-family)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 10,
+      "usageCount": 11,
       "usedIn": [
         "blocks/blog-post/blog-post.css",
         "blocks/form-4/form-4.css",
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
         "blocks/form-mccs-preferences/form-mccs-preferences.css",
         "blocks/medal-rack-configurator/medal-rack-configurator.css",
         "blocks/product-configurator-luxe/product-configurator-luxe.css",
@@ -9359,8 +11862,9 @@
     {
       "name": "--type-display-3-letter-spacing",
       "prefix": "type",
-      "value": "-0.01em",
+      "value": "0.018em",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 7,
@@ -9376,25 +11880,30 @@
     {
       "name": "--type-display-font-family",
       "prefix": "type",
-      "value": "\"Teko\", var(--type-base-font-family)",
+      "value": "var(--gs-font-display)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 38,
+      "usageCount": 41,
       "usedIn": [
         "blocks/accordion/accordion.css",
         "blocks/catalog-highlights/catalog-highlights.css",
         "blocks/features-grid/features-grid.css",
         "blocks/hero-5/hero-5.css",
         "blocks/hero-6/hero-6.css",
+        "blocks/how-it-works-stats-2/how-it-works-stats-2.css",
+        "blocks/how-it-works-stats/how-it-works-stats.css",
         "blocks/live-block-premium/live-block-premium.css",
         "blocks/live-block/live-block.css",
         "blocks/luxury-configurator/luxury-configurator.css",
         "blocks/medal-rack-configurator/medal-rack-configurator.css",
         "blocks/product-highlights/product-highlights.css",
         "blocks/product-technical-details/product-technical-details.css",
+        "blocks/quiz-router-mccs/quiz-router-mccs.css",
         "blocks/quiz-router/quiz-router.css",
         "blocks/uniform-configurator/uniform-configurator.css",
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "status": "defined"
@@ -9415,20 +11924,23 @@
     {
       "name": "--type-headline-1-font",
       "prefix": "type",
-      "value": "normal normal 400 2.4rem/3.12rem var(--type-display-font-family)",
+      "value": "normal normal 700 clamp(3.2rem, 3vw, 4.4rem)/0.9 var(--gs-font-display)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 10,
+      "usageCount": 15,
       "usedIn": [
         "blocks/age-gate/age-gate.css",
         "blocks/age-verification/age-verification.css",
         "blocks/blog-post/blog-post.css",
         "blocks/form-4/form-4.css",
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
         "blocks/form-mccs-preferences/form-mccs-preferences.css",
         "blocks/header/header.css",
         "blocks/medal-rack-configurator/medal-rack-configurator.css",
         "blocks/vip-hero-block/vip-hero-block.css",
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "status": "defined"
@@ -9436,8 +11948,9 @@
     {
       "name": "--type-headline-1-letter-spacing",
       "prefix": "type",
-      "value": "0",
+      "value": "0.03em",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 7,
@@ -9476,15 +11989,15 @@
     {
       "name": "--type-headline-2-default-font",
       "prefix": "type",
-      "value": "normal normal 600 2rem/2.2rem var(--type-display-font-family)",
+      "value": "normal normal 700 2.05rem/1.12 var(--gs-font-condensed)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 17,
+      "usageCount": 16,
       "usedIn": [
         "blocks/blog-post/blog-post.css",
         "blocks/commerce-b2b-quote-checkout/commerce-b2b-quote-checkout.css",
-        "blocks/commerce-checkout/commerce-checkout.css",
         "blocks/header/header.css",
         "blocks/medal-rack-configurator/medal-rack-configurator.css",
         "blocks/product-configurator-luxe/product-configurator-luxe.css",
@@ -9496,15 +12009,15 @@
     {
       "name": "--type-headline-2-default-letter-spacing",
       "prefix": "type",
-      "value": "-0.01em",
+      "value": "0.08em",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 12,
+      "usageCount": 11,
       "usedIn": [
         "blocks/blog-post/blog-post.css",
         "blocks/commerce-b2b-quote-checkout/commerce-b2b-quote-checkout.css",
-        "blocks/commerce-checkout/commerce-checkout.css",
         "blocks/header/header.css",
         "blocks/medal-rack-configurator/medal-rack-configurator.css",
         "scripts/components/commerce-mini-pdp/commerce-mini-pdp.css",
@@ -9515,18 +12028,18 @@
     {
       "name": "--type-headline-2-strong-font",
       "prefix": "type",
-      "value": "normal normal 700 2rem/2.2rem var(--type-display-font-family)",
+      "value": "normal normal 700 2.05rem/1.12 var(--gs-font-condensed)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 29,
+      "usageCount": 28,
       "usedIn": [
         "blocks/commerce-account-hub/commerce-account-hub.css",
         "blocks/commerce-addresses/commerce-addresses.css",
         "blocks/commerce-b2b-quote-checkout/commerce-b2b-quote-checkout.css",
         "blocks/commerce-b2b-requisition-list-view/commerce-b2b-requisition-list-view.css",
         "blocks/commerce-b2b-requisition-list/commerce-b2b-requisition-list.css",
-        "blocks/commerce-checkout/commerce-checkout.css",
         "blocks/commerce-company-credit/commerce-company-credit.css",
         "blocks/commerce-company-profile/commerce-company-profile.css",
         "blocks/commerce-company-roles-permissions/commerce-company-roles-permissions.css",
@@ -9535,6 +12048,7 @@
         "blocks/commerce-customer-information/commerce-customer-information.css",
         "blocks/commerce-orders-list/commerce-orders-list.css",
         "blocks/form-4/form-4.css",
+        "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css",
         "blocks/form-mccs-preferences/form-mccs-preferences.css",
         "blocks/medal-rack-configurator/medal-rack-configurator.css",
         "blocks/newsletter/newsletter.css",
@@ -9548,14 +12062,14 @@
     {
       "name": "--type-headline-2-strong-letter-spacing",
       "prefix": "type",
-      "value": "-0.02em",
+      "value": "0.08em",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 10,
+      "usageCount": 8,
       "usedIn": [
         "blocks/commerce-b2b-quote-checkout/commerce-b2b-quote-checkout.css",
-        "blocks/commerce-checkout/commerce-checkout.css",
         "blocks/medal-rack-configurator/medal-rack-configurator.css",
         "blocks/newsletter/newsletter.css",
         "blocks/product-configurator-luxe/product-configurator-luxe.css",
@@ -9589,8 +12103,9 @@
     {
       "name": "--type-price-default-font",
       "prefix": "type",
-      "value": "normal normal 600 2.4rem/2.4rem var(--type-price-font-family)",
+      "value": "normal normal 700 2.4rem/2.4rem var(--type-price-font-family)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 2,
@@ -9603,16 +12118,21 @@
     {
       "name": "--type-price-font-family",
       "prefix": "type",
-      "value": "\"Barlow Condensed\", var(--type-base-font-family)",
+      "value": "var(--gs-font-condensed)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
-      "usageCount": 15,
+      "usageCount": 21,
       "usedIn": [
+        "blocks/live-block-premium/live-block-premium.css",
+        "blocks/live-block/live-block.css",
+        "blocks/luxury-configurator/luxury-configurator.css",
         "blocks/product-configurator-luxe/product-configurator-luxe.css",
         "blocks/product-details/product-details.css",
         "blocks/vip-member-block-real-v2/vip-member-block-real-v2.css",
         "blocks/vip-member-block/vip-member-block.css",
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "status": "defined"
@@ -9620,8 +12140,9 @@
     {
       "name": "--type-price-letter-spacing",
       "prefix": "type",
-      "value": "-0.01em",
+      "value": "0.01em",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 10,
@@ -9637,8 +12158,9 @@
     {
       "name": "--type-price-strong-font",
       "prefix": "type",
-      "value": "normal normal 600 2.4rem/2.4rem var(--type-price-font-family)",
+      "value": "normal normal 700 2.4rem/2.4rem var(--type-price-font-family)",
       "definedIn": [
+        "styles/storefront-reference.css",
         "styles/styles.css"
       ],
       "usageCount": 6,
@@ -9651,9 +12173,172 @@
       "status": "defined"
     },
     {
-      "name": "--uc-hero-max",
+      "name": "--uc-bg",
       "prefix": "uc",
-      "value": "1120px",
+      "value": "#f8f4ee",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-bg-strong",
+      "prefix": "uc",
+      "value": "#efe7db",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-border",
+      "prefix": "uc",
+      "value": "rgb(19 33 50 / 10%)",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 6,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-border-soft",
+      "prefix": "uc",
+      "value": "rgb(255 255 255 / 58%)",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 3,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-border-strong",
+      "prefix": "uc",
+      "value": "rgb(201 162 39 / 28%)",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-ease-out",
+      "prefix": "uc",
+      "value": "var(--ease-out, cubic-bezier(0.4, 0, 0.2, 1))",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 18,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-ease-spring",
+      "prefix": "uc",
+      "value": "var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1))",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 5,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-font-body",
+      "prefix": "uc",
+      "value": "'Barlow', var(--font-body, system-ui, sans-serif)",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-font-condensed",
+      "prefix": "uc",
+      "value": "'Barlow Condensed', var(--font-body, sans-serif)",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 4,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-font-display",
+      "prefix": "uc",
+      "value": "'Teko', var(--type-display-font-family), 'Impact', sans-serif",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 7,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-font-tactical",
+      "prefix": "uc",
+      "value": "'Rajdhani', var(--font-body, system-ui, sans-serif)",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 5,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-gold",
+      "prefix": "uc",
+      "value": "#c9a227",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 15,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-gold-glow",
+      "prefix": "uc",
+      "value": "rgb(201 162 39 / 22%)",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-gold-light",
+      "prefix": "uc",
+      "value": "#e2c261",
       "definedIn": [
         "blocks/uniform-configurator/uniform-configurator.css"
       ],
@@ -9664,9 +12349,74 @@
       "status": "defined"
     },
     {
+      "name": "--uc-gold-wash",
+      "prefix": "uc",
+      "value": "rgb(201 162 39 / 16%)",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-hero-max",
+      "prefix": "uc",
+      "value": "1140px",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-ink",
+      "prefix": "uc",
+      "value": "#0f1a24",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 15,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-ink-muted",
+      "prefix": "uc",
+      "value": "#7a8a9a",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 4,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-ink-soft",
+      "prefix": "uc",
+      "value": "#3d4d5e",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 9,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
       "name": "--uc-layout-gap-desktop",
       "prefix": "uc",
-      "value": "clamp(2rem, 2.8vw, 3.2rem)",
+      "value": "clamp(2.4rem, 3vw, 3.6rem)",
       "definedIn": [
         "blocks/uniform-configurator/uniform-configurator.css"
       ],
@@ -9677,7 +12427,7 @@
     {
       "name": "--uc-layout-gap-mobile",
       "prefix": "uc",
-      "value": "clamp(1.6rem, 2vw, 2rem)",
+      "value": "clamp(1.8rem, 2vw, 2.2rem)",
       "definedIn": [
         "blocks/uniform-configurator/uniform-configurator.css"
       ],
@@ -9686,13 +12436,200 @@
       "status": "defined"
     },
     {
-      "name": "--uc-shell-max",
+      "name": "--uc-progress",
       "prefix": "uc",
-      "value": "1288px",
+      "value": "16.666%",
       "definedIn": [
         "blocks/uniform-configurator/uniform-configurator.css"
       ],
       "usageCount": 1,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-scarlet",
+      "prefix": "uc",
+      "value": "#c1121f",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 11,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-scarlet-dark",
+      "prefix": "uc",
+      "value": "#8b0000",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-scarlet-glow",
+      "prefix": "uc",
+      "value": "rgb(193 18 31 / 18%)",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-shadow-button",
+      "prefix": "uc",
+      "value": "0 16px 36px rgb(193 18 31 / 24%), 0 6px 16px rgb(193 18 31 / 14%)",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 3,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-shadow-button-hover",
+      "prefix": "uc",
+      "value": "0 24px 48px rgb(193 18 31 / 30%), 0 8px 24px rgb(193 18 31 / 18%)",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-shadow-card",
+      "prefix": "uc",
+      "value": "0 24px 56px rgb(45 35 20 / 12%), 0 8px 24px rgb(45 35 20 / 6%)",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 4,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-shadow-card-hover",
+      "prefix": "uc",
+      "value": "0 32px 72px rgb(45 35 20 / 16%), 0 12px 32px rgb(45 35 20 / 10%)",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 2,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-shadow-focus",
+      "prefix": "uc",
+      "value": "0 0 0 4px rgb(193 18 31 / 14%)",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-shadow-gold",
+      "prefix": "uc",
+      "value": "0 16px 36px rgb(201 162 39 / 30%), 0 6px 16px rgb(201 162 39 / 16%)",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-shadow-shell",
+      "prefix": "uc",
+      "value": "0 48px 120px rgb(45 35 20 / 14%), 0 16px 48px rgb(45 35 20 / 8%)",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-shell-max",
+      "prefix": "uc",
+      "value": "1320px",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 1,
+      "usedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-surface",
+      "prefix": "uc",
+      "value": "rgb(255 252 247 / 96%)",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-surface-muted",
+      "prefix": "uc",
+      "value": "#f3ece3",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-surface-strong",
+      "prefix": "uc",
+      "value": "#fffdfa",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 0,
+      "usedIn": [],
+      "status": "defined"
+    },
+    {
+      "name": "--uc-transition",
+      "prefix": "uc",
+      "value": "0.25s",
+      "definedIn": [
+        "blocks/uniform-configurator/uniform-configurator.css"
+      ],
+      "usageCount": 22,
       "usedIn": [
         "blocks/uniform-configurator/uniform-configurator.css"
       ],
@@ -10174,6 +13111,24 @@
       "usedIn": [
         "blocks/vip-member-block-real-v2/vip-member-block-real-v2.css",
         "blocks/vip-member-block/vip-member-block.css"
+      ],
+      "status": "defined"
+    },
+    {
+      "name": "--void",
+      "prefix": "void",
+      "value": "var(--gs-bg)",
+      "definedIn": [
+        "styles/mcx-theme.css"
+      ],
+      "usageCount": 11,
+      "usedIn": [
+        "blocks/mcx-category-page/mcx-category-page.css",
+        "blocks/mcx-deal-countdown/mcx-deal-countdown.css",
+        "blocks/mcx-hero/mcx-hero.css",
+        "blocks/mcx-product-cards/mcx-product-cards.css",
+        "blocks/mcx-promo-strip/mcx-promo-strip.css",
+        "styles/mcx-theme.css"
       ],
       "status": "defined"
     },

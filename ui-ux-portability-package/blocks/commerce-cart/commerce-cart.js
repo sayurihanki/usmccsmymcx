@@ -59,6 +59,7 @@ export default async function decorate(block) {
   } = readBlockConfig(block);
 
   const placeholders = await fetchPlaceholders();
+  const checkoutHref = checkoutURL ? rootLink(checkoutURL) : rootLink('/checkout');
 
   const _cart = Cart.getCartDataFromCache();
 
@@ -71,6 +72,14 @@ export default async function decorate(block) {
 
   // Layout
   const fragment = document.createRange().createContextualFragment(`
+    <div class="cart__journey">
+      <div class="cart__journey-copy">
+        <span class="cart__journey-eyebrow">Step 0 · Cart Review</span>
+        <h1 class="cart__journey-title">Review the loadout before <span>secure checkout</span></h1>
+        <p class="cart__journey-body">Keep the real MCX cart behavior, then hand off into the new guided checkout when your order is ready.</p>
+      </div>
+      <a class="cart__journey-link" href="${checkoutHref}">Proceed to checkout</a>
+    </div>
     <div class="cart__notification"></div>
     <div class="cart__wrapper">
       <div class="cart__left-column">

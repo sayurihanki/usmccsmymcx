@@ -122,8 +122,73 @@ const CUSTOMER_GROUP_UID_QUERY = `
 
 const CUSTOMER_GROUP_UID_SESSION_KEY = 'DROPINS_CUSTOMER_GROUP_UID';
 const DEFAULT_GUEST_CUSTOMER_GROUP_UID = 'MA==';
+const CATALOG_SEARCH_INDEX_MISSING_MESSAGE = 'No index was found for this request';
 
 let customerGroupUidPromise;
+
+function queryUsesProductSearch(query) {
+  return typeof query === 'string' && /\bproductSearch\s*\(/.test(query);
+}
+
+function hasMissingCatalogIndexError(response) {
+  return Array.isArray(response?.errors)
+    && response.errors.some(
+      (error) => error?.message?.includes(CATALOG_SEARCH_INDEX_MISSING_MESSAGE),
+    );
+}
+
+function buildCatalogServiceEndpointForHeaders(baseEndpoint, headers) {
+  const endpoint = new URL(baseEndpoint || getConfigValue('commerce-endpoint'));
+  const normalizedHeaders = Object.fromEntries(
+    Object.entries(headers || {}).filter(([, value]) => value != null),
+  );
+
+  endpoint.searchParams.set('cb', createHashFromObject(normalizedHeaders));
+  return endpoint;
+}
+
+async function retryCatalogSearchWithoutStoreHeader(query, options = {}) {
+  const currentConfig = CS_FETCH_GRAPHQL.getConfig?.() || {};
+  const retryHeaders = { ...(currentConfig.fetchGraphQlHeaders || {}) };
+  const removedStoreHeader = retryHeaders.Store;
+
+  if (!removedStoreHeader) {
+    return null;
+  }
+
+  delete retryHeaders.Store;
+
+  const retryClient = new FetchGraphQL();
+  retryClient.setEndpoint(
+    buildCatalogServiceEndpointForHeaders(currentConfig.endpoint, retryHeaders),
+  );
+  retryClient.setFetchGraphQlHeaders(retryHeaders);
+
+  console.warn('Catalog Service productSearch returned no index; retrying without Store header.', {
+    removedStoreHeader,
+    storeView: retryHeaders['Magento-Store-View-Code'],
+  });
+
+  return retryClient.fetchGraphQl(query, options);
+}
+
+const originalCatalogServiceFetchGraphQl = CS_FETCH_GRAPHQL.fetchGraphQl.bind(CS_FETCH_GRAPHQL);
+
+CS_FETCH_GRAPHQL.fetchGraphQl = async (query, options = {}) => {
+  const response = await originalCatalogServiceFetchGraphQl(query, options);
+
+  if (!queryUsesProductSearch(query) || !hasMissingCatalogIndexError(response)) {
+    return response;
+  }
+
+  try {
+    const retryResponse = await retryCatalogSearchWithoutStoreHeader(query, options);
+    return retryResponse || response;
+  } catch (error) {
+    console.warn('Catalog Service productSearch retry failed.', { error });
+    return response;
+  }
+};
 
 async function hashCustomerGroupUid(customerGroupUid) {
   if (!customerGroupUid) {
@@ -218,7 +283,10 @@ function notifyUI(event) {
 export function detectPageType() {
   if (document.body.querySelector('main .product-details')) {
     return 'Product';
-  } if (document.body.querySelector('main .product-list-page')) {
+  } if (
+    document.body.querySelector('main .product-list-page')
+    || document.body.querySelector('main .mcx-category-page')
+  ) {
     return 'Category';
   } if (document.body.querySelector('main .commerce-cart')) {
     return 'Cart';

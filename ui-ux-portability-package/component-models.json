@@ -746,6 +746,37 @@
     ]
   },
   {
+    "id": "form-mccs-preferences-next",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Form Title",
+        "description": "Heading displayed on the left briefing panel. Use a newline to split the title across two lines.",
+        "value": "Personalize\nyour MCCS experience",
+        "required": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "subtitle",
+        "label": "Form Subtitle",
+        "description": "Supporting copy shown beneath the heading.",
+        "value": "Tell us about your military life, interests, and preferences. We will tailor shopping, events, and family programs around your world.",
+        "required": false
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "redirect",
+        "label": "Redirect URL",
+        "description": "Optional page to navigate to after successful submission.",
+        "required": false
+      }
+    ]
+  },
+  {
     "id": "form-mccs-preferences",
     "fields": [
       {
@@ -822,6 +853,74 @@
         "component": "text",
         "name": "fragmentUrlText",
         "label": "Fragment URL Text"
+      }
+    ]
+  },
+  {
+    "id": "guided-selling",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "eyebrow",
+        "label": "Eyebrow",
+        "value": "AI-Powered Style Match"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": "FIND YOUR\\nPERFECT\\nGEAR"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "subtitle",
+        "label": "Subtitle",
+        "value": "Answer 7 quick questions and we will build a personalized shopping list matched to your life, mission, and style."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "start-cta-label",
+        "label": "Start CTA Label",
+        "value": "Start Finding My Style"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "results-cta-label",
+        "label": "Results CTA Label",
+        "value": "Shop All Recommendations"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "results-cta-url",
+        "label": "Results CTA URL",
+        "value": "#shop-all"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "theme",
+        "label": "Theme",
+        "value": "dark"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "analytics-id",
+        "label": "Analytics ID",
+        "value": "mcx-guided-selling"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "data-source",
+        "label": "Data Source",
+        "value": "/data/guided-selling/mcx-style-match.json"
       }
     ]
   },
@@ -1715,6 +1814,102 @@
         "value": "/support"
       }
     ]
+  },
+  {
+    "id": "mcx-announcement-bar",
+    "fields": []
+  },
+  {
+    "id": "mcx-benefits",
+    "fields": []
+  },
+  {
+    "id": "mcx-brands",
+    "fields": []
+  },
+  {
+    "id": "mcx-category-grid",
+    "fields": []
+  },
+  {
+    "id": "mcx-category-page",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "urlPath",
+        "label": "URL Path",
+        "value": "apparel-footwear"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "eyebrow",
+        "label": "Eyebrow",
+        "value": "Apparel & Footwear"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": "GEAR UP.\\nDRESS RIGHT."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description",
+        "value": "Built for training, off-duty, and everyday mission support."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "hero-image-alt",
+        "label": "Hero Image Alt",
+        "value": "Apparel & Footwear category hero"
+      }
+    ]
+  },
+  {
+    "id": "mcx-deal-countdown",
+    "fields": []
+  },
+  {
+    "id": "mcx-editorial-cards",
+    "fields": []
+  },
+  {
+    "id": "mcx-featured-collections",
+    "fields": []
+  },
+  {
+    "id": "mcx-footer",
+    "fields": []
+  },
+  {
+    "id": "mcx-header",
+    "fields": []
+  },
+  {
+    "id": "mcx-hero",
+    "fields": []
+  },
+  {
+    "id": "mcx-newsletter",
+    "fields": []
+  },
+  {
+    "id": "mcx-product-cards",
+    "fields": []
+  },
+  {
+    "id": "mcx-promo-strip",
+    "fields": []
+  },
+  {
+    "id": "mcx-ticker",
+    "fields": []
   },
   {
     "id": "medal-rack-configurator",

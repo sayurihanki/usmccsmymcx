@@ -21,6 +21,10 @@ import { render as wishlistRender } from '@dropins/storefront-wishlist/render.js
 // Block-level
 import { readBlockConfig } from '../../scripts/aem.js';
 import { fetchPlaceholders, getProductLink } from '../../scripts/commerce.js';
+import {
+  getCartSkus,
+  getRecommendationBootstrapContext,
+} from './product-recommendations.lib.js';
 
 // Initializers
 import '../../scripts/initializers/recommendations.js';
@@ -293,10 +297,7 @@ export default async function decorate(block) {
   }
 
   function handleCartChanges({ shoppingCartContext }) {
-    const cartSkus = shoppingCartContext?.totalQuantity === 0
-      ? []
-      : shoppingCartContext?.items?.map(({ product }) => product.sku);
-    updateContext({ cartSkus });
+    updateContext({ cartSkus: getCartSkus(shoppingCartContext) });
   }
 
   window.adobeDataLayer.push((dl) => {
@@ -305,6 +306,15 @@ export default async function decorate(block) {
     dl.addEventListener('adobeDataLayer:change', handleCategoryChanges, { path: 'categoryContext' });
     dl.addEventListener('adobeDataLayer:change', handleCartChanges, { path: 'shoppingCartContext' });
   });
+
+  const bootstrapContext = getRecommendationBootstrapContext({
+    authoredCurrentSku: currentsku,
+    adobeDataLayer: window.adobeDataLayer,
+  });
+
+  if (Object.keys(bootstrapContext).length) {
+    updateContext(bootstrapContext);
+  }
 
   if (isMobile) {
     const section = block.closest('.section');

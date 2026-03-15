@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-14T09:37:34.086Z",
+  "generatedAt": "2026-03-15T19:02:55.113Z",
   "summary": {
     "totalPackages": 17,
     "undeclaredPackages": []
@@ -36,7 +36,7 @@
       "package": "@dropins/storefront-auth",
       "version": "~3.0.0",
       "source": "declared",
-      "importCount": 33,
+      "importCount": 36,
       "importSpecifiers": [
         "@dropins/storefront-auth/api.js",
         "@dropins/storefront-auth/containers/AuthCombine.js",
@@ -61,6 +61,8 @@
         "blocks/commerce-wishlist/commerce-wishlist.js",
         "blocks/header/renderAuthCombine.js",
         "blocks/header/renderAuthDropdown.js",
+        "blocks/mcx-header/auth-combine-modal.js",
+        "blocks/mcx-header/mcx-header.js",
         "scripts/initializers/auth.js"
       ]
     },
@@ -68,7 +70,7 @@
       "package": "@dropins/storefront-cart",
       "version": "~3.0.0",
       "source": "declared",
-      "importCount": 38,
+      "importCount": 39,
       "importSpecifiers": [
         "@dropins/storefront-cart/api.js",
         "@dropins/storefront-cart/containers/CartSummaryList.js",
@@ -91,6 +93,7 @@
         "blocks/header/header.js",
         "blocks/live-block/dashboard-core.js",
         "blocks/luxury-configurator/luxury-configurator.js",
+        "blocks/mcx-category-page/mcx-category-page.js",
         "blocks/product-configurator-luxe/product-configurator-luxe.js",
         "blocks/product-details/product-details.js",
         "blocks/product-list-page/product-list-page.js",
@@ -281,7 +284,7 @@
       "package": "@dropins/storefront-product-discovery",
       "version": "~3.0.0",
       "source": "declared",
-      "importCount": 13,
+      "importCount": 21,
       "importSpecifiers": [
         "@dropins/storefront-product-discovery/api.js",
         "@dropins/storefront-product-discovery/containers/Facets.js",
@@ -292,6 +295,8 @@
       ],
       "importedBy": [
         "blocks/header/header.js",
+        "blocks/mcx-category-page/mcx-category-page.js",
+        "blocks/mcx-header/mcx-header.js",
         "blocks/product-list-page/product-list-page.js",
         "blocks/search-bar/search-bar.js",
         "scripts/initializers/search.js"
@@ -404,7 +409,7 @@
       "package": "@dropins/storefront-wishlist",
       "version": "~3.0.0",
       "source": "declared",
-      "importCount": 14,
+      "importCount": 16,
       "importSpecifiers": [
         "@dropins/storefront-wishlist/api.js",
         "@dropins/storefront-wishlist/containers/Wishlist.js",
@@ -416,6 +421,7 @@
         "blocks/commerce-cart/commerce-cart.js",
         "blocks/commerce-wishlist/commerce-wishlist.js",
         "blocks/live-block/dashboard-core.js",
+        "blocks/mcx-category-page/mcx-category-page.js",
         "blocks/product-details/product-details.js",
         "blocks/product-list-page/product-list-page.js",
         "blocks/product-recommendations/product-recommendations.js",
@@ -426,7 +432,7 @@
       "package": "@dropins/tools",
       "version": "~1.6.0",
       "source": "declared",
-      "importCount": 163,
+      "importCount": 168,
       "importSpecifiers": [
         "@dropins/tools/components.js",
         "@dropins/tools/event-bus.js",
@@ -490,6 +496,9 @@
         "blocks/header/renderAuthDropdown.js",
         "blocks/live-block/dashboard-core.js",
         "blocks/luxury-configurator/luxury-configurator.js",
+        "blocks/mcx-category-page/mcx-category-page.js",
+        "blocks/mcx-header/auth-combine-modal.js",
+        "blocks/mcx-header/mcx-header.js",
         "blocks/modal/modal.js",
         "blocks/product-configurator-luxe/product-configurator-luxe.js",
         "blocks/product-details/product-details.js",

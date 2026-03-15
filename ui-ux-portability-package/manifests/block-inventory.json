@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-03-14T09:37:33.972Z",
+  "generatedAt": "2026-03-15T19:02:55.008Z",
   "summary": {
-    "totalBlocks": 115,
-    "withStyles": 115,
-    "withRuntime": 115,
+    "totalBlocks": 132,
+    "withStyles": 132,
+    "withRuntime": 132,
     "byCategory": {
       "interactive-content": 10,
-      "content": 40,
+      "content": 56,
       "commerce": 55,
       "shell": 5,
-      "forms": 5
+      "forms": 6
     }
   },
   "blocks": [
@@ -1633,6 +1633,29 @@
       "fileCount": 5
     },
     {
+      "name": "form-mccs-preferences-next",
+      "category": "forms",
+      "subcategory": "authorable-forms",
+      "title": "Form MCCS Preferences Next",
+      "overview": "`form-mccs-preferences-next` keeps the existing MCCS preference flow intact while recasting the experience as a darker, more premium two-panel shell. The left rail acts as the briefing panel and progress tracker, while the right rail presents the active form card and success state.",
+      "sourcePath": "blocks/form-mccs-preferences-next",
+      "files": {
+        "css": [
+          "blocks/form-mccs-preferences-next/form-mccs-preferences-next.css"
+        ],
+        "js": [
+          "blocks/form-mccs-preferences-next/form-mccs-preferences-next.js"
+        ],
+        "json": [
+          "blocks/form-mccs-preferences-next/_form-mccs-preferences-next.json"
+        ],
+        "readme": "blocks/form-mccs-preferences-next/README.md"
+      },
+      "hasStyles": true,
+      "hasRuntime": true,
+      "fileCount": 5
+    },
+    {
       "name": "fragment",
       "category": "content",
       "subcategory": "general",
@@ -1654,6 +1677,31 @@
       "hasStyles": true,
       "hasRuntime": true,
       "fileCount": 4
+    },
+    {
+      "name": "guided-selling",
+      "category": "content",
+      "subcategory": "general",
+      "title": "Guided Selling",
+      "overview": "`guided-selling` is a dedicated MCX-style guided shopping block with:",
+      "sourcePath": "blocks/guided-selling",
+      "files": {
+        "css": [
+          "blocks/guided-selling/guided-selling.css"
+        ],
+        "js": [
+          "blocks/guided-selling/guided-selling.js",
+          "blocks/guided-selling/guided-selling.lib.js",
+          "blocks/guided-selling/guided-selling.sample.js"
+        ],
+        "json": [
+          "blocks/guided-selling/_guided-selling.json"
+        ],
+        "readme": "blocks/guided-selling/README.md"
+      },
+      "hasStyles": true,
+      "hasRuntime": true,
+      "fileCount": 6
     },
     {
       "name": "header",
@@ -1911,6 +1959,353 @@
       "fileCount": 5
     },
     {
+      "name": "mcx-announcement-bar",
+      "category": "content",
+      "subcategory": "general",
+      "title": "MCX Announcement Bar",
+      "overview": "The `mcx-announcement-bar` block renders the slim scrolling utility bar used at the top of the MCX experience for shipping, eligibility, and seasonal campaign messages. It reads plain text rows, duplicates them for a continuous marquee effect, and can optionally add a dismiss button that removes the entire section from the page.",
+      "sourcePath": "blocks/mcx-announcement-bar",
+      "files": {
+        "css": [
+          "blocks/mcx-announcement-bar/mcx-announcement-bar.css"
+        ],
+        "js": [
+          "blocks/mcx-announcement-bar/mcx-announcement-bar.js"
+        ],
+        "json": [
+          "blocks/mcx-announcement-bar/_mcx-announcement-bar.json"
+        ],
+        "readme": "blocks/mcx-announcement-bar/README.md"
+      },
+      "hasStyles": true,
+      "hasRuntime": true,
+      "fileCount": 4
+    },
+    {
+      "name": "mcx-benefits",
+      "category": "content",
+      "subcategory": "general",
+      "title": "MCX Benefits",
+      "overview": "The `mcx-benefits` block renders the compact MCX value-proposition bar that calls out tax-free shopping, shipping perks, quality, and community impact. Each row becomes one benefit item with an icon, a headline, and a supporting subtitle.",
+      "sourcePath": "blocks/mcx-benefits",
+      "files": {
+        "css": [
+          "blocks/mcx-benefits/mcx-benefits.css"
+        ],
+        "js": [
+          "blocks/mcx-benefits/mcx-benefits.js"
+        ],
+        "json": [
+          "blocks/mcx-benefits/_mcx-benefits.json"
+        ],
+        "readme": "blocks/mcx-benefits/README.md"
+      },
+      "hasStyles": true,
+      "hasRuntime": true,
+      "fileCount": 4
+    },
+    {
+      "name": "mcx-brands",
+      "category": "content",
+      "subcategory": "general",
+      "title": "MCX Brands",
+      "overview": "The `mcx-brands` block renders the horizontal brand roster used to reinforce assortment and trust on MCX landing pages. Authors only provide the brand names. The heading copy is fixed in the block code.",
+      "sourcePath": "blocks/mcx-brands",
+      "files": {
+        "css": [
+          "blocks/mcx-brands/mcx-brands.css"
+        ],
+        "js": [
+          "blocks/mcx-brands/mcx-brands.js"
+        ],
+        "json": [
+          "blocks/mcx-brands/_mcx-brands.json"
+        ],
+        "readme": "blocks/mcx-brands/README.md"
+      },
+      "hasStyles": true,
+      "hasRuntime": true,
+      "fileCount": 4
+    },
+    {
+      "name": "mcx-category-grid",
+      "category": "content",
+      "subcategory": "general",
+      "title": "MCX Category Grid",
+      "overview": "The `mcx-category-grid` block renders the browseable merchandising grid used to send shoppers into major storefront categories. It supports an optional section header plus a grid of icon-led category tiles.",
+      "sourcePath": "blocks/mcx-category-grid",
+      "files": {
+        "css": [
+          "blocks/mcx-category-grid/mcx-category-grid.css"
+        ],
+        "js": [
+          "blocks/mcx-category-grid/mcx-category-grid.js"
+        ],
+        "json": [
+          "blocks/mcx-category-grid/_mcx-category-grid.json"
+        ],
+        "readme": "blocks/mcx-category-grid/README.md"
+      },
+      "hasStyles": true,
+      "hasRuntime": true,
+      "fileCount": 4
+    },
+    {
+      "name": "mcx-category-page",
+      "category": "content",
+      "subcategory": "general",
+      "title": "MCX Category Page",
+      "overview": "The `mcx-category-page` block is the MCX-specific category landing experience for product discovery pages. It keeps the existing MCX shell, theme, header, and footer, but replaces the generic category body with a tactical layout that includes breadcrumb, hero, authored tabs, sticky Commerce facets, active-filter chips, sort controls, grid or list product views, and Commerce pagination. The page uses real Adobe Commerce product-discovery drop-ins for search state, filtering, sort, pagination, wishlist, and add-to-cart behavior while rendering a custom MCX card layout from the live search payload.",
+      "sourcePath": "blocks/mcx-category-page",
+      "files": {
+        "css": [
+          "blocks/mcx-category-page/mcx-category-page.css"
+        ],
+        "js": [
+          "blocks/mcx-category-page/mcx-category-page.js",
+          "blocks/mcx-category-page/mcx-category-page.lib.js"
+        ],
+        "json": [
+          "blocks/mcx-category-page/_mcx-category-page.json"
+        ],
+        "readme": "blocks/mcx-category-page/README.md"
+      },
+      "hasStyles": true,
+      "hasRuntime": true,
+      "fileCount": 5
+    },
+    {
+      "name": "mcx-deal-countdown",
+      "category": "content",
+      "subcategory": "general",
+      "title": "MCX Deal Countdown",
+      "overview": "The `mcx-deal-countdown` block renders the MCX urgency strip for limited-time campaigns. Authors provide the promotional copy, the countdown end time, and the CTA. The timer behavior is activated by `scripts/mcx-ui.js` on MCX pages and MCX block-library previews.",
+      "sourcePath": "blocks/mcx-deal-countdown",
+      "files": {
+        "css": [
+          "blocks/mcx-deal-countdown/mcx-deal-countdown.css"
+        ],
+        "js": [
+          "blocks/mcx-deal-countdown/mcx-deal-countdown.js"
+        ],
+        "json": [
+          "blocks/mcx-deal-countdown/_mcx-deal-countdown.json"
+        ],
+        "readme": "blocks/mcx-deal-countdown/README.md"
+      },
+      "hasStyles": true,
+      "hasRuntime": true,
+      "fileCount": 4
+    },
+    {
+      "name": "mcx-editorial-cards",
+      "category": "content",
+      "subcategory": "general",
+      "title": "MCX Editorial Cards",
+      "overview": "The `mcx-editorial-cards` block renders the large story-driven card grid used for editorial merchandising and supporting content on MCX landing pages. Each row becomes one image card with an index, a tag, a headline, and a description.",
+      "sourcePath": "blocks/mcx-editorial-cards",
+      "files": {
+        "css": [
+          "blocks/mcx-editorial-cards/mcx-editorial-cards.css"
+        ],
+        "js": [
+          "blocks/mcx-editorial-cards/mcx-editorial-cards.js"
+        ],
+        "json": [
+          "blocks/mcx-editorial-cards/_mcx-editorial-cards.json"
+        ],
+        "readme": "blocks/mcx-editorial-cards/README.md"
+      },
+      "hasStyles": true,
+      "hasRuntime": true,
+      "fileCount": 4
+    },
+    {
+      "name": "mcx-featured-collections",
+      "category": "content",
+      "subcategory": "general",
+      "title": "MCX Featured Collections",
+      "overview": "The `mcx-featured-collections` block renders the editorial collection layout with one large lead card and two supporting cards. It supports an optional section label, title, and view-all link above the card layout.",
+      "sourcePath": "blocks/mcx-featured-collections",
+      "files": {
+        "css": [
+          "blocks/mcx-featured-collections/mcx-featured-collections.css"
+        ],
+        "js": [
+          "blocks/mcx-featured-collections/mcx-featured-collections.js"
+        ],
+        "json": [
+          "blocks/mcx-featured-collections/_mcx-featured-collections.json"
+        ],
+        "readme": "blocks/mcx-featured-collections/README.md"
+      },
+      "hasStyles": true,
+      "hasRuntime": true,
+      "fileCount": 4
+    },
+    {
+      "name": "mcx-footer",
+      "category": "content",
+      "subcategory": "general",
+      "title": "MCX Footer",
+      "overview": "The `mcx-footer` block is the tactical MCX footer shell. Authors place the block on the page, but the real content comes from the fragment referenced by page metadata. If the fragment is missing or cannot be loaded, the block falls back to bundled demo footer data so previews still render.",
+      "sourcePath": "blocks/mcx-footer",
+      "files": {
+        "css": [
+          "blocks/mcx-footer/mcx-footer.css"
+        ],
+        "js": [
+          "blocks/mcx-footer/mcx-footer.js"
+        ],
+        "json": [
+          "blocks/mcx-footer/_mcx-footer.json"
+        ],
+        "readme": "blocks/mcx-footer/README.md"
+      },
+      "hasStyles": true,
+      "hasRuntime": true,
+      "fileCount": 4
+    },
+    {
+      "name": "mcx-header",
+      "category": "content",
+      "subcategory": "general",
+      "title": "MCX Header",
+      "overview": "The `mcx-header` block is the tactical storefront header shell for the MCX experience. Like the footer, authors place the block on the page but manage the real navigation content through a fragment referenced in page metadata. If that fragment cannot be loaded, the block falls back to bundled demo navigation so previews still work.",
+      "sourcePath": "blocks/mcx-header",
+      "files": {
+        "css": [
+          "blocks/mcx-header/mcx-header.css"
+        ],
+        "js": [
+          "blocks/mcx-header/auth-combine-modal.js",
+          "blocks/mcx-header/mcx-header.js"
+        ],
+        "json": [
+          "blocks/mcx-header/_mcx-header.json"
+        ],
+        "readme": "blocks/mcx-header/README.md"
+      },
+      "hasStyles": true,
+      "hasRuntime": true,
+      "fileCount": 5
+    },
+    {
+      "name": "mcx-hero",
+      "category": "content",
+      "subcategory": "general",
+      "title": "MCX Hero",
+      "overview": "The `mcx-hero` block is the flagship MCX homepage hero. It supports a multi-line headline, tactical eyebrow, hero image, two CTAs, optional status badges, and up to four KPI stats. On MCX block-library preview URLs, the block can fall back to built-in demo content when no authored 2-column table is present so the preview still renders.",
+      "sourcePath": "blocks/mcx-hero",
+      "files": {
+        "css": [
+          "blocks/mcx-hero/mcx-hero.css"
+        ],
+        "js": [
+          "blocks/mcx-hero/mcx-hero.js"
+        ],
+        "json": [
+          "blocks/mcx-hero/_mcx-hero.json"
+        ],
+        "readme": "blocks/mcx-hero/README.md"
+      },
+      "hasStyles": true,
+      "hasRuntime": true,
+      "fileCount": 4
+    },
+    {
+      "name": "mcx-newsletter",
+      "category": "content",
+      "subcategory": "general",
+      "title": "MCX Newsletter",
+      "overview": "The `mcx-newsletter` block renders the centered email signup panel used for insider deals and community updates. It is intentionally lightweight: the form UI is real, but submission is demo behavior handled by `scripts/mcx-ui.js` unless a backend integration is added later.",
+      "sourcePath": "blocks/mcx-newsletter",
+      "files": {
+        "css": [
+          "blocks/mcx-newsletter/mcx-newsletter.css"
+        ],
+        "js": [
+          "blocks/mcx-newsletter/mcx-newsletter.js"
+        ],
+        "json": [
+          "blocks/mcx-newsletter/_mcx-newsletter.json"
+        ],
+        "readme": "blocks/mcx-newsletter/README.md"
+      },
+      "hasStyles": true,
+      "hasRuntime": true,
+      "fileCount": 4
+    },
+    {
+      "name": "mcx-product-cards",
+      "category": "content",
+      "subcategory": "general",
+      "title": "MCX Product Cards",
+      "overview": "The `mcx-product-cards` block renders the interactive MCX product grid with tabs, price chips, wishlist hearts, quick view, and demo cart behavior. The block itself builds the card markup from the authored table, and `scripts/mcx-ui.js` wires in tabs, modal behavior, wishlist toasts, and session-backed cart interactions on MCX pages and MCX block-library previews.",
+      "sourcePath": "blocks/mcx-product-cards",
+      "files": {
+        "css": [
+          "blocks/mcx-product-cards/mcx-product-cards.css"
+        ],
+        "js": [
+          "blocks/mcx-product-cards/mcx-product-cards.js"
+        ],
+        "json": [
+          "blocks/mcx-product-cards/_mcx-product-cards.json"
+        ],
+        "readme": "blocks/mcx-product-cards/README.md"
+      },
+      "hasStyles": true,
+      "hasRuntime": true,
+      "fileCount": 4
+    },
+    {
+      "name": "mcx-promo-strip",
+      "category": "content",
+      "subcategory": "general",
+      "title": "MCX Promo Strip",
+      "overview": "The `mcx-promo-strip` block renders the full-width campaign banner used for large seasonal or clearance messaging on MCX pages. It is intentionally simple: badge, title, description, and one CTA.",
+      "sourcePath": "blocks/mcx-promo-strip",
+      "files": {
+        "css": [
+          "blocks/mcx-promo-strip/mcx-promo-strip.css"
+        ],
+        "js": [
+          "blocks/mcx-promo-strip/mcx-promo-strip.js"
+        ],
+        "json": [
+          "blocks/mcx-promo-strip/_mcx-promo-strip.json"
+        ],
+        "readme": "blocks/mcx-promo-strip/README.md"
+      },
+      "hasStyles": true,
+      "hasRuntime": true,
+      "fileCount": 4
+    },
+    {
+      "name": "mcx-ticker",
+      "category": "content",
+      "subcategory": "general",
+      "title": "MCX Ticker",
+      "overview": "The `mcx-ticker` block renders the animated merchandising ticker used for short, repeatable highlights such as offers, brands, and service promises. Authors provide one line per ticker item, and the block duplicates those items to create a continuous scrolling track.",
+      "sourcePath": "blocks/mcx-ticker",
+      "files": {
+        "css": [
+          "blocks/mcx-ticker/mcx-ticker.css"
+        ],
+        "js": [
+          "blocks/mcx-ticker/mcx-ticker.js"
+        ],
+        "json": [
+          "blocks/mcx-ticker/_mcx-ticker.json"
+        ],
+        "readme": "blocks/mcx-ticker/README.md"
+      },
+      "hasStyles": true,
+      "hasRuntime": true,
+      "fileCount": 4
+    },
+    {
       "name": "medal-rack-configurator",
       "category": "content",
       "subcategory": "general",
@@ -2082,7 +2477,8 @@
           "blocks/product-recommendations/product-recommendations.css"
         ],
         "js": [
-          "blocks/product-recommendations/product-recommendations.js"
+          "blocks/product-recommendations/product-recommendations.js",
+          "blocks/product-recommendations/product-recommendations.lib.js"
         ],
         "json": [
           "blocks/product-recommendations/_product-recommendations.json"
@@ -2091,7 +2487,7 @@
       },
       "hasStyles": true,
       "hasRuntime": true,
-      "fileCount": 4
+      "fileCount": 5
     },
     {
       "name": "product-teaser",

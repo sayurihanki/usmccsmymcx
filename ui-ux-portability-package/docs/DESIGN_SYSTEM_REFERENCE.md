@@ -38,81 +38,105 @@
 - `--nav-live-search-shadow`
 - `--nav-live-search-width`
 - `--nav-overlay-blur`
+- `--nav-pill-bg`
+- `--nav-pill-bg-hover`
+- `--nav-pill-border`
+- `--nav-pill-shadow`
+- `--nav-shell-glow`
+- `--nav-tool-bg`
+- `--nav-tool-bg-hover`
+- `--nav-tool-border`
+- `--nav-tool-shadow`
 
 ## Component Inventory Summary
 
-- Total blocks: `115`
-- Blocks with CSS: `115`
-- Blocks with JS runtime: `115`
+- Total blocks: `132`
+- Blocks with CSS: `132`
+- Blocks with JS runtime: `132`
 
 Category distribution:
 - `interactive-content`: 10
-- `content`: 40
+- `content`: 56
 - `commerce`: 55
 - `shell`: 5
-- `forms`: 5
+- `forms`: 6
 
 ## Token Prefix Distribution
 
-- `accent`: 3
+- `accent`: 4
+- `auth`: 5
+- `back`: 1
 - `background`: 2
 - `blogpost`: 1
 - `body`: 4
 - `circle`: 4
-- `color`: 63
+- `color`: 66
 - `column`: 1
 - `cream`: 1
 - `d`: 1
 - `desktop`: 5
 - `dialog`: 1
-- `ease`: 3
+- `ease`: 4
 - `f2`: 15
 - `f3`: 15
 - `f4`: 20
 - `featured`: 1
 - `float`: 1
-- `font`: 2
+- `font`: 7
 - `gap`: 1
 - `glass`: 9
-- `gold`: 2
+- `gold`: 5
 - `green`: 10
 - `grid`: 15
+- `gs`: 43
 - `header`: 1
 - `hero`: 34
 - `hiws`: 22
-- `ink`: 11
+- `ink`: 12
 - `light`: 1
 - `live`: 21
 - `luxury`: 14
 - `main`: 1
+- `mcx`: 17
+- `mega`: 1
 - `minifiedView`: 1
 - `mp`: 23
+- `mpn`: 41
 - `mrc`: 9
-- `nav`: 17
+- `nav`: 26
 - `newsletter`: 28
 - `no`: 1
 - `pcl`: 5
 - `pp`: 14
+- `primary`: 1
 - `product`: 11
 - `promotional`: 51
 - `qrm`: 19
 - `quiz`: 11
+- `r`: 5
 - `readonly`: 1
+- `rim`: 2
+- `scarlet`: 5
 - `search`: 26
+- `secondary`: 1
 - `sel`: 1
-- `shadow`: 5
+- `shadow`: 8
 - `shape`: 15
 - `sl`: 70
 - `slide`: 1
 - `spacing`: 13
 - `store`: 3
+- `surface`: 5
+- `t`: 3
+- `teal`: 2
 - `tertiary`: 1
-- `text`: 1
+- `text`: 5
 - `top`: 7
 - `transition`: 3
 - `type`: 48
-- `uc`: 4
+- `uc`: 37
 - `vip`: 34
 - `vmb`: 3
+- `void`: 1
 - `width`: 1
 - `yes`: 1
