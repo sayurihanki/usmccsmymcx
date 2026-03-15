@@ -227,7 +227,7 @@ body:is(.mcx, .mcx-preview) main .mcx-category-page .filter-panel {
   grid-column: 1;
   overflow: hidden;
   position: sticky;
-  top: 118px;
+  top: 24px;
   width: 100%;
 }
 

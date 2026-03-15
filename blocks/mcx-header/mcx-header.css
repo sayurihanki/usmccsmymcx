@@ -34,8 +34,7 @@ header .mcx-header {
   --mcx-header-search-card-border: rgb(255 255 255 / 8%);
 
   color-scheme: dark;
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 900;
 }
 
