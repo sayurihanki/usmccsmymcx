@@ -61,6 +61,10 @@ body:is(.mcx, .mcx-preview) footer {
   height: auto;
 }
 
+body:is(.mcx, .mcx-preview) header {
+  min-height: var(--mcx-header-shell-height, auto);
+}
+
 body:is(.mcx, .mcx-preview) header .mcx-header,
 body:is(.mcx, .mcx-preview) footer .mcx-footer {
   visibility: visible;

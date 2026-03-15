@@ -998,6 +998,34 @@ function syncMegaOffsets(block) {
   });
 }
 
+function syncHeaderShellHeight(block) {
+  const siteHeader = block.closest('header');
+  const shell = block.querySelector('.header');
+  if (!siteHeader || !shell) return;
+
+  const updateHeight = () => {
+    const height = Math.ceil(shell.getBoundingClientRect().height);
+    if (!height) return;
+
+    document.documentElement.style.setProperty('--mcx-header-shell-height', `${height}px`);
+    siteHeader.style.minHeight = `${height}px`;
+  };
+
+  updateHeight();
+  window.requestAnimationFrame(() => updateHeight());
+
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(updateHeight).catch(() => {});
+  }
+
+  if (window.ResizeObserver) {
+    const resizeObserver = new window.ResizeObserver(() => updateHeight());
+    resizeObserver.observe(shell);
+  }
+
+  window.addEventListener('resize', updateHeight, { passive: true });
+}
+
 function bindMegaState(block) {
   const navItems = [...block.querySelectorAll('.nav-item.has-mega')];
 
@@ -1373,6 +1401,7 @@ export default async function decorate(block) {
   bindMegaState(block);
   await enhanceLiveSearch(block);
   syncMegaOffsets(block);
+  syncHeaderShellHeight(block);
 
   events.on('authenticated', (payload) => {
     const snapshot = getAuthSnapshot();
