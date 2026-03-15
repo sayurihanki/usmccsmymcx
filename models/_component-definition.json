@@ -50,6 +50,9 @@
           "...": "../blocks/form-mccs-preferences/_*.json#/definitions"
         },
         {
+          "...": "../blocks/form-mccs-preferences-next/_*.json#/definitions"
+        },
+        {
           "...": "../blocks/hero/_*.json#/definitions"
         },
         {
