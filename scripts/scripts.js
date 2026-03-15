@@ -1,5 +1,6 @@
 import {
   buildBlock,
+  getMetadata,
   loadHeader,
   loadFooter,
   decorateButtons,
@@ -24,6 +25,78 @@ import {
   IS_DA,
 } from './commerce.js';
 import { runExperimentation } from './experiment-loader.js';
+import { applyMcxExperienceFallback, hasMcxContentBlock } from './mcx-experience.js';
+import {
+  getMcxLibraryPreviewBlockName,
+  isMcxLibraryPreviewPath,
+} from './mcx-preview.js';
+
+const isMcxPage = () => (
+  document.body.classList.contains('mcx')
+  || hasMcxContentBlock(document.querySelector('main'))
+);
+const isMcxLibraryPreview = () => isMcxLibraryPreviewPath(window.location.pathname);
+const usesMcxExperience = () => isMcxPage() || isMcxLibraryPreview();
+
+function ensureMetadata(name, content) {
+  if (!content || getMetadata(name)) return;
+  const meta = document.createElement('meta');
+  meta.name = name;
+  meta.content = content;
+  document.head.append(meta);
+}
+
+function applyMcxLibraryPreviewShell() {
+  if (!isMcxLibraryPreview()) return;
+
+  ensureMetadata('template', 'mcx-home');
+  ensureMetadata('theme', 'mcx');
+  ensureMetadata('nav', '/fragments/mcx-nav');
+  ensureMetadata('footer', '/fragments/mcx-footer');
+
+  document.body.classList.add('mcx', 'mcx-preview', 'mcx-home');
+}
+
+/**
+ * Build default table rows for mcx-hero when shown on the block library preview
+ * and the doc has no block table. Returns a 2D array for buildBlock(blockName, rows).
+ * Uses safe DOM creation (no innerHTML) for image and link cells.
+ */
+function getMcxHeroLibraryPreviewRows() {
+  const imgCell = document.createElement('div');
+  const img = document.createElement('img');
+  img.src = 'https://images.unsplash.com/photo-1519415943484-9fa1873496d4?w=1200&q=80';
+  img.alt = 'Marine Corps collection hero';
+  imgCell.appendChild(img);
+  const primaryCtaCell = document.createElement('div');
+  const primaryLink = document.createElement('a');
+  primaryLink.href = '#products';
+  primaryLink.textContent = 'Shop Now';
+  primaryCtaCell.appendChild(primaryLink);
+  const secondaryCtaCell = document.createElement('div');
+  const secondaryLink = document.createElement('a');
+  secondaryLink.href = '#deals';
+  secondaryLink.textContent = 'View Deals';
+  secondaryCtaCell.appendChild(secondaryLink);
+  return [
+    ['eyebrow', 'Spring Collection - 2026 - Tax-Free'],
+    ['heading-line-1', 'OUTFITTED'],
+    ['heading-line-2', 'FOR THE'],
+    ['heading-line-3', 'mission & beyond'],
+    ['description', 'Serving Marines and their families since 1897. Premium brands, exclusive savings, and tax-free shopping - exclusively for those who serve.'],
+    ['image', imgCell],
+    ['primary-cta', primaryCtaCell],
+    ['secondary-cta', secondaryCtaCell],
+    ['stat-1-value', '20%+'],
+    ['stat-1-label', 'Average Savings'],
+    ['stat-2-value', '33M+'],
+    ['stat-2-label', 'Yearly Transactions'],
+    ['stat-3-value', 'Tax Free'],
+    ['stat-3-label', 'Exclusive Benefit'],
+    ['stat-4-value', '127+'],
+    ['stat-4-label', 'Store Locations'],
+  ];
+}
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -48,12 +121,18 @@ function buildHeroBlock(main) {
  * load fonts.css and set a session storage flag
  */
 async function loadFonts() {
+  if (usesMcxExperience()) return;
   await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
   try {
     if (!window.location.hostname.includes('localhost')) sessionStorage.setItem('fonts-loaded', 'true');
   } catch (e) {
     // do nothing
   }
+}
+
+async function loadMcxPackage() {
+  if (!usesMcxExperience()) return;
+  await loadCSS(`${window.hlx.codeBasePath}/styles/mcx-package.css`);
 }
 
 /**
@@ -80,7 +159,19 @@ function buildAutoBlocks(main) {
       });
     }
 
-    if (!main.querySelector('.hero')) buildHeroBlock(main);
+    if (!usesMcxExperience() && !main.querySelector('.hero')) buildHeroBlock(main);
+
+    // Block library preview: if the doc has no block table, the page has no mcx-hero block.
+    // Inject a section with mcx-hero and default content so the preview renders.
+    if (usesMcxExperience() && isMcxLibraryPreview()) {
+      const blockName = getMcxLibraryPreviewBlockName(window.location.pathname);
+      if (blockName === 'mcx-hero' && !main.querySelector('.mcx-hero')) {
+        const section = document.createElement('div');
+        const heroBlock = buildBlock('mcx-hero', getMcxHeroLibraryPreviewRows());
+        section.appendChild(heroBlock);
+        main.prepend(section);
+      }
+    }
   } catch (error) {
     console.error('Auto Blocking failed', error);
   }
@@ -129,7 +220,13 @@ const experimentationConfig = {
  */
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
+  applyMcxLibraryPreviewShell();
+  applyMcxExperienceFallback(doc, ensureMetadata);
   decorateTemplateAndTheme();
+  if (!isMcxPage() && isMcxLibraryPreview()) {
+    document.body.classList.add('mcx-preview');
+  }
+  await loadMcxPackage();
   await runExperimentation(doc, experimentationConfig);
 
   const main = doc.querySelector('main');
@@ -141,7 +238,8 @@ async function loadEager(doc) {
       await loadCommerceEager();
     } catch (e) {
       console.error('Error initializing commerce configuration:', e);
-      loadErrorPage(418);
+      if (!isMcxLibraryPreview()) loadErrorPage(418);
+      else decorateMain(main);
     }
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);
@@ -149,7 +247,7 @@ async function loadEager(doc) {
 
   try {
     /* if desktop (proxy for fast connection) or fonts already loaded, load fonts.css */
-    if (window.innerWidth >= 900 || sessionStorage.getItem('fonts-loaded')) {
+    if (!usesMcxExperience() && (window.innerWidth >= 900 || sessionStorage.getItem('fonts-loaded'))) {
       loadFonts();
     }
   } catch (e) {
@@ -176,7 +274,11 @@ async function loadLazy(doc) {
   loadCommerceLazy();
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
-  loadFonts();
+  if (usesMcxExperience()) {
+    import('./mcx-ui.js').then(({ default: initMcxUi }) => initMcxUi());
+  } else {
+    loadFonts();
+  }
 }
 
 /**

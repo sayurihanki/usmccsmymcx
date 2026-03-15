@@ -228,6 +228,16 @@
           }
         },
         {
+          "title": "Guided Selling",
+          "id": "guided-selling",
+          "model": "guided-selling",
+          "plugins": {
+            "da": {
+              "type": "key-value-block"
+            }
+          }
+        },
+        {
           "title": "Form MCCS Preferences",
           "id": "form-mccs-preferences",
           "plugins": {
@@ -260,6 +270,160 @@
                   "selector": "div>div>h1"
                 }
               ]
+            }
+          }
+        },
+        {
+          "title": "MCX Announcement Bar",
+          "id": "mcx-announcement-bar",
+          "plugins": {
+            "da": {
+              "name": "mcx-announcement-bar",
+              "rows": 6,
+              "columns": 1
+            }
+          }
+        },
+        {
+          "title": "MCX Benefits",
+          "id": "mcx-benefits",
+          "plugins": {
+            "da": {
+              "name": "mcx-benefits",
+              "rows": 4,
+              "columns": 3
+            }
+          }
+        },
+        {
+          "title": "MCX Brands",
+          "id": "mcx-brands",
+          "plugins": {
+            "da": {
+              "name": "mcx-brands",
+              "rows": 7,
+              "columns": 1
+            }
+          }
+        },
+        {
+          "title": "MCX Category Grid",
+          "id": "mcx-category-grid",
+          "plugins": {
+            "da": {
+              "name": "mcx-category-grid",
+              "rows": 12,
+              "columns": 4
+            }
+          }
+        },
+        {
+          "title": "MCX Deal Countdown",
+          "id": "mcx-deal-countdown",
+          "plugins": {
+            "da": {
+              "name": "mcx-deal-countdown",
+              "rows": 8,
+              "columns": 2
+            }
+          }
+        },
+        {
+          "title": "MCX Editorial Cards",
+          "id": "mcx-editorial-cards",
+          "plugins": {
+            "da": {
+              "name": "mcx-editorial-cards",
+              "rows": 3,
+              "columns": 4
+            }
+          }
+        },
+        {
+          "title": "MCX Featured Collections",
+          "id": "mcx-featured-collections",
+          "plugins": {
+            "da": {
+              "name": "mcx-featured-collections",
+              "rows": 3,
+              "columns": 4
+            }
+          }
+        },
+        {
+          "title": "MCX Footer",
+          "id": "mcx-footer",
+          "plugins": {
+            "da": {
+              "name": "mcx-footer",
+              "rows": 1,
+              "columns": 1
+            }
+          }
+        },
+        {
+          "title": "MCX Header",
+          "id": "mcx-header",
+          "plugins": {
+            "da": {
+              "name": "mcx-header",
+              "rows": 1,
+              "columns": 1
+            }
+          }
+        },
+        {
+          "title": "MCX Hero",
+          "id": "mcx-hero",
+          "plugins": {
+            "da": {
+              "name": "mcx-hero",
+              "rows": 18,
+              "columns": 2
+            }
+          }
+        },
+        {
+          "title": "MCX Newsletter",
+          "id": "mcx-newsletter",
+          "plugins": {
+            "da": {
+              "name": "mcx-newsletter",
+              "rows": 6,
+              "columns": 2
+            }
+          }
+        },
+        {
+          "title": "MCX Product Cards",
+          "id": "mcx-product-cards",
+          "plugins": {
+            "da": {
+              "name": "mcx-product-cards",
+              "rows": 14,
+              "columns": 4
+            }
+          }
+        },
+        {
+          "title": "MCX Promo Strip",
+          "id": "mcx-promo-strip",
+          "plugins": {
+            "da": {
+              "name": "mcx-promo-strip",
+              "rows": 5,
+              "columns": 2
+            }
+          }
+        },
+        {
+          "title": "MCX Ticker",
+          "id": "mcx-ticker",
+          "plugins": {
+            "da": {
+              "name": "mcx-ticker",
+              "rows": 8,
+              "columns": 1
             }
           }
         },

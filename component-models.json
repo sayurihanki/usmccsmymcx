@@ -826,6 +826,74 @@
     ]
   },
   {
+    "id": "guided-selling",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "eyebrow",
+        "label": "Eyebrow",
+        "value": "AI-Powered Style Match"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": "FIND YOUR\\nPERFECT\\nGEAR"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "subtitle",
+        "label": "Subtitle",
+        "value": "Answer 7 quick questions and we will build a personalized shopping list matched to your life, mission, and style."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "start-cta-label",
+        "label": "Start CTA Label",
+        "value": "Start Finding My Style"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "results-cta-label",
+        "label": "Results CTA Label",
+        "value": "Shop All Recommendations"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "results-cta-url",
+        "label": "Results CTA URL",
+        "value": "#shop-all"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "theme",
+        "label": "Theme",
+        "value": "dark"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "analytics-id",
+        "label": "Analytics ID",
+        "value": "mcx-guided-selling"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "data-source",
+        "label": "Data Source",
+        "value": "/data/guided-selling/mcx-style-match.json"
+      }
+    ]
+  },
+  {
     "id": "hero-3",
     "fields": [
       {
@@ -1715,6 +1783,62 @@
         "value": "/support"
       }
     ]
+  },
+  {
+    "id": "mcx-announcement-bar",
+    "fields": []
+  },
+  {
+    "id": "mcx-benefits",
+    "fields": []
+  },
+  {
+    "id": "mcx-brands",
+    "fields": []
+  },
+  {
+    "id": "mcx-category-grid",
+    "fields": []
+  },
+  {
+    "id": "mcx-deal-countdown",
+    "fields": []
+  },
+  {
+    "id": "mcx-editorial-cards",
+    "fields": []
+  },
+  {
+    "id": "mcx-featured-collections",
+    "fields": []
+  },
+  {
+    "id": "mcx-footer",
+    "fields": []
+  },
+  {
+    "id": "mcx-header",
+    "fields": []
+  },
+  {
+    "id": "mcx-hero",
+    "fields": []
+  },
+  {
+    "id": "mcx-newsletter",
+    "fields": []
+  },
+  {
+    "id": "mcx-product-cards",
+    "fields": []
+  },
+  {
+    "id": "mcx-promo-strip",
+    "fields": []
+  },
+  {
+    "id": "mcx-ticker",
+    "fields": []
   },
   {
     "id": "medal-rack-configurator",

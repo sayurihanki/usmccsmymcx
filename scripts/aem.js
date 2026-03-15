@@ -11,6 +11,8 @@
  */
 
 /* eslint-env browser */
+import { isMcxLibraryPreviewPath } from './mcx-preview.js';
+
 function sampleRUM(checkpoint, data) {
   // eslint-disable-next-line max-len
   const timeShift = () => (window.performance ? window.performance.now() : Date.now() - window.hlx.rum.firstReadTime);
@@ -620,7 +622,24 @@ function decorateBlocks(main) {
  * @returns {Promise}
  */
 async function loadHeader(header) {
-  const headerBlock = buildBlock('header', '');
+  const usesMcxShell = document.body.matches('.mcx, .mcx-preview');
+  const isMcxLibraryPreviewRoute = isMcxLibraryPreviewPath(window.location.pathname);
+
+  if (usesMcxShell && isMcxLibraryPreviewRoute) {
+    const announcementBlock = buildBlock('mcx-announcement-bar', [
+      ['dismissible', 'true'],
+      ['🎖 Free Shipping $50+'],
+      ['Tax-Free Shopping for Authorized Patrons'],
+      ['Spring 2026 Collection - Now Available'],
+      ['Ship to Store: 3-5 Days Stateside'],
+    ]);
+    header.append(announcementBlock);
+    decorateBlock(announcementBlock);
+    await loadBlock(announcementBlock);
+  }
+
+  const blockName = usesMcxShell ? 'mcx-header' : 'header';
+  const headerBlock = buildBlock(blockName, '');
   header.append(headerBlock);
   decorateBlock(headerBlock);
   return loadBlock(headerBlock);
@@ -632,7 +651,8 @@ async function loadHeader(header) {
  * @returns {Promise}
  */
 async function loadFooter(footer) {
-  const footerBlock = buildBlock('footer', '');
+  const blockName = document.body.matches('.mcx, .mcx-preview') ? 'mcx-footer' : 'footer';
+  const footerBlock = buildBlock(blockName, '');
   footer.append(footerBlock);
   decorateBlock(footerBlock);
   return loadBlock(footerBlock);

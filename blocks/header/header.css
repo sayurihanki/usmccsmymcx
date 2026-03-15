@@ -1325,3 +1325,119 @@ header nav .minicart-panel a[href*="/cart"] {
   max-width: 15rem;
   max-height: 15rem;
 }
+
+/* stylelint-disable no-duplicate-selectors, no-descending-specificity */
+:root {
+  --nav-hover-radius: 18px;
+  --nav-dropdown-radius: 22px;
+  --nav-highlight-bg: rgb(255 255 255 / 3%);
+  --nav-highlight-border: var(--gs-border);
+  --nav-highlight-bg-selected: rgb(17 29 42 / 84%);
+  --nav-highlight-shadow: 0 0 0 1px var(--gs-border) inset, 0 10px 24px rgb(0 0 0 / 28%);
+  --nav-flyout-bg: linear-gradient(180deg, rgb(17 29 42 / 98%) 0%, rgb(13 21 32 / 98%) 100%);
+  --nav-flyout-border: var(--gs-border);
+  --nav-flyout-shadow: 0 24px 64px rgb(0 0 0 / 46%);
+  --nav-live-search-width: 720px;
+  --nav-live-search-radius: 22px;
+  --nav-live-search-bg: linear-gradient(180deg, rgb(17 29 42 / 98%) 0%, rgb(13 21 32 / 98%) 100%);
+  --nav-live-search-border: var(--gs-border);
+  --nav-live-search-shadow: 0 24px 64px rgb(0 0 0 / 46%);
+}
+
+header .nav-wrapper {
+  background: rgb(13 21 32 / 94%);
+  backdrop-filter: blur(22px);
+  border-bottom: 1px solid var(--gs-border);
+  box-shadow: 0 10px 36px rgb(0 0 0 / 28%);
+}
+
+header nav {
+  color: var(--gs-text-primary);
+  max-width: 1440px;
+  min-height: var(--nav-height);
+}
+
+header nav .nav-brand a,
+header nav .nav-brand a:any-link {
+  color: var(--gs-text-primary);
+  font-family: var(--gs-font-display);
+  font-size: clamp(2.8rem, 3vw, 3.4rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+header nav .nav-brand img {
+  filter: brightness(1.15) contrast(1.05);
+}
+
+header nav .nav-sections .default-content-wrapper > ul > li > p,
+header nav .nav-sections .default-content-wrapper > ul > li > a,
+header nav .nav-sections ul > li,
+header nav .nav-sections ul > li > a {
+  color: var(--gs-text-secondary);
+  font-family: var(--gs-font-condensed);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+header nav .nav-sections .default-content-wrapper > ul > li:hover,
+header nav .nav-sections .nav-drop[aria-expanded='true'] {
+  background: var(--nav-highlight-bg);
+  border-color: var(--nav-highlight-border);
+}
+
+header nav .nav-sections .default-content-wrapper > ul > li:hover > p,
+header nav .nav-sections .default-content-wrapper > ul > li:hover > a,
+header nav .nav-sections .nav-drop[aria-expanded='true'] > p,
+header nav .nav-sections .nav-drop[aria-expanded='true'] > a {
+  color: var(--gs-text-primary);
+}
+
+header nav .nav-sections .default-content-wrapper > ul > li::after {
+  background: linear-gradient(90deg, var(--gs-scarlet), var(--gs-gold));
+}
+
+header nav .nav-sections .default-content-wrapper > ul > li ul,
+header nav .nav-sections .default-content-wrapper > ul > li .submenu-wrapper,
+header .nav-search-panel,
+header nav .nav-tools-panel,
+header nav .minicart-panel .cart-mini-cart,
+.dropdown-wrapper.nav-tools-wrapper .nav-auth-menu-panel {
+  background: var(--nav-flyout-bg);
+  border-color: var(--nav-flyout-border);
+  box-shadow: var(--nav-flyout-shadow);
+  color: var(--gs-text-primary);
+}
+
+header .nav-search-panel input,
+header nav .nav-tools-wrapper > button,
+header nav .nav-tools button.nav-cart-button,
+header nav .nav-tools button.nav-wishlist-button,
+header nav .nav-tools button.nav-search-button,
+.dropdown-wrapper.nav-tools-wrapper .nav-dropdown-button {
+  background: var(--gs-s2);
+  border-color: var(--gs-border);
+  border-radius: var(--gs-r-pill);
+  color: var(--gs-text-secondary);
+}
+
+header .nav-search-panel input:focus,
+header .nav-search-panel input:focus-visible,
+header nav .nav-tools-wrapper > button:hover,
+header nav .nav-tools button.nav-cart-button:hover,
+header nav .nav-tools button.nav-wishlist-button:hover,
+header nav .nav-tools button.nav-search-button:hover,
+.dropdown-wrapper.nav-tools-wrapper .nav-dropdown-button:hover,
+.dropdown-wrapper.nav-tools-wrapper .nav-dropdown-button:focus-visible {
+  border-color: var(--gs-scarlet);
+  color: var(--gs-text-primary);
+}
+
+header nav .nav-tools button.nav-cart-button[data-count]::after {
+  background: var(--gs-scarlet);
+  color: #fff;
+  font-family: var(--gs-font-tactical);
+  font-weight: 700;
+}
+/* stylelint-enable no-duplicate-selectors, no-descending-specificity */

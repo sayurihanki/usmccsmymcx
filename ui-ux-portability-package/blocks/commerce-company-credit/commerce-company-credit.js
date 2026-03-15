@@ -69,7 +69,9 @@ const GET_COMPANY_CREDIT_PROBE = `
   }
 `;
 
-const hasGraphQlErrors = (response) => Array.isArray(response?.errors) && response.errors.length > 0;
+const hasGraphQlErrors = (response) => (
+  Array.isArray(response?.errors) && response.errors.length > 0
+);
 
 async function ensureCompanyContext() {
   let companyContext = sessionStorage.getItem(COMPANY_CONTEXT_SESSION_KEY);
