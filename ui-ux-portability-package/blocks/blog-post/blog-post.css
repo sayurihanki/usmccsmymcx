@@ -1,5 +1,7 @@
 .blog-post {
   --blogpost-avatar-size: var(--spacing-big);
+  --blog-post-header-offset: var(--mcx-header-shell-height, var(--nav-height, 6.4rem));
+  --blog-post-sticky-offset: calc(var(--blog-post-header-offset) + var(--spacing-medium));
 
   max-width: 100%;
 }
@@ -148,7 +150,7 @@
 .blog-post-body h2,
 .blog-post-body h3,
 .blog-post-body h4 {
-  scroll-margin-top: calc(var(--nav-height, 6.4rem) + var(--spacing-medium));
+  scroll-margin-top: var(--blog-post-sticky-offset);
 }
 
 .blog-post-toc {
@@ -158,7 +160,7 @@
   border-radius: var(--shape-border-radius-2);
   box-sizing: border-box;
   margin: 0;
-  max-height: calc(100vh - var(--nav-height, 6.4rem) - var(--spacing-medium));
+  max-height: calc(100vh - var(--blog-post-sticky-offset));
   overflow: auto;
   padding: var(--spacing-small);
 }
@@ -404,7 +406,7 @@
 
 /* Clear fixed nav in first section */
 main > .section:first-of-type .blog-post .blog-post-wrap {
-  padding-top: calc(var(--nav-height, 6.4rem) + var(--spacing-medium));
+  padding-top: var(--blog-post-sticky-offset);
 }
 
 /* Minimal style */
@@ -458,7 +460,7 @@ main > .section:first-of-type .blog-post .blog-post-wrap {
 
   .blog-post-toc {
     position: sticky;
-    top: calc(var(--nav-height, 6.4rem) + var(--spacing-medium));
+    top: var(--blog-post-sticky-offset);
   }
 
   .blog-post[data-blogpost-layout='centered'] .blog-post-content {

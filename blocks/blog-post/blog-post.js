@@ -99,6 +99,37 @@ function formatPublishDate(value) {
   }).format(parsed);
 }
 
+function readCssLengthInPx(rawValue) {
+  const value = (rawValue || '').toString().trim();
+  const parsed = Number.parseFloat(value);
+  if (Number.isNaN(parsed)) return 0;
+  if (value.endsWith('rem')) {
+    const rootFontSize = Number.parseFloat(
+      getComputedStyle(document.documentElement).fontSize,
+    ) || 16;
+    return parsed * rootFontSize;
+  }
+  return parsed;
+}
+
+function getHeaderOffsetPx(extra = 0) {
+  const siteHeader = document.querySelector('header');
+  if (siteHeader) {
+    const height = Math.ceil(siteHeader.getBoundingClientRect().height);
+    if (height > 0) return height + extra;
+
+    const computedHeight = readCssLengthInPx(getComputedStyle(siteHeader).height);
+    if (computedHeight > 0) return computedHeight + extra;
+  }
+
+  const rootStyles = getComputedStyle(document.documentElement);
+  const shellHeight = readCssLengthInPx(rootStyles.getPropertyValue('--mcx-header-shell-height'));
+  if (shellHeight > 0) return shellHeight + extra;
+
+  const navHeight = readCssLengthInPx(rootStyles.getPropertyValue('--nav-height'));
+  return (navHeight || 64) + extra;
+}
+
 function readConfig(block) {
   const sectionData = block.closest('.section')?.dataset || {};
 
@@ -468,11 +499,7 @@ function initTocBehavior(block) {
   if (!observedHeadings.length) return;
   const lastHeadingId = observedHeadings[observedHeadings.length - 1]?.id || '';
 
-  const navHeightRaw = getComputedStyle(document.documentElement).getPropertyValue('--nav-height').trim();
-  const navHeight = Number.parseFloat(navHeightRaw) || 64;
-  const anchorOffset = navHeight + 16;
-
-  const getClosestHeadingId = () => {
+  const getClosestHeadingId = (anchorOffset) => {
     let closestPast = null;
     let firstAhead = null;
 
@@ -485,7 +512,7 @@ function initTocBehavior(block) {
     return (closestPast || firstAhead || observedHeadings[0])?.id;
   };
 
-  const updateProgress = () => {
+  const updateProgress = (anchorOffset) => {
     const activeLink = toc.querySelector('.blog-post-toc-link.is-active');
     const activeId = activeLink?.getAttribute('href')?.replace(/^#/, '') || '';
     const atBottom = (
@@ -511,9 +538,10 @@ function initTocBehavior(block) {
     if (ticking) return;
     ticking = true;
     window.requestAnimationFrame(() => {
-      const id = getClosestHeadingId();
+      const anchorOffset = getHeaderOffsetPx(16);
+      const id = getClosestHeadingId(anchorOffset);
       if (id) setActive(id);
-      updateProgress();
+      updateProgress(anchorOffset);
       ticking = false;
     });
   };
