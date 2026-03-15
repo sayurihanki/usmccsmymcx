@@ -616,6 +616,14 @@ function decorateBlocks(main) {
   main.querySelectorAll('div.section > div > div').forEach(decorateBlock);
 }
 
+function resolveHeaderBlockName() {
+  return 'mcx-header';
+}
+
+function resolveFooterBlockName() {
+  return document.body.matches('.mcx, .mcx-preview') ? 'mcx-footer' : 'footer';
+}
+
 /**
  * Loads a block named 'header' into header
  * @param {Element} header header element
@@ -638,7 +646,7 @@ async function loadHeader(header) {
     await loadBlock(announcementBlock);
   }
 
-  const blockName = usesMcxShell ? 'mcx-header' : 'header';
+  const blockName = resolveHeaderBlockName();
   const headerBlock = buildBlock(blockName, '');
   header.append(headerBlock);
   decorateBlock(headerBlock);
@@ -651,7 +659,7 @@ async function loadHeader(header) {
  * @returns {Promise}
  */
 async function loadFooter(footer) {
-  const blockName = document.body.matches('.mcx, .mcx-preview') ? 'mcx-footer' : 'footer';
+  const blockName = resolveFooterBlockName();
   const footerBlock = buildBlock(blockName, '');
   footer.append(footerBlock);
   decorateBlock(footerBlock);
@@ -728,6 +736,8 @@ export {
   loadCSS,
   loadFooter,
   loadHeader,
+  resolveFooterBlockName,
+  resolveHeaderBlockName,
   loadScript,
   loadSection,
   loadSections,

@@ -9,18 +9,24 @@ export function getRows(block) {
 
 function collectCellText(node, parts = []) {
   if (!node) return parts;
+  const nodeType = node.nodeType ?? (node.tagName ? 1 : 0);
 
-  if (node.nodeType === 3) {
+  if (nodeType === 3) {
     parts.push(node.textContent || '');
     return parts;
   }
 
-  if (node.nodeType !== 1 && node.nodeType !== 11) {
+  if (nodeType !== 1 && nodeType !== 11) {
     return parts;
   }
 
   if (node.tagName?.toLowerCase() === 'br') {
     parts.push('\n');
+    return parts;
+  }
+
+  if (!node.childNodes?.length) {
+    parts.push(node.textContent || '');
     return parts;
   }
 

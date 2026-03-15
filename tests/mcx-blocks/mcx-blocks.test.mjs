@@ -419,7 +419,8 @@ test('mcx header renders the nav fragment into the shell block', async () => {
 
     assert.equal(fetchCalls[0]?.[0], '/fragments/mcx-nav.plain.html');
     assert.equal(block.querySelector('.logo-mcx')?.textContent, 'MCX');
-    assert.equal(block.querySelector('.hdr-signin')?.href, '/account');
+    assert.equal(block.querySelector('.store-switcher-toggle-label')?.textContent, 'usmccsmymcx');
+    assert.equal(block.querySelector('.hdr-signin-label')?.textContent, 'Sign In');
     assert.equal(block.querySelector('.nav-hot')?.textContent, 'Deals & Offers');
     assert.equal(block.querySelectorAll('.nav-item').length, 7);
     assert.equal(block.querySelectorAll('.mega-col').length >= 3, true);

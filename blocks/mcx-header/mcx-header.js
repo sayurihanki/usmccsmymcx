@@ -1,7 +1,11 @@
+import { events } from '@dropins/tools/event-bus.js';
 import { tryRenderAemAssetsImage } from '@dropins/tools/lib/aem/assets.js';
 
 import { getMetadata, toClassName } from '../../scripts/aem.js';
 import {
+  CUSTOMER_ACCOUNT_PATH,
+  CUSTOMER_LOGIN_PATH,
+  ORDER_STATUS_PATH,
   fetchPlaceholders,
   getProductLink,
   getSearchContext,
@@ -11,6 +15,26 @@ import {
 const LIVE_SEARCH_PAGE_SIZE = 5;
 const LIVE_SEARCH_MIN_QUERY_LENGTH = 2;
 const LIVE_SEARCH_DEBOUNCE_MS = 90;
+const REGISTRATION_PATH = '/customer/create';
+const COMPANY_ACCOUNT_CREATE_PATH = '/customer/company/create';
+const CART_PATH = '/cart';
+const SEARCH_PATH = '/search';
+const WISHLIST_PATH = '/wishlist';
+
+const STORE_SWITCHER_OPTIONS = [
+  {
+    id: 'jenhankib2bapple',
+    label: 'jenhankib2bapple',
+    href: 'https://main--jenhankib2bapple--sayurihanki.aem.live/',
+    matchToken: 'jenhankib2bapple',
+  },
+  {
+    id: 'usmccsmymcx',
+    label: 'usmccsmymcx',
+    href: 'https://main--usmccsmymcx--sayurihanki.aem.live/',
+    matchToken: 'usmccsmymcx',
+  },
+];
 
 let liveSearchCounter = 0;
 
@@ -18,7 +42,6 @@ function iconMarkup(name) {
   const icons = {
     search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>',
     chevron: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>',
-    stores: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>',
     heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>',
     cart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>',
     user: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>',
@@ -38,18 +61,76 @@ function normalizePath(value = '/') {
   }
 }
 
+function resolveHref(value = '#') {
+  if (!value || value === '#') {
+    return '#';
+  }
+
+  if (value.startsWith('mailto:') || value.startsWith('tel:')) {
+    return value;
+  }
+
+  try {
+    const url = new URL(value, window.location.origin);
+    if (url.origin === window.location.origin) {
+      return rootLink(`${url.pathname}${url.search}${url.hash}`);
+    }
+    return url.href;
+  } catch {
+    return value;
+  }
+}
+
+function getCookieValue(name) {
+  const cookieString = document.cookie || '';
+  return cookieString
+    .split(';')
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .map((part) => part.split('='))
+    .find(([key]) => key === name)?.[1]
+    ? decodeURIComponent(
+      cookieString
+        .split(';')
+        .map((part) => part.trim())
+        .filter(Boolean)
+        .map((part) => part.split('='))
+        .find(([key]) => key === name)
+        ?.slice(1)
+        .join('=') || '',
+    )
+    : '';
+}
+
+function getAuthSnapshot() {
+  const eventState = typeof events?.lastPayload === 'function'
+    ? events.lastPayload('authenticated')
+    : undefined;
+  const firstName = getCookieValue('auth_dropin_firstname');
+  const hasToken = Boolean(getCookieValue('auth_dropin_user_token'));
+
+  return {
+    firstName,
+    isAuthenticated: typeof eventState === 'boolean' ? eventState : hasToken || Boolean(firstName),
+  };
+}
+
 function getSafeAemAlias(product) {
   const rawAlias = product?.urlKey || product?.sku || 'product-image';
   return encodeURIComponent(rawAlias);
 }
 
-function getUniqueLiveSearchScope() {
+function getUniqueId(prefix) {
   if (window.crypto?.randomUUID) {
-    return `mcx-header-live-${window.crypto.randomUUID()}`;
+    return `${prefix}-${window.crypto.randomUUID()}`;
   }
 
   liveSearchCounter += 1;
-  return `mcx-header-live-${liveSearchCounter}`;
+  return `${prefix}-${liveSearchCounter}`;
+}
+
+function getUniqueLiveSearchScope() {
+  return getUniqueId('mcx-header-live');
 }
 
 function resolveActiveIndex(navItems) {
@@ -65,7 +146,7 @@ function resolveActiveIndex(navItems) {
 function createLogo() {
   const link = document.createElement('a');
   link.className = 'logo';
-  link.href = '/';
+  link.href = rootLink('/');
   link.setAttribute('aria-label', 'MCX home');
   link.innerHTML = `
     <div class="logo-emblem" aria-hidden="true">
@@ -90,7 +171,7 @@ function createSearchForm(placeholder) {
   const search = document.createElement('form');
   search.className = 'hdr-search';
   search.setAttribute('role', 'search');
-  search.setAttribute('action', rootLink('/search'));
+  search.setAttribute('action', rootLink(SEARCH_PATH));
   search.setAttribute('method', 'get');
   search.setAttribute('aria-expanded', 'false');
   search.dataset.searchStatus = 'idle';
@@ -129,14 +210,24 @@ function createSearchForm(placeholder) {
   return search;
 }
 
+function getDefaultAccountLinks() {
+  return {
+    account: CUSTOMER_ACCOUNT_PATH,
+    combinedAuth: '#combined-auth',
+    companyAccount: COMPANY_ACCOUNT_CREATE_PATH,
+    login: CUSTOMER_LOGIN_PATH,
+    registration: REGISTRATION_PATH,
+    searchOrder: ORDER_STATUS_PATH,
+  };
+}
+
 function getDefaultData() {
   return {
     configs: {
-      searchPlaceholder: 'Search products, brands, gear...',
       hotLabel: 'Deals & Offers',
       hotUrl: '/deals',
+      searchPlaceholder: 'Search products, brands, gear...',
       signInLabel: 'Sign In',
-      signInUrl: '/account',
     },
     navItems: [
       {
@@ -214,17 +305,16 @@ async function fetchFragmentDocument(path) {
 
 function normalizeConfigKey(key) {
   const aliasMap = {
-    'search-placeholder': 'searchPlaceholder',
     'hot-label': 'hotLabel',
     'hot-url': 'hotUrl',
+    'search-placeholder': 'searchPlaceholder',
     'sign-in-label': 'signInLabel',
-    'sign-in-url': 'signInUrl',
   };
 
   return aliasMap[key] || key;
 }
 
-function upsertNavItem(items, label, url = '#') {
+function upsertNavItem(items, label, url = '') {
   let item = items.find((entry) => entry.label === label);
   if (!item) {
     item = {
@@ -251,17 +341,83 @@ function upsertGroup(item, label) {
   return group;
 }
 
+function normalizeAccountLinkKey(label = '') {
+  const normalized = label.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+
+  if (['log in', 'login', 'sign in'].includes(normalized)) return 'login';
+  if (['registration', 'register', 'sign up', 'create account'].includes(normalized)) return 'registration';
+  if (['account', 'my account'].includes(normalized)) return 'account';
+  if (['create new company account', 'create company account', 'company account'].includes(normalized)) return 'companyAccount';
+  if (['combined auth', 'combined authentication'].includes(normalized)) return 'combinedAuth';
+  if (['search order', 'order status'].includes(normalized)) return 'searchOrder';
+  return '';
+}
+
+function normalizeHiddenNavKey(label = '') {
+  const normalized = label.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  if (['account', 'my account'].includes(normalized)) return 'account';
+  if (['search order', 'order status'].includes(normalized)) return 'searchOrder';
+  return '';
+}
+
+function flattenNavItemLinks(item) {
+  const links = [{ text: item.label, url: item.url }];
+  item.groups.forEach((group) => {
+    group.links.forEach((link) => links.push(link));
+  });
+  item.features.forEach((feature) => {
+    links.push({ text: feature.text, url: feature.url });
+  });
+  return links;
+}
+
+function mergeAccountLinks(accountLinks, links) {
+  links.forEach(({ text, url }) => {
+    const key = normalizeAccountLinkKey(text);
+    if (key && url) {
+      accountLinks[key] = url;
+    }
+  });
+}
+
+function normalizeHeaderData(data) {
+  const accountLinks = getDefaultAccountLinks();
+  const navItems = [];
+
+  data.navItems.forEach((item) => {
+    const hiddenKey = normalizeHiddenNavKey(item.label);
+
+    if (hiddenKey === 'account') {
+      mergeAccountLinks(accountLinks, flattenNavItemLinks(item));
+      return;
+    }
+
+    if (hiddenKey === 'searchOrder') {
+      accountLinks.searchOrder = item.url || accountLinks.searchOrder;
+      mergeAccountLinks(accountLinks, flattenNavItemLinks(item));
+      return;
+    }
+
+    navItems.push(item);
+  });
+
+  return {
+    ...data,
+    accountLinks,
+    navItems,
+  };
+}
+
 function parseNavData(main) {
   const dataBlock = main.querySelector('.mcx-nav-data');
-  if (!dataBlock) return getDefaultData();
+  if (!dataBlock) return normalizeHeaderData(getDefaultData());
 
   const data = {
     configs: {
-      searchPlaceholder: 'Search products, brands, gear...',
       hotLabel: 'Deals & Offers',
       hotUrl: '/deals',
+      searchPlaceholder: 'Search products, brands, gear...',
       signInLabel: 'Sign In',
-      signInUrl: '/account',
     },
     navItems: [],
   };
@@ -309,35 +465,391 @@ function parseNavData(main) {
     }
   });
 
-  return data.navItems.length ? data : getDefaultData();
+  return data.navItems.length ? normalizeHeaderData(data) : normalizeHeaderData(getDefaultData());
 }
 
-function createActionButton(kind, label, href = '#') {
-  const linkKinds = new Set(['stores', 'wishlist', 'cart', 'signin']);
-  const isLink = linkKinds.has(kind);
-  const element = document.createElement(isLink ? 'a' : 'button');
-  element.className = `hdr-act${kind === 'signin' ? ' hdr-signin' : ''}`;
-  if (isLink) {
-    element.href = href || '#';
-  } else {
-    element.type = 'button';
-  }
+function getCurrentStoreId() {
+  const currentUrl = `${window.location.hostname}${window.location.pathname}`.toLowerCase();
+  return STORE_SWITCHER_OPTIONS
+    .find(({ matchToken }) => currentUrl.includes(matchToken))
+    ?.id || 'usmccsmymcx';
+}
 
-  let iconName = kind;
-  if (kind === 'wishlist') iconName = 'heart';
-  if (kind === 'signin') iconName = 'user';
+function getStoreById(storeId) {
+  return STORE_SWITCHER_OPTIONS.find(({ id }) => id === storeId) || STORE_SWITCHER_OPTIONS[0];
+}
 
-  element.innerHTML = `${iconMarkup(iconName)}${label ? `<span>${label}</span>` : ''}`;
+function createStoreSwitcher() {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'hdr-storefront store-switcher-wrapper';
 
+  const currentStore = getStoreById(getCurrentStoreId());
+  const menuId = getUniqueId('mcx-store-switcher');
+
+  const toggle = document.createElement('button');
+  toggle.type = 'button';
+  toggle.className = 'store-switcher-toggle';
+  toggle.setAttribute('aria-controls', menuId);
+  toggle.setAttribute('aria-expanded', 'false');
+  toggle.setAttribute('aria-haspopup', 'menu');
+  toggle.setAttribute('aria-label', 'Choose storefront');
+
+  const label = document.createElement('span');
+  label.className = 'store-switcher-toggle-label';
+  label.textContent = currentStore.label;
+
+  const caret = document.createElement('span');
+  caret.className = 'store-switcher-toggle-caret';
+  caret.setAttribute('aria-hidden', 'true');
+  caret.innerHTML = iconMarkup('chevron');
+
+  const menu = document.createElement('ul');
+  menu.className = 'store-switcher-menu';
+  menu.id = menuId;
+  menu.hidden = true;
+  menu.setAttribute('role', 'menu');
+
+  const setStoreOpenState = (open) => {
+    wrapper.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menu.hidden = !open;
+  };
+
+  const closeMenu = () => setStoreOpenState(false);
+
+  STORE_SWITCHER_OPTIONS.forEach(({ id, href, label: optionLabel }) => {
+    const item = document.createElement('li');
+    item.setAttribute('role', 'none');
+
+    const option = document.createElement('button');
+    option.type = 'button';
+    option.className = 'store-switcher-option';
+    option.setAttribute('role', 'menuitemradio');
+    option.setAttribute('aria-checked', id === currentStore.id ? 'true' : 'false');
+    option.textContent = optionLabel;
+    option.addEventListener('click', () => {
+      if (id === currentStore.id) {
+        closeMenu();
+        return;
+      }
+
+      window.location.href = href;
+    });
+
+    item.append(option);
+    menu.append(item);
+  });
+
+  toggle.addEventListener('click', () => {
+    setStoreOpenState(!wrapper.classList.contains('is-open'));
+  });
+
+  toggle.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      setStoreOpenState(true);
+      requestAnimationFrame(() => {
+        menu.querySelector('.store-switcher-option')?.focus();
+      });
+    }
+  });
+
+  menu.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeMenu();
+      toggle.focus();
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!wrapper.contains(event.target)) {
+      closeMenu();
+    }
+  });
+
+  wrapper.append(toggle);
+  toggle.append(label, caret);
+  wrapper.append(menu);
+
+  return {
+    closeMenu,
+    element: wrapper,
+  };
+}
+
+function createActionLink(kind, href, label = '') {
+  const element = document.createElement('a');
+  element.className = `hdr-act hdr-act-${kind}`;
+  element.href = resolveHref(href);
+  element.setAttribute('aria-label', label || kind);
+
+  let icon = kind;
+  if (kind === 'wishlist') icon = 'heart';
+
+  element.innerHTML = `${iconMarkup(icon)}${label ? `<span>${label}</span>` : ''}`;
+
+  let badge = null;
   if (kind === 'cart') {
-    const dot = document.createElement('span');
-    dot.className = 'cart-dot';
-    dot.dataset.mcxCartCount = 'true';
-    dot.textContent = '0';
-    element.append(dot);
+    badge = document.createElement('span');
+    badge.className = 'cart-dot';
+    badge.dataset.mcxCartCount = 'true';
+    badge.setAttribute('hidden', '');
+    element.append(badge);
   }
 
-  return element;
+  return {
+    badge,
+    element,
+  };
+}
+
+function focusAccountMenuItem(list, delta) {
+  const items = [...list.querySelectorAll('a, button:not([disabled])')];
+  if (!items.length) {
+    return;
+  }
+
+  const currentIndex = items.indexOf(document.activeElement);
+  const fallbackIndex = delta > 0 ? 0 : items.length - 1;
+  const nextIndex = currentIndex === -1
+    ? fallbackIndex
+    : (currentIndex + delta + items.length) % items.length;
+  items[nextIndex].focus();
+}
+
+function createAccountMenu({
+  accountLinks,
+  signInLabel = 'Sign In',
+}) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'hdr-account';
+
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'hdr-act hdr-signin';
+  button.setAttribute('aria-expanded', 'false');
+  button.setAttribute('aria-haspopup', 'menu');
+
+  const buttonLabel = document.createElement('span');
+  buttonLabel.className = 'hdr-signin-label';
+
+  const buttonCaret = document.createElement('span');
+  buttonCaret.className = 'hdr-signin-caret';
+  buttonCaret.setAttribute('aria-hidden', 'true');
+  buttonCaret.innerHTML = iconMarkup('chevron');
+
+  button.innerHTML = iconMarkup('user');
+  button.append(buttonLabel, buttonCaret);
+
+  const panel = document.createElement('div');
+  panel.className = 'hdr-account-panel';
+  panel.hidden = true;
+
+  const eyebrow = document.createElement('p');
+  eyebrow.className = 'hdr-account-eyebrow';
+
+  const title = document.createElement('h3');
+  title.className = 'hdr-account-title';
+
+  const description = document.createElement('p');
+  description.className = 'hdr-account-copy';
+
+  const list = document.createElement('ul');
+  list.className = 'hdr-account-list';
+  list.setAttribute('role', 'menu');
+
+  const closeMenu = () => {
+    wrapper.classList.remove('is-open');
+    button.setAttribute('aria-expanded', 'false');
+    panel.hidden = true;
+  };
+
+  const openMenu = () => {
+    wrapper.classList.add('is-open');
+    button.setAttribute('aria-expanded', 'true');
+    panel.hidden = false;
+  };
+
+  const setAccountOpenState = (open, { focusFirst = false } = {}) => {
+    if (open) {
+      openMenu();
+      if (focusFirst) {
+        requestAnimationFrame(() => {
+          list.querySelector('a, button')?.focus();
+        });
+      }
+      return;
+    }
+
+    closeMenu();
+  };
+
+  async function handleLogout() {
+    const authApi = await import('@dropins/storefront-auth/api.js');
+    await authApi.revokeCustomerToken();
+
+    if (window.location.pathname.includes('/checkout')) {
+      window.location.href = rootLink(CART_PATH);
+      return;
+    }
+
+    if (window.location.pathname.includes('/customer')) {
+      window.location.href = rootLink(CUSTOMER_LOGIN_PATH);
+      return;
+    }
+
+    if (window.location.pathname.includes('/order-details')) {
+      window.location.href = rootLink('/');
+      return;
+    }
+
+    if (typeof window.location.reload === 'function') {
+      window.location.reload();
+    } else {
+      window.location.href = `${window.location.pathname}${window.location.search || ''}`;
+    }
+  }
+
+  function buildMenuItem({
+    action,
+    href,
+    kind = 'link',
+    label,
+    tone = 'default',
+  }) {
+    const item = document.createElement('li');
+    item.setAttribute('role', 'none');
+
+    const control = document.createElement(kind === 'button' ? 'button' : 'a');
+    control.className = `hdr-account-item${tone !== 'default' ? ` is-${tone}` : ''}`;
+    control.setAttribute('role', 'menuitem');
+    control.textContent = label;
+
+    if (kind === 'button') {
+      control.type = 'button';
+    } else {
+      control.href = resolveHref(href);
+    }
+
+    control.addEventListener('click', async (event) => {
+      if (kind === 'button') {
+        event.preventDefault();
+      }
+
+      closeMenu();
+
+      if (action) {
+        await action();
+      }
+    });
+
+    item.append(control);
+    return item;
+  }
+
+  function sync(nextState = getAuthSnapshot()) {
+    const state = nextState || getAuthSnapshot();
+
+    buttonLabel.textContent = state.isAuthenticated ? 'My Account' : signInLabel;
+    eyebrow.textContent = state.isAuthenticated ? 'Mission Profile' : 'Account Access';
+    if (state.isAuthenticated) {
+      title.textContent = state.firstName
+        ? `Welcome back, ${state.firstName}`
+        : 'Manage your account';
+    } else {
+      title.textContent = 'Sign in, register, or track an order';
+    }
+    description.textContent = state.isAuthenticated
+      ? 'Quick links for your account, orders, and company access.'
+      : 'Open the login flow, create an account, or jump straight to order lookup.';
+
+    list.replaceChildren();
+
+    const menuItems = state.isAuthenticated
+      ? [
+        { label: 'My Account', href: accountLinks.account },
+        { label: 'Create New Company Account', href: accountLinks.companyAccount },
+        { label: 'Search Order', href: accountLinks.searchOrder },
+        {
+          label: 'Logout',
+          kind: 'button',
+          tone: 'danger',
+          action: handleLogout,
+        },
+      ]
+      : [
+        { label: 'Log in', href: accountLinks.login },
+        { label: 'Registration', href: accountLinks.registration },
+        { label: 'My Account', href: accountLinks.account },
+        { label: 'Create New Company Account', href: accountLinks.companyAccount },
+        {
+          label: 'Combined Auth',
+          kind: 'button',
+          tone: 'accent',
+          action: async () => {
+            const { default: openAuthCombineModal } = await import('./auth-combine-modal.js');
+            openAuthCombineModal({ triggerElement: button });
+          },
+        },
+        { label: 'Search Order', href: accountLinks.searchOrder },
+      ];
+
+    menuItems.forEach((item) => {
+      list.append(buildMenuItem(item));
+    });
+  }
+
+  button.addEventListener('click', () => {
+    setAccountOpenState(!wrapper.classList.contains('is-open'));
+  });
+
+  button.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      setAccountOpenState(true, { focusFirst: true });
+    }
+  });
+
+  panel.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeMenu();
+      button.focus();
+      return;
+    }
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      focusAccountMenuItem(list, 1);
+    }
+
+    if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      focusAccountMenuItem(list, -1);
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!wrapper.contains(event.target)) {
+      closeMenu();
+    }
+  });
+
+  wrapper.addEventListener('focusout', (event) => {
+    if (!wrapper.contains(event.relatedTarget)) {
+      closeMenu();
+    }
+  });
+
+  panel.append(eyebrow, title, description, list);
+  wrapper.append(button, panel);
+
+  return {
+    closeMenu,
+    element: wrapper,
+    sync,
+  };
 }
 
 function buildMegaMenu(item) {
@@ -363,7 +875,7 @@ function buildMegaMenu(item) {
     group.links.forEach((linkData) => {
       const listItem = document.createElement('li');
       const link = document.createElement('a');
-      link.href = linkData.url;
+      link.href = resolveHref(linkData.url);
       link.textContent = linkData.text;
       listItem.append(link);
       list.append(listItem);
@@ -381,7 +893,7 @@ function buildMegaMenu(item) {
     item.features.forEach((feature) => {
       const link = document.createElement('a');
       link.className = 'mega-ft-tag';
-      link.href = feature.url;
+      link.href = resolveHref(feature.url);
       link.textContent = feature.text;
       featureRow.append(link);
     });
@@ -405,17 +917,32 @@ function buildHeaderDom(data) {
 
   const actions = document.createElement('div');
   actions.className = 'hdr-actions';
+
+  const storefront = createStoreSwitcher();
+  const wishlistMeta = getMetadata('wishlist');
+  const wishlistPath = wishlistMeta
+    ? new URL(wishlistMeta, window.location).pathname
+    : WISHLIST_PATH;
+  const wishlist = createActionLink('wishlist', wishlistPath, 'Wishlist');
+  const cart = createActionLink('cart', CART_PATH, 'Cart');
+  const authMenu = createAccountMenu({
+    accountLinks: data.accountLinks,
+    signInLabel: data.configs.signInLabel,
+  });
+
   actions.append(
-    createActionButton('stores', 'Stores', '/stores'),
-    createActionButton('wishlist', '', '/wishlist'),
-    createActionButton('cart', '', '/cart'),
-    createActionButton('signin', data.configs.signInLabel, data.configs.signInUrl),
+    storefront.element,
+    wishlist.element,
+    cart.element,
+    authMenu.element,
   );
   mainBar.append(actions);
   shell.append(mainBar);
 
   const nav = document.createElement('nav');
   nav.className = 'nav-bar';
+  nav.setAttribute('aria-label', 'Primary');
+
   const navInner = document.createElement('div');
   navInner.className = 'nav-inner';
 
@@ -426,7 +953,7 @@ function buildHeaderDom(data) {
     const link = document.createElement('a');
     const isActive = index === activeIndex;
     link.className = `nav-link${isActive ? ' on' : ''}`;
-    link.href = item.url;
+    link.href = resolveHref(item.url);
     link.innerHTML = `${item.label}${item.groups.length ? iconMarkup('chevron') : ''}`;
     if (isActive) link.setAttribute('aria-current', 'page');
     if (item.groups.length) {
@@ -448,14 +975,18 @@ function buildHeaderDom(data) {
 
   const hotLink = document.createElement('a');
   hotLink.className = 'nav-hot';
-  hotLink.href = data.configs.hotUrl;
+  hotLink.href = resolveHref(data.configs.hotUrl);
   hotLink.textContent = data.configs.hotLabel;
   navInner.append(hotLink);
 
   nav.append(navInner);
   shell.append(nav);
 
-  return shell;
+  return {
+    authMenu,
+    cartCount: cart.badge,
+    shell,
+  };
 }
 
 function syncMegaOffsets(block) {
@@ -597,7 +1128,7 @@ async function enhanceLiveSearch(block) {
         { search },
         { render },
         { SearchResults },
-        { events },
+        { events: searchEvents },
         labels,
       ] = await Promise.all([
         import('@dropins/storefront-product-discovery/api.js'),
@@ -610,20 +1141,17 @@ async function enhanceLiveSearch(block) {
       searchApi = search;
 
       const uiText = {
-        searchViewAll: labels.Global?.SearchViewAll || 'View all results',
+        noResults: labels.Global?.SearchNoResults || 'No results found',
         resultFound: labels.Global?.SearchResultFound || 'result found',
+        resultsClosed: labels.Global?.SearchResultsClosed || 'Search results closed',
         resultsFound: labels.Global?.SearchResultsFound || 'results found',
         searchError: labels.Global?.SearchError || 'Search is temporarily unavailable',
-        noResults: labels.Global?.SearchNoResults || 'No results found',
-        resultsClosed: labels.Global?.SearchResultsClosed || 'Search results closed',
+        searchViewAll: labels.Global?.SearchViewAll || 'View all results',
       };
 
       render.render(SearchResults, {
-        scope: searchScope,
-        skeletonCount: LIVE_SEARCH_PAGE_SIZE,
-        imageWidth: 112,
         imageHeight: 112,
-        routeProduct: ({ urlKey, sku }) => getProductLink(urlKey, sku),
+        imageWidth: 112,
         onSearchResult: (results) => {
           if (latestTypedPhrase !== dispatchedPhrase) {
             return;
@@ -642,7 +1170,29 @@ async function enhanceLiveSearch(block) {
 
           announce(uiText.noResults);
         },
+        routeProduct: ({ urlKey, sku }) => getProductLink(urlKey, sku),
+        scope: searchScope,
+        skeletonCount: LIVE_SEARCH_PAGE_SIZE,
         slots: {
+          Footer: (ctx) => {
+            viewAllWrapper = document.createElement('div');
+            viewAllWrapper.className = 'hdr-search-footer';
+
+            const viewAllLink = document.createElement('a');
+            viewAllLink.className = 'hdr-search-view-all';
+            viewAllLink.href = rootLink(SEARCH_PATH);
+            viewAllLink.textContent = uiText.searchViewAll;
+
+            viewAllWrapper.append(viewAllLink);
+            viewAllWrapper.setAttribute('hidden', '');
+            ctx.appendChild(viewAllWrapper);
+
+            ctx.onChange((next) => {
+              viewAllLink.href = `${rootLink(SEARCH_PATH)}?q=${encodeURIComponent(next.variables?.phrase || '')}`;
+            });
+
+            syncViewAllVisibility();
+          },
           ProductImage: (ctx) => {
             const { product, defaultImageProps } = ctx;
             const anchorWrapper = document.createElement('a');
@@ -656,36 +1206,17 @@ async function enhanceLiveSearch(block) {
             tryRenderAemAssetsImage(ctx, {
               alias: getSafeAemAlias(product),
               imageProps: defaultImageProps,
-              wrapper: anchorWrapper,
               params: {
-                width: defaultImageProps.width,
                 height: defaultImageProps.height,
+                width: defaultImageProps.width,
               },
+              wrapper: anchorWrapper,
             });
-          },
-          Footer: (ctx) => {
-            viewAllWrapper = document.createElement('div');
-            viewAllWrapper.className = 'hdr-search-footer';
-
-            const viewAllLink = document.createElement('a');
-            viewAllLink.className = 'hdr-search-view-all';
-            viewAllLink.href = rootLink('/search');
-            viewAllLink.textContent = uiText.searchViewAll;
-
-            viewAllWrapper.append(viewAllLink);
-            viewAllWrapper.setAttribute('hidden', '');
-            ctx.appendChild(viewAllWrapper);
-
-            ctx.onChange((next) => {
-              viewAllLink.href = `${rootLink('/search')}?q=${encodeURIComponent(next.variables?.phrase || '')}`;
-            });
-
-            syncViewAllVisibility();
           },
         },
       })(resultsPanel);
 
-      events.on('search/error', () => {
+      searchEvents.on('search/error', () => {
         if (!latestTypedPhrase || latestTypedPhrase.length < LIVE_SEARCH_MIN_QUERY_LENGTH) {
           return;
         }
@@ -752,12 +1283,12 @@ async function enhanceLiveSearch(block) {
       searchInput.setAttribute('aria-expanded', 'true');
 
       searchApi({
-        phrase: dispatchedPhrase,
-        pageSize: LIVE_SEARCH_PAGE_SIZE,
+        context: getSearchContext(),
         filter: [
           { attribute: 'visibility', in: ['Search', 'Catalog, Search'] },
         ],
-        context: getSearchContext(),
+        pageSize: LIVE_SEARCH_PAGE_SIZE,
+        phrase: dispatchedPhrase,
       }, { scope: searchScope });
     }, LIVE_SEARCH_DEBOUNCE_MS);
   };
@@ -804,21 +1335,55 @@ async function enhanceLiveSearch(block) {
   });
 }
 
+function syncCartCount(cartCount, cartData) {
+  if (!cartCount) {
+    return;
+  }
+
+  const quantity = Number(cartData?.totalQuantity) || 0;
+
+  if (quantity > 0) {
+    cartCount.textContent = String(quantity);
+    cartCount.removeAttribute('hidden');
+    return;
+  }
+
+  cartCount.textContent = '';
+  cartCount.setAttribute('hidden', '');
+}
+
 export default async function decorate(block) {
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/fragments/mcx-nav';
 
-  let data = getDefaultData();
+  let data = normalizeHeaderData(getDefaultData());
   try {
     const fragment = await fetchFragmentDocument(navPath);
     data = parseNavData(fragment);
   } catch (error) {
-    // Fall back to the bundled demo data when the authored fragment is unavailable.
+    // Fall back to the bundled MCX nav data when the authored fragment is unavailable.
   }
 
-  block.replaceChildren(buildHeaderDom(data));
+  const refs = buildHeaderDom(data);
+
+  block.replaceChildren(refs.shell);
+  refs.authMenu.sync();
+  syncCartCount(refs.cartCount);
+
   bindMegaState(block);
   await enhanceLiveSearch(block);
   syncMegaOffsets(block);
+
+  events.on('authenticated', (payload) => {
+    const snapshot = getAuthSnapshot();
+    refs.authMenu.sync(typeof payload === 'boolean'
+      ? { ...snapshot, isAuthenticated: payload }
+      : snapshot);
+  }, { eager: true });
+
+  events.on('cart/data', (cartData) => {
+    syncCartCount(refs.cartCount, cartData);
+  }, { eager: true });
+
   window.addEventListener('resize', () => syncMegaOffsets(block), { passive: true });
 }
