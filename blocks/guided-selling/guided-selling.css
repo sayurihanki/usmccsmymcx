@@ -1210,15 +1210,14 @@ main > .section.guided-selling-section > div {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .guided-selling .gs-options-card,
-  .guided-selling .gs-options-image {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .guided-selling .gs-band-grid {
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 900px) {
   .guided-selling {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .guided-selling .gs-header {
@@ -1242,18 +1241,18 @@ main > .section.guided-selling-section > div {
   }
 
   .guided-selling .gs-intro-title {
-    font-size: clamp(5.6rem, 18vw, 8.6rem);
+    font-size: clamp(6.4rem, 18vw, 9.8rem);
   }
 
   .guided-selling .gs-step-title,
   .guided-selling .gs-loading-title,
   .guided-selling .gs-results-title {
-    font-size: clamp(4.6rem, 14vw, 7.6rem);
+    font-size: clamp(5.2rem, 14vw, 8.4rem);
     max-width: none;
   }
 
   .guided-selling .gs-results-section-title {
-    font-size: 4rem;
+    font-size: 4.6rem;
   }
 
   .guided-selling .gs-results-header,
@@ -1266,7 +1265,7 @@ main > .section.guided-selling-section > div {
 
 @media (max-width: 700px) {
   .guided-selling {
-    font-size: 17px;
+    font-size: 18px;
   }
 
   .guided-selling .gs-screen {
@@ -1278,7 +1277,7 @@ main > .section.guided-selling-section > div {
   }
 
   .guided-selling .gs-brand-title {
-    font-size: 3.2rem;
+    font-size: 3.6rem;
   }
 
   .guided-selling .gs-intro-content {
@@ -1292,20 +1291,20 @@ main > .section.guided-selling-section > div {
   }
 
   .guided-selling .gs-intro-title {
-    font-size: clamp(4.6rem, 18vw, 6.8rem);
+    font-size: clamp(5.2rem, 18vw, 7.4rem);
   }
 
   .guided-selling .gs-step-title,
   .guided-selling .gs-loading-title,
   .guided-selling .gs-results-title {
-    font-size: clamp(3.8rem, 16vw, 5.8rem);
+    font-size: clamp(4.4rem, 16vw, 6.4rem);
   }
 
   .guided-selling .gs-intro-subtitle,
   .guided-selling .gs-step-description,
   .guided-selling .gs-loading-subtitle,
   .guided-selling .gs-results-description {
-    font-size: 1.5rem;
+    font-size: 1.72rem;
   }
 
   .guided-selling .gs-option-label,
@@ -1313,7 +1312,7 @@ main > .section.guided-selling-section > div {
   .guided-selling .gs-band-title,
   .guided-selling .gs-bundle-title,
   .guided-selling .gs-profile-name {
-    font-size: 1.95rem;
+    font-size: 2.2rem;
   }
 
   .guided-selling .gs-card-media {
