@@ -18,6 +18,7 @@
     "build:json:definitions": "merge-json-cli -i \"models/_component-definition.json\" -o \"component-definition.json\"",
     "build:json:filters": "merge-json-cli -i \"models/_component-filters.json\" -o \"component-filters.json\"",
     "build:ui-ux-package": "node tools/build-ui-ux-portability-package.mjs",
+    "verify:catalog": "node tools/catalog-health-check.mjs",
     "verify:uniform-contract": "node tools/uniform-configurator/verify-commerce-contract.mjs",
     "test:unit": "node --test tests/**/*.test.mjs",
     "test": "npm run lint && npm run test:unit",
