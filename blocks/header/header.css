@@ -982,7 +982,8 @@ header .nav-search-input .search_autocomplete .popover-container {
 ) .dropin-header-container__title {
   color: var(--gs-text-primary);
   font: var(--type-headline-1-font);
-  letter-spacing: 0.16em;
+  letter-spacing: 0.04em;
+  text-shadow: 0 10px 24px rgb(0 0 0 / 30%);
   text-transform: uppercase;
 }
 
@@ -1603,8 +1604,9 @@ header nav .nav-brand a:any-link {
   color: var(--gs-text-primary);
   font-family: var(--gs-font-display);
   font-size: clamp(2.8rem, 3vw, 3.4rem);
-  font-weight: 400;
-  letter-spacing: 0.04em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-shadow: 0 10px 18px rgb(0 0 0 / 24%);
   text-transform: uppercase;
 }
 
