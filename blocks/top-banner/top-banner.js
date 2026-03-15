@@ -392,8 +392,6 @@ function updateAllHeaderOffsets() {
 }
 
 function mountBannerToHeader(block, mountTarget) {
-  if (block.closest('header')) return true;
-
   const sourceSection = block.closest('.section');
   let target = null;
 
@@ -410,9 +408,10 @@ function mountBannerToHeader(block, mountTarget) {
 
   if (!target) return false;
 
-  const navWrapper = target.querySelector(':scope > .nav-wrapper');
-  if (navWrapper) target.insertBefore(block, navWrapper);
-  else target.prepend(block);
+  if (block.parentElement !== target || target.firstElementChild !== block) {
+    // Always pin the banner to the top of the resolved header target.
+    target.prepend(block);
+  }
 
   if (sourceSection) {
     const remainingBlocks = sourceSection.querySelectorAll('.block');
