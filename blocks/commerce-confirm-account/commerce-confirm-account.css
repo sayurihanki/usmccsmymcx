@@ -1,4 +1,6 @@
 .commerce-confirm-account-container {
-    max-width: 700px;
-    margin: auto;
+  margin: clamp(40px, 8vw, 88px) auto;
+  max-width: 760px;
+  padding: 0 16px;
+  width: 100%;
 }

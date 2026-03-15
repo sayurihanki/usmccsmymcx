@@ -902,35 +902,178 @@ header .nav-search-input .search_autocomplete .popover-container {
 
 /* CSS for authCombine */
 #auth-combine-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgb(0 0 0 / 50%);
-  display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 10;
-  overflow-y: auto;
-  padding: 10px 0;
+  backdrop-filter: blur(18px);
+  background:
+    radial-gradient(circle at 20% 20%, rgb(193 18 31 / 14%), transparent 30%),
+    linear-gradient(180deg, rgb(3 5 7 / 78%) 0%, rgb(3 5 7 / 88%) 100%);
   box-sizing: border-box;
+  display: flex;
+  height: 100%;
+  inset: 0;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 16px 0;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
 }
 
 #auth-combine-wrapper {
-  background-color: white;
-  border-radius: var(--shape-border-radius-2);
-  width: 100%;
-  max-width: 800px;
-  min-height: max-content;
-  margin: 0 10px;
+  background: var(--auth-shell-bg);
+  border: 1px solid var(--auth-shell-border);
+  border-radius: var(--auth-shell-radius);
+  box-shadow: 0 28px 72px rgb(0 0 0 / 44%);
   box-sizing: border-box;
+  margin: 0 16px;
   max-height: 90vh;
-  overflow-y: auto;
+  max-width: 820px;
+  min-height: max-content;
+  overflow: hidden auto;
+  padding: clamp(40px, 5vw, 56px) clamp(24px, 4vw, 40px) clamp(28px, 4vw, 40px);
+  position: relative;
+  width: 100%;
+}
 
-  @supports (height: 90svh) {
+@supports (height: 90svh) {
+  #auth-combine-wrapper {
     max-height: 90svh;
   }
+}
+
+#auth-combine-wrapper::before {
+  background:
+    linear-gradient(90deg, rgb(255 255 255 / 4%) 1px, transparent 1px),
+    linear-gradient(180deg, rgb(255 255 255 / 4%) 1px, transparent 1px);
+  background-size: 88px 88px;
+  content: '';
+  inset: 0;
+  mask-image: linear-gradient(180deg, rgb(0 0 0 / 85%) 0%, transparent 92%);
+  opacity: 0.22;
+  pointer-events: none;
+  position: absolute;
+}
+
+#auth-combine-wrapper::after {
+  background: linear-gradient(90deg, var(--gs-scarlet), var(--gs-gold));
+  border-radius: 999px;
+  content: '';
+  height: 4px;
+  left: clamp(24px, 4vw, 40px);
+  position: absolute;
+  top: 24px;
+  width: clamp(88px, 18vw, 120px);
+}
+
+#auth-combine-wrapper .auth-combine {
+  position: relative;
+  z-index: 1;
+}
+
+#auth-combine-wrapper .dropin-header-container .dropin-divider {
+  display: none;
+}
+
+#auth-combine-wrapper :is(
+  .auth-sign-in-form__title,
+  .auth-sign-up-form__title,
+  .auth-reset-password-form__title,
+  .auth-email-confirmation-form__title
+) .dropin-header-container__title {
+  color: var(--gs-text-primary);
+  font: var(--type-headline-1-font);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+#auth-combine-wrapper :is(.dropin-input, .dropin-picker__select, .dropin-textarea) {
+  background: var(--auth-field-bg);
+  border: 1px solid var(--auth-field-border);
+  border-radius: 16px;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 4%);
+  color: var(--gs-text-primary);
+}
+
+#auth-combine-wrapper .dropin-input,
+#auth-combine-wrapper .dropin-picker__select {
+  min-height: 72px;
+  padding: 30px 24px 16px;
+}
+
+#auth-combine-wrapper .dropin-input-password .dropin-input {
+  padding-left: 56px;
+  padding-right: 72px;
+}
+
+#auth-combine-wrapper :is(.dropin-input__label--floating, .dropin-picker__floatingLabel, .dropin-textarea__label--floating) {
+  background: transparent;
+  color: rgb(242 237 229 / 80%);
+  font: normal normal 500 1.8rem/1.2 var(--gs-font-body);
+  letter-spacing: 0.01em;
+  left: 24px;
+}
+
+#auth-combine-wrapper .dropin-input-password__eye-icon {
+  background: transparent;
+  border: 0;
+  color: var(--gs-scarlet);
+  min-height: 40px;
+  min-width: 40px;
+  padding: 0;
+  top: 16px;
+}
+
+#auth-combine-wrapper .dropin-input-password__eye-icon:hover,
+#auth-combine-wrapper .dropin-input-password__eye-icon:focus-visible {
+  color: #ff6b74;
+}
+
+#auth-combine-wrapper :is(.dropin-button--primary, .auth-sign-in-form__button--submit) {
+  align-items: center;
+  background: linear-gradient(135deg, var(--gs-scarlet) 0%, #d4202e 100%);
+  border: 0;
+  border-radius: 999px;
+  box-shadow: 0 18px 36px rgb(193 18 31 / 24%);
+  color: #fff;
+  display: inline-flex;
+  font: var(--type-button-1-font);
+  justify-content: center;
+  letter-spacing: var(--type-button-1-letter-spacing);
+  min-height: 56px;
+  padding: 0 28px;
+  text-transform: uppercase;
+}
+
+#auth-combine-wrapper :is(.dropin-button--primary, .auth-sign-in-form__button--submit):hover,
+#auth-combine-wrapper :is(.dropin-button--primary, .auth-sign-in-form__button--submit):focus-visible {
+  background: linear-gradient(135deg, #d4202e 0%, #e63946 100%);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+#auth-combine-wrapper :is(.dropin-button--tertiary, .auth-sign-in-form__button--forgot, .auth-sign-in-form__button--signup, .auth-sign-up-form-buttons--signin) {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: var(--gs-gold-light);
+  font: var(--type-details-overline-font);
+  letter-spacing: var(--type-details-overline-letter-spacing);
+  min-height: auto;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+#auth-combine-wrapper :is(.dropin-button--tertiary, .auth-sign-in-form__button--forgot, .auth-sign-in-form__button--signup, .auth-sign-up-form-buttons--signin):hover,
+#auth-combine-wrapper :is(.dropin-button--tertiary, .auth-sign-in-form__button--forgot, .auth-sign-in-form__button--signup, .auth-sign-up-form-buttons--signin):focus-visible {
+  color: var(--gs-text-primary);
+}
+
+#auth-combine-wrapper .dropin-in-line-alert {
+  background: linear-gradient(180deg, rgb(37 15 20 / 96%) 0%, rgb(26 11 14 / 96%) 100%);
+  border: 1px solid rgb(193 18 31 / 24%);
+  border-radius: 16px;
+  color: var(--gs-text-primary);
+  box-sizing: border-box;
 }
 
 /* CSS for auth dropdown */
@@ -957,11 +1100,89 @@ header .nav-search-input .search_autocomplete .popover-container {
   width: min(92vw, 560px);
   min-width: 15rem;
   max-width: 100%;
-  background: var(--nav-flyout-bg);
-  border: 1px solid var(--nav-flyout-border);
-  border-radius: 10px;
-  box-shadow: var(--nav-flyout-shadow);
+  background: var(--auth-shell-bg);
+  border: 1px solid var(--auth-shell-border);
+  border-radius: 22px;
+  box-shadow: 0 28px 72px rgb(0 0 0 / 44%);
   overflow: hidden;
+}
+
+.dropdown-wrapper.nav-tools-wrapper #auth-dropin-container {
+  padding: 24px;
+}
+
+.dropdown-wrapper.nav-tools-wrapper #auth-dropin-container .dropin-header-container .dropin-divider {
+  display: none;
+}
+
+.dropdown-wrapper.nav-tools-wrapper #auth-dropin-container :is(.dropin-input, .dropin-picker__select, .dropin-textarea) {
+  background: var(--auth-field-bg);
+  border: 1px solid var(--auth-field-border);
+  border-radius: 14px;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 4%);
+  color: var(--gs-text-primary);
+}
+
+.dropdown-wrapper.nav-tools-wrapper #auth-dropin-container .dropin-input,
+.dropdown-wrapper.nav-tools-wrapper #auth-dropin-container .dropin-picker__select {
+  min-height: 64px;
+  padding: 26px 20px 12px;
+}
+
+.dropdown-wrapper.nav-tools-wrapper #auth-dropin-container .dropin-input-password .dropin-input {
+  padding-left: 48px;
+  padding-right: 60px;
+}
+
+.dropdown-wrapper.nav-tools-wrapper #auth-dropin-container :is(.dropin-input__label--floating, .dropin-picker__floatingLabel, .dropin-textarea__label--floating) {
+  background: transparent;
+  color: rgb(242 237 229 / 80%);
+  font: normal normal 500 1.6rem/1.2 var(--gs-font-body);
+  letter-spacing: 0.01em;
+  left: 20px;
+}
+
+.dropdown-wrapper.nav-tools-wrapper #auth-dropin-container .dropin-input-password__eye-icon {
+  background: transparent;
+  border: 0;
+  color: var(--gs-scarlet);
+  min-height: 36px;
+  min-width: 36px;
+  top: 14px;
+}
+
+.dropdown-wrapper.nav-tools-wrapper #auth-dropin-container :is(.dropin-button--primary, .auth-sign-in-form__button--submit) {
+  align-items: center;
+  background: linear-gradient(135deg, var(--gs-scarlet) 0%, #d4202e 100%);
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  display: inline-flex;
+  font: var(--type-button-2-font);
+  justify-content: center;
+  letter-spacing: var(--type-button-2-letter-spacing);
+  min-height: 48px;
+  padding: 0 24px;
+  text-transform: uppercase;
+}
+
+.dropdown-wrapper.nav-tools-wrapper #auth-dropin-container :is(.dropin-button--tertiary, .auth-sign-in-form__button--forgot, .auth-sign-in-form__button--signup) {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: var(--gs-gold-light);
+  font: var(--type-details-overline-font);
+  letter-spacing: var(--type-details-overline-letter-spacing);
+  min-height: auto;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.dropdown-wrapper.nav-tools-wrapper #auth-dropin-container .dropin-in-line-alert {
+  background: linear-gradient(180deg, rgb(37 15 20 / 96%) 0%, rgb(26 11 14 / 96%) 100%);
+  border: 1px solid rgb(193 18 31 / 24%);
+  border-radius: 16px;
+  color: var(--gs-text-primary);
 }
 
 @media (min-width: 1024px) {
