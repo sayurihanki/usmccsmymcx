@@ -469,8 +469,8 @@
         "compareAt": "$69.99",
         "saving": "Save $15",
         "image": {
-          "src": "https://picsum.photos/seed/ua-comp/400/220",
-          "alt": "Under Armour HeatGear shirt",
+          "src": "https://images.unsplash.com/photo-1598632598200-beb70561625f?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Athlete wearing a long sleeve training shirt",
           "emoji": "👕"
         }
       },
@@ -493,8 +493,8 @@
         "compareAt": "$139.99",
         "saving": "Save $20",
         "image": {
-          "src": "https://picsum.photos/seed/brooks-16/400/220",
-          "alt": "Brooks Ghost 16 shoe",
+          "src": "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Close-up of a road running shoe",
           "emoji": "👟"
         }
       },
@@ -517,8 +517,8 @@
         "compareAt": "$89.99",
         "saving": "Save $15",
         "image": {
-          "src": "https://picsum.photos/seed/511-tdu/400/220",
-          "alt": "5.11 tactical pants",
+          "src": "https://images.unsplash.com/photo-1685157782880-4479324e907b?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Camouflage tactical pants with black boots",
           "emoji": "👖"
         }
       },
@@ -542,8 +542,8 @@
         "compareAt": "$239.99",
         "saving": "Save $50",
         "image": {
-          "src": "https://picsum.photos/seed/danner-tachyon/400/220",
-          "alt": "Danner Tachyon boot",
+          "src": "https://images.unsplash.com/photo-1772627340345-d1ca0f377e6e?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Black tactical boot with dirt on the sole",
           "emoji": "🥾"
         }
       },

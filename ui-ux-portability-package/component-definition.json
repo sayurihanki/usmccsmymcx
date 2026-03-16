@@ -260,6 +260,17 @@
           }
         },
         {
+          "title": "Promo Strip",
+          "id": "promo-strip",
+          "plugins": {
+            "da": {
+              "name": "promo-strip",
+              "rows": 5,
+              "columns": 2
+            }
+          }
+        },
+        {
           "title": "Hero",
           "id": "hero",
           "model": "hero",

@@ -53,6 +53,9 @@
           "...": "../blocks/form-mccs-preferences-next/_*.json#/definitions"
         },
         {
+          "...": "../blocks/promo-strip/_*.json#/definitions"
+        },
+        {
           "...": "../blocks/hero/_*.json#/definitions"
         },
         {

@@ -83,6 +83,7 @@ The repo now includes a full local preview harness:
 - `mcx-hero` is explicit author content. No synthetic hero auto-blocking runs on MCX pages.
 - `theme: mcx` is still the recommended authored switch for the MCX style package and shell.
 - As a publish safety net, pages that contain authored `mcx-*` content blocks now auto-activate the MCX experience even if the page metadata missed `theme: mcx`. Keep the metadata on the page anyway so the intent stays explicit in DA.live.
+- Generic `promo-strip` blocks are optional authored inserts. They are not part of the required MCX homepage base order and can be placed wherever the page narrative needs an inline promotion.
 - Section styling for the category, product, and featured rows is controlled by the section metadata example files above.
 - `mcx-header` and `mcx-footer` are shell blocks. Authors should edit the fragment docs, not inline blocks on the homepage.
 - `mcx-hero` still accepts legacy `status-badge-*` rows for backward compatibility, but the redesigned hero no longer renders them. Do not add them to new docs.
