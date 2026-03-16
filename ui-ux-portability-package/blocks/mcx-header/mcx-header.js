@@ -29,6 +29,12 @@ const STORE_SWITCHER_OPTIONS = [
     matchToken: 'jenhankib2bapple',
   },
   {
+    id: 'jenhankib2bbodea',
+    label: 'jenhankib2bbodea',
+    href: 'https://main--jenhankib2bbodea--sayurihanki.aem.live/',
+    matchToken: 'jenhankib2bbodea',
+  },
+  {
     id: 'usmccsmymcx',
     label: 'usmccsmymcx',
     href: 'https://main--usmccsmymcx--sayurihanki.aem.live/',
