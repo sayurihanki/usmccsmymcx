@@ -6,7 +6,7 @@
       "plugins": {
         "da": {
           "name": "mcx-hero",
-          "rows": 18,
+          "rows": 20,
           "columns": 2
         }
       }

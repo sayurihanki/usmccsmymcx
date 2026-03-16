@@ -9,6 +9,12 @@ import {
 import { isMcxLibraryPreviewPath } from '../../scripts/mcx-preview.js';
 
 const STAT_KEYS = ['1', '2', '3', '4'];
+const HERO_AUTOPLAY_INTERVAL = 4500;
+const HERO_IMAGE_BREAKPOINTS = [
+  { media: '(min-width: 900px)', width: '1600' },
+  { width: '900' },
+];
+const EXTRA_IMAGE_FIELD_REGEX = /^image-(\d+)$/;
 const LIBRARY_PREVIEW_DEFAULTS = {
   eyebrow: 'Spring Collection - 2026 - Tax-Free',
   'heading-line-1': 'OUTFITTED',
@@ -17,10 +23,23 @@ const LIBRARY_PREVIEW_DEFAULTS = {
   description:
     'Serving Marines and their families since 1897. Premium brands, exclusive savings, and'
     + ' tax-free shopping - exclusively for those who serve.',
-  image: {
-    src: 'https://images.unsplash.com/photo-1519415943484-9fa1873496d4?w=1200&q=80',
-    alt: 'Marine Corps collection hero',
-  },
+  images: [
+    {
+      key: 'image',
+      src: 'https://images.unsplash.com/photo-1519415943484-9fa1873496d4?w=1200&q=80',
+      alt: 'Marine Corps collection hero',
+    },
+    {
+      key: 'image-2',
+      src: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1200&q=80',
+      alt: 'Tactical collection apparel',
+    },
+    {
+      key: 'image-3',
+      src: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80',
+      alt: 'Performance training essentials',
+    },
+  ],
   'primary-cta': {
     href: '#products',
     text: 'Shop Now',
@@ -91,10 +110,10 @@ function getDefaultLibraryFields() {
     'heading-line-2': createFieldCell(LIBRARY_PREVIEW_DEFAULTS['heading-line-2']),
     'heading-line-3': createFieldCell(LIBRARY_PREVIEW_DEFAULTS['heading-line-3']),
     description: createFieldCell(LIBRARY_PREVIEW_DEFAULTS.description),
-    image: createImageCell(
-      LIBRARY_PREVIEW_DEFAULTS.image.src,
-      LIBRARY_PREVIEW_DEFAULTS.image.alt,
-    ),
+    ...LIBRARY_PREVIEW_DEFAULTS.images.reduce((acc, image) => {
+      acc[image.key] = createImageCell(image.src, image.alt);
+      return acc;
+    }, {}),
     'primary-cta': createLinkCell(
       LIBRARY_PREVIEW_DEFAULTS['primary-cta'].href,
       LIBRARY_PREVIEW_DEFAULTS['primary-cta'].text,
@@ -174,20 +193,161 @@ function createStats(fields) {
   return stats.children.length ? stats : null;
 }
 
-function createHeroNavigation() {
-  const heroNav = document.createElement('div');
-  heroNav.className = 'hero-nav';
+function getImageFieldEntries(fields) {
+  return Object.entries(fields)
+    .map(([key, valueCell]) => {
+      if (key === 'image') return { key, order: 1, valueCell };
 
-  for (let index = 0; index < 3; index += 1) {
+      const match = key.match(EXTRA_IMAGE_FIELD_REGEX);
+      const order = Number.parseInt(match?.[1] || '', 10);
+      if (!match || Number.isNaN(order) || order < 2) return null;
+
+      return { key, order, valueCell };
+    })
+    .filter(Boolean)
+    .sort((left, right) => left.order - right.order);
+}
+
+function createHeroSlides(fields) {
+  const imageFields = getImageFieldEntries(fields);
+  const media = document.createElement('div');
+  media.className = 'hero-media';
+
+  const slides = imageFields.reduce((acc, imageField, index) => {
+    const picture = createPictureFromCell(
+      imageField.valueCell,
+      index === 0,
+      HERO_IMAGE_BREAKPOINTS,
+    );
+    if (!picture) return acc;
+
+    picture.className = 'hero-photo hero-slide';
+    picture.dataset.heroSlide = String(acc.length);
+    picture.setAttribute('aria-hidden', 'true');
+    media.append(picture);
+    acc.push(picture);
+    return acc;
+  }, []);
+
+  return {
+    media: slides.length ? media : null,
+    slides,
+  };
+}
+
+function createHeroNavigation(slideCount) {
+  if (slideCount < 2) return null;
+
+  const heroNav = document.createElement('nav');
+  heroNav.className = 'hero-nav';
+  heroNav.setAttribute('aria-label', 'Hero image navigation');
+
+  for (let index = 0; index < slideCount; index += 1) {
     const dot = document.createElement('button');
     dot.type = 'button';
-    dot.className = index === 0 ? 'h-dot on' : 'h-dot';
+    dot.className = 'h-dot';
     dot.dataset.heroDot = String(index);
-    dot.setAttribute('aria-label', `Hero slide ${index + 1}`);
+    dot.setAttribute('aria-label', `Show hero image ${index + 1} of ${slideCount}`);
+    dot.setAttribute('aria-pressed', 'false');
     heroNav.append(dot);
   }
 
   return heroNav;
+}
+
+function isNodeWithin(root, node) {
+  let current = node;
+
+  while (current) {
+    if (current === root) return true;
+    current = current.parentNode;
+  }
+
+  return false;
+}
+
+function updateCarouselState(hero, slides, dots, activeIndex) {
+  hero.dataset.activeSlide = String(activeIndex);
+
+  slides.forEach((slide, index) => {
+    const isActive = index === activeIndex;
+    slide.classList.toggle('is-active', isActive);
+    slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+  });
+
+  dots.forEach((dot, index) => {
+    const isActive = index === activeIndex;
+    dot.classList.toggle('on', isActive);
+    dot.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+  });
+}
+
+function bindHeroCarousel(hero, slides, heroNav) {
+  if (!heroNav || slides.length < 2) return;
+
+  const dots = [...heroNav.querySelectorAll('.h-dot')];
+  let activeIndex = 0;
+  let isHovered = false;
+  let hasFocusedControl = false;
+  let autoplayId = 0;
+
+  const stopAutoplay = () => {
+    if (!autoplayId) return;
+    window.clearInterval(autoplayId);
+    autoplayId = 0;
+  };
+
+  const startAutoplay = () => {
+    if (autoplayId || isHovered || hasFocusedControl || slides.length < 2) return;
+
+    autoplayId = window.setInterval(() => {
+      activeIndex = (activeIndex + 1) % slides.length;
+      updateCarouselState(hero, slides, dots, activeIndex);
+    }, HERO_AUTOPLAY_INTERVAL);
+  };
+
+  const setActiveSlide = (index, resetAutoplay = false) => {
+    activeIndex = ((index % slides.length) + slides.length) % slides.length;
+    updateCarouselState(hero, slides, dots, activeIndex);
+
+    if (resetAutoplay) {
+      stopAutoplay();
+      startAutoplay();
+    }
+  };
+
+  hero.addEventListener('mouseenter', () => {
+    isHovered = true;
+    stopAutoplay();
+  });
+
+  hero.addEventListener('mouseleave', () => {
+    isHovered = false;
+    startAutoplay();
+  });
+
+  hero.querySelectorAll('a, button').forEach((node) => {
+    node.addEventListener('focus', () => {
+      hasFocusedControl = true;
+      stopAutoplay();
+    });
+
+    node.addEventListener('blur', () => {
+      window.setTimeout(() => {
+        hasFocusedControl = isNodeWithin(hero, document.activeElement);
+        if (!hasFocusedControl) startAutoplay();
+      }, 0);
+    });
+  });
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      setActiveSlide(index, true);
+    });
+  });
+
+  updateCarouselState(hero, slides, dots, activeIndex);
+  startAutoplay();
 }
 
 export default function decorate(block) {
@@ -214,11 +374,8 @@ export default function decorate(block) {
   scan.className = 'hero-scan';
   hero.append(scan);
 
-  const picture = createPictureFromCell(fields.image, true, [{ media: '(min-width: 900px)', width: '1600' }, { width: '900' }]);
-  if (picture) {
-    picture.className = 'hero-photo';
-    hero.append(picture);
-  }
+  const { media, slides } = createHeroSlides(fields);
+  if (media) hero.append(media);
 
   const fade = document.createElement('div');
   fade.className = 'hero-photo-fade';
@@ -254,7 +411,13 @@ export default function decorate(block) {
   if (stats) content.append(stats);
   hero.append(content);
 
-  hero.append(createHeroNavigation());
+  const heroNav = createHeroNavigation(slides.length);
+  if (heroNav) hero.append(heroNav);
+  if (slides.length === 1) {
+    slides[0].classList.add('is-active');
+    slides[0].setAttribute('aria-hidden', 'false');
+  }
+  bindHeroCarousel(hero, slides, heroNav);
 
   block.replaceChildren(hero);
 }

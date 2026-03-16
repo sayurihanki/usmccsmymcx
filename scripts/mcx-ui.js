@@ -145,23 +145,6 @@ function initRevealObserver() {
   document.querySelectorAll('.reveal').forEach((node) => observer.observe(node));
 }
 
-function initHeroDots() {
-  const dots = [...document.querySelectorAll('.mcx-hero .h-dot')];
-  if (!dots.length) return;
-  let current = 0;
-
-  const activate = (index) => {
-    dots.forEach((dot, dotIndex) => dot.classList.toggle('on', dotIndex === index));
-    current = index;
-  };
-
-  dots.forEach((dot, index) => {
-    dot.addEventListener('click', () => activate(index));
-  });
-
-  window.setInterval(() => activate((current + 1) % dots.length), 4500);
-}
-
 function initCountdown() {
   document.querySelectorAll('.mcx-deal-countdown .deal-strip').forEach((strip) => {
     const end = strip.dataset.countdownEnd ? new Date(strip.dataset.countdownEnd) : null;
@@ -303,7 +286,6 @@ export default function initMcxUi() {
 
   initRevealObserver();
   initScrollEffects(backToTop);
-  initHeroDots();
   initCountdown();
   initSearchShortcut();
   initNavState();

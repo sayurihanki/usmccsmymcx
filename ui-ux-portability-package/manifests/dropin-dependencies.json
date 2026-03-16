@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-15T19:02:55.113Z",
+  "generatedAt": "2026-03-16T05:45:11.397Z",
   "summary": {
     "totalPackages": 17,
     "undeclaredPackages": []
@@ -9,7 +9,7 @@
       "package": "@dropins/storefront-account",
       "version": "~3.0.0",
       "source": "declared",
-      "importCount": 21,
+      "importCount": 22,
       "importSpecifiers": [
         "@dropins/storefront-account/api.js",
         "@dropins/storefront-account/containers/Addresses.js",
@@ -19,6 +19,7 @@
         "@dropins/storefront-account/render.js"
       ],
       "importedBy": [
+        "blocks/commerce-account-header/commerce-account-header.js",
         "blocks/commerce-account-hub/commerce-account-hub.js",
         "blocks/commerce-account-sidebar/commerce-account-sidebar.js",
         "blocks/commerce-addresses/commerce-addresses.js",
@@ -70,7 +71,7 @@
       "package": "@dropins/storefront-cart",
       "version": "~3.0.0",
       "source": "declared",
-      "importCount": 39,
+      "importCount": 40,
       "importSpecifiers": [
         "@dropins/storefront-cart/api.js",
         "@dropins/storefront-cart/containers/CartSummaryList.js",
@@ -90,6 +91,7 @@
         "blocks/commerce-mini-cart/commerce-mini-cart.js",
         "blocks/commerce-order-product-list/commerce-order-product-list.js",
         "blocks/commerce-wishlist/commerce-wishlist.js",
+        "blocks/ez-rack-builder/ez-rack-builder.js",
         "blocks/header/header.js",
         "blocks/live-block/dashboard-core.js",
         "blocks/luxury-configurator/luxury-configurator.js",
@@ -140,7 +142,7 @@
       "package": "@dropins/storefront-company-management",
       "version": "~1.0.0",
       "source": "declared",
-      "importCount": 25,
+      "importCount": 26,
       "importSpecifiers": [
         "@dropins/storefront-company-management/api.js",
         "@dropins/storefront-company-management/containers/AcceptInvitation.js",
@@ -154,6 +156,7 @@
         "@dropins/storefront-company-management/render.js"
       ],
       "importedBy": [
+        "blocks/commerce-account-header/commerce-account-header.js",
         "blocks/commerce-account-hub/commerce-account-hub.js",
         "blocks/commerce-b2b-negotiable-quote-template/commerce-b2b-negotiable-quote-template.js",
         "blocks/commerce-b2b-negotiable-quote/commerce-b2b-negotiable-quote.js",
@@ -239,7 +242,7 @@
       "package": "@dropins/storefront-pdp",
       "version": "~3.0.0",
       "source": "declared",
-      "importCount": 28,
+      "importCount": 31,
       "importSpecifiers": [
         "@dropins/storefront-pdp/api.js",
         "@dropins/storefront-pdp/containers/ProductAttributes.js",
@@ -255,6 +258,7 @@
       ],
       "importedBy": [
         "blocks/commerce-wishlist/commerce-wishlist.js",
+        "blocks/ez-rack-builder/ez-rack-builder.js",
         "blocks/luxury-configurator/luxury-configurator.js",
         "blocks/product-configurator-luxe/product-configurator-luxe.js",
         "blocks/product-details/product-details.js",
@@ -432,7 +436,7 @@
       "package": "@dropins/tools",
       "version": "~1.6.0",
       "source": "declared",
-      "importCount": 168,
+      "importCount": 169,
       "importSpecifiers": [
         "@dropins/tools/components.js",
         "@dropins/tools/event-bus.js",
@@ -489,6 +493,7 @@
         "blocks/commerce-shipping-status/commerce-shipping-status.js",
         "blocks/commerce-wishlist/commerce-wishlist.js",
         "blocks/customer-segment-personalization-block/customer-segment-personalization-block.js",
+        "blocks/ez-rack-builder/ez-rack-builder.js",
         "blocks/footer/footer.js",
         "blocks/fragment/fragment.js",
         "blocks/header/header.js",

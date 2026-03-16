@@ -1,233 +1,8 @@
 /* eslint-env node */
-/* global globalThis */
-/* eslint-disable max-classes-per-file, class-methods-use-this */
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-class FakeEventTarget {
-  constructor() {
-    this.listeners = new Map();
-  }
-
-  addEventListener(type, listener) {
-    const existing = this.listeners.get(type) || [];
-    existing.push(listener);
-    this.listeners.set(type, existing);
-  }
-}
-
-class FakeStyle {
-  setProperty(name, value) {
-    this[name] = value;
-  }
-}
-
-class FakeClassList {
-  constructor(element) {
-    this.element = element;
-  }
-
-  add(...tokens) {
-    const classes = new Set(this.element.className.split(/\s+/).filter(Boolean));
-    tokens.forEach((token) => classes.add(token));
-    this.element.className = [...classes].join(' ');
-  }
-
-  contains(token) {
-    return this.element.className.split(/\s+/).filter(Boolean).includes(token);
-  }
-}
-
-function matchesSelector(element, selector) {
-  const normalized = selector.trim();
-  if (!normalized) return false;
-
-  if (normalized.startsWith('.')) {
-    return element.classList.contains(normalized.slice(1));
-  }
-
-  return element.tagName === normalized.toUpperCase();
-}
-
-class FakeElement extends FakeEventTarget {
-  constructor(tagName, ownerDocument) {
-    super();
-    this.tagName = tagName.toUpperCase();
-    this.ownerDocument = ownerDocument;
-    this.parentNode = null;
-    this.className = '';
-    this.dataset = {};
-    this.style = new FakeStyle();
-    this.attributes = new Map();
-    this.classList = new FakeClassList(this);
-    this._children = [];
-    this._textContent = '';
-    this.href = '';
-    this.src = '';
-    this.alt = '';
-    this.loading = '';
-    this.type = '';
-  }
-
-  get children() {
-    return this._children.filter((child) => child instanceof FakeElement);
-  }
-
-  get childNodes() {
-    return [...this._children];
-  }
-
-  get textContent() {
-    if (this._children.length) {
-      return this._children.map((child) => child.textContent || '').join('');
-    }
-
-    return this._textContent;
-  }
-
-  set textContent(value) {
-    this._children = [];
-    this._textContent = value;
-  }
-
-  append(...nodes) {
-    nodes.forEach((node) => this.appendChild(node));
-  }
-
-  appendChild(node) {
-    if (node.parentNode) {
-      node.parentNode.removeChild(node);
-    }
-
-    this._children.push(node);
-    node.parentNode = this;
-    return node;
-  }
-
-  removeChild(node) {
-    const index = this._children.indexOf(node);
-    if (index >= 0) {
-      this._children.splice(index, 1);
-      node.parentNode = null;
-    }
-    return node;
-  }
-
-  replaceChildren(...nodes) {
-    this._children.forEach((child) => {
-      child.parentNode = null;
-    });
-    this._children = [];
-    this._textContent = '';
-    this.append(...nodes);
-  }
-
-  setAttribute(name, value) {
-    const normalized = String(value);
-    this.attributes.set(name, normalized);
-
-    if (name === 'class') this.className = normalized;
-    if (name === 'href') this.href = normalized;
-    if (name === 'src') this.src = normalized;
-    if (name === 'alt') this.alt = normalized;
-    if (name === 'type') this.type = normalized;
-    if (name.startsWith('data-')) {
-      const key = name.slice(5).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
-      this.dataset[key] = normalized;
-    }
-  }
-
-  getAttribute(name) {
-    if (name === 'href') return this.href || null;
-    if (name === 'src') return this.src || null;
-    if (name === 'alt') return this.alt || null;
-    if (name === 'type') return this.type || null;
-    if (name === 'class') return this.className || null;
-    return this.attributes.get(name) ?? null;
-  }
-
-  querySelector(selector) {
-    return this.querySelectorAll(selector)[0] || null;
-  }
-
-  querySelectorAll(selector) {
-    const selectors = selector.split(',').map((entry) => entry.trim()).filter(Boolean);
-    const matches = [];
-
-    const walk = (node) => {
-      node.children.forEach((child) => {
-        if (selectors.some((entry) => matchesSelector(child, entry))) {
-          matches.push(child);
-        }
-        walk(child);
-      });
-    };
-
-    walk(this);
-    return matches;
-  }
-
-  closest(selector) {
-    let current = this;
-    while (current) {
-      if (matchesSelector(current, selector)) return current;
-      current = current.parentNode;
-    }
-    return null;
-  }
-
-  cloneNode(deep = false) {
-    const clone = new FakeElement(this.tagName, this.ownerDocument);
-    clone.className = this.className;
-    clone.href = this.href;
-    clone.src = this.src;
-    clone.alt = this.alt;
-    clone.loading = this.loading;
-    clone.type = this.type;
-    clone.dataset = { ...this.dataset };
-    clone.attributes = new Map(this.attributes);
-    clone._textContent = this._textContent;
-
-    if (deep) {
-      this._children.forEach((child) => {
-        clone.appendChild(child.cloneNode ? child.cloneNode(true) : child);
-      });
-    }
-
-    return clone;
-  }
-}
-
-class FakeDocument extends FakeEventTarget {
-  constructor() {
-    super();
-    this.body = new FakeElement('body', this);
-  }
-
-  createElement(tagName) {
-    return new FakeElement(tagName, this);
-  }
-
-  createElementNS(_namespace, tagName) {
-    return new FakeElement(tagName, this);
-  }
-
-  querySelector(selector) {
-    return this.body.querySelector(selector);
-  }
-}
-
-class FakeWindow extends FakeEventTarget {
-  constructor(document) {
-    super();
-    this.document = document;
-    this.location = {
-      href: 'https://example.com/',
-      pathname: '/',
-      search: '',
-    };
-  }
-}
+import { withFakeDom } from '../helpers/fake-dom.js';
 
 function createFieldRow(document, key, valueBuilder) {
   const row = document.createElement('div');
@@ -265,7 +40,7 @@ function createImageRow(document, key, src, alt) {
   });
 }
 
-function createAuthoredBlock(document) {
+function createAuthoredBlock(document, options = {}) {
   const section = document.createElement('div');
   section.className = 'section';
 
@@ -288,6 +63,13 @@ function createAuthoredBlock(document) {
       'https://images.unsplash.com/photo-1519415943484-9fa1873496d4?w=1200&q=80',
       'Marine Corps collection hero',
     ),
+  );
+
+  (options.extraImages || []).forEach((image, index) => {
+    block.append(createImageRow(document, `image-${index + 2}`, image.src, image.alt));
+  });
+
+  block.append(
     createLinkRow(document, 'primary-cta', '#products', 'Shop Now'),
     createLinkRow(document, 'secondary-cta', '#deals', 'View Deals'),
     createTextRow(document, 'status-badge-1', 'SYS: MCX-2026'),
@@ -308,26 +90,43 @@ function createAuthoredBlock(document) {
   return { section, block };
 }
 
-async function withFakeDom(fn) {
-  const document = new FakeDocument();
-  const window = new FakeWindow(document);
-  const previousGlobals = {
-    document: globalThis.document,
-    window: globalThis.window,
+function createTimerControls() {
+  const callbacks = new Map();
+  let nextId = 1;
+
+  return {
+    window: {
+      setInterval(callback) {
+        const id = nextId;
+        nextId += 1;
+        callbacks.set(id, callback);
+        return id;
+      },
+      clearInterval(id) {
+        callbacks.delete(id);
+      },
+      setTimeout(callback) {
+        callback();
+        return nextId;
+      },
+      clearTimeout() {},
+    },
+    tick() {
+      [...callbacks.values()].forEach((callback) => callback());
+    },
+    intervalCount() {
+      return callbacks.size;
+    },
   };
-
-  globalThis.document = document;
-  globalThis.window = window;
-
-  try {
-    await fn({ document, window });
-  } finally {
-    globalThis.document = previousGlobals.document;
-    globalThis.window = previousGlobals.window;
-  }
 }
 
-test('mcx-hero renders authored content', async () => {
+function getActiveHeroAlt(hero) {
+  return hero.querySelector('.hero-photo.is-active img')?.alt || '';
+}
+
+test('mcx-hero renders single-image authored content without carousel navigation', async () => {
+  const timers = createTimerControls();
+
   await withFakeDom(async ({ document }) => {
     const { default: decorate } = await import('../../blocks/mcx-hero/mcx-hero.js');
     const { section, block } = createAuthoredBlock(document);
@@ -340,23 +139,114 @@ test('mcx-hero renders authored content', async () => {
     assert.equal(hero.className, 'hero');
     assert.equal(hero.querySelector('.hero-eyebrow-txt')?.textContent, 'Spring Collection - 2026 - Tax-Free');
     assert.equal(hero.querySelectorAll('.h-stat').length, 4);
-    assert.equal(hero.querySelectorAll('.h-dot').length, 3);
+    assert.equal(hero.querySelector('.hero-nav'), null);
+    assert.equal(hero.querySelectorAll('.hero-photo').length, 1);
+    assert.equal(hero.querySelectorAll('.hero-photo.is-active').length, 1);
     assert.equal(hero.querySelector('.btn-hero')?.href, '#products');
     assert.equal(hero.querySelector('.btn-ghost')?.href, '#deals');
-    assert.equal(hero.querySelector('.hero-photo')?.querySelector('img')?.alt, 'Marine Corps collection hero');
-    assert.equal(hero.querySelector('.hero-rank'), null);
-    assert.equal(hero.querySelector('.hero-scroll'), null);
+    assert.equal(getActiveHeroAlt(hero), 'Marine Corps collection hero');
     assert.equal(hero.textContent.includes('SYS: MCX-2026'), false);
+    assert.equal(timers.intervalCount(), 0);
 
     const heading = hero.querySelector('.hero-h1');
     assert.equal(heading?.children.length, 3);
     assert.equal(heading?.children[0]?.textContent, 'OUTFITTED');
     assert.equal(heading?.children[1]?.textContent, 'FOR THE');
     assert.equal(heading?.children[2]?.textContent, 'mission & beyond');
+  }, {
+    window: timers.window,
   });
 });
 
-test('mcx-hero falls back to library preview defaults', async () => {
+test('mcx-hero rotates multiple authored images and supports dot navigation', async () => {
+  const timers = createTimerControls();
+
+  await withFakeDom(async ({ document }) => {
+    const { default: decorate } = await import('../../blocks/mcx-hero/mcx-hero.js');
+    const { block } = createAuthoredBlock(document, {
+      extraImages: [
+        {
+          src: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1200&q=80',
+          alt: 'Tactical collection apparel',
+        },
+        {
+          src: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80',
+          alt: 'Performance training essentials',
+        },
+      ],
+    });
+
+    decorate(block);
+
+    const hero = block.children[0];
+    const dots = hero.querySelectorAll('.h-dot');
+
+    assert.equal(hero.querySelectorAll('.hero-photo').length, 3);
+    assert.equal(dots.length, 3);
+    assert.equal(dots[0]?.getAttribute('aria-pressed'), 'true');
+    assert.equal(getActiveHeroAlt(hero), 'Marine Corps collection hero');
+    assert.equal(timers.intervalCount(), 1);
+
+    dots[2].dispatchEvent({ type: 'click' });
+
+    assert.equal(dots[0]?.getAttribute('aria-pressed'), 'false');
+    assert.equal(dots[2]?.getAttribute('aria-pressed'), 'true');
+    assert.equal(getActiveHeroAlt(hero), 'Performance training essentials');
+    assert.equal(timers.intervalCount(), 1);
+  }, {
+    window: timers.window,
+  });
+});
+
+test('mcx-hero pauses autoplay on hover and focus, then resumes cleanly', async () => {
+  const timers = createTimerControls();
+
+  await withFakeDom(async ({ document }) => {
+    const { default: decorate } = await import('../../blocks/mcx-hero/mcx-hero.js');
+    const { block } = createAuthoredBlock(document, {
+      extraImages: [
+        {
+          src: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1200&q=80',
+          alt: 'Tactical collection apparel',
+        },
+      ],
+    });
+
+    decorate(block);
+
+    const hero = block.children[0];
+    const firstDot = hero.querySelector('.h-dot');
+
+    timers.tick();
+    assert.equal(getActiveHeroAlt(hero), 'Tactical collection apparel');
+
+    hero.dispatchEvent({ type: 'mouseenter' });
+    assert.equal(timers.intervalCount(), 0);
+
+    timers.tick();
+    assert.equal(getActiveHeroAlt(hero), 'Tactical collection apparel');
+
+    hero.dispatchEvent({ type: 'mouseleave' });
+    assert.equal(timers.intervalCount(), 1);
+
+    firstDot.focus();
+    firstDot.dispatchEvent({ type: 'focus' });
+    assert.equal(timers.intervalCount(), 0);
+
+    document.activeElement = null;
+    firstDot.dispatchEvent({ type: 'blur' });
+    assert.equal(timers.intervalCount(), 1);
+
+    timers.tick();
+    assert.equal(getActiveHeroAlt(hero), 'Marine Corps collection hero');
+  }, {
+    window: timers.window,
+  });
+});
+
+test('mcx-hero falls back to multi-image library preview defaults', async () => {
+  const timers = createTimerControls();
+
   await withFakeDom(async ({ document, window }) => {
     const { default: decorate } = await import('../../blocks/mcx-hero/mcx-hero.js');
     window.location.pathname = '/library/blocks/mcx-hero.plain.html';
@@ -372,9 +262,12 @@ test('mcx-hero falls back to library preview defaults', async () => {
     decorate(block);
 
     const hero = block.children[0];
-    assert.equal(hero.querySelector('.hero-eyebrow-txt')?.textContent, 'Spring Collection - 2026 - Tax-Free');
+    assert.equal(hero.querySelectorAll('.hero-photo').length, 3);
+    assert.equal(hero.querySelectorAll('.h-dot').length, 3);
+    assert.equal(getActiveHeroAlt(hero), 'Marine Corps collection hero');
     assert.equal(hero.querySelector('.btn-hero')?.textContent.includes('Shop Now'), true);
     assert.equal(hero.querySelectorAll('.h-stat').length, 4);
-    assert.equal(hero.textContent.includes('STATUS: ACTIVE'), false);
+  }, {
+    window: timers.window,
   });
 });

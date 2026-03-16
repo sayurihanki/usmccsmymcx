@@ -6,7 +6,7 @@
       "plugins": {
         "da": {
           "name": "promo-strip",
-          "rows": 5,
+          "rows": 6,
           "columns": 2
         }
       }

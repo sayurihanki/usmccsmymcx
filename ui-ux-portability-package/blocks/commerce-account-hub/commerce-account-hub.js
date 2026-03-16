@@ -9,6 +9,7 @@ import {
   CUSTOMER_NEGOTIABLE_QUOTE_TEMPLATE_PATH,
   CUSTOMER_ORDERS_PATH,
   CUSTOMER_REQUISITION_LISTS_PATH,
+  CUSTOMER_RETURNS_PATH,
   rootLink,
 } from '../../scripts/commerce.js';
 
@@ -18,12 +19,19 @@ const CUSTOMER_COMPANY_USERS_PATH = '/customer/company/users';
 const CUSTOMER_COMPANY_ROLES_PATH = '/customer/company/roles';
 const CUSTOMER_COMPANY_CREDIT_PATH = '/customer/company/credit';
 
+const COMPANY_VIEW_PERMISSION_KEYS = ['Magento_Company::view'];
+const COMPANY_USERS_PERMISSION_KEYS = ['Magento_Company::users_view'];
+const COMPANY_ROLES_PERMISSION_KEYS = ['Magento_Company::roles_view'];
+const COMPANY_CREDIT_PERMISSION_KEYS = ['Magento_CompanyCredit::view'];
+const REQUISITION_PERMISSION_KEYS = [
+  'Magento_RequisitionList::requisition_list',
+  'Magento_RequisitionList::view',
+];
 const QUOTE_PERMISSION_KEYS = [
   'Magento_NegotiableQuote::all',
   'Magento_NegotiableQuote::view_quotes',
   'Magento_NegotiableQuote::manage',
 ];
-
 const TEMPLATE_PERMISSION_KEYS = [
   'Magento_NegotiableQuoteTemplate::all',
   'Magento_NegotiableQuoteTemplate::view_template',
@@ -34,58 +42,72 @@ const MODULE_CARD_DEFINITIONS = [
   {
     id: 'company-profile',
     title: 'Company Profile',
-    description: 'Manage company account details',
+    description: 'Manage company settings and buyers',
     href: CUSTOMER_COMPANY_PROFILE_PATH,
-    countKey: null,
+    permissionKeys: COMPANY_VIEW_PERMISSION_KEYS,
+    tone: 'primary',
   },
   {
     id: 'company-structure',
     title: 'Company Structure',
-    description: 'Manage company structure',
+    description: 'Review departments and reporting lines',
     href: CUSTOMER_COMPANY_STRUCTURE_PATH,
-    countKey: null,
+    permissionKeys: COMPANY_VIEW_PERMISSION_KEYS,
+    tone: 'neutral',
   },
   {
     id: 'company-users',
     title: 'Company Users',
-    description: 'Manage company users',
+    description: 'Invite, edit, and manage company users',
     href: CUSTOMER_COMPANY_USERS_PATH,
+    permissionKeys: COMPANY_USERS_PERMISSION_KEYS,
     countKey: 'usersCount',
+    tone: 'primary',
   },
   {
     id: 'roles',
     title: 'Roles & Permissions',
-    description: 'Manage company roles',
+    description: 'Control approver and buyer access',
     href: CUSTOMER_COMPANY_ROLES_PATH,
+    permissionKeys: COMPANY_ROLES_PERMISSION_KEYS,
     countKey: 'rolesCount',
+    tone: 'neutral',
   },
   {
     id: 'credit',
     title: 'Company Credit',
-    description: 'View company credit status',
+    description: 'View available credit and account status',
     href: CUSTOMER_COMPANY_CREDIT_PATH,
+    permissionKeys: COMPANY_CREDIT_PERMISSION_KEYS,
     countKey: 'creditAvailable',
+    tone: 'gold',
   },
   {
     id: 'quotes',
     title: 'Quotes',
-    description: 'Manage negotiable quotes',
+    description: 'Review active negotiable quotes',
     href: CUSTOMER_NEGOTIABLE_QUOTE_PATH,
+    permissionKeys: QUOTE_PERMISSION_KEYS,
     countKey: 'quoteCount',
+    tone: 'primary',
   },
   {
     id: 'quote-templates',
     title: 'Quote Templates',
-    description: 'Manage reusable quote templates',
+    description: 'Reuse template-based quote requests',
     href: CUSTOMER_NEGOTIABLE_QUOTE_TEMPLATE_PATH,
+    permissionKeys: TEMPLATE_PERMISSION_KEYS,
     countKey: 'templateCount',
+    tone: 'neutral',
   },
   {
     id: 'requisition-lists',
     title: 'Requisition Lists',
-    description: 'Manage requisition lists',
+    description: 'Stage repeat buys for faster ordering',
     href: CUSTOMER_REQUISITION_LISTS_PATH,
+    permissionKeys: REQUISITION_PERMISSION_KEYS,
     countKey: 'requisitionCount',
+    tone: 'gold',
   },
 ];
 
@@ -104,12 +126,6 @@ const MAX_ROWS = 5;
 const FALLBACK_TEXT = 'Not available';
 const LOADING_TEXT = 'Loading...';
 
-/**
- * Parse string/boolean as boolean.
- * @param {string | boolean | undefined} value
- * @param {boolean} fallback
- * @returns {boolean}
- */
 function parseBoolean(value, fallback) {
   if (typeof value === 'boolean') return value;
   if (typeof value === 'string') {
@@ -120,23 +136,12 @@ function parseBoolean(value, fallback) {
   return fallback;
 }
 
-/**
- * Parse string/number as integer and clamp.
- * @param {string | number | undefined} value
- * @param {number} fallback
- * @returns {number}
- */
 function parseInteger(value, fallback) {
   const parsed = Number.parseInt(value, 10);
   if (Number.isNaN(parsed)) return fallback;
   return Math.max(MIN_ROWS, Math.min(MAX_ROWS, parsed));
 }
 
-/**
- * Convert raw configuration to normalized options.
- * @param {HTMLElement} block
- * @returns {object}
- */
 function getConfig(block) {
   const config = readBlockConfig(block);
 
@@ -151,24 +156,12 @@ function getConfig(block) {
   };
 }
 
-/**
- * Resolve a route/path for the current locale.
- * @param {string} href
- * @returns {string}
- */
 function resolveHref(href) {
   if (!href) return rootLink(CUSTOMER_ACCOUNT_PATH);
   if (href.startsWith('/')) return rootLink(href);
   return href;
 }
 
-/**
- * Create a DOM element.
- * @param {string} tagName
- * @param {string} className
- * @param {string} text
- * @returns {HTMLElement}
- */
 function createElement(tagName, className, text) {
   const element = document.createElement(tagName);
   if (className) element.className = className;
@@ -176,11 +169,6 @@ function createElement(tagName, className, text) {
   return element;
 }
 
-/**
- * Coerce a feature flag into boolean.
- * @param {unknown} value
- * @returns {boolean}
- */
 function isTruthyFlag(value) {
   if (value === true || value === 1) return true;
   if (typeof value === 'string') {
@@ -190,65 +178,32 @@ function isTruthyFlag(value) {
   return false;
 }
 
-/**
- * Determine whether any permission is explicitly disabled.
- * @param {Record<string, boolean>} permissions
- * @param {string[]} keys
- * @returns {boolean}
- */
 function isExplicitlyDisabled(permissions, keys) {
   return keys.some((key) => permissions[key] === false);
 }
 
-/**
- * Determine whether permission set is granted.
- * @param {Record<string, boolean>} permissions
- * @param {string[]} keys
- * @returns {boolean}
- */
 function isPermissionGranted(permissions, keys) {
   if (keys.length === 0 || keys.includes('all')) return true;
   if (permissions.admin || permissions.all) return true;
   return keys.some((key) => permissions[key] === true);
 }
 
-/**
- * Determine if a permission set is available.
- * @param {Record<string, boolean>} permissions
- * @param {string[]} keys
- * @returns {boolean}
- */
 function canUsePermissionSet(permissions, keys) {
   if (isExplicitlyDisabled(permissions, keys)) return false;
   return isPermissionGranted(permissions, keys);
 }
 
-/**
- * Get a safe permissions snapshot.
- * @returns {Record<string, boolean>}
- */
 function getPermissionsSnapshot() {
   const snapshot = events.lastPayload('auth/permissions');
   if (!snapshot || typeof snapshot !== 'object') return {};
   return snapshot;
 }
 
-/**
- * Format number counts for display.
- * @param {number | undefined} value
- * @returns {string}
- */
 function formatCount(value) {
   if (typeof value !== 'number' || Number.isNaN(value)) return FALLBACK_TEXT;
   return value.toLocaleString('en-US');
 }
 
-/**
- * Format money for display.
- * @param {number | undefined} value
- * @param {string | undefined} currency
- * @returns {string}
- */
 function formatMoney(value, currency) {
   if (typeof value !== 'number' || Number.isNaN(value) || !currency) return FALLBACK_TEXT;
 
@@ -259,11 +214,6 @@ function formatMoney(value, currency) {
   }
 }
 
-/**
- * Compute full customer name.
- * @param {object | null} customer
- * @returns {string}
- */
 function getCustomerName(customer) {
   if (!customer) return 'Customer';
   const firstName = customer.firstName || customer.firstname || '';
@@ -272,11 +222,6 @@ function getCustomerName(customer) {
   return fullName || 'Customer';
 }
 
-/**
- * Build initial runtime state.
- * @param {object} config
- * @returns {object}
- */
 function createInitialState(config) {
   return {
     config,
@@ -284,6 +229,7 @@ function createInitialState(config) {
     customerName: 'Customer',
     companyName: '',
     orderCount: undefined,
+    addressCount: undefined,
     usersCount: undefined,
     rolesCount: undefined,
     creditAvailable: undefined,
@@ -304,69 +250,203 @@ function createInitialState(config) {
   };
 }
 
-/**
- * Build text value with loading fallback.
- * @param {object} options
- * @param {boolean} options.loading
- * @param {string | undefined} options.value
- * @returns {string}
- */
 function loadingValue({ loading, value }) {
   if (loading) return LOADING_TEXT;
-  return value || FALLBACK_TEXT;
+  if (value === undefined || value === null || value === '') return FALLBACK_TEXT;
+  return value;
 }
 
-/**
- * Add a metric card to the parent container.
- * @param {HTMLElement} parent
- * @param {string} label
- * @param {string} value
- */
-function appendMetric(parent, label, value) {
-  const card = createElement('article', 'commerce-account-hub-metric');
-  const metricLabel = createElement('div', 'commerce-account-hub-metric-label', label);
-  const metricValue = createElement('div', 'commerce-account-hub-metric-value', value);
-
-  card.append(metricLabel, metricValue);
-  parent.append(card);
-}
-
-/**
- * Render guest-safe view.
- * @param {HTMLElement} block
- * @param {object} config
- */
-function renderGuest(block, config) {
-  const shell = createElement('section', 'commerce-account-hub-shell commerce-account-hub-shell-guest');
-
-  const header = createElement('header', 'commerce-account-hub-header');
-  const title = createElement('h2', 'commerce-account-hub-title', config.title);
-  const badge = createElement('span', 'commerce-account-hub-badge', 'Guest');
-  header.append(title, badge);
-
-  const subtitle = createElement(
-    'p',
-    'commerce-account-hub-subtitle',
-    'Sign in to view live account and B2B company insights.',
+function createTopbar(badgeText, badgeTone = 'ready') {
+  const topbar = createElement('div', 'commerce-account-hub__topbar');
+  const eyebrow = createElement('span', 'commerce-account-hub__eyebrow', 'Account dashboard');
+  const badge = createElement(
+    'span',
+    `commerce-account-hub__badge commerce-account-hub__badge--${badgeTone}`,
+    badgeText,
   );
 
-  const cta = createElement('a', 'commerce-account-hub-cta', config.guestCtaLabel);
-  cta.href = resolveHref(config.guestCtaHref);
-
-  shell.append(header, subtitle, cta);
-  block.replaceChildren(shell);
+  topbar.append(eyebrow, badge);
+  return topbar;
 }
 
-/**
- * Build module cards list according to state.
- * @param {object} state
- * @returns {Array<object>}
- */
+function createSectionHeader(titleText, subtitleText) {
+  const header = createElement('div', 'commerce-account-hub__section-header');
+  const title = createElement('h3', 'commerce-account-hub__section-title', titleText);
+  header.append(title);
+
+  if (subtitleText) {
+    header.append(createElement('p', 'commerce-account-hub__section-copy', subtitleText));
+  }
+
+  return header;
+}
+
+function buildSummaryCards(state) {
+  const cards = [];
+
+  if (state.config.showOrders) {
+    cards.push({
+      label: 'Orders',
+      value: loadingValue({
+        loading: state.isLoadingCritical,
+        value: formatCount(state.orderCount),
+      }),
+      detail: 'Recent orders on file',
+      tone: 'primary',
+    });
+  }
+
+  if (state.config.showAddresses) {
+    cards.push({
+      label: 'Addresses',
+      value: loadingValue({
+        loading: state.isLoadingCritical,
+        value: formatCount(state.addressCount),
+      }),
+      detail: 'Saved shipping and billing locations',
+      tone: 'neutral',
+    });
+  }
+
+  if (state.hasCompany && state.companyCreditEnabled) {
+    cards.push({
+      label: 'Available Credit',
+      value: loadingValue({
+        loading: state.isLoadingTier2,
+        value: formatMoney(state.creditAvailable, state.creditCurrency),
+      }),
+      detail: 'Current company credit available to spend',
+      tone: 'gold',
+    });
+  }
+
+  if (state.hasCompany) {
+    cards.push({
+      label: 'Company Users',
+      value: loadingValue({
+        loading: state.isLoadingTier2,
+        value: formatCount(state.usersCount),
+      }),
+      detail: 'Users tied to this company account',
+      tone: 'primary',
+    });
+  }
+
+  if (state.hasCompany && cards.length < 4) {
+    cards.push({
+      label: 'Roles',
+      value: loadingValue({
+        loading: state.isLoadingTier2,
+        value: formatCount(state.rolesCount),
+      }),
+      detail: 'Permission roles available today',
+      tone: 'neutral',
+    });
+  }
+
+  return cards.slice(0, 4);
+}
+
+function createSummaryCard(card) {
+  const summary = createElement(
+    'article',
+    `commerce-account-hub__summary commerce-account-hub__summary--${card.tone || 'neutral'}`,
+  );
+  summary.append(
+    createElement('span', 'commerce-account-hub__summary-label', card.label),
+    createElement('strong', 'commerce-account-hub__summary-value', card.value),
+    createElement('p', 'commerce-account-hub__summary-copy', card.detail),
+  );
+  return summary;
+}
+
+function buildQuickActions(state) {
+  const actions = [];
+
+  actions.push({
+    title: 'Orders',
+    description: 'Track shipments, reorder, and review invoices.',
+    href: CUSTOMER_ORDERS_PATH,
+    meta: loadingValue({
+      loading: state.isLoadingCritical,
+      value: typeof state.orderCount === 'number' ? `${formatCount(state.orderCount)} on file` : '',
+    }),
+    tone: 'primary',
+    visible: state.config.showOrders,
+  });
+
+  actions.push({
+    title: 'Addresses',
+    description: 'Update shipping, billing, and default locations.',
+    href: CUSTOMER_ADDRESS_PATH,
+    meta: loadingValue({
+      loading: state.isLoadingCritical,
+      value: typeof state.addressCount === 'number' ? `${formatCount(state.addressCount)} saved` : '',
+    }),
+    tone: 'neutral',
+    visible: state.config.showAddresses,
+  });
+
+  actions.push({
+    title: 'Returns',
+    description: 'Review return requests and start new ones.',
+    href: CUSTOMER_RETURNS_PATH,
+    meta: 'Customer support and return status',
+    tone: 'neutral',
+    visible: true,
+  });
+
+  actions.push({
+    title: 'Account Details',
+    description: 'Manage your profile, credentials, and preferences.',
+    href: CUSTOMER_ACCOUNT_PATH,
+    meta: state.hasCompany ? 'Company-aware account access' : 'Personal account access',
+    tone: 'gold',
+    visible: true,
+  });
+
+  if (state.hasCompany && canUsePermissionSet(state.permissions, COMPANY_VIEW_PERMISSION_KEYS)) {
+    actions.push({
+      title: 'Company Profile',
+      description: 'Review company settings, contacts, and policies.',
+      href: CUSTOMER_COMPANY_PROFILE_PATH,
+      meta: state.companyName || 'Company management',
+      tone: 'primary',
+      visible: true,
+    });
+  }
+
+  return actions.filter((action) => action.visible);
+}
+
+function createQuickAction(action) {
+  const link = createElement(
+    'a',
+    `commerce-account-hub__action commerce-account-hub__action--${action.tone || 'neutral'}`,
+  );
+  link.href = resolveHref(action.href);
+
+  const eyebrow = createElement('span', 'commerce-account-hub__action-eyebrow', action.meta);
+  const title = createElement('span', 'commerce-account-hub__action-title', action.title);
+  const description = createElement(
+    'span',
+    'commerce-account-hub__action-description',
+    action.description,
+  );
+  const arrow = createElement('span', 'commerce-account-hub__action-arrow', 'Explore');
+
+  link.append(eyebrow, title, description, arrow);
+  return link;
+}
+
 function buildModuleCards(state) {
-  if (!state.config.showModuleCards) return [];
-  if (!state.hasCompany) return [];
+  if (!state.config.showModuleCards || !state.hasCompany) return [];
 
   const filteredCards = MODULE_CARD_DEFINITIONS.filter((card) => {
+    if (!canUsePermissionSet(state.permissions, card.permissionKeys || [])) {
+      return false;
+    }
+
     if (card.id === 'credit') return state.companyCreditEnabled;
     if (card.id === 'quotes') return state.quoteEnabled;
     if (card.id === 'quote-templates') return state.quoteTemplateEnabled;
@@ -375,19 +455,13 @@ function buildModuleCards(state) {
   });
 
   const maxRows = parseInteger(state.config.rowsLimit, DEFAULT_CONFIG.rowsLimit);
-  const maxCards = maxRows * 2;
-
-  return filteredCards.slice(0, maxCards);
+  return filteredCards.slice(0, maxRows * 2);
 }
 
-/**
- * Resolve metric display text for a module card.
- * @param {object} state
- * @param {object} card
- * @returns {string}
- */
 function getModuleCardValue(state, card) {
-  if (!card.countKey) return 'Open';
+  if (!card.countKey) {
+    return state.companyName || 'Open workspace';
+  }
 
   if (card.countKey === 'creditAvailable') {
     return loadingValue({
@@ -396,140 +470,134 @@ function getModuleCardValue(state, card) {
     });
   }
 
-  const sourceValue = state[card.countKey];
-  const loading = card.id === 'quotes'
-    || card.id === 'quote-templates'
-    || card.id === 'requisition-lists'
-    ? state.isLoadingTier3
-    : state.isLoadingTier2;
-
-  return loadingValue({ loading, value: formatCount(sourceValue) });
+  const isTier3Metric = ['quoteCount', 'templateCount', 'requisitionCount'].includes(card.countKey);
+  return loadingValue({
+    loading: isTier3Metric ? state.isLoadingTier3 : state.isLoadingTier2,
+    value: formatCount(state[card.countKey]),
+  });
 }
 
-/**
- * Render authenticated view.
- * @param {HTMLElement} block
- * @param {object} state
- */
+function createModuleCard(state, card) {
+  const link = createElement(
+    'a',
+    `commerce-account-hub__module commerce-account-hub__module--${card.tone || 'neutral'}`,
+  );
+  link.href = resolveHref(card.href);
+  link.append(
+    createElement('span', 'commerce-account-hub__module-title', card.title),
+    createElement('span', 'commerce-account-hub__module-description', card.description),
+    createElement('span', 'commerce-account-hub__module-value', getModuleCardValue(state, card)),
+  );
+  return link;
+}
+
+function renderGuest(block, config) {
+  const shell = createElement(
+    'section',
+    'commerce-account-hub-shell commerce-account-hub-shell--guest',
+  );
+
+  shell.append(createTopbar('Guest', 'neutral'));
+
+  const intro = createElement('div', 'commerce-account-hub__intro');
+  const copy = createElement('div', 'commerce-account-hub__intro-copy');
+  copy.append(
+    createElement('h2', 'commerce-account-hub__title', config.title),
+    createElement(
+      'p',
+      'commerce-account-hub__subtitle',
+      'Sign in to load your live orders, saved addresses, and any company tools tied to your account.',
+    ),
+  );
+
+  const cta = createElement('a', 'commerce-account-hub__cta', config.guestCtaLabel);
+  cta.href = resolveHref(config.guestCtaHref);
+
+  intro.append(copy, cta);
+  shell.append(intro);
+  block.replaceChildren(shell);
+}
+
 function renderAuthenticated(block, state) {
-  const shell = createElement('section', 'commerce-account-hub-shell commerce-account-hub-shell-auth');
+  const shell = createElement('section', 'commerce-account-hub-shell commerce-account-hub-shell--auth');
 
-  const header = createElement('header', 'commerce-account-hub-header');
-  const title = createElement('h2', 'commerce-account-hub-title', state.config.title);
-  let badgeText = 'Live';
-  if (state.isLoadingCritical) {
+  let badgeText = 'Ready';
+  let badgeTone = 'ready';
+  if (state.hasError) {
+    badgeText = 'Sync issue';
+    badgeTone = 'error';
+  } else if (state.isLoadingCritical || state.isLoadingTier2 || state.isLoadingTier3) {
     badgeText = 'Loading';
-  } else if (state.hasError) {
-    badgeText = 'Error';
+    badgeTone = 'neutral';
   }
-  const badgeClass = state.hasError
-    ? 'commerce-account-hub-badge commerce-account-hub-badge-error'
-    : 'commerce-account-hub-badge';
-  const badge = createElement('span', badgeClass, badgeText);
-  header.append(title, badge);
 
+  shell.append(createTopbar(badgeText, badgeTone));
+
+  const intro = createElement('div', 'commerce-account-hub__intro');
+  const copy = createElement('div', 'commerce-account-hub__intro-copy');
   const subtitleText = state.hasCompany
     ? `${state.customerName} · ${state.companyName}`
     : `${state.customerName} · Individual account`;
-  const subtitle = createElement('p', 'commerce-account-hub-subtitle', subtitleText);
 
-  const metrics = createElement('div', 'commerce-account-hub-metrics');
-
-  appendMetric(
-    metrics,
-    'Recent Orders',
-    loadingValue({
-      loading: state.isLoadingCritical,
-      value: formatCount(state.orderCount),
-    }),
+  copy.append(
+    createElement('h2', 'commerce-account-hub__title', state.config.title),
+    createElement('p', 'commerce-account-hub__subtitle', subtitleText),
   );
+  intro.append(copy);
+  shell.append(intro);
 
-  appendMetric(
-    metrics,
-    'Company Users',
-    state.hasCompany
-      ? loadingValue({
-        loading: state.isLoadingTier2,
-        value: formatCount(state.usersCount),
-      })
-      : FALLBACK_TEXT,
-  );
+  const summaryCards = buildSummaryCards(state);
+  if (summaryCards.length > 0) {
+    const summarySection = createElement('section', 'commerce-account-hub__section');
+    summarySection.append(
+      createSectionHeader('Snapshot', 'Live metrics from your current account context.'),
+    );
 
-  appendMetric(
-    metrics,
-    'Available Credit',
-    state.hasCompany && state.companyCreditEnabled
-      ? loadingValue({
-        loading: state.isLoadingTier2,
-        value: formatMoney(state.creditAvailable, state.creditCurrency),
-      })
-      : FALLBACK_TEXT,
-  );
-
-  const quickActions = createElement('div', 'commerce-account-hub-actions');
-
-  const addQuickAction = (label, description, href) => {
-    const action = createElement('a', 'commerce-account-hub-action-card');
-    action.href = resolveHref(href);
-
-    const actionTitle = createElement('span', 'commerce-account-hub-action-title', label);
-    const actionDescription = createElement('span', 'commerce-account-hub-action-description', description);
-
-    action.append(actionTitle, actionDescription);
-    quickActions.append(action);
-  };
-
-  addQuickAction('My Account', 'Review account details', CUSTOMER_ACCOUNT_PATH);
-
-  if (state.config.showOrders) {
-    addQuickAction('Orders', 'Track and manage your orders', CUSTOMER_ORDERS_PATH);
+    const summaryGrid = createElement('div', 'commerce-account-hub__summary-grid');
+    summaryCards.forEach((card) => summaryGrid.append(createSummaryCard(card)));
+    summarySection.append(summaryGrid);
+    shell.append(summarySection);
   }
 
-  if (state.config.showAddresses) {
-    addQuickAction('Addresses', 'Manage your saved addresses', CUSTOMER_ADDRESS_PATH);
-  }
+  const actions = buildQuickActions(state);
+  if (actions.length > 0) {
+    const actionsSection = createElement('section', 'commerce-account-hub__section');
+    actionsSection.append(
+      createSectionHeader('Quick Actions', 'Jump to the pages customers use most.'),
+    );
 
-  shell.append(header, subtitle, metrics, quickActions);
+    const actionsGrid = createElement('div', 'commerce-account-hub__actions');
+    actions.forEach((action) => actionsGrid.append(createQuickAction(action)));
+    actionsSection.append(actionsGrid);
+    shell.append(actionsSection);
+  }
 
   const moduleCards = buildModuleCards(state);
   if (moduleCards.length > 0) {
-    const modulesSection = createElement('section', 'commerce-account-hub-modules');
-    const modulesHeading = createElement('h3', 'commerce-account-hub-modules-title', 'B2B Modules');
-    const modulesGrid = createElement('div', 'commerce-account-hub-modules-grid');
+    const modulesSection = createElement('section', 'commerce-account-hub__section');
+    modulesSection.append(
+      createSectionHeader('Company Workspace', 'Live B2B modules available to this account.'),
+    );
 
-    moduleCards.forEach((card) => {
-      const moduleCard = createElement('a', 'commerce-account-hub-module-card');
-      moduleCard.href = resolveHref(card.href);
-
-      const moduleTitle = createElement('span', 'commerce-account-hub-module-title', card.title);
-      const moduleDescription = createElement('span', 'commerce-account-hub-module-description', card.description);
-      const moduleValue = createElement('span', 'commerce-account-hub-module-value', getModuleCardValue(state, card));
-
-      moduleCard.append(moduleTitle, moduleDescription, moduleValue);
-      modulesGrid.append(moduleCard);
-    });
-
-    modulesSection.append(modulesHeading, modulesGrid);
+    const modulesGrid = createElement('div', 'commerce-account-hub__modules');
+    moduleCards.forEach((card) => modulesGrid.append(createModuleCard(state, card)));
+    modulesSection.append(modulesGrid);
     shell.append(modulesSection);
   }
 
   if (state.hasError) {
-    const alert = createElement(
-      'p',
-      'commerce-account-hub-error',
-      'Some live data could not be loaded. Try refreshing the page.',
+    shell.append(
+      createElement(
+        'p',
+        'commerce-account-hub__error',
+        'Some live account data could not be loaded. Refresh the page to try again.',
+      ),
     );
-    shell.append(alert);
   }
 
   block.replaceChildren(shell);
 }
 
-/**
- * Safe request wrapper that never throws.
- * @param {Function} callback
- * @returns {Promise<any | null>}
- */
 async function safeRequest(callback) {
   try {
     return await callback();
@@ -539,21 +607,12 @@ async function safeRequest(callback) {
   }
 }
 
-/**
- * Wait until next paint.
- * @returns {Promise<void>}
- */
 function waitForNextPaint() {
   return new Promise((resolve) => {
     window.requestAnimationFrame(() => resolve());
   });
 }
 
-/**
- * Determine whether requisition list is enabled in store config.
- * @param {object | null} storeConfig
- * @returns {boolean}
- */
 function isRequisitionListEnabled(storeConfig) {
   if (!storeConfig || typeof storeConfig !== 'object') return false;
 
@@ -565,12 +624,6 @@ function isRequisitionListEnabled(storeConfig) {
   return listEnabled && companyEnabled;
 }
 
-/**
- * Execute staged refresh.
- * @param {HTMLElement} block
- * @param {object} config
- * @returns {Function}
- */
 function createRefresh(block, config) {
   let refreshToken = 0;
 
@@ -588,7 +641,6 @@ function createRefresh(block, config) {
     renderAuthenticated(block, state);
 
     try {
-      // Critical initializers only.
       await Promise.all([
         import('../../scripts/initializers/auth.js'),
         import('../../scripts/initializers/account.js'),
@@ -606,9 +658,10 @@ function createRefresh(block, config) {
         import('@dropins/storefront-company-management/api.js'),
       ]);
 
-      const [customer, orderHistory, companyEnabled] = await Promise.all([
+      const [customer, orderHistory, addresses, companyEnabled] = await Promise.all([
         safeRequest(() => accountApi.getCustomer()),
         safeRequest(() => accountApi.getOrderHistoryList(1, 'viewAll', 1)),
+        safeRequest(() => accountApi.getCustomerAddress()),
         safeRequest(() => companyApi.companyEnabled()),
       ]);
 
@@ -616,6 +669,7 @@ function createRefresh(block, config) {
 
       state.customerName = getCustomerName(customer);
       state.orderCount = orderHistory?.totalCount;
+      state.addressCount = Array.isArray(addresses) ? addresses.length : undefined;
       state.companyEnabled = Boolean(companyEnabled);
 
       if (state.companyEnabled) {
@@ -678,7 +732,6 @@ function createRefresh(block, config) {
       if (state.quoteEnabled || state.quoteTemplateEnabled) {
         await import('../../scripts/initializers/quote-management.js');
         const quoteApi = await import('@dropins/storefront-quote-management/api.js');
-
         const quoteRequests = [];
 
         if (state.quoteEnabled) {
@@ -702,15 +755,19 @@ function createRefresh(block, config) {
         await Promise.all(quoteRequests);
       }
 
-      await import('../../scripts/initializers/requisition-list.js');
-      const requisitionApi = await import('@dropins/storefront-requisition-list/api.js');
-      const requisitionStoreConfig = await safeRequest(() => requisitionApi.getStoreConfig());
+      if (canUsePermissionSet(state.permissions, REQUISITION_PERMISSION_KEYS)) {
+        await import('../../scripts/initializers/requisition-list.js');
+        const requisitionApi = await import('@dropins/storefront-requisition-list/api.js');
+        const requisitionStoreConfig = await safeRequest(() => requisitionApi.getStoreConfig());
 
-      state.requisitionEnabled = isRequisitionListEnabled(requisitionStoreConfig);
-      if (state.requisitionEnabled) {
-        const requisitionLists = await safeRequest(() => requisitionApi.getRequisitionLists(1, 1));
-        if (Array.isArray(requisitionLists)) {
-          state.requisitionCount = requisitionLists.length;
+        state.requisitionEnabled = isRequisitionListEnabled(requisitionStoreConfig);
+        if (state.requisitionEnabled) {
+          const requisitionLists = await safeRequest(
+            () => requisitionApi.getRequisitionLists(1, 1),
+          );
+          if (Array.isArray(requisitionLists)) {
+            state.requisitionCount = requisitionLists.length;
+          }
         }
       }
 
@@ -731,11 +788,6 @@ function createRefresh(block, config) {
   };
 }
 
-/**
- * Cleanup listeners and observers.
- * @param {Array<{off?: Function}>} subscriptions
- * @param {MutationObserver | null} observer
- */
 function cleanup(subscriptions, observer) {
   subscriptions.forEach((subscription) => {
     subscription?.off?.();
@@ -746,7 +798,6 @@ function cleanup(subscriptions, observer) {
 
 export default async function decorate(block) {
   const config = getConfig(block);
-
   const refresh = createRefresh(block, config);
   const subscriptions = [];
 
@@ -765,7 +816,6 @@ export default async function decorate(block) {
   await refresh();
 
   let disposed = false;
-
   const observer = new MutationObserver(() => {
     if (disposed) return;
 

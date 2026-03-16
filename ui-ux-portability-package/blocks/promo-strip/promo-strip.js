@@ -6,6 +6,14 @@ import {
   parseFieldRows,
 } from '../../scripts/mcx-block-utils.js';
 
+const THEMES = new Set([
+  'scarlet-gold',
+  'midnight-gold',
+  'coyote-tan',
+  'marine-teal',
+  'steel-scarlet',
+]);
+
 function createIcon() {
   const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   icon.setAttribute('width', '16');
@@ -39,8 +47,13 @@ export default function decorate(block) {
   const badge = cellText(fields.badge);
   const title = cellText(fields.title);
   const description = cellText(fields.description);
+  const theme = cellText(fields.theme).toLowerCase();
   const ctaSource = fields.cta;
   const hasCta = Boolean(ctaSource || cellText(ctaSource));
+
+  if (THEMES.has(theme)) {
+    block.dataset.theme = theme;
+  }
 
   const surface = document.createElement('div');
   surface.className = 'promo-strip__surface';

@@ -651,7 +651,6 @@ button.checkout-progress__link[disabled] {
   padding-top: 0;
 }
 
-.checkout__aside .cart-summary-list__heading,
 .checkout__aside .cart-cart-summary-list__heading,
 .checkout__aside .cart-order-summary__heading {
   gap: 12px;
@@ -673,12 +672,6 @@ button.checkout-progress__link[disabled] {
   margin-top: 18px;
   padding-top: 18px;
   border-top: 1px solid rgb(255 255 255 / 8%);
-}
-
-.checkout__aside .dropin-accordion-section__heading {
-  margin: 0;
-  padding: 18px 0;
-  width: 100%;
 }
 
 .checkout__aside .dropin-accordion-section__title-container {
@@ -866,6 +859,16 @@ button.checkout-progress__link[disabled] {
 
 .cart-coupons__accordion {
   margin-top: var(--spacing-small);
+}
+
+.checkout__aside .cart-summary-list__heading {
+  gap: 12px;
+}
+
+.checkout__aside .dropin-accordion-section__heading {
+  margin: 0;
+  padding: 18px 0;
+  width: 100%;
 }
 
 [data-testid='default-cart-heading'] {

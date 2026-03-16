@@ -757,6 +757,241 @@ body.columns main > .section:empty {
   }
 }
 
+/* Account shell */
+body.columns main:has(.commerce-account-nav-wrapper),
+body.columns main:has(.commerce-account-sidebar-wrapper) {
+  align-items: flex-start;
+  gap: var(--spacing-medium);
+  max-width: 1320px;
+  padding-top: var(--spacing-big);
+}
+
+body.columns main:has(.commerce-account-nav-wrapper) > .section:last-child,
+body.columns main:has(.commerce-account-sidebar-wrapper) > .section:last-child {
+  --gap: var(--spacing-small);
+
+  min-width: 0;
+}
+
+body.columns main:has(.commerce-account-nav-wrapper) > .section:last-child > div,
+body.columns main:has(.commerce-account-sidebar-wrapper) > .section:last-child > div,
+body.columns main:has(.commerce-account-nav-wrapper) > .section:last-child > div > *,
+body.columns main:has(.commerce-account-sidebar-wrapper) > .section:last-child > div > * {
+  min-width: 0;
+}
+
+body.columns main:has(.commerce-account-nav-wrapper) .commerce-company-credit-container,
+body.columns main:has(.commerce-account-sidebar-wrapper) .commerce-company-credit-container {
+  max-width: none;
+  margin: 0;
+}
+
+body.columns main:has(.commerce-account-nav-wrapper) > .section:last-child > :is(
+  .commerce-customer-details-wrapper,
+  .commerce-returns-list-wrapper,
+  .commerce-wishlist-wrapper,
+  .commerce-b2b-negotiable-quote-wrapper,
+  .commerce-b2b-negotiable-quote-template-wrapper,
+  .commerce-b2b-requisition-list-view-wrapper,
+  .commerce-b2b-po-approval-flow-wrapper,
+  .commerce-b2b-po-approval-rule-details-wrapper,
+  .commerce-b2b-po-approval-rule-form-wrapper,
+  .commerce-b2b-po-approval-rules-list-wrapper,
+  .commerce-b2b-po-comment-form-wrapper,
+  .commerce-b2b-po-comments-list-wrapper,
+  .commerce-b2b-po-company-purchase-orders-wrapper,
+  .commerce-b2b-po-customer-purchase-orders-wrapper,
+  .commerce-b2b-po-history-log-wrapper,
+  .commerce-b2b-po-require-approval-purchase-orders-wrapper,
+  .commerce-b2b-po-status-wrapper,
+  .commerce-order-returns-wrapper
+) > *,
+body.columns main:has(.commerce-account-sidebar-wrapper) > .section:last-child > :is(
+  .commerce-customer-details-wrapper,
+  .commerce-returns-list-wrapper,
+  .commerce-wishlist-wrapper,
+  .commerce-b2b-negotiable-quote-wrapper,
+  .commerce-b2b-negotiable-quote-template-wrapper,
+  .commerce-b2b-requisition-list-view-wrapper,
+  .commerce-b2b-po-approval-flow-wrapper,
+  .commerce-b2b-po-approval-rule-details-wrapper,
+  .commerce-b2b-po-approval-rule-form-wrapper,
+  .commerce-b2b-po-approval-rules-list-wrapper,
+  .commerce-b2b-po-comment-form-wrapper,
+  .commerce-b2b-po-comments-list-wrapper,
+  .commerce-b2b-po-company-purchase-orders-wrapper,
+  .commerce-b2b-po-customer-purchase-orders-wrapper,
+  .commerce-b2b-po-history-log-wrapper,
+  .commerce-b2b-po-require-approval-purchase-orders-wrapper,
+  .commerce-b2b-po-status-wrapper,
+  .commerce-order-returns-wrapper
+) > * {
+  border: 1px solid var(--glass-border-subtle);
+  border-radius: calc(var(--shape-border-radius-2) + 6px);
+  background: linear-gradient(180deg, rgb(11 18 27 / 90%) 0%, rgb(16 25 36 / 92%) 100%);
+  box-shadow: var(--shadow-glass);
+  overflow: hidden;
+}
+
+body.columns main:has(.commerce-account-nav-wrapper) > .section:last-child :is(
+  .quote-management-quotes-list-table,
+  .quote-management-quote-templates-list-table__table,
+  .b2b-purchase-order-purchase-orders-table,
+  .wishlist-empty-wishlist__wrapper .dropin-card,
+  .wishlist-product-item,
+  .wishlist-wishlist__content--empty,
+  .order-returns-list-content__card,
+  .order-returns-list-content__cards-list .dropin-card,
+  .purchase-orders-table__empty-state
+),
+body.columns main:has(.commerce-account-sidebar-wrapper) > .section:last-child :is(
+  .quote-management-quotes-list-table,
+  .quote-management-quote-templates-list-table__table,
+  .b2b-purchase-order-purchase-orders-table,
+  .wishlist-empty-wishlist__wrapper .dropin-card,
+  .wishlist-product-item,
+  .wishlist-wishlist__content--empty,
+  .order-returns-list-content__card,
+  .order-returns-list-content__cards-list .dropin-card,
+  .purchase-orders-table__empty-state
+) {
+  border: 1px solid var(--glass-border-subtle);
+  border-radius: calc(var(--shape-border-radius-2) + 2px);
+  background: var(--glass-bg-strong);
+  backdrop-filter: var(--glass-blur-xs) var(--glass-saturate);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 14%);
+}
+
+body.columns main:has(.commerce-account-nav-wrapper) > .section:last-child :is(
+  .purchase-orders-table__table-wrapper,
+  .wishlist-wishlist__content,
+  .quote-management-quotes-list-table__table-wrapper,
+  .quote-management-quote-templates-list-table__table
+),
+body.columns main:has(.commerce-account-sidebar-wrapper) > .section:last-child :is(
+  .purchase-orders-table__table-wrapper,
+  .wishlist-wishlist__content,
+  .quote-management-quotes-list-table__table-wrapper,
+  .quote-management-quote-templates-list-table__table
+) {
+  overflow-x: auto;
+}
+
+body.columns main:has(.commerce-account-nav-wrapper) > .section:last-child :is(
+  .dropin-header-container__title,
+  .wishlist-wishlist__heading-text,
+  .quote-management-quote-summary-list__heading-text
+),
+body.columns main:has(.commerce-account-sidebar-wrapper) > .section:last-child :is(
+  .dropin-header-container__title,
+  .wishlist-wishlist__heading-text,
+  .quote-management-quote-summary-list__heading-text
+) {
+  font: var(--type-headline-2-strong-font);
+  letter-spacing: normal;
+}
+
+body.columns main:has(.commerce-account-nav-wrapper) > .section:last-child :is(
+  .dropin-divider,
+  .purchase-orders-header hr.dropin-divider
+),
+body.columns main:has(.commerce-account-sidebar-wrapper) > .section:last-child :is(
+  .dropin-divider,
+  .purchase-orders-header hr.dropin-divider
+) {
+  opacity: 0.45;
+}
+
+body.columns main:has(.commerce-account-nav-wrapper) > .section:last-child :is(
+  .dropin-table__header__row th,
+  .quote-management-quotes-list-table__table thead th,
+  .quote-management-quote-templates-list-table__table thead th
+),
+body.columns main:has(.commerce-account-sidebar-wrapper) > .section:last-child :is(
+  .dropin-table__header__row th,
+  .quote-management-quotes-list-table__table thead th,
+  .quote-management-quote-templates-list-table__table thead th
+) {
+  background: rgb(9 17 25 / 72%);
+  color: var(--color-neutral-700);
+  font: var(--type-details-overline-font);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+body.columns main:has(.commerce-account-nav-wrapper) > .section:last-child :is(
+  .dropin-table__body td,
+  .quote-management-quotes-list-table__table tbody td,
+  .quote-management-quote-templates-list-table__table tbody td
+),
+body.columns main:has(.commerce-account-sidebar-wrapper) > .section:last-child :is(
+  .dropin-table__body td,
+  .quote-management-quotes-list-table__table tbody td,
+  .quote-management-quote-templates-list-table__table tbody td
+) {
+  border-top-color: rgb(255 255 255 / 7%);
+}
+
+body.columns main:has(.commerce-account-nav-wrapper) > .section:last-child :is(
+  .quotes-list-table__footer,
+  .quote-templates-list-table__footer,
+  .purchase-orders-table__pagination-wrapper,
+  .b2b-purchase-order-purchase-orders-table-actions
+),
+body.columns main:has(.commerce-account-sidebar-wrapper) > .section:last-child :is(
+  .quotes-list-table__footer,
+  .quote-templates-list-table__footer,
+  .purchase-orders-table__pagination-wrapper,
+  .b2b-purchase-order-purchase-orders-table-actions
+) {
+  border-top: 1px solid rgb(255 255 255 / 7%);
+  padding-top: var(--spacing-small);
+}
+
+body.columns main:has(.commerce-account-nav-wrapper) > .section:last-child :is(
+  .quote-management-manage-negotiable-quote,
+  .quote-management-manage-negotiable-quote-template,
+  .purchase-orders,
+  .b2b-purchase-order-approval-rule-details-content,
+  .b2b-purchase-order-status-content,
+  .b2b-purchase-order-comment-list-content,
+  .b2b-purchase-order-approval-flow-content,
+  .b2b-purchase-order-history-log-content
+),
+body.columns main:has(.commerce-account-sidebar-wrapper) > .section:last-child :is(
+  .quote-management-manage-negotiable-quote,
+  .quote-management-manage-negotiable-quote-template,
+  .purchase-orders,
+  .b2b-purchase-order-approval-rule-details-content,
+  .b2b-purchase-order-status-content,
+  .b2b-purchase-order-comment-list-content,
+  .b2b-purchase-order-approval-flow-content,
+  .b2b-purchase-order-history-log-content
+) {
+  padding: var(--spacing-medium);
+}
+
+@media (max-width: 899px) {
+  body.columns main:has(.commerce-account-nav-wrapper),
+  body.columns main:has(.commerce-account-sidebar-wrapper) {
+    padding-top: var(--spacing-medium);
+    gap: var(--spacing-small);
+  }
+}
+
+@media (min-width: 900px) {
+  body.columns main:has(.commerce-account-nav-wrapper) > .section:first-child,
+  body.columns main:has(.commerce-account-sidebar-wrapper) > .section:first-child {
+    flex: 0 0 292px;
+    max-width: 292px;
+  }
+
+  body.columns main:has(.commerce-account-nav-wrapper) > .section:last-child,
+  body.columns main:has(.commerce-account-sidebar-wrapper) > .section:last-child {
+    flex: 1 1 0;
+  }
+}
+
 /**
 * Reset main element visibility
 * https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/hidden

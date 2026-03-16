@@ -83,6 +83,8 @@
 | `customer-segment-personalization-block` | `content` | `general` | 1 | 2 |
 | `embed` | `interactive-content` | `engagement` | 1 | 1 |
 | `enrichment` | `content` | `general` | 1 | 1 |
+| `ez-rack-builder` | `content` | `general` | 1 | 3 |
+| `ez-rack-builder-mockup` | `content` | `general` | 1 | 2 |
 | `features-grid` | `content` | `general` | 1 | 1 |
 | `footer` | `shell` | `navigation-and-layout` | 1 | 1 |
 | `form` | `forms` | `authorable-forms` | 1 | 2 |
@@ -130,6 +132,7 @@
 | `product-teaser` | `content` | `general` | 1 | 2 |
 | `product-technical-details` | `content` | `general` | 1 | 1 |
 | `promo-popup` | `content` | `general` | 1 | 1 |
+| `promo-strip` | `content` | `general` | 1 | 1 |
 | `promotional-hero` | `content` | `general` | 1 | 1 |
 | `quiz-router` | `interactive-content` | `engagement` | 1 | 1 |
 | `quiz-router-mccs` | `interactive-content` | `engagement` | 1 | 1 |

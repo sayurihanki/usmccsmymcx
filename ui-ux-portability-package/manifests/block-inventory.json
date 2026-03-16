@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-03-15T19:02:55.008Z",
+  "generatedAt": "2026-03-16T05:45:11.286Z",
   "summary": {
-    "totalBlocks": 132,
-    "withStyles": 132,
-    "withRuntime": 132,
+    "totalBlocks": 135,
+    "withStyles": 135,
+    "withRuntime": 135,
     "byCategory": {
       "interactive-content": 10,
-      "content": 56,
+      "content": 59,
       "commerce": 55,
       "shell": 5,
       "forms": 6
@@ -1475,6 +1475,55 @@
       "fileCount": 3
     },
     {
+      "name": "ez-rack-builder",
+      "category": "content",
+      "subcategory": "general",
+      "title": "EZ Rack Builder",
+      "overview": "`ez-rack-builder` is a PDP-native luxury configurator block for regulation-aware ribbon rack builds.",
+      "sourcePath": "blocks/ez-rack-builder",
+      "files": {
+        "css": [
+          "blocks/ez-rack-builder/ez-rack-builder.css"
+        ],
+        "js": [
+          "blocks/ez-rack-builder/ez-rack-builder.commerce.js",
+          "blocks/ez-rack-builder/ez-rack-builder.js",
+          "blocks/ez-rack-builder/ez-rack-builder.lib.js"
+        ],
+        "json": [
+          "blocks/ez-rack-builder/_ez-rack-builder.json"
+        ],
+        "readme": "blocks/ez-rack-builder/README.md"
+      },
+      "hasStyles": true,
+      "hasRuntime": true,
+      "fileCount": 7
+    },
+    {
+      "name": "ez-rack-builder-mockup",
+      "category": "content",
+      "subcategory": "general",
+      "title": "EZ Rack Builder Mockup",
+      "overview": "`ez-rack-builder-mockup` is a prototype-only luxury wizard block that recreates the cinematic EZ Rack builder flow without referencing a real product.",
+      "sourcePath": "blocks/ez-rack-builder-mockup",
+      "files": {
+        "css": [
+          "blocks/ez-rack-builder-mockup/ez-rack-builder-mockup.css"
+        ],
+        "js": [
+          "blocks/ez-rack-builder-mockup/ez-rack-builder-mockup.js",
+          "blocks/ez-rack-builder-mockup/ez-rack-builder-mockup.lib.js"
+        ],
+        "json": [
+          "blocks/ez-rack-builder-mockup/_ez-rack-builder-mockup.json"
+        ],
+        "readme": "blocks/ez-rack-builder-mockup/README.md"
+      },
+      "hasStyles": true,
+      "hasRuntime": true,
+      "fileCount": 6
+    },
+    {
       "name": "features-grid",
       "category": "content",
       "subcategory": "general",
@@ -2195,7 +2244,7 @@
       "category": "content",
       "subcategory": "general",
       "title": "MCX Hero",
-      "overview": "The `mcx-hero` block is the flagship MCX homepage hero. It supports a multi-line headline, tactical eyebrow, hero image, two CTAs, optional status badges, and up to four KPI stats. On MCX block-library preview URLs, the block can fall back to built-in demo content when no authored 2-column table is present so the preview still renders.",
+      "overview": "The `mcx-hero` block is the flagship MCX homepage hero. It supports a multi-line headline, tactical eyebrow, an image-only hero carousel, two CTAs, legacy status badge rows, and up to four KPI stats. On MCX block-library preview URLs, the block can fall back to built-in demo content when no authored 2-column table is present so the preview still renders.",
       "sourcePath": "blocks/mcx-hero",
       "files": {
         "css": [
@@ -2558,6 +2607,29 @@
       "hasStyles": true,
       "hasRuntime": true,
       "fileCount": 5
+    },
+    {
+      "name": "promo-strip",
+      "category": "content",
+      "subcategory": "general",
+      "title": "Promo Strip",
+      "overview": "`promo-strip` is a theme-agnostic promotional banner block for short campaign moments, guided-selling entry points, and inline conversion nudges.",
+      "sourcePath": "blocks/promo-strip",
+      "files": {
+        "css": [
+          "blocks/promo-strip/promo-strip.css"
+        ],
+        "js": [
+          "blocks/promo-strip/promo-strip.js"
+        ],
+        "json": [
+          "blocks/promo-strip/_promo-strip.json"
+        ],
+        "readme": "blocks/promo-strip/README.md"
+      },
+      "hasStyles": true,
+      "hasRuntime": true,
+      "fileCount": 4
     },
     {
       "name": "promotional-hero",

@@ -86,5 +86,6 @@ The repo now includes a full local preview harness:
 - Generic `promo-strip` blocks are optional authored inserts. They are not part of the required MCX homepage base order and can be placed wherever the page narrative needs an inline promotion.
 - Section styling for the category, product, and featured rows is controlled by the section metadata example files above.
 - `mcx-header` and `mcx-footer` are shell blocks. Authors should edit the fragment docs, not inline blocks on the homepage.
+- `mcx-hero` supports an image-only carousel. Author `image` for the first slide, then add `image-2`, `image-3`, and so on for additional slides.
 - `mcx-hero` still accepts legacy `status-badge-*` rows for backward compatibility, but the redesigned hero no longer renders them. Do not add them to new docs.
 - `mcx-product-cards` still accepts legacy `tabs` and `default-tab` rows for backward compatibility, but the redesigned product grid no longer renders tabs. Do not add them to new docs.

@@ -326,6 +326,11 @@ export class FakeElement extends FakeEventTarget {
     this._textContent = '';
   }
 
+  _readBoxValue(value) {
+    const numeric = Number.parseFloat(String(value || '0'));
+    return Number.isFinite(numeric) ? numeric : 0;
+  }
+
   get children() {
     return this.childNodes.filter((child) => child instanceof FakeElement);
   }
@@ -465,6 +470,25 @@ export class FakeElement extends FakeEventTarget {
 
   matches(selector) {
     return matchesSelectorChain(this, selector);
+  }
+
+  getBoundingClientRect() {
+    const width = this._readBoxValue(this.style.width);
+    const height = this._readBoxValue(this.style.height);
+
+    return {
+      width,
+      height,
+      top: 0,
+      right: width,
+      bottom: height,
+      left: 0,
+      x: 0,
+      y: 0,
+      toJSON() {
+        return this;
+      },
+    };
   }
 
   reset() {

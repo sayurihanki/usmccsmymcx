@@ -37,20 +37,27 @@ function createRow(document, key, value, href = '') {
 }
 
 function createPromoStripBlock(document, {
-  badge = 'Guided Selling Experience',
-  title = 'PERSONALIZE YOUR MCCS EXPERIENCE',
-  description = 'Tell us about your military life, interests, and preferences.',
-  ctaLabel = 'Start Personalizing',
+  badge = 'Guided Newcomer Experience',
+  title = 'NEW TO CAMP PENDLETON? START HERE',
+  description = 'Tell us what your first weeks look like and we will tailor shopping picks, family programs, and base-life suggestions to help you settle in faster.',
+  ctaLabel = 'Get My Suggestions',
   ctaHref = '/personalize',
+  theme = '',
 } = {}) {
   const block = document.createElement('div');
   block.className = 'promo-strip';
-  block.append(
+  const rows = [
     createRow(document, 'badge', badge),
     createRow(document, 'title', title),
     createRow(document, 'description', description),
     createRow(document, 'cta', ctaLabel, ctaHref),
-  );
+  ];
+
+  if (theme) {
+    rows.push(createRow(document, 'theme', theme));
+  }
+
+  block.append(...rows);
   return block;
 }
 
@@ -62,11 +69,11 @@ test('promo-strip renders author copy and CTA on a non-MCX page', async () => {
 
     decorate(block);
 
-    assert.equal(block.querySelector('.promo-strip__badge')?.textContent, 'Guided Selling Experience');
-    assert.equal(block.querySelector('.promo-strip__title')?.textContent, 'PERSONALIZE YOUR MCCS EXPERIENCE');
-    assert.match(block.querySelector('.promo-strip__description')?.textContent || '', /military life/);
+    assert.equal(block.querySelector('.promo-strip__badge')?.textContent, 'Guided Newcomer Experience');
+    assert.equal(block.querySelector('.promo-strip__title')?.textContent, 'NEW TO CAMP PENDLETON? START HERE');
+    assert.match(block.querySelector('.promo-strip__description')?.textContent || '', /settle in faster/);
     assert.equal(block.querySelector('.promo-strip__cta')?.href, '/personalize');
-    assert.equal(block.querySelector('.promo-strip__cta span')?.textContent, 'Start Personalizing');
+    assert.equal(block.querySelector('.promo-strip__cta span')?.textContent, 'Get My Suggestions');
     assert.equal(block.querySelectorAll('svg').length, 1);
   });
 });
@@ -91,6 +98,40 @@ test('promo-strip decorates cleanly when the page already uses the MCX shell', a
     assert.equal(block.querySelector('.promo-strip__grid') !== null, true);
     assert.equal(block.querySelector('.promo-strip__title')?.textContent, 'WELCOME BACK TO MCCS');
     assert.equal(block.querySelector('.promo-strip__cta')?.href, '/');
+  });
+});
+
+test('promo-strip applies authored theme variants when supported', async () => {
+  await withFakeDom(async ({ document }) => {
+    const { default: decorate } = await import('../../blocks/promo-strip/promo-strip.js');
+    const block = createPromoStripBlock(document, {
+      badge: 'Guided Selling Experience',
+      title: 'NEW TO BASE START HERE',
+      description: 'Guidance tailored around first-week shopping, family programs, and base-life suggestions.',
+      ctaLabel: 'Take the AI Recommendations Quiz',
+      ctaHref: '/.da/library/blocks/guided-selling',
+      theme: 'marine-teal',
+    });
+    document.body.append(block);
+
+    decorate(block);
+
+    assert.equal(block.dataset.theme, 'marine-teal');
+    assert.equal(block.querySelector('.promo-strip__cta')?.href, '/.da/library/blocks/guided-selling');
+  });
+});
+
+test('promo-strip ignores unsupported theme variants', async () => {
+  await withFakeDom(async ({ document }) => {
+    const { default: decorate } = await import('../../blocks/promo-strip/promo-strip.js');
+    const block = createPromoStripBlock(document, {
+      theme: 'sunset-pink',
+    });
+    document.body.append(block);
+
+    decorate(block);
+
+    assert.equal(block.dataset.theme, undefined);
   });
 });
 
