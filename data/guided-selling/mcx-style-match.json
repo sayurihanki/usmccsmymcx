@@ -608,7 +608,7 @@
         "badge": "Based on your lifestyle",
         "title": "PT & Training Gear",
         "description": "High-performance athletic wear built for Marine Corps PT standards: compression, moisture-wicking layers, and reliable running shoes.",
-        "href": "#pt-training",
+        "href": "https://main--usmccsmymcx--sayurihanki.aem.live/.da/library/blocks/mcx-category-page",
         "ctaLabel": "Shop PT Gear",
         "tags": [
           "Under Armour",
@@ -630,7 +630,7 @@
         "badge": "Based on your priorities",
         "title": "Uniform & Duty Wear",
         "description": "Inspection-ready uniforms, BDUs, and authorized service items at MCX pricing.",
-        "href": "#uniform-duty",
+        "href": "https://main--usmccsmymcx--sayurihanki.aem.live/.da/library/blocks/uniform-configurator",
         "ctaLabel": "Shop Uniforms",
         "tags": [
           "Propper",
@@ -653,7 +653,7 @@
         "badge": "Based on your style",
         "title": "Everyday Casual",
         "description": "Off-duty comfort with tactical credibility: hoodies, polos, casual pants, and easy layering pieces.",
-        "href": "#everyday-casual",
+        "href": "https://main--usmccsmymcx--sayurihanki.aem.live/.da/library/blocks/mcx-category-page",
         "ctaLabel": "Shop Casual",
         "tags": [
           "North Face",
