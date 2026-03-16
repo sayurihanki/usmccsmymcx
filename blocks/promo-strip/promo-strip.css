@@ -1,16 +1,6 @@
-.promo-strip-container > div {
-  box-sizing: border-box;
-  margin: 0 auto;
-  max-width: 1500px;
-  padding: 0 48px;
-  width: 100%;
-}
-
 .promo-strip-wrapper {
-  box-sizing: border-box;
   max-width: none;
   padding: 0;
-  width: 100%;
 }
 
 .promo-strip {
@@ -294,10 +284,6 @@ body:is(.mcx, .mcx-preview) .promo-strip:not([data-theme]) {
 }
 
 @media (max-width: 900px) {
-  .promo-strip-container > div {
-    padding: 0 20px;
-  }
-
   .promo-strip .promo-strip__surface {
     border-radius: 24px;
     padding: 26px 22px;
@@ -310,12 +296,6 @@ body:is(.mcx, .mcx-preview) .promo-strip:not([data-theme]) {
 
   .promo-strip .promo-strip__title {
     max-width: none;
-  }
-}
-
-@media (max-width: 1200px) and (min-width: 901px) {
-  .promo-strip-container > div {
-    padding: 0 32px;
   }
 }
 
