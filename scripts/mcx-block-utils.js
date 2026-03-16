@@ -103,7 +103,7 @@ export function extractMarkdownImage(text = '') {
 }
 
 export function extractMarkdownLink(text = '') {
-  const match = text.match(/(?:^|[^!])\[([^\]]+)\]\(([^)]+)\)/);
+  const match = text.match(/(?:^|[^!])\[([^\]]+)\]\s*\(([^)]+)\)/);
   if (!match) return null;
 
   const [, label, href] = match;

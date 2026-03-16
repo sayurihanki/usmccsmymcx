@@ -121,6 +121,30 @@ test('promo-strip applies authored theme variants when supported', async () => {
   });
 });
 
+test('promo-strip parses markdown CTA when DA.live wraps the url onto a new line', async () => {
+  await withFakeDom(async ({ document }) => {
+    const { default: decorate } = await import('../../blocks/promo-strip/promo-strip.js');
+    const block = document.createElement('div');
+    block.className = 'promo-strip';
+    block.append(
+      createRow(document, 'badge', 'Guided Selling Experience'),
+      createRow(document, 'title', 'NEW TO BASE START HERE'),
+      createRow(document, 'description', 'Guidance tailored around first-week shopping, family programs, and base-life suggestions'),
+      createRow(document, 'cta', '[Take the AI Recommendations Quiz]\n(https://main--usmccsmymcx--sayurihanki.aem.live/.da/library/blocks/guided-selling)'),
+      createRow(document, 'theme', 'midnight-gold'),
+    );
+    document.body.append(block);
+
+    decorate(block);
+
+    assert.equal(
+      block.querySelector('.promo-strip__cta')?.href,
+      'https://main--usmccsmymcx--sayurihanki.aem.live/.da/library/blocks/guided-selling',
+    );
+    assert.equal(block.querySelector('.promo-strip__cta span')?.textContent, 'Take the AI Recommendations Quiz');
+  });
+});
+
 test('promo-strip ignores unsupported theme variants', async () => {
   await withFakeDom(async ({ document }) => {
     const { default: decorate } = await import('../../blocks/promo-strip/promo-strip.js');

@@ -1,3 +1,11 @@
+body:is(.mcx, .mcx-preview) main > .mcx-product-cards-container > div,
+body:is(.mcx, .mcx-preview) main .mcx-product-cards-wrapper {
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  width: 100%;
+}
+
 body:is(.mcx, .mcx-preview) main .mcx-product-cards .prod-grid {
   display: grid;
   gap: 18px;
