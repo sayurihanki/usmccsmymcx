@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>USMC MCCS MYMCx — Architecture Map</title>
+<style>
+  :root {
+    --bg: #0b1120;
+    --card: #131c31;
+    --card-border: #1e2d4a;
+    --accent: #3b82f6;
+    --accent2: #8b5cf6;
+    --accent3: #06b6d4;
+    --accent4: #f59e0b;
+    --accent5: #ef4444;
+    --accent6: #10b981;
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --glow: rgba(59,130,246,.15);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .page { max-width: 1400px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  /* Header */
+  .page-header {
+    text-align: center;
+    margin-bottom: 56px;
+    position: relative;
+  }
+  .page-header::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 2px;
+  }
+  .page-header h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff 0%, var(--accent3) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -.02em;
+  }
+  .page-header .sub {
+    margin-top: 10px;
+    color: var(--text-dim);
+    font-size: .95rem;
+  }
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    margin-top: 12px;
+  }
+  .badge-blue { background: rgba(59,130,246,.15); color: var(--accent); border: 1px solid rgba(59,130,246,.25); }
+
+  /* Flow connector */
+  .flow-connector {
+    display: flex;
+    justify-content: center;
+    padding: 12px 0;
+  }
+  .flow-connector svg { opacity: .45; }
+
+  /* Section */
+  .section {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 0;
+    position: relative;
+    transition: box-shadow .3s;
+  }
+  .section:hover { box-shadow: 0 0 40px var(--glow); }
+  .section-label {
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dot-blue { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+  .dot-purple { background: var(--accent2); box-shadow: 0 0 8px var(--accent2); }
+  .dot-cyan { background: var(--accent3); box-shadow: 0 0 8px var(--accent3); }
+  .dot-amber { background: var(--accent4); box-shadow: 0 0 8px var(--accent4); }
+  .dot-red { background: var(--accent5); box-shadow: 0 0 8px var(--accent5); }
+  .dot-green { background: var(--accent6); box-shadow: 0 0 8px var(--accent6); }
+
+  /* Cards grid */
+  .cards { display: grid; gap: 12px; }
+  .cards-3 { grid-template-columns: repeat(3, 1fr); }
+  .cards-4 { grid-template-columns: repeat(4, 1fr); }
+  .cards-2 { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 900px) {
+    .cards-3, .cards-4 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .cards-3, .cards-4, .cards-2 { grid-template-columns: 1fr; }
+  }
+
+  .card {
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 10px;
+    padding: 16px 18px;
+    transition: border-color .25s, background .25s;
+  }
+  .card:hover {
+    border-color: rgba(255,255,255,.14);
+    background: rgba(255,255,255,.055);
+  }
+  .card h3 {
+    font-size: .82rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .card h3 .icon { font-size: 1rem; }
+  .card ul {
+    list-style: none;
+    padding: 0;
+  }
+  .card ul li {
+    font-size: .75rem;
+    color: var(--text-dim);
+    padding: 2px 0;
+    padding-left: 14px;
+    position: relative;
+  }
+  .card ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.15);
+  }
+
+  /* Chip list */
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .chip {
+    font-size: .68rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.08);
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+  .chip-blue { background: rgba(59,130,246,.1); border-color: rgba(59,130,246,.2); color: #93c5fd; }
+  .chip-purple { background: rgba(139,92,246,.1); border-color: rgba(139,92,246,.2); color: #c4b5fd; }
+  .chip-cyan { background: rgba(6,182,212,.1); border-color: rgba(6,182,212,.2); color: #67e8f9; }
+  .chip-amber { background: rgba(245,158,11,.1); border-color: rgba(245,158,11,.2); color: #fcd34d; }
+  .chip-green { background: rgba(16,185,129,.1); border-color: rgba(16,185,129,.2); color: #6ee7b7; }
+  .chip-red { background: rgba(239,68,68,.1); border-color: rgba(239,68,68,.2); color: #fca5a5; }
+
+  /* Data flow */
+  .flow-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .flow-node {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: .75rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .flow-arrow { color: var(--text-dim); font-size: 1.2rem; }
+
+  /* Stats bar */
+  .stats {
+    display: flex;
+    gap: 24px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+  }
+  .stat-num {
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: .68rem;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  /* File tree */
+  .tree {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: .72rem;
+    line-height: 1.7;
+    color: var(--text-dim);
+    margin-top: 10px;
+    white-space: pre;
+    overflow-x: auto;
+  }
+  .tree .dir { color: var(--accent3); font-weight: 600; }
+  .tree .file { color: var(--text-dim); }
+  .tree .comment { color: #475569; }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: .72rem;
+    color: var(--text-dim);
+  }
+  .legend-swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+  }
+
+  /* Dep table */
+  .dep-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: .75rem;
+  }
+  .dep-table th {
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--card-border);
+    color: var(--text-dim);
+    font-weight: 600;
+    font-size: .68rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .dep-table td {
+    padding: 7px 12px;
+    border-bottom: 1px solid rgba(255,255,255,.04);
+  }
+  .dep-table tr:hover td { background: rgba(255,255,255,.02); }
+  .ver { color: var(--accent6); font-family: 'SF Mono', monospace; font-size: .7rem; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="page-header">
+    <h1>USMC MCCS MYMCx</h1>
+    <div class="sub">Edge Delivery Services + Adobe Commerce &mdash; Full Architecture Map</div>
+    <span class="badge badge-blue">v4.0.1 &bull; @adobe/aem-boilerplate-commerce</span>
+  </div>
+
+  <!-- 1. Content Layer -->
+  <div class="section">
+    <div class="section-label"><span class="dot dot-cyan"></span> Content Authoring Layer</div>
+    <div class="cards cards-3">
+      <div class="card">
+        <h3><span class="icon">📄</span> Document Editing</h3>
+        <ul>
+          <li>AEM Live / DA Live authoring</li>
+          <li>Mountpoint: content.da.live/sayurihanki</li>
+          <li>Markup → Sections → Blocks pipeline</li>
+          <li>fstab.yaml maps "/" → content repo</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="icon">📊</span> Data Sources</h3>
+        <ul>
+          <li>/data — Spreadsheet-driven content</li>
+          <li>/drafts — Draft content previews</li>
+          <li>/fragments — Reusable content chunks</li>
+          <li>/models — Component model definitions</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="icon">⚙️</span> Configuration</h3>
+        <ul>
+          <li>Component models (JSON)</li>
+          <li>Component definitions (JSON)</li>
+          <li>Component filters (JSON)</li>
+          <li>Page, section, image, text models</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="flow-connector">
+    <svg width="24" height="40"><path d="M12 0 v32 M6 26 l6 8 l6-8" stroke="#3b82f6" stroke-width="2" fill="none"/></svg>
+  </div>
+
+  <!-- 2. Edge Delivery -->
+  <div class="section">
+    <div class="section-label"><span class="dot dot-blue"></span> Edge Delivery Services (CDN)</div>
+    <div class="flow-row">
+      <div class="flow-node" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25);color:#93c5fd;">Author Content</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node" style="background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.25);color:#c4b5fd;">EDS Pipeline</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node" style="background:rgba(6,182,212,.12);border:1px solid rgba(6,182,212,.25);color:#67e8f9;">CDN Edge</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);color:#6ee7b7;">Browser Render</div>
+    </div>
+    <div style="text-align:center;margin-top:14px;font-size:.78rem;color:var(--text-dim);">
+      Auto-blocking &bull; Section detection &bull; Lazy loading &bull; Target: Lighthouse 100
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="flow-connector">
+    <svg width="24" height="40"><path d="M12 0 v32 M6 26 l6 8 l6-8" stroke="#8b5cf6" stroke-width="2" fill="none"/></svg>
+  </div>
+
+  <!-- 3. Block System -->
+  <div class="section">
+    <div class="section-label"><span class="dot dot-purple"></span> Block System — 130+ Components</div>
+    <div class="stats">
+      <div class="stat"><span class="stat-num" style="color:var(--accent);">130+</span><span class="stat-label">Total Blocks</span></div>
+      <div class="stat"><span class="stat-num" style="color:var(--accent2);">50+</span><span class="stat-label">Commerce Blocks</span></div>
+      <div class="stat"><span class="stat-num" style="color:var(--accent3);">15+</span><span class="stat-label">MCX Custom</span></div>
+      <div class="stat"><span class="stat-num" style="color:var(--accent4);">10+</span><span class="stat-label">B2B Blocks</span></div>
+    </div>
+    <div class="cards cards-4" style="margin-top:18px;">
+      <div class="card">
+        <h3 style="color:var(--accent);">Layout</h3>
+        <div class="chips">
+          <span class="chip chip-blue">header</span>
+          <span class="chip chip-blue">footer</span>
+          <span class="chip chip-blue">mcx-header</span>
+          <span class="chip chip-blue">mcx-footer</span>
+          <span class="chip chip-blue">tabs</span>
+          <span class="chip chip-blue">accordion</span>
+          <span class="chip chip-blue">carousel</span>
+          <span class="chip chip-blue">cards</span>
+          <span class="chip chip-blue">cards-list</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--accent2);">Commerce — Storefront</h3>
+        <div class="chips">
+          <span class="chip chip-purple">commerce-cart</span>
+          <span class="chip chip-purple">commerce-checkout</span>
+          <span class="chip chip-purple">commerce-mini-cart</span>
+          <span class="chip chip-purple">commerce-login</span>
+          <span class="chip chip-purple">commerce-create-account</span>
+          <span class="chip chip-purple">commerce-wishlist</span>
+          <span class="chip chip-purple">commerce-orders-list</span>
+          <span class="chip chip-purple">commerce-checkout-success</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--accent4);">Commerce — B2B</h3>
+        <div class="chips">
+          <span class="chip chip-amber">b2b-negotiable-quote</span>
+          <span class="chip chip-amber">b2b-po-approval-flow</span>
+          <span class="chip chip-amber">b2b-po-approval-rules</span>
+          <span class="chip chip-amber">b2b-requisition-list</span>
+          <span class="chip chip-amber">b2b-quote-checkout</span>
+          <span class="chip chip-amber">company-structure</span>
+          <span class="chip chip-amber">company-users</span>
+          <span class="chip chip-amber">company-roles</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--accent3);">MCX Custom</h3>
+        <div class="chips">
+          <span class="chip chip-cyan">mcx-hero</span>
+          <span class="chip chip-cyan">mcx-brands</span>
+          <span class="chip chip-cyan">mcx-benefits</span>
+          <span class="chip chip-cyan">mcx-category-grid</span>
+          <span class="chip chip-cyan">mcx-category-page</span>
+          <span class="chip chip-cyan">mcx-deal-countdown</span>
+          <span class="chip chip-cyan">mcx-editorial-cards</span>
+          <span class="chip chip-cyan">mcx-featured-collections</span>
+          <span class="chip chip-cyan">mcx-announcement-bar</span>
+        </div>
+      </div>
+    </div>
+    <div class="cards cards-4" style="margin-top:12px;">
+      <div class="card">
+        <h3 style="color:var(--accent6);">Content & Media</h3>
+        <div class="chips">
+          <span class="chip chip-green">hero-3 / hero-5 / hero-6</span>
+          <span class="chip chip-green">hero-cta</span>
+          <span class="chip chip-green">blog-post</span>
+          <span class="chip chip-green">video</span>
+          <span class="chip chip-green">embed</span>
+          <span class="chip chip-green">enrichment</span>
+          <span class="chip chip-green">features-grid</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--accent5);">Interactive</h3>
+        <div class="chips">
+          <span class="chip chip-red">form / form-2 / form-3 / form-4</span>
+          <span class="chip chip-red">guided-selling</span>
+          <span class="chip chip-red">quiz-router-mccs</span>
+          <span class="chip chip-red">store-locator</span>
+          <span class="chip chip-red">luxury-configurator</span>
+          <span class="chip chip-red">ez-rack-builder</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--accent4);">Account</h3>
+        <div class="chips">
+          <span class="chip chip-amber">account-hub</span>
+          <span class="chip chip-amber">account-header</span>
+          <span class="chip chip-amber">account-nav</span>
+          <span class="chip chip-amber">account-sidebar</span>
+          <span class="chip chip-amber">addresses</span>
+          <span class="chip chip-amber">customer-details</span>
+          <span class="chip chip-amber">customer-information</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--accent);">Specialty</h3>
+        <div class="chips">
+          <span class="chip chip-blue">vip-hero-block</span>
+          <span class="chip chip-blue">vip-hero-mccs</span>
+          <span class="chip chip-blue">vip-member-block</span>
+          <span class="chip chip-blue">live-block</span>
+          <span class="chip chip-blue">live-block-premium</span>
+          <span class="chip chip-blue">product-teaser</span>
+          <span class="chip chip-blue">catalog-highlights</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="flow-connector">
+    <svg width="24" height="40"><path d="M12 0 v32 M6 26 l6 8 l6-8" stroke="#06b6d4" stroke-width="2" fill="none"/></svg>
+  </div>
+
+  <!-- 4. Scripts & Drop-ins -->
+  <div class="section">
+    <div class="section-label"><span class="dot dot-cyan"></span> Client-Side Scripts & Drop-in Components</div>
+    <div class="cards cards-3">
+      <div class="card">
+        <h3><span class="icon">🔧</span> Core Runtime</h3>
+        <ul>
+          <li><b>scripts.js</b> — Main entry point</li>
+          <li><b>aem.js</b> — AEM integration layer</li>
+          <li><b>commerce.js</b> — Commerce API bridge</li>
+          <li><b>delayed.js</b> — Deferred loading</li>
+          <li><b>mcx-ui.js</b> — MCX UI utilities</li>
+          <li><b>mcx-block-utils.js</b> — Block helpers</li>
+          <li><b>submit-json.js</b> — Form submissions</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="icon">📡</span> Events & Data</h3>
+        <ul>
+          <li><b>acdl/</b> — Adobe Client Data Layer</li>
+          <li><b>commerce-events-sdk.js</b> — Event SDK</li>
+          <li><b>commerce-events-collector.js</b> — Analytics</li>
+          <li><b>mcx-experience.js</b> — Personalization</li>
+          <li><b>experiment-loader.js</b> — A/B Testing</li>
+          <li><b>mcx-preview.js</b> — Preview mode</li>
+          <li><b>ue.js / ue-utils.js</b> — Universal Editor</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="icon">🧩</span> Drop-in Components</h3>
+        <ul>
+          <li><b>storefront-auth</b> — Authentication</li>
+          <li><b>storefront-cart</b> — Shopping cart</li>
+          <li><b>storefront-checkout</b> — Checkout flow</li>
+          <li><b>storefront-pdp</b> — Product detail</li>
+          <li><b>storefront-order</b> — Order management</li>
+          <li><b>storefront-account</b> — User accounts</li>
+          <li><b>storefront-wishlist</b> — Wishlists</li>
+          <li><b>storefront-payment-services</b></li>
+          <li><b>storefront-recommendations</b></li>
+          <li><b>storefront-personalization</b></li>
+          <li><b>storefront-product-discovery</b></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="flow-connector">
+    <svg width="24" height="40"><path d="M12 0 v32 M6 26 l6 8 l6-8" stroke="#f59e0b" stroke-width="2" fill="none"/></svg>
+  </div>
+
+  <!-- 5. Backend -->
+  <div class="section">
+    <div class="section-label"><span class="dot dot-amber"></span> Backend — Adobe Commerce (Magento) APIs</div>
+    <div class="cards cards-2">
+      <div class="card">
+        <h3><span class="icon">🛒</span> Commerce Services</h3>
+        <div class="chips">
+          <span class="chip chip-amber">Product Catalog API</span>
+          <span class="chip chip-amber">Cart Management</span>
+          <span class="chip chip-amber">Checkout & Payment</span>
+          <span class="chip chip-amber">Order Processing</span>
+          <span class="chip chip-amber">Customer Accounts</span>
+          <span class="chip chip-amber">Shipping & Returns</span>
+          <span class="chip chip-amber">Recommendations Engine</span>
+          <span class="chip chip-amber">Personalization</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3><span class="icon">🏢</span> B2B Commerce Services</h3>
+        <div class="chips">
+          <span class="chip chip-purple">Company Management</span>
+          <span class="chip chip-purple">Company Switcher</span>
+          <span class="chip chip-purple">Purchase Orders</span>
+          <span class="chip chip-purple">Quote Management</span>
+          <span class="chip chip-purple">Requisition Lists</span>
+          <span class="chip chip-purple">Approval Workflows</span>
+          <span class="chip chip-purple">Company Credit</span>
+          <span class="chip chip-purple">Roles & Permissions</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="flow-connector">
+    <svg width="24" height="40"><path d="M12 0 v32 M6 26 l6 8 l6-8" stroke="#10b981" stroke-width="2" fill="none"/></svg>
+  </div>
+
+  <!-- 6. Dev Tooling -->
+  <div class="section">
+    <div class="section-label"><span class="dot dot-green"></span> Developer Tooling & Build Pipeline</div>
+    <div class="cards cards-3">
+      <div class="card">
+        <h3><span class="icon">🔨</span> Build System</h3>
+        <ul>
+          <li><b>npm start</b> — AEM CLI dev server</li>
+          <li><b>npm run postinstall</b> — Drop-in sync</li>
+          <li><b>npm run build:json</b> — Merge models</li>
+          <li><b>build.mjs</b> — Custom build steps</li>
+          <li><b>merge-json-cli</b> — Config merging</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="icon">🧪</span> Testing</h3>
+        <ul>
+          <li><b>npm test</b> — Lint + Unit tests</li>
+          <li><b>Node --test</b> — Unit test runner</li>
+          <li><b>Cypress</b> — E2E integration tests</li>
+          <li><b>catalog-health-check</b> — Catalog verify</li>
+          <li><b>verify-commerce-contract</b></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="icon">✅</span> Code Quality</h3>
+        <ul>
+          <li><b>ESLint</b> — JS linting (Airbnb)</li>
+          <li><b>StyleLint</b> — CSS linting</li>
+          <li><b>Husky</b> — Git hooks / pre-commit</li>
+          <li><b>.github/</b> — CI/CD workflows</li>
+          <li><b>.vscode/</b> — Editor configuration</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="flow-connector">
+    <svg width="24" height="40"><path d="M12 0 v32 M6 26 l6 8 l6-8" stroke="#ef4444" stroke-width="2" fill="none"/></svg>
+  </div>
+
+  <!-- 7. Dependencies -->
+  <div class="section">
+    <div class="section-label"><span class="dot dot-red"></span> Dependency Map</div>
+    <table class="dep-table">
+      <thead>
+        <tr><th>Package</th><th>Version</th><th>Purpose</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>@dropins/storefront-cart</td><td class="ver">~3.0.0</td><td>Shopping cart UI & logic</td></tr>
+        <tr><td>@dropins/storefront-checkout</td><td class="ver">~3.0.1</td><td>Checkout flow</td></tr>
+        <tr><td>@dropins/storefront-auth</td><td class="ver">~3.0.0</td><td>Authentication</td></tr>
+        <tr><td>@dropins/storefront-account</td><td class="ver">~3.0.0</td><td>Account management</td></tr>
+        <tr><td>@dropins/storefront-pdp</td><td class="ver">~3.0.0</td><td>Product detail pages</td></tr>
+        <tr><td>@dropins/storefront-order</td><td class="ver">~3.0.0</td><td>Order management</td></tr>
+        <tr><td>@dropins/storefront-wishlist</td><td class="ver">~3.0.0</td><td>Wishlists</td></tr>
+        <tr><td>@dropins/storefront-payment-services</td><td class="ver">~3.0.0</td><td>Payment processing</td></tr>
+        <tr><td>@dropins/storefront-recommendations</td><td class="ver">~3.0.0</td><td>Product recommendations</td></tr>
+        <tr><td>@dropins/storefront-personalization</td><td class="ver">~3.0.0</td><td>Personalized experiences</td></tr>
+        <tr><td>@dropins/storefront-product-discovery</td><td class="ver">~3.0.0</td><td>Search & discovery</td></tr>
+        <tr><td>@dropins/storefront-company-management</td><td class="ver">~1.0.0</td><td>B2B company management</td></tr>
+        <tr><td>@dropins/storefront-purchase-order</td><td class="ver">~1.0.0</td><td>B2B purchase orders</td></tr>
+        <tr><td>@dropins/storefront-quote-management</td><td class="ver">~1.0.0</td><td>B2B quotes</td></tr>
+        <tr><td>@dropins/storefront-requisition-list</td><td class="ver">1.0.0</td><td>B2B requisition lists</td></tr>
+        <tr><td>@dropins/tools</td><td class="ver">~1.6.0</td><td>Shared utilities</td></tr>
+        <tr><td>@adobe/magento-storefront-events-sdk</td><td class="ver">^1.15.0</td><td>Commerce events SDK</td></tr>
+        <tr><td>@adobe/magento-storefront-event-collector</td><td class="ver">^1.15.0</td><td>Event analytics collector</td></tr>
+        <tr><td>@adobe/adobe-client-data-layer</td><td class="ver">^3.0.1</td><td>Client data layer</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Arrow -->
+  <div class="flow-connector">
+    <svg width="24" height="40"><path d="M12 0 v32 M6 26 l6 8 l6-8" stroke="#8b5cf6" stroke-width="2" fill="none"/></svg>
+  </div>
+
+  <!-- 8. File Structure -->
+  <div class="section">
+    <div class="section-label"><span class="dot dot-purple"></span> Project File Structure</div>
+    <div class="tree"><span class="dir">usmccsmymcx/</span>
+├── <span class="dir">blocks/</span>              <span class="comment">── 130+ UI component blocks (JS + CSS each)</span>
+│   ├── <span class="dir">header/</span>           <span class="comment">── Main site navigation</span>
+│   ├── <span class="dir">footer/</span>           <span class="comment">── Site footer</span>
+│   ├── <span class="dir">commerce-*/</span>       <span class="comment">── 50+ e-commerce blocks</span>
+│   ├── <span class="dir">mcx-*/</span>            <span class="comment">── 15+ MCX-branded custom blocks</span>
+│   └── <span class="dir">[other]/</span>          <span class="comment">── Layout, content, interactive blocks</span>
+│
+├── <span class="dir">scripts/</span>             <span class="comment">── Client-side JavaScript</span>
+│   ├── <span class="dir">__dropins__/</span>      <span class="comment">── Pre-built Adobe drop-in components</span>
+│   ├── <span class="dir">acdl/</span>             <span class="comment">── Adobe Client Data Layer</span>
+│   ├── <span class="dir">components/</span>       <span class="comment">── Shared JS components</span>
+│   ├── <span class="dir">initializers/</span>     <span class="comment">── Component initializers</span>
+│   ├── <span class="file">scripts.js</span>        <span class="comment">── Main entry point</span>
+│   ├── <span class="file">commerce.js</span>       <span class="comment">── Commerce API bridge</span>
+│   └── <span class="file">mcx-*.js</span>          <span class="comment">── MCX utilities</span>
+│
+├── <span class="dir">styles/</span>              <span class="comment">── Global CSS stylesheets</span>
+├── <span class="dir">models/</span>              <span class="comment">── Component model definitions (JSON)</span>
+├── <span class="dir">data/</span>                <span class="comment">── Spreadsheet-driven content sources</span>
+├── <span class="dir">fragments/</span>           <span class="comment">── Reusable content fragments</span>
+├── <span class="dir">icons/</span>               <span class="comment">── SVG icon library</span>
+├── <span class="dir">fonts/</span>               <span class="comment">── Custom typography (WOFF2)</span>
+├── <span class="dir">plugins/</span>             <span class="comment">── Custom plugin extensions</span>
+├── <span class="dir">tools/</span>               <span class="comment">── Build & verification scripts</span>
+├── <span class="dir">tests/</span>               <span class="comment">── Unit tests (*.test.mjs)</span>
+├── <span class="dir">cypress/</span>             <span class="comment">── E2E integration tests</span>
+├── <span class="dir">docs/</span>                <span class="comment">── Documentation</span>
+├── <span class="file">fstab.yaml</span>           <span class="comment">── Content source mount config</span>
+└── <span class="file">package.json</span>         <span class="comment">── Dependencies & build scripts</span></div>
+  </div>
+
+  <!-- Legend -->
+  <div style="margin-top:32px;">
+    <div class="legend">
+      <div class="legend-item"><div class="legend-swatch" style="background:var(--accent3);"></div> Content Layer</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:var(--accent);"></div> Edge Delivery</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:var(--accent2);"></div> Block System</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:var(--accent4);"></div> Commerce APIs</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:var(--accent6);"></div> Dev Tooling</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:var(--accent5);"></div> Dependencies</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
