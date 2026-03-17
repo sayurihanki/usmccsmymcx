@@ -661,6 +661,166 @@
     ]
   },
   {
+    "id": "ez-rack-builder-mockup",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "eyebrow-text",
+        "label": "Eyebrow Text",
+        "value": "MarineShop · Awards Division"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": "Welcome to the\nEZ Rack Builder"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "subtitle",
+        "label": "Subtitle",
+        "value": "Assemble your ribbon rack, medal display, or full awards package in minutes. Our system automatically applies regulation precedence. Prototype mode keeps everything local to the block."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "primary-cta-label",
+        "label": "Primary CTA Label",
+        "value": "Start New Rack"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "secondary-cta-label",
+        "label": "Secondary CTA Label",
+        "value": "Prototype Login"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "review-cta-label",
+        "label": "Review CTA Label",
+        "value": "Save Prototype Rack"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "prototype-note",
+        "label": "Prototype Note",
+        "value": "Prototype mode only. This block recreates the full luxury builder experience without connecting to Commerce, cart, or PDP configuration."
+      }
+    ]
+  },
+  {
+    "id": "ez-rack-builder",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "sku",
+        "label": "SKU",
+        "required": true,
+        "value": "USMC-EZ-RACK"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "schema-url",
+        "label": "Schema URL",
+        "required": true,
+        "value": "/data/configurators/ez-rack-builder-usmc.json"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "eyebrow-text",
+        "label": "Eyebrow Text",
+        "value": "Marine Corps Awards Division"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": "Luxury EZ Rack Builder"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "subtitle",
+        "label": "Subtitle",
+        "value": "Assemble your regulation-aware ribbon rack in a ceremonial configuration studio."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "primary-cta-label",
+        "label": "Primary CTA Label",
+        "value": "Add configured rack to cart"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "secondary-cta-label",
+        "label": "Secondary CTA Label",
+        "value": "Talk to a specialist"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "secondary-cta-href",
+        "label": "Secondary CTA Href",
+        "value": "/contact"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "theme",
+        "label": "Theme",
+        "value": "scarlet-gold",
+        "options": [
+          {
+            "name": "Scarlet Gold",
+            "value": "scarlet-gold"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "presentation",
+        "label": "Presentation",
+        "value": "rack-immersive",
+        "options": [
+          {
+            "name": "Rack Immersive",
+            "value": "rack-immersive"
+          },
+          {
+            "name": "Default",
+            "value": "default"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "dd214-mode",
+        "label": "DD214 Mode",
+        "value": "smart-stub",
+        "options": [
+          {
+            "name": "Smart Stub",
+            "value": "smart-stub"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "form-2",
     "fields": [
       {
@@ -1892,6 +2052,10 @@
     "fields": []
   },
   {
+    "id": "mcx-hero-2",
+    "fields": []
+  },
+  {
     "id": "mcx-hero",
     "fields": []
   },
@@ -1955,60 +2119,6 @@
         "name": "prototype-note",
         "label": "Prototype Note",
         "value": "Prototype mode only. This configurator previews the experience without adding anything to cart. Use the standard PDP purchase controls on this page for live checkout."
-      }
-    ]
-  },
-  {
-    "id": "ez-rack-builder-mockup",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "eyebrow-text",
-        "label": "Eyebrow Text",
-        "value": "MarineShop · Awards Division"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "title",
-        "label": "Title",
-        "value": "Welcome to the\nEZ Rack Builder"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "subtitle",
-        "label": "Subtitle",
-        "value": "Assemble your ribbon rack, medal display, or full awards package in minutes. Our system automatically applies regulation precedence. Prototype mode keeps everything local to the block."
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "primary-cta-label",
-        "label": "Primary CTA Label",
-        "value": "Start New Rack"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "secondary-cta-label",
-        "label": "Secondary CTA Label",
-        "value": "Prototype Login"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "review-cta-label",
-        "label": "Review CTA Label",
-        "value": "Save Prototype Rack"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "prototype-note",
-        "label": "Prototype Note",
-        "value": "Prototype mode only. This block recreates the full luxury builder experience without connecting to Commerce, cart, or PDP configuration."
       }
     ]
   },
@@ -2907,11 +3017,11 @@
     ]
   },
   {
-    "id": "promotional-hero",
+    "id": "promo-strip",
     "fields": []
   },
   {
-    "id": "promo-strip",
+    "id": "promotional-hero",
     "fields": []
   },
   {

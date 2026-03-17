@@ -1,0 +1,22 @@
+{
+  "definitions": [
+    {
+      "title": "MCX Hero 2",
+      "id": "mcx-hero-2",
+      "plugins": {
+        "da": {
+          "name": "mcx-hero-2",
+          "rows": 50,
+          "columns": 2
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "mcx-hero-2",
+      "fields": []
+    }
+  ],
+  "filters": []
+}
