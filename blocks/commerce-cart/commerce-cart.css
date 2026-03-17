@@ -1,4 +1,9 @@
 /* stylelint-disable no-descending-specificity, no-duplicate-selectors */
+main:has(.commerce-cart-wrapper) {
+  max-width: 1480px;
+  padding-inline: clamp(24px, 4vw, 48px);
+}
+
 .commerce-cart {
   --cart-control-border: rgb(255 255 255 / 14%);
   --cart-control-border-strong: rgb(201 162 39 / 26%);
@@ -18,7 +23,8 @@
 }
 
 main > .section:has(.commerce-cart-wrapper) > div {
-  max-width: 1320px;
+  max-width: none;
+  padding: 0;
 }
 
 .cart__journey {

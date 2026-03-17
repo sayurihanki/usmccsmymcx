@@ -1,3 +1,13 @@
+main:has(.commerce-checkout-wrapper) {
+  max-width: 1480px;
+  padding-inline: clamp(24px, 4vw, 48px);
+}
+
+main > .section:has(.commerce-checkout-wrapper) > div {
+  max-width: none;
+  padding: 0;
+}
+
 .commerce-checkout {
   padding: clamp(24px, 4vw, 48px) 0 clamp(64px, 8vw, 96px);
   position: relative;

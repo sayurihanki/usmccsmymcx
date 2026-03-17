@@ -1,6 +1,11 @@
-body.columns main:has(.commerce-checkout) {
+main:has(.commerce-checkout-wrapper) {
   max-width: 1480px;
   padding-inline: clamp(24px, 4vw, 48px);
+}
+
+main > .section:has(.commerce-checkout-wrapper) > div {
+  max-width: none;
+  padding: 0;
 }
 
 .commerce-checkout {
