@@ -1,14 +1,14 @@
-# MCX Hero 2
+# MCX Hero Newcomer
 
 ## Overview
 
-The `mcx-hero-2` block is a newcomer-focused MCX hero variant. It keeps the tactical scarlet-and-gold visual language, but swaps the image carousel for an abstract command-surface layout with layered background motion, optional rank badges, quick links, right-side intel panels, two CTAs, and up to four stats.
+The `mcx-hero-newcomer` block is a newcomer-focused MCX hero variant. It keeps the tactical scarlet-and-gold visual language, but swaps the image carousel for an abstract command-surface layout with layered background motion, optional rank badges, quick links, right-side intel panels, two CTAs, and up to four stats.
 
 ## Live Example
 
 The table below is a real block instance so the block library page can render an actual preview instead of only showing field names.
 
-| mcx-hero-2 | |
+| mcx-hero-newcomer | |
 | --- | --- |
 | eyebrow | New to Base · Start Here · Active Duty |
 | heading-line-1 | WELCOME |
@@ -109,7 +109,7 @@ Recognized quick-link icon keys:
 
 ## Rendering And Behavior
 
-- The block adds `mcx-hero-2-section` to the containing section for full-bleed MCX framing.
+- The block adds `mcx-hero-newcomer-section` to the containing section for full-bleed MCX framing.
 - On MCX block-library preview URLs, if `heading-line-1` is missing, the block falls back to built-in newcomer demo content.
 - Quick-link rows only render when both the matching label and href exist.
 - Intel cards only render when the matching `tag`, `value`, and `sub` rows all exist. Progress values are clamped to `0..100` and invalid values fall back to `0`.
@@ -121,16 +121,16 @@ Recognized quick-link icon keys:
 - Author `primary-cta` and `secondary-cta` as real links, not plain text URLs.
 - Keep each optional quick-link or intel slot complete. Partial groups are skipped.
 - `quick-link-N-tone` accepts only `red`, `gold`, or `teal`. Anything else falls back to `red`.
-- `mcx-hero-2` does not bundle the ticker or benefits bar from the mockup. Compose those separately with `mcx-ticker` and `mcx-benefits`.
+- `mcx-hero-newcomer` does not bundle the ticker or benefits bar from the mockup. Compose those separately with `mcx-ticker` and `mcx-benefits`.
 - This block does not support `image` or `image-2+` rows.
 
 ## DA Library Metadata Table
 
-Use this table for the DA library entry at `/.da/library/blocks/mcx-hero-2`.
+Use this table for the DA library entry at `/.da/library/blocks/mcx-hero-newcomer`.
 Do not paste the hero field rows into the library metadata doc.
 
 | library metadata | |
 | --- | --- |
-| name | mcx hero 2 |
+| name | mcx hero newcomer |
 | description | Newcomer-focused tactical MCX hero with quick links, rank badges, intel panels, CTAs, and stats. |
 | searchtags | mcx, hero, newcomer, onboard, tactical, quick links, pcs, active duty, banner |

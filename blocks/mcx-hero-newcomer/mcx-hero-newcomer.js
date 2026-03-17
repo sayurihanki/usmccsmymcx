@@ -537,7 +537,7 @@ export default function decorate(block) {
   }
 
   const section = block.closest('.section');
-  if (section) section.classList.add('mcx-hero-2-section');
+  if (section) section.classList.add('mcx-hero-newcomer-section');
 
   const hero = document.createElement('section');
   hero.className = 'hero';

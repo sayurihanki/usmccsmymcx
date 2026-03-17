@@ -1,20 +1,20 @@
-body:is(.mcx, .mcx-preview) main .mcx-hero-2-container .section,
-body:is(.mcx, .mcx-preview) main .mcx-hero-2-wrapper {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer-container .section,
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer-wrapper {
   max-width: none;
   padding: 0;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer {
   overflow: hidden;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero {
   min-height: 720px;
   overflow: hidden;
   position: relative;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-canvas {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-canvas {
   background:
     radial-gradient(ellipse 70% 80% at 75% 35%, rgb(193 18 31 / 10%) 0%, transparent 65%),
     radial-gradient(ellipse 50% 50% at 85% 80%, rgb(0 0 0 / 55%) 0%, transparent 50%),
@@ -24,7 +24,7 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-canvas {
   position: absolute;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-grid {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-grid {
   background-image:
     linear-gradient(var(--rim) 1px, transparent 1px),
     linear-gradient(90deg, var(--rim) 1px, transparent 1px);
@@ -35,8 +35,8 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-grid {
   position: absolute;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-scan {
-  animation: mcx-hero-2-scan 6s linear infinite;
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-scan {
+  animation: mcx-hero-newcomer-scan 6s linear infinite;
   background: linear-gradient(90deg, transparent, rgb(193 18 31 / 35%), transparent);
   height: 1px;
   left: 0;
@@ -45,7 +45,7 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-scan {
   top: 0;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-vline {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-vline {
   background: linear-gradient(180deg, transparent 5%, rgb(193 18 31 / 18%) 20%, rgb(193 18 31 / 18%) 80%, transparent 95%);
   bottom: 0;
   left: 44px;
@@ -55,8 +55,8 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-vline {
   z-index: 2;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-vline::after {
-  animation: mcx-hero-2-vdot 4s ease-in-out infinite;
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-vline::after {
+  animation: mcx-hero-newcomer-vdot 4s ease-in-out infinite;
   background: var(--scarlet);
   border-radius: 50%;
   box-shadow: 0 0 12px var(--scarlet);
@@ -68,22 +68,22 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-vline::after {
   width: 7px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .particles {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .particles {
   inset: 0;
   pointer-events: none;
   position: absolute;
   z-index: 1;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .particle {
-  animation: mcx-hero-2-pfloat var(--dur, 12s) linear infinite;
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .particle {
+  animation: mcx-hero-newcomer-pfloat var(--dur, 12s) linear infinite;
   animation-delay: var(--delay, 0s);
   border-radius: 50%;
   opacity: 0;
   position: absolute;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .glow-ring {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .glow-ring {
   border-radius: 50%;
   pointer-events: none;
   position: absolute;
@@ -91,8 +91,8 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .glow-ring {
   z-index: 1;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .glow-ring-1 {
-  animation: mcx-hero-2-rpulse 8s ease-in-out infinite;
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .glow-ring-1 {
+  animation: mcx-hero-newcomer-rpulse 8s ease-in-out infinite;
   border: 1px solid rgb(193 18 31 / 6%);
   box-shadow: inset 0 0 100px rgb(193 18 31 / 3%);
   height: 560px;
@@ -101,8 +101,8 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .glow-ring-1 {
   width: 560px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .glow-ring-2 {
-  animation: mcx-hero-2-rpulse 8s ease-in-out 2s infinite;
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .glow-ring-2 {
+  animation: mcx-hero-newcomer-rpulse 8s ease-in-out 2s infinite;
   border: 1px solid rgb(201 162 39 / 3%);
   height: 760px;
   right: -220px;
@@ -110,8 +110,8 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .glow-ring-2 {
   width: 760px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .glow-ring-3 {
-  animation: mcx-hero-2-rpulse 8s ease-in-out 4s infinite;
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .glow-ring-3 {
+  animation: mcx-hero-newcomer-rpulse 8s ease-in-out 4s infinite;
   border: 1px solid rgb(255 255 255 / 2%);
   height: 1000px;
   right: -340px;
@@ -119,8 +119,8 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .glow-ring-3 {
   width: 1000px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .corner {
-  animation: mcx-hero-2-corner-in 0.6s var(--ease) forwards;
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .corner {
+  animation: mcx-hero-newcomer-corner-in 0.6s var(--ease) forwards;
   animation-delay: var(--d, 0.3s);
   height: 44px;
   opacity: 0;
@@ -129,92 +129,92 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .corner {
   z-index: 5;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .corner::before,
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .corner::after {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .corner::before,
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .corner::after {
   background: var(--scarlet);
   content: '';
   position: absolute;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .corner::before {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .corner::before {
   height: 1px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .corner::after {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .corner::after {
   width: 1px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .c-tl {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .c-tl {
   left: 20px;
   top: 20px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .c-tl::before {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .c-tl::before {
   left: 0;
   top: 0;
   width: 100%;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .c-tl::after {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .c-tl::after {
   height: 100%;
   left: 0;
   top: 0;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .c-tr {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .c-tr {
   right: 20px;
   top: 20px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .c-tr::before {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .c-tr::before {
   right: 0;
   top: 0;
   width: 100%;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .c-tr::after {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .c-tr::after {
   height: 100%;
   right: 0;
   top: 0;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .c-bl {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .c-bl {
   bottom: 20px;
   left: 20px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .c-bl::before {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .c-bl::before {
   bottom: 0;
   left: 0;
   width: 100%;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .c-bl::after {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .c-bl::after {
   bottom: 0;
   height: 100%;
   left: 0;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .c-br {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .c-br {
   bottom: 20px;
   right: 20px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .c-br::before {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .c-br::before {
   bottom: 0;
   right: 0;
   width: 100%;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .c-br::after {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .c-br::after {
   bottom: 0;
   height: 100%;
   right: 0;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-rank {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-rank {
   align-items: flex-end;
-  animation: mcx-hero-2-fade-down 0.7s var(--ease) 0.25s forwards;
+  animation: mcx-hero-newcomer-fade-down 0.7s var(--ease) 0.25s forwards;
   color: rgb(255 255 255 / 18%);
   display: flex;
   flex-direction: column;
@@ -229,14 +229,14 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-rank {
   z-index: 5;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-rank span {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-rank span {
   border: 1px solid rgb(255 255 255 / 6%);
   border-radius: 3px;
   display: block;
   padding: 3px 10px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .intel {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .intel {
   bottom: 0;
   display: flex;
   flex-direction: column;
@@ -251,8 +251,8 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .intel {
   z-index: 3;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ip {
-  animation: mcx-hero-2-panel-in 0.8s var(--ease) forwards;
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ip {
+  animation: mcx-hero-newcomer-panel-in 0.8s var(--ease) forwards;
   animation-delay: var(--d, 0.45s);
   backdrop-filter: blur(14px);
   background: rgb(13 21 32 / 60%);
@@ -263,7 +263,7 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ip {
   pointer-events: auto;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ip-tag {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ip-tag {
   align-items: center;
   color: var(--scarlet);
   display: flex;
@@ -275,15 +275,15 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ip-tag {
   text-transform: uppercase;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ip-dot {
-  animation: mcx-hero-2-blink 2s ease-in-out infinite;
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ip-dot {
+  animation: mcx-hero-newcomer-blink 2s ease-in-out infinite;
   background: var(--scarlet);
   border-radius: 50%;
   height: 4px;
   width: 4px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ip-val {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ip-val {
   color: var(--text-bright);
   font-family: var(--font-hero);
   font-size: 30px;
@@ -291,7 +291,7 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ip-val {
   line-height: 1;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ip-sub {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ip-sub {
   color: var(--text-dim);
   font-family: var(--font-mono);
   font-size: 10px;
@@ -299,7 +299,7 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ip-sub {
   margin-top: 4px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ip-bar {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ip-bar {
   background: var(--surface-4);
   border-radius: 1px;
   height: 2px;
@@ -307,13 +307,13 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ip-bar {
   overflow: hidden;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ip-bar-fill {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ip-bar-fill {
   background: linear-gradient(90deg, var(--scarlet), var(--gold));
   border-radius: 1px;
   height: 100%;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-content {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-content {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -326,16 +326,16 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-content {
   z-index: 4;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-eyebrow,
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-desc,
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .quick-links,
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-ctas,
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .stats-row {
-  animation: mcx-hero-2-fade-up 0.7s var(--ease) forwards;
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-eyebrow,
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-desc,
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .quick-links,
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-ctas,
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .stats-row {
+  animation: mcx-hero-newcomer-fade-up 0.7s var(--ease) forwards;
   opacity: 0;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-eyebrow {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-eyebrow {
   align-items: center;
   animation-delay: 0.3s;
   display: inline-flex;
@@ -343,33 +343,33 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-eyebrow {
   margin-bottom: 20px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .eyebrow-pip {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .eyebrow-pip {
   display: flex;
   gap: 4px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .eyebrow-pip span {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .eyebrow-pip span {
   background: var(--scarlet);
   box-shadow: 0 0 8px var(--scarlet);
   display: block;
   height: 2px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .eyebrow-pip span:nth-child(1) {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .eyebrow-pip span:nth-child(1) {
   width: 18px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .eyebrow-pip span:nth-child(2) {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .eyebrow-pip span:nth-child(2) {
   opacity: 0.5;
   width: 8px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .eyebrow-pip span:nth-child(3) {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .eyebrow-pip span:nth-child(3) {
   opacity: 0.25;
   width: 4px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-eyebrow-txt {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-eyebrow-txt {
   color: var(--scarlet);
   font-family: var(--font-mono);
   font-size: 11px;
@@ -377,7 +377,7 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-eyebrow-txt {
   text-transform: uppercase;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-h1 {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-h1 {
   color: var(--text-bright);
   font-family: var(--font-hero);
   font-size: clamp(68px, 9.5vw, 136px);
@@ -390,25 +390,25 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-h1 {
   text-transform: uppercase;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-h1 .l1,
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-h1 .l2,
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-h1 .l3 {
-  animation: mcx-hero-2-title-reveal 0.8s var(--ease) forwards;
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-h1 .l1,
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-h1 .l2,
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-h1 .l3 {
+  animation: mcx-hero-newcomer-title-reveal 0.8s var(--ease) forwards;
   display: block;
   opacity: 0;
   transform: translateY(100%);
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-h1 .l1 {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-h1 .l1 {
   animation-delay: 0.35s;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-h1 .l2 {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-h1 .l2 {
   animation-delay: 0.5s;
   color: var(--gold);
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-h1 .l3 {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-h1 .l3 {
   animation-delay: 0.65s;
   color: rgb(240 234 224 / 55%);
   font-size: 0.52em;
@@ -417,7 +417,7 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-h1 .l3 {
   text-transform: uppercase;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-desc {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-desc {
   animation-delay: 0.8s;
   color: var(--text-body);
   font-size: 15px;
@@ -426,7 +426,7 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-desc {
   max-width: 440px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .quick-links {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .quick-links {
   animation-delay: 0.9s;
   display: flex;
   flex-wrap: wrap;
@@ -434,7 +434,7 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .quick-links {
   margin-bottom: 36px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ql {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ql {
   align-items: center;
   backdrop-filter: blur(10px);
   background: rgb(13 21 32 / 65%);
@@ -450,14 +450,14 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ql {
     transform var(--t-mid) var(--ease);
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ql:hover,
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ql:focus-visible {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ql:hover,
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ql:focus-visible {
   background: rgb(201 162 39 / 6%);
   border-color: var(--rim-gold);
   transform: translateY(-1px);
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ql-icon {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ql-icon {
   align-items: center;
   border-radius: 6px;
   display: flex;
@@ -467,29 +467,29 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ql-icon {
   width: 28px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ql-icon svg,
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ql-arrow svg,
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .btn-arrow svg {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ql-icon svg,
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ql-arrow svg,
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .btn-arrow svg {
   height: 14px;
   width: 14px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ql-icon.red {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ql-icon.red {
   background: rgb(193 18 31 / 14%);
   color: var(--scarlet);
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ql-icon.gold {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ql-icon.gold {
   background: var(--gold-dim);
   color: var(--gold);
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ql-icon.teal {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ql-icon.teal {
   background: rgb(52 198 120 / 10%);
   color: #34c678;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ql-label {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ql-label {
   color: var(--text-body);
   font-family: var(--font-ui);
   font-size: 12.5px;
@@ -499,8 +499,8 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ql-label {
   transition: color var(--t-mid) var(--ease);
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ql-arrow,
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .btn-arrow {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ql-arrow,
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .btn-arrow {
   color: var(--text-dim);
   display: inline-flex;
   flex-shrink: 0;
@@ -509,18 +509,18 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .btn-arrow {
     transform var(--t-mid) var(--ease);
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ql:hover .ql-label,
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ql:focus-visible .ql-label {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ql:hover .ql-label,
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ql:focus-visible .ql-label {
   color: var(--gold-lt);
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ql:hover .ql-arrow,
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ql:focus-visible .ql-arrow {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ql:hover .ql-arrow,
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ql:focus-visible .ql-arrow {
   color: var(--gold);
   transform: translateX(3px);
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-ctas {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-ctas {
   align-items: center;
   animation-delay: 1s;
   display: flex;
@@ -529,7 +529,7 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-ctas {
   margin-bottom: 52px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .btn {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .btn {
   align-items: center;
   border: 0;
   cursor: pointer;
@@ -551,7 +551,7 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .btn {
     transform var(--t-mid) var(--ease);
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .btn-p {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .btn-p {
   background: var(--scarlet);
   border-radius: var(--r-sm);
   box-shadow: var(--shadow-red);
@@ -560,14 +560,14 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .btn-p {
   padding: 15px 38px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .btn-p:hover,
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .btn-p:focus-visible {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .btn-p:hover,
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .btn-p:focus-visible {
   background: var(--scarlet-bright);
   box-shadow: 0 0 44px rgb(193 18 31 / 40%);
   transform: translateY(-2px);
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .btn-p .btn-shine {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .btn-p .btn-shine {
   background: linear-gradient(90deg, transparent, rgb(255 255 255 / 15%), transparent);
   height: 100%;
   left: -100%;
@@ -576,13 +576,13 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .btn-p .btn-shine {
   width: 60%;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .btn-p:hover .btn-shine,
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .btn-p:focus-visible .btn-shine {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .btn-p:hover .btn-shine,
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .btn-p:focus-visible .btn-shine {
   left: 130%;
   transition: left 0.6s var(--ease);
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .btn-s {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .btn-s {
   background: transparent;
   border: 1px solid var(--rim);
   border-radius: var(--r-sm);
@@ -590,40 +590,40 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .btn-s {
   padding: 14px 28px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .btn-s:hover,
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .btn-s:focus-visible {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .btn-s:hover,
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .btn-s:focus-visible {
   background: var(--gold-dim);
   border-color: var(--gold-border);
   color: var(--gold);
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .btn:hover .btn-arrow,
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .btn:focus-visible .btn-arrow {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .btn:hover .btn-arrow,
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .btn:focus-visible .btn-arrow {
   color: currentcolor;
   transform: translateX(3px);
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .stats-row {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .stats-row {
   align-items: center;
   animation-delay: 1.1s;
   display: flex;
   gap: 0;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .stat {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .stat {
   border-right: 1px solid var(--rim);
   padding: 0 32px;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .stat:first-child {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .stat:first-child {
   padding-left: 0;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .stat:last-child {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .stat:last-child {
   border-right: 0;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .stat-val {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .stat-val {
   color: var(--text-bright);
   font-family: var(--font-hero);
   font-size: 40px;
@@ -633,7 +633,7 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .stat-val {
   white-space: nowrap;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .stat-lbl {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .stat-lbl {
   color: var(--text-dim);
   font-family: var(--font-mono);
   font-size: 9.5px;
@@ -642,14 +642,14 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .stat-lbl {
   text-transform: uppercase;
 }
 
-body:is(.mcx, .mcx-preview) main .mcx-hero-2 .parallax-layer {
+body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .parallax-layer {
   inset: 0;
   pointer-events: none;
   position: absolute;
   transition: transform 0.15s ease-out;
 }
 
-@keyframes mcx-hero-2-scan {
+@keyframes mcx-hero-newcomer-scan {
   0% {
     opacity: 0;
     top: -2px;
@@ -669,7 +669,7 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .parallax-layer {
   }
 }
 
-@keyframes mcx-hero-2-vdot {
+@keyframes mcx-hero-newcomer-vdot {
   0%,
   100% {
     opacity: 1;
@@ -682,7 +682,7 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .parallax-layer {
   }
 }
 
-@keyframes mcx-hero-2-pfloat {
+@keyframes mcx-hero-newcomer-pfloat {
   0% {
     opacity: 0;
     transform: translateY(0) scale(0);
@@ -703,7 +703,7 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .parallax-layer {
   }
 }
 
-@keyframes mcx-hero-2-rpulse {
+@keyframes mcx-hero-newcomer-rpulse {
   0%,
   100% {
     opacity: 0.6;
@@ -716,7 +716,7 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .parallax-layer {
   }
 }
 
-@keyframes mcx-hero-2-corner-in {
+@keyframes mcx-hero-newcomer-corner-in {
   from {
     opacity: 0;
     transform: scale(0.7);
@@ -728,7 +728,7 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .parallax-layer {
   }
 }
 
-@keyframes mcx-hero-2-fade-down {
+@keyframes mcx-hero-newcomer-fade-down {
   from {
     opacity: 0;
     transform: translateY(-12px);
@@ -740,7 +740,7 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .parallax-layer {
   }
 }
 
-@keyframes mcx-hero-2-panel-in {
+@keyframes mcx-hero-newcomer-panel-in {
   from {
     opacity: 0;
     transform: translateX(30px);
@@ -752,7 +752,7 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .parallax-layer {
   }
 }
 
-@keyframes mcx-hero-2-fade-up {
+@keyframes mcx-hero-newcomer-fade-up {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -764,14 +764,14 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .parallax-layer {
   }
 }
 
-@keyframes mcx-hero-2-title-reveal {
+@keyframes mcx-hero-newcomer-title-reveal {
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-@keyframes mcx-hero-2-blink {
+@keyframes mcx-hero-newcomer-blink {
   0%,
   100% {
     opacity: 1;
@@ -783,90 +783,90 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-2 .parallax-layer {
 }
 
 @media (max-width: 1100px) {
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .intel {
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .intel {
     display: none;
   }
 }
 
 @media (max-width: 900px) {
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero {
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero {
     min-height: 640px;
   }
 
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-content {
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-content {
     padding: 70px 32px 40px 48px;
   }
 
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-rank,
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .glow-ring {
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-rank,
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .glow-ring {
     display: none;
   }
 
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-vline {
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-vline {
     left: 20px;
   }
 }
 
 @media (max-width: 600px) {
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero {
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero {
     min-height: auto;
   }
 
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-content {
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-content {
     padding: 60px 20px 30px;
   }
 
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-vline,
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .corner {
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-vline,
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .corner {
     display: none;
   }
 
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-h1 {
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-h1 {
     font-size: 64px;
   }
 
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .quick-links {
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .quick-links {
     gap: 8px;
   }
 
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ql {
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ql {
     padding: 8px 14px;
   }
 
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .stats-row {
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .stats-row {
     flex-wrap: wrap;
     gap: 16px;
   }
 
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .stat {
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .stat {
     border-right: 0;
     padding: 0;
     width: calc(50% - 8px);
   }
 
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .stat-val {
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .stat-val {
     font-size: 30px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 *,
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 *::before,
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 *::after {
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer *,
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer *::before,
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-h1 span,
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-eyebrow,
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-desc,
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .quick-links,
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-ctas,
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .stats-row,
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .ip,
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .corner,
-  body:is(.mcx, .mcx-preview) main .mcx-hero-2 .hero-rank {
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-h1 span,
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-eyebrow,
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-desc,
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .quick-links,
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-ctas,
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .stats-row,
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .ip,
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .corner,
+  body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-rank {
     opacity: 1 !important;
     transform: none !important;
   }

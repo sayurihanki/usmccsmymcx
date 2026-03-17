@@ -34,7 +34,7 @@ function createAuthoredBlock(document, overrides = {}) {
   section.className = 'section';
 
   const block = document.createElement('div');
-  block.className = 'mcx-hero-2';
+  block.className = 'mcx-hero-newcomer';
 
   const rows = [
     createTextRow(document, 'eyebrow', overrides.eyebrow || 'New to Base · Start Here · Active Duty'),
@@ -86,14 +86,14 @@ function createAuthoredBlock(document, overrides = {}) {
   return { section, block };
 }
 
-test('mcx-hero-2 renders authored newcomer content with quick links, intel panels, and stats', async () => {
+test('mcx-hero-newcomer renders authored newcomer content with quick links, intel panels, and stats', async () => {
   await withFakeDom(async ({ document }) => {
-    const { default: decorate } = await import('../../blocks/mcx-hero-2/mcx-hero-2.js');
+    const { default: decorate } = await import('../../blocks/mcx-hero-newcomer/mcx-hero-newcomer.js');
     const { section, block } = createAuthoredBlock(document);
 
     decorate(block);
 
-    assert.equal(section.classList.contains('mcx-hero-2-section'), true);
+    assert.equal(section.classList.contains('mcx-hero-newcomer-section'), true);
 
     const hero = block.children[0];
     assert.equal(hero.className, 'hero');
@@ -111,9 +111,9 @@ test('mcx-hero-2 renders authored newcomer content with quick links, intel panel
   });
 });
 
-test('mcx-hero-2 skips incomplete optional groups and normalizes icon tone and progress fallbacks', async () => {
+test('mcx-hero-newcomer skips incomplete optional groups and normalizes icon tone and progress fallbacks', async () => {
   await withFakeDom(async ({ document }) => {
-    const { default: decorate } = await import('../../blocks/mcx-hero-2/mcx-hero-2.js');
+    const { default: decorate } = await import('../../blocks/mcx-hero-newcomer/mcx-hero-newcomer.js');
     const { block } = createAuthoredBlock(document, {
       quickIcon: 'unknown-icon',
       quickTone: 'blue',
@@ -141,16 +141,16 @@ test('mcx-hero-2 skips incomplete optional groups and normalizes icon tone and p
   });
 });
 
-test('mcx-hero-2 falls back to newcomer preview defaults on block-library paths', async () => {
+test('mcx-hero-newcomer falls back to newcomer preview defaults on block-library paths', async () => {
   await withFakeDom(async ({ document, window }) => {
-    const { default: decorate } = await import('../../blocks/mcx-hero-2/mcx-hero-2.js');
-    window.location.pathname = '/library/blocks/mcx-hero-2.plain.html';
-    window.location.href = 'https://example.com/library/blocks/mcx-hero-2.plain.html';
+    const { default: decorate } = await import('../../blocks/mcx-hero-newcomer/mcx-hero-newcomer.js');
+    window.location.pathname = '/library/blocks/mcx-hero-newcomer.plain.html';
+    window.location.href = 'https://example.com/library/blocks/mcx-hero-newcomer.plain.html';
 
     const section = document.createElement('div');
     section.className = 'section';
     const block = document.createElement('div');
-    block.className = 'mcx-hero-2';
+    block.className = 'mcx-hero-newcomer';
     section.append(block);
     document.body.append(section);
 
@@ -165,9 +165,9 @@ test('mcx-hero-2 falls back to newcomer preview defaults on block-library paths'
   });
 });
 
-test('mcx-hero-2 keeps non-numeric stat values static while animating numeric-prefixed values', async () => {
+test('mcx-hero-newcomer keeps non-numeric stat values static while animating numeric-prefixed values', async () => {
   await withFakeDom(async ({ document }) => {
-    const { default: decorate } = await import('../../blocks/mcx-hero-2/mcx-hero-2.js');
+    const { default: decorate } = await import('../../blocks/mcx-hero-newcomer/mcx-hero-newcomer.js');
     const { block } = createAuthoredBlock(document, {
       stat1Value: '24hr',
       stat2Value: 'Tax Free',

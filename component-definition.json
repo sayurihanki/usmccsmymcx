@@ -407,11 +407,11 @@
           }
         },
         {
-          "title": "MCX Hero 2",
-          "id": "mcx-hero-2",
+          "title": "MCX Hero Newcomer",
+          "id": "mcx-hero-newcomer",
           "plugins": {
             "da": {
-              "name": "mcx-hero-2",
+              "name": "mcx-hero-newcomer",
               "rows": 50,
               "columns": 2
             }
