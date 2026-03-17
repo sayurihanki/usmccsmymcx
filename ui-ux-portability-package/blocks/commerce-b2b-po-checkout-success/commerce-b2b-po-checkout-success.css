@@ -1,20 +1,23 @@
+body:is(.mcx, .mcx-preview) main > .section > div.commerce-b2b-po-checkout-success-wrapper {
+  max-width: 1500px;
+}
+
 .po-confirmation {
-  --po-surface-1: rgb(12 19 30 / 96%);
-  --po-surface-2: rgb(17 29 42 / 92%);
-  --po-surface-3: rgb(23 38 56 / 92%);
-  --po-border: rgb(255 255 255 / 9%);
-  --po-border-strong: rgb(201 162 39 / 22%);
+  --po-surface-1: var(--surface-1, rgb(12 19 30 / 96%));
+  --po-surface-2: var(--surface-2, rgb(17 29 42 / 92%));
+  --po-border: var(--rim, rgb(255 255 255 / 9%));
+  --po-border-strong: var(--rim-gold, rgb(201 162 39 / 22%));
   --po-text-main: var(--text-bright, #f2ede5);
   --po-text-body: var(--text-body, rgb(222 228 236 / 82%));
-  --po-text-muted: var(--text-light, rgb(157 170 184 / 84%));
+  --po-text-muted: var(--text-dim, rgb(157 170 184 / 84%));
   --po-gold: var(--gold, #c9a227);
   --po-scarlet: var(--scarlet, #c1121f);
   --po-scarlet-bright: var(--scarlet-bright, #e63946);
-  --po-positive: #6dd9a0;
-  --po-warning: #f3c967;
-  --po-critical: #ff7f8a;
-  --po-shadow: 0 24px 80px rgb(0 0 0 / 34%);
-  --po-focus: 0 0 0 3px rgb(201 162 39 / 30%);
+  --po-positive: var(--teal, #6dd9a0);
+  --po-warning: var(--gold-lt, #f3c967);
+  --po-critical: var(--color-alert-500, #ff7f8a);
+  --po-shadow: var(--shadow-card, 0 24px 80px rgb(0 0 0 / 34%));
+  --po-focus: var(--shadow-focus, 0 0 0 3px rgb(201 162 39 / 30%));
 
   display: grid;
   gap: 24px;
@@ -194,24 +197,13 @@
   align-items: center;
   justify-content: center;
   min-height: 52px;
+  margin: 0;
   padding: 14px 20px;
-  border: 1px solid rgb(255 255 255 / 12%);
-  border-radius: var(--r-pill, 999px);
-  background: rgb(255 255 255 / 3%);
-  color: var(--po-text-main);
-  font-family: var(--font-ui, sans-serif);
-  font-size: 1.25rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
   text-align: center;
   text-decoration: none;
-  text-transform: uppercase;
   transition:
     transform var(--transition-fast, 180ms ease),
-    border-color var(--transition-fast, 180ms ease),
-    box-shadow var(--transition-fast, 180ms ease),
-    color var(--transition-fast, 180ms ease),
-    background-color var(--transition-fast, 180ms ease);
+    box-shadow var(--transition-fast, 180ms ease);
 }
 
 .po-confirmation-action:hover,
@@ -225,22 +217,8 @@
   box-shadow: var(--po-focus);
 }
 
-.po-confirmation-action--primary {
-  border-color: transparent;
-  background: linear-gradient(135deg, var(--po-scarlet), var(--po-scarlet-bright));
-  box-shadow: 0 18px 44px rgb(193 18 31 / 24%);
-  color: #fff;
-}
-
-.po-confirmation-action--primary:hover,
-.po-confirmation-action--primary:focus-visible {
-  color: #fff;
-}
-
-.po-confirmation-action:not(.po-confirmation-action--primary):hover,
-.po-confirmation-action:not(.po-confirmation-action--primary):focus-visible {
-  border-color: var(--po-gold);
-  color: var(--po-gold);
+.po-confirmation-action.secondary {
+  box-shadow: none;
 }
 
 .po-confirmation-spotlight {

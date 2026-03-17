@@ -456,8 +456,17 @@ function createDetailRow(labelText, valueText) {
 
 function appendAction(parent, options) {
   const element = document.createElement(options.href ? 'a' : 'button');
+  const classes = ['po-confirmation-action', 'button'];
 
-  element.className = `po-confirmation-action ${options.variant || 'po-confirmation-action--secondary'}`;
+  if (options.variant) {
+    classes.push(options.variant);
+  }
+
+  if (options.variant !== 'po-confirmation-action--primary') {
+    classes.push('secondary');
+  }
+
+  element.className = classes.join(' ');
   element.textContent = options.label;
 
   if (options.href) {
