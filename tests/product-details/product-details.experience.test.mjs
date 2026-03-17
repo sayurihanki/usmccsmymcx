@@ -94,7 +94,7 @@ test('buildExperienceModel merges partial authored overrides without dropping de
         rating: 4.6,
         items: [
           {
-            name: 'Sgt. Hammer',
+            name: 'Alex Harper',
             body: 'Outstanding fit and finish.',
           },
         ],
@@ -108,6 +108,6 @@ test('buildExperienceModel merges partial authored overrides without dropping de
   assert.equal(model.promo.text, 'Extra 20% off with code');
   assert.equal(model.shippingCards[0].title, 'Fleet Delivery');
   assert.equal(model.reviews.rating, 4.6);
-  assert.equal(model.reviews.items[0].initials, 'SH');
+  assert.equal(model.reviews.items[0].initials, 'AH');
   assert.equal(model.stockMessage, 'Limited issue available');
 });

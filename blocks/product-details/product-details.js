@@ -480,7 +480,7 @@ function renderReviewsSection(section, experience) {
   label.textContent = 'Customer Reviews';
 
   const title = createElement('h2', 'product-details__section-title');
-  title.innerHTML = 'What Marines<br>Are Saying';
+  title.innerHTML = 'What People<br>Are Saying';
 
   const summary = createElement('div', 'product-details__review-summary');
   const big = createElement('div', 'product-details__review-big');
