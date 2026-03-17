@@ -5,7 +5,9 @@ import assert from 'node:assert/strict';
 import {
   buildExperienceModel,
   getPriceSummary,
+  normalizeExperienceOverrides,
   resolveExperienceDataSourceUrl,
+  resolveExperienceOverridesForProduct,
 } from '../../blocks/product-details/product-details.experience.mjs';
 /* eslint-enable import/extensions */
 
@@ -110,4 +112,121 @@ test('buildExperienceModel merges partial authored overrides without dropping de
   assert.equal(model.reviews.rating, 4.6);
   assert.equal(model.reviews.items[0].initials, 'AH');
   assert.equal(model.stockMessage, 'Limited issue available');
+});
+
+test('normalizeExperienceOverrides preserves legacy flat overrides as shared defaults', () => {
+  const legacy = {
+    eyebrow: 'Legacy Collection',
+    promo: {
+      code: 'LEGACY15',
+    },
+  };
+
+  assert.deepEqual(normalizeExperienceOverrides(legacy), {
+    defaults: legacy,
+    bySku: {},
+    byUrlKey: {},
+  });
+});
+
+test('resolveExperienceOverridesForProduct applies mapped defaults when no product entry matches', () => {
+  const resolved = resolveExperienceOverridesForProduct(
+    {
+      sku: 'UNKNOWN-SKU',
+      urlKey: 'unknown-product',
+    },
+    {
+      defaults: {
+        eyebrow: 'Shared Collection',
+        promo: {
+          code: 'DEFAULT20',
+        },
+      },
+      bySku: {
+        'MCX-ALPHA': {
+          eyebrow: 'Alpha Collection',
+        },
+      },
+    },
+  );
+
+  assert.equal(resolved.eyebrow, 'Shared Collection');
+  assert.equal(resolved.promo.code, 'DEFAULT20');
+});
+
+test('resolveExperienceOverridesForProduct matches SKU entries using trimmed uppercase keys', () => {
+  const resolved = resolveExperienceOverridesForProduct(
+    {
+      sku: '  mcx-alpha  ',
+      urlKey: 'alpha-product',
+    },
+    {
+      defaults: {
+        promo: {
+          text: 'Shared promo',
+          code: 'DEFAULT20',
+        },
+      },
+      bySku: {
+        'MCX-ALPHA': {
+          promo: {
+            code: 'ALPHA30',
+          },
+          stockMessage: 'Ships today',
+        },
+      },
+    },
+  );
+
+  assert.equal(resolved.promo.text, 'Shared promo');
+  assert.equal(resolved.promo.code, 'ALPHA30');
+  assert.equal(resolved.stockMessage, 'Ships today');
+});
+
+test('resolveExperienceOverridesForProduct falls back to URL key when SKU does not match', () => {
+  const resolved = resolveExperienceOverridesForProduct(
+    {
+      sku: 'NO-SKU-MATCH',
+      urlKey: '  alpha-product  ',
+    },
+    {
+      defaults: {
+        stickyName: 'Shared Name',
+      },
+      bySku: {
+        'MCX-OTHER': {
+          stickyName: 'Other Name',
+        },
+      },
+      byUrlKey: {
+        'alpha-product': {
+          stickyName: 'Alpha Name',
+          reviews: {
+            count: 12,
+          },
+        },
+      },
+    },
+  );
+
+  assert.equal(resolved.stickyName, 'Alpha Name');
+  assert.equal(resolved.reviews.count, 12);
+});
+
+test('resolveExperienceOverridesForProduct safely ignores malformed mapped sections', () => {
+  const resolved = resolveExperienceOverridesForProduct(
+    {
+      sku: 'MCX-ALPHA',
+      urlKey: 'alpha-product',
+    },
+    {
+      defaults: 'invalid',
+      bySku: {
+        'MCX-ALPHA': 'invalid',
+      },
+      byUrlKey: ['invalid'],
+    },
+  );
+
+  assert.deepEqual(resolved, {});
 });

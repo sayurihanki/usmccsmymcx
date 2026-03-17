@@ -95,6 +95,10 @@ const DEFAULT_REVIEWS = Object.freeze({
   distribution: [267, 48, 17, 7, 3],
 });
 
+function isPlainObject(value) {
+  return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+}
+
 function getCurrentOrigin() {
   if (typeof window === 'undefined') {
     return 'http://localhost';
@@ -268,6 +272,102 @@ function createDefaultBadges(product) {
   return badges;
 }
 
+function mergeOverrideLayers(base, source) {
+  const merged = isPlainObject(base) ? { ...base } : {};
+
+  if (!isPlainObject(source)) {
+    return merged;
+  }
+
+  Object.entries(source).forEach(([key, value]) => {
+    if (Array.isArray(value)) {
+      merged[key] = [...value];
+      return;
+    }
+
+    if (isPlainObject(value)) {
+      merged[key] = mergeOverrideLayers(merged[key], value);
+      return;
+    }
+
+    merged[key] = value;
+  });
+
+  return merged;
+}
+
+function normalizeMappedEntries(entries, normalizeKey) {
+  if (!isPlainObject(entries)) {
+    return {};
+  }
+
+  return Object.entries(entries).reduce((acc, [key, value]) => {
+    const normalizedKey = normalizeKey(key);
+    if (!normalizedKey || !isPlainObject(value)) {
+      return acc;
+    }
+
+    acc[normalizedKey] = mergeOverrideLayers({}, value);
+    return acc;
+  }, {});
+}
+
+function hasMappedOverrides(overrides) {
+  return isPlainObject(overrides) && (
+    Object.hasOwn(overrides, 'defaults')
+    || Object.hasOwn(overrides, 'bySku')
+    || Object.hasOwn(overrides, 'byUrlKey')
+  );
+}
+
+function normalizeSkuKey(value) {
+  return toText(value).toUpperCase();
+}
+
+function normalizeUrlKey(value) {
+  return toText(value).toLowerCase();
+}
+
+export function normalizeExperienceOverrides(rawOverrides = {}) {
+  if (!isPlainObject(rawOverrides)) {
+    return {
+      defaults: {},
+      bySku: {},
+      byUrlKey: {},
+    };
+  }
+
+  if (!hasMappedOverrides(rawOverrides)) {
+    return {
+      defaults: mergeOverrideLayers({}, rawOverrides),
+      bySku: {},
+      byUrlKey: {},
+    };
+  }
+
+  return {
+    defaults: mergeOverrideLayers(
+      {},
+      isPlainObject(rawOverrides.defaults) ? rawOverrides.defaults : {},
+    ),
+    bySku: normalizeMappedEntries(rawOverrides.bySku, normalizeSkuKey),
+    byUrlKey: normalizeMappedEntries(rawOverrides.byUrlKey, normalizeUrlKey),
+  };
+}
+
+export function resolveExperienceOverridesForProduct(product = {}, rawOverrides = {}) {
+  const normalized = normalizeExperienceOverrides(rawOverrides);
+  const skuKey = normalizeSkuKey(product?.sku);
+  const urlKey = normalizeUrlKey(product?.urlKey);
+  const productOverrides = (
+    (skuKey && normalized.bySku[skuKey])
+    || (urlKey && normalized.byUrlKey[urlKey])
+    || {}
+  );
+
+  return mergeOverrideLayers(normalized.defaults, productOverrides);
+}
+
 export function resolveExperienceDataSourceUrl(rawSource, origin = getCurrentOrigin()) {
   const source = toText(rawSource);
   if (!source) {
@@ -336,10 +436,11 @@ export function getPriceSummary(product = {}) {
 
 export function buildExperienceModel(product = {}, overrides = {}) {
   const priceSummary = getPriceSummary(product);
+  const defaultBadges = createDefaultBadges(product);
   const breadcrumbs = normalizeBreadcrumbs(overrides?.breadcrumbs, product?.name);
   const badgesSource = Array.isArray(overrides?.badges) && overrides.badges.length
     ? overrides.badges
-    : createDefaultBadges(product);
+    : defaultBadges;
   const shippingCardsSource = Array.isArray(overrides?.shippingCards)
     && overrides.shippingCards.length
     ? overrides.shippingCards
@@ -359,7 +460,7 @@ export function buildExperienceModel(product = {}, overrides = {}) {
     eyebrow: toText(overrides?.eyebrow, DEFAULT_EYEBROW),
     badges: badgesSource.map((badge, index) => normalizeBadge(
       badge,
-      createDefaultBadges(product)[index] || createDefaultBadges(product).at(-1),
+      defaultBadges[index] || defaultBadges.at(-1),
     )),
     promo: normalizePromo(overrides?.promo),
     shippingCards: shippingCardsSource.map(normalizeShippingCard),
