@@ -56,9 +56,9 @@ const LIBRARY_PREVIEW_DEFAULTS = {
     text: 'Explore Deals',
   },
   ranks: [
-    'WELCOME ABOARD',
-    'STATUS: ACTIVE DUTY',
-    'ACCESS: FULL PATRON',
+    'NEW TO BASE',
+    'FIRST DUTY STATION',
+    'CHECK-IN READY',
   ],
   quickLinks: [
     {
@@ -88,27 +88,27 @@ const LIBRARY_PREVIEW_DEFAULTS = {
   ],
   intel: [
     {
-      tag: 'New This Month',
-      value: '240+',
-      sub: 'New Products Added',
+      tag: 'First Stop',
+      value: 'Day One',
+      sub: 'Base essentials for your first week',
       progress: '78',
     },
     {
-      tag: 'Current Promotion',
+      tag: 'PCS Support',
       value: '30% Off',
-      sub: 'PCS Welcome Discount',
+      sub: 'Welcome savings at your new exchange',
       progress: '100',
     },
     {
-      tag: 'On-Base Pickup',
-      value: '24hr',
-      sub: 'Express Ready Orders',
+      tag: 'Uniform Ready',
+      value: 'Ready Now',
+      sub: 'Grab service basics after check-in',
       progress: '92',
     },
     {
       tag: 'Your Benefit',
       value: 'Tax Free',
-      sub: 'Every Purchase, Every Day',
+      sub: 'Savings from your first stop on base',
       progress: '100',
     },
   ],

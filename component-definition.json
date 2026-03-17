@@ -451,6 +451,17 @@
           }
         },
         {
+          "title": "MCX Promo Popup",
+          "id": "mcx-promo-popup",
+          "plugins": {
+            "da": {
+              "name": "mcx-promo-popup",
+              "rows": 24,
+              "columns": 2
+            }
+          }
+        },
+        {
           "title": "MCX Promo Strip",
           "id": "mcx-promo-strip",
           "plugins": {

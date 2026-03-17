@@ -60,6 +60,14 @@ Do not paste the block authoring rows here. These library docs should contain `l
 | description | Promotional countdown strip with sales messaging, end datetime, CTA, and ended state. |
 | searchtags | mcx, countdown, flash sale, urgency, deal, promo strip, timer, offer |
 
+## MCX Promo Popup
+
+| library metadata | |
+| --- | --- |
+| name | mcx promo popup |
+| description | Tactical promotional modal with countdown, coupon code, offer cards, and two CTAs. |
+| searchtags | mcx, popup, promo modal, campaign, countdown, coupon, overlay, tactical |
+
 ## MCX Promo Strip
 
 | library metadata | |

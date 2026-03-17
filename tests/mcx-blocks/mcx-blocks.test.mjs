@@ -1,4 +1,5 @@
 /* eslint-env node */
+/* global globalThis */
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
@@ -179,16 +180,37 @@ test('mcx deal countdown, newsletter, and promo strip expose the authored data n
   await withFakeDom(async ({ document }) => {
     const countdownBlock = await createBlockFromTable(document, 'docs/mcx-examples/mcx-deal-countdown.table.txt');
     const newsletterBlock = await createBlockFromTable(document, 'docs/mcx-examples/mcx-newsletter.table.txt');
+    const popupBlock = await createBlockFromTable(document, 'docs/mcx-examples/mcx-promo-popup.table.txt');
     const promoBlock = await createBlockFromTable(document, 'docs/mcx-examples/mcx-promo-strip.table.txt');
-    document.body.append(countdownBlock, newsletterBlock, promoBlock);
+    document.body.append(countdownBlock, newsletterBlock, popupBlock, promoBlock);
 
     const { default: decorateCountdown } = await import('../../blocks/mcx-deal-countdown/mcx-deal-countdown.js');
     const { default: decorateNewsletter } = await import('../../blocks/mcx-newsletter/mcx-newsletter.js');
+    const { default: decoratePopup } = await import('../../blocks/mcx-promo-popup/mcx-promo-popup.js');
     const { default: decoratePromo } = await import('../../blocks/mcx-promo-strip/mcx-promo-strip.js');
 
-    decorateCountdown(countdownBlock);
-    decorateNewsletter(newsletterBlock);
-    decoratePromo(promoBlock);
+    const previousNavigatorDescriptor = Object.getOwnPropertyDescriptor(globalThis, 'navigator');
+    Object.defineProperty(globalThis, 'navigator', {
+      configurable: true,
+      value: {
+        clipboard: {
+          writeText: async () => {},
+        },
+      },
+    });
+
+    try {
+      decorateCountdown(countdownBlock);
+      decorateNewsletter(newsletterBlock);
+      decoratePopup(popupBlock);
+      decoratePromo(promoBlock);
+    } finally {
+      if (previousNavigatorDescriptor) {
+        Object.defineProperty(globalThis, 'navigator', previousNavigatorDescriptor);
+      } else {
+        delete globalThis.navigator;
+      }
+    }
 
     const strip = countdownBlock.querySelector('.deal-strip');
     assert.equal(strip?.dataset.countdownEnd, '2026-04-01T23:59:59-07:00');
@@ -199,6 +221,13 @@ test('mcx deal countdown, newsletter, and promo strip expose the authored data n
     assert.equal(newsletterBlock.querySelector('[data-mcx-newsletter]')?.tagName, 'FORM');
     assert.equal(newsletterBlock.querySelector('.btn-nl')?.textContent, 'Subscribe');
     assert.equal(newsletterBlock.querySelector('.nl-input')?.placeholder, 'Your military email address...');
+
+    const popupOverlay = document.querySelector('.mpp-overlay');
+    assert.ok(popupOverlay);
+    assert.equal(popupOverlay.querySelector('.mpp-heading')?.textContent.includes('Settle In'), true);
+    assert.equal(popupOverlay.querySelector('.mpp-coupon-code')?.textContent, 'SEMPERFI20');
+    assert.equal(popupOverlay.querySelector('.mpp-btn-primary')?.getAttribute('href'), '/deals');
+    assert.equal(popupOverlay.querySelector('.mpp-countdown')?.dataset.status, 'active');
 
     assert.equal(promoBlock.querySelector('.promo-title')?.textContent, 'EARN MORE, SPEND LESS');
     assert.equal(promoBlock.querySelector('.btn-promo')?.href, '/clearance');

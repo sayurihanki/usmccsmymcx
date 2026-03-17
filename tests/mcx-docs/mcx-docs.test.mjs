@@ -20,7 +20,9 @@ const MCX_BLOCKS = [
   'mcx-footer',
   'mcx-header',
   'mcx-hero',
+  'mcx-hero-newcomer',
   'mcx-newsletter',
+  'mcx-promo-popup',
   'mcx-product-cards',
   'mcx-promo-strip',
   'mcx-ticker',
@@ -65,7 +67,7 @@ test('all MCX block directories have detailed README coverage', async () => {
 
   assert.deepEqual(blockDirs, [...MCX_BLOCKS].sort());
 
-  for (const blockName of MCX_BLOCKS) {
+  await Promise.all(MCX_BLOCKS.map(async (blockName) => {
     const readmePath = resolve(blocksRoot, blockName, 'README.md');
     await access(readmePath);
     const readme = await readFile(readmePath, 'utf8');
@@ -76,7 +78,7 @@ test('all MCX block directories have detailed README coverage', async () => {
     assert.match(readme, /^## Authoring Shape$/m, `${blockName} README should have an Authoring Shape section`);
     assert.match(readme, /^## DA Library Metadata Table$/m, `${blockName} README should have a DA Library Metadata Table section`);
     assert.ok(readme.length > 900, `${blockName} README should be detailed enough to guide authors`);
-  }
+  }));
 });
 
 test('MCX homepage metadata example points to the expected shell fragments', async () => {
@@ -137,10 +139,11 @@ test('MCX category, featured collection, and editorial examples match their card
   editorial.rows.forEach((row) => assert.equal(row.length, 4));
 });
 
-test('MCX hero, deal countdown, newsletter, and promo examples include required field rows', async () => {
+test('MCX hero, deal countdown, newsletter, popup, and promo examples include required field rows', async () => {
   const hero = await loadTable('docs/mcx-examples/mcx-hero.table.txt');
   const countdown = await loadTable('docs/mcx-examples/mcx-deal-countdown.table.txt');
   const newsletter = await loadTable('docs/mcx-examples/mcx-newsletter.table.txt');
+  const popup = await loadTable('docs/mcx-examples/mcx-promo-popup.table.txt');
   const promo = await loadTable('docs/mcx-examples/mcx-promo-strip.table.txt');
 
   assert.equal(hero.title, 'mcx-hero');
@@ -168,6 +171,30 @@ test('MCX hero, deal countdown, newsletter, and promo examples include required 
     assert.ok(hasField(newsletter.rows, field), `newsletter example is missing ${field}`);
   });
   assert.ok(newsletter.rows.every((row) => row.length === 2));
+
+  assert.equal(popup.title, 'mcx-promo-popup');
+  [
+    'campaign-id',
+    'eyebrow',
+    'heading-line-1',
+    'heading-line-2',
+    'description',
+    'badge-value',
+    'offer-1-value',
+    'offer-1-label',
+    'offer-2-value',
+    'offer-2-label',
+    'offer-3-value',
+    'offer-3-label',
+    'end-datetime',
+    'coupon-code',
+    'primary-cta',
+    'secondary-cta',
+    'fine-print',
+  ].forEach((field) => {
+    assert.ok(hasField(popup.rows, field), `popup example is missing ${field}`);
+  });
+  assert.ok(popup.rows.every((row) => row.length === 2));
 
   assert.equal(promo.title, 'mcx-promo-strip');
   ['badge', 'title', 'description', 'cta'].forEach((field) => {
