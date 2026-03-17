@@ -841,9 +841,9 @@ export default async function decorate(block) {
     })($galleryMobile),
 
     pdpRendered.render(ProductGallery, {
-      controls: 'thumbnailsColumn',
+      controls: 'thumbnailsRow',
       arrows: true,
-      peak: true,
+      peak: false,
       gap: 'small',
       loop: false,
       imageParams: {

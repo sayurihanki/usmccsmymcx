@@ -186,7 +186,10 @@ function normalizeDistribution(distribution) {
   if (Array.isArray(distribution)) {
     const normalized = distribution
       .slice(0, 5)
-      .map((value, index) => Math.max(0, toNumber(value, DEFAULT_REVIEWS.distribution[index] || 0)));
+      .map((value, index) => Math.max(
+        0,
+        toNumber(value, DEFAULT_REVIEWS.distribution[index] || 0),
+      ));
 
     if (normalized.length === 5) {
       return normalized;
@@ -212,7 +215,9 @@ function normalizeReviewItem(review, index) {
     initials: toText(review?.initials, deriveInitials(name) || fallback.initials),
     date: toText(review?.date, fallback.date),
     rating: clampRating(review?.rating, fallback.rating),
-    verified: review?.verified == null ? fallback.verified : toBoolean(review.verified, fallback.verified),
+    verified: review?.verified == null
+      ? fallback.verified
+      : toBoolean(review.verified, fallback.verified),
     body: toText(review?.body, fallback.body),
   };
 }
@@ -310,7 +315,9 @@ export function getPriceSummary(product = {}) {
     final.amount ?? final.minimumAmount ?? final.maximumAmount,
     toText(final.currency, toText(regular.currency, 'USD')),
   );
-  const savingsAmount = regularAmount > currentAmount ? regularAmount - currentAmount : 0;
+  const savingsAmount = regularAmount > currentAmount
+    ? regularAmount - currentAmount
+    : 0;
   const savingsPercent = savingsAmount > 0 && regularAmount > 0
     ? Math.round((savingsAmount / regularAmount) * 100)
     : 0;
@@ -333,7 +340,8 @@ export function buildExperienceModel(product = {}, overrides = {}) {
   const badgesSource = Array.isArray(overrides?.badges) && overrides.badges.length
     ? overrides.badges
     : createDefaultBadges(product);
-  const shippingCardsSource = Array.isArray(overrides?.shippingCards) && overrides.shippingCards.length
+  const shippingCardsSource = Array.isArray(overrides?.shippingCards)
+    && overrides.shippingCards.length
     ? overrides.shippingCards
     : DEFAULT_SHIPPING_CARDS;
   const distribution = normalizeDistribution(overrides?.reviews?.distribution);
@@ -341,7 +349,8 @@ export function buildExperienceModel(product = {}, overrides = {}) {
     overrides?.reviews?.count,
     distribution.reduce((sum, count) => sum + count, 0) || DEFAULT_REVIEWS.count,
   );
-  const reviewItemsSource = Array.isArray(overrides?.reviews?.items) && overrides.reviews.items.length
+  const reviewItemsSource = Array.isArray(overrides?.reviews?.items)
+    && overrides.reviews.items.length
     ? overrides.reviews.items
     : DEFAULT_REVIEW_ITEMS;
 
