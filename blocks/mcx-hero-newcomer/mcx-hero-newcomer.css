@@ -213,7 +213,7 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .c-br::after {
 }
 
 body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-rank {
-  align-items: flex-end;
+  align-items: flex-start;
   animation: mcx-hero-newcomer-fade-down 0.7s var(--ease) 0.25s forwards;
   color: rgb(255 255 255 / 18%);
   display: flex;
@@ -224,7 +224,7 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-rank {
   letter-spacing: 0.2em;
   opacity: 0;
   position: absolute;
-  right: 44px;
+  right: clamp(72px, 8vw, 132px);
   top: 44px;
   z-index: 5;
 }
@@ -233,6 +233,7 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .hero-rank span {
   border: 1px solid rgb(255 255 255 / 6%);
   border-radius: 3px;
   display: block;
+  min-width: 184px;
   padding: 3px 10px;
 }
 
@@ -242,12 +243,12 @@ body:is(.mcx, .mcx-preview) main .mcx-hero-newcomer .intel {
   flex-direction: column;
   gap: 16px;
   justify-content: center;
-  padding: 80px 36px 80px 0;
+  padding: 120px 0 80px;
   pointer-events: none;
   position: absolute;
-  right: 0;
+  right: clamp(44px, 6vw, 96px);
   top: 0;
-  width: 300px;
+  width: 340px;
   z-index: 3;
 }
 

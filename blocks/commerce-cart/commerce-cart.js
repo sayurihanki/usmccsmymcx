@@ -74,9 +74,9 @@ export default async function decorate(block) {
   const fragment = document.createRange().createContextualFragment(`
     <div class="cart__journey">
       <div class="cart__journey-copy">
-        <span class="cart__journey-eyebrow">Step 0 · Cart Review</span>
-        <h1 class="cart__journey-title">Review the loadout before <span>secure checkout</span></h1>
-        <p class="cart__journey-body">Keep the real MCX cart behavior, then hand off into the new guided checkout when your order is ready.</p>
+        <span class="cart__journey-eyebrow">Your Cart</span>
+        <h1 class="cart__journey-title">Review your <span>order</span></h1>
+        <p class="cart__journey-body">Check your items, quantities, and pricing before proceeding to secure checkout.</p>
       </div>
       <a class="cart__journey-link" href="${checkoutHref}">Proceed to checkout</a>
     </div>

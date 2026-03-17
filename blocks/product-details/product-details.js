@@ -41,11 +41,15 @@ import '../../scripts/initializers/cart.js';
 import '../../scripts/initializers/wishlist.js';
 /* eslint-disable import/extensions */
 import {
+  PRODUCT_DETAILS_PRESENTATIONS,
   normalizeProductDetailsPresentation,
   shouldActivateConfigurator,
   shouldActivateImmersivePresentation,
-  PRODUCT_DETAILS_PRESENTATIONS,
 } from './product-details.utils.mjs';
+import {
+  buildExperienceModel,
+  fetchExperienceOverrides,
+} from './product-details.experience.mjs';
 /* eslint-enable import/extensions */
 
 const PDP_CONFIGURATOR_FALLBACKS = Object.freeze({
@@ -56,10 +60,87 @@ const PDP_CONFIGURATOR_FALLBACKS = Object.freeze({
   },
 });
 
-/**
- * Checks if the page has prerendered product JSON-LD data
- * @returns {boolean} True if product JSON-LD exists and contains @type=Product
- */
+const SVG_MARKUP = Object.freeze({
+  starFilled: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>',
+  starOutline: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>',
+  tag: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>',
+  shield: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>',
+  truck: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>',
+  store: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>',
+  returns: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 14L4 9l5-5"></path><path d="M4 9h11a5 5 0 1 1 0 10h-1"></path></svg>',
+});
+
+function createElement(tag, className = '', attrs = {}) {
+  const element = document.createElement(tag);
+  if (className) {
+    element.className = className;
+  }
+
+  Object.entries(attrs).forEach(([name, value]) => {
+    if (value !== undefined && value !== null && value !== '') {
+      element.setAttribute(name, value);
+    }
+  });
+
+  return element;
+}
+
+function createIconMarkup(name) {
+  return SVG_MARKUP[name] || '';
+}
+
+function createStarsMarkup(rating = 0) {
+  const rounded = Math.round(Number(rating) || 0);
+  let markup = '';
+
+  for (let index = 1; index <= 5; index += 1) {
+    markup += index <= rounded ? SVG_MARKUP.starFilled : SVG_MARKUP.starOutline;
+  }
+
+  return markup;
+}
+
+function formatCurrency(value, currency = 'USD') {
+  const amount = Number(value);
+  if (!Number.isFinite(amount)) {
+    return '';
+  }
+
+  try {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency,
+    }).format(amount);
+  } catch (error) {
+    return `$${amount.toFixed(2)}`;
+  }
+}
+
+function getDisplayedPriceText(priceRoot, experience) {
+  const selectors = [
+    '.pdp-price__amount-special',
+    '.pdp-price__amount',
+    '.pdp-price-range',
+    '.dropin-price',
+  ];
+
+  const text = selectors
+    .map((selector) => priceRoot.querySelector(selector)?.textContent?.trim())
+    .find(Boolean);
+
+  return text || formatCurrency(
+    experience?.priceSummary?.currentAmount,
+    experience?.priceSummary?.currency,
+  );
+}
+
+function getAddToCartButtonText(labels, inCart) {
+  return inCart
+    ? labels.Global?.UpdateProductInCart || 'Update Cart'
+    : labels.Global?.AddProductToCart || 'Add to Cart';
+}
+
 function isProductPrerendered() {
   const jsonLdScript = document.querySelector('script[type="application/ld+json"]');
 
@@ -76,17 +157,25 @@ function isProductPrerendered() {
   }
 }
 
-// Function to update the Add to Cart button text
-function updateAddToCartButtonText(addToCartInstance, inCart, labels) {
-  const buttonText = inCart
-    ? labels.Global?.UpdateProductInCart
-    : labels.Global?.AddProductToCart;
-  if (addToCartInstance) {
-    addToCartInstance.setProps((prev) => ({
-      ...prev,
-      children: buttonText,
-    }));
+async function waitForProductData() {
+  const current = events.lastPayload('pdp/data');
+  if (current) {
+    return current;
   }
+
+  return new Promise((resolve, reject) => {
+    let subscription;
+    const timer = window.setTimeout(() => {
+      subscription?.off?.();
+      reject(new Error('Product data was not available on this page.'));
+    }, 5000);
+
+    subscription = events.on('pdp/data', (payload) => {
+      window.clearTimeout(timer);
+      subscription?.off?.();
+      resolve(payload);
+    });
+  });
 }
 
 async function getInitialEnteredOptions(itemUid, inputOptions) {
@@ -162,66 +251,449 @@ async function mountConfiguratorFallback(container, block, product) {
   return true;
 }
 
+function renderBreadcrumbs(container, breadcrumbs = []) {
+  container.replaceChildren();
+
+  breadcrumbs.forEach((entry, index) => {
+    const isLast = index === breadcrumbs.length - 1;
+    const node = entry.href && !isLast
+      ? createElement('a', 'product-details__breadcrumb-link', { href: entry.href })
+      : createElement('span', isLast ? 'product-details__breadcrumb-current' : 'product-details__breadcrumb-link');
+
+    node.textContent = entry.label;
+    container.append(node);
+
+    if (!isLast) {
+      const separator = createElement('span', 'product-details__breadcrumb-separator', {
+        'aria-hidden': 'true',
+      });
+      separator.textContent = '›';
+      container.append(separator);
+    }
+  });
+}
+
+function renderBadges(containers, badges = []) {
+  containers.forEach((container) => {
+    container.replaceChildren();
+
+    if (!badges.length) {
+      container.hidden = true;
+      return;
+    }
+
+    badges.forEach((badge) => {
+      const item = createElement(
+        'span',
+        `product-details__gallery-badge product-details__gallery-badge--${badge.tone}`,
+      );
+      item.textContent = badge.label;
+      container.append(item);
+    });
+
+    container.hidden = false;
+  });
+}
+
+function renderRatingRow(container, reviews) {
+  if (!reviews?.count) {
+    container.hidden = true;
+    container.replaceChildren();
+    return;
+  }
+
+  const stars = createElement('div', 'product-details__rating-stars');
+  stars.innerHTML = createStarsMarkup(reviews.rating);
+
+  const copy = createElement('span', 'product-details__rating-text');
+  copy.append(`${reviews.rating.toFixed(1)} out of 5 · `);
+  const link = createElement('a', 'product-details__rating-link', {
+    href: '#reviews',
+  });
+  link.textContent = `${reviews.count} Reviews`;
+  copy.append(link);
+
+  container.replaceChildren(stars, copy);
+  container.hidden = false;
+}
+
+function renderPromo(container, promo) {
+  container.replaceChildren();
+
+  if (!promo?.text && !promo?.code) {
+    container.hidden = true;
+    return;
+  }
+
+  const icon = createElement('span', 'product-details__promo-icon', {
+    'aria-hidden': 'true',
+  });
+  icon.innerHTML = SVG_MARKUP.tag;
+
+  const text = createElement('span', 'product-details__promo-text');
+  const [prefix, suffix] = promo.text.split(promo.highlight || '').filter(Boolean);
+  if (promo.highlight && promo.text.includes(promo.highlight)) {
+    if (prefix) {
+      text.append(prefix);
+    }
+
+    const highlight = createElement('strong');
+    highlight.textContent = promo.highlight;
+    text.append(highlight);
+
+    if (suffix) {
+      text.append(suffix);
+    }
+  } else {
+    text.textContent = promo.text;
+  }
+
+  const code = promo.copyEnabled
+    ? createElement('button', 'product-details__promo-code', {
+      type: 'button',
+    })
+    : createElement('span', 'product-details__promo-code');
+  code.textContent = promo.code;
+
+  if (promo.copyEnabled) {
+    code.addEventListener('click', async () => {
+      if (navigator.clipboard?.writeText) {
+        try {
+          await navigator.clipboard.writeText(promo.code);
+        } catch (error) {
+          console.debug('Unable to copy promo code to clipboard:', error);
+        }
+      }
+
+      const original = promo.code;
+      code.textContent = 'Copied!';
+      code.classList.add('is-copied');
+      window.setTimeout(() => {
+        code.textContent = original;
+        code.classList.remove('is-copied');
+      }, 1500);
+    });
+  }
+
+  container.append(icon, text, code);
+  container.hidden = false;
+}
+
+function renderShippingCards(container, cards = []) {
+  container.replaceChildren();
+
+  cards.forEach((card) => {
+    const article = createElement('article', 'product-details__shipping-card');
+    const icon = createElement('span', 'product-details__shipping-card-icon', {
+      'aria-hidden': 'true',
+    });
+    icon.innerHTML = createIconMarkup(card.icon);
+    const title = createElement('h3', 'product-details__shipping-card-title');
+    title.textContent = card.title;
+    const subtitle = createElement('p', 'product-details__shipping-card-subtitle');
+    subtitle.textContent = card.subtitle;
+    article.append(icon, title, subtitle);
+    container.append(article);
+  });
+}
+
+function renderPriceSavings(container, experience) {
+  const savingsAmount = experience?.priceSummary?.savingsAmount || 0;
+  if (savingsAmount <= 0) {
+    container.hidden = true;
+    container.textContent = '';
+    return;
+  }
+
+  container.textContent = `Save ${formatCurrency(
+    savingsAmount,
+    experience?.priceSummary?.currency,
+  )}`;
+  container.hidden = false;
+}
+
+function renderStockTag(container, product, experience) {
+  container.replaceChildren();
+
+  const message = product?.inStock ? experience.stockMessage : 'Out of Stock';
+  container.classList.toggle('is-out-of-stock', !product?.inStock);
+
+  const dot = createElement('span', 'product-details__stock-dot', {
+    'aria-hidden': 'true',
+  });
+  const copy = createElement('span', 'product-details__stock-copy');
+  copy.textContent = message;
+  container.append(dot, copy);
+}
+
+function renderAccordionCopy(container, html) {
+  container.innerHTML = html;
+}
+
+function createReviewCard(review) {
+  const card = createElement('article', 'product-details__review-card');
+  const top = createElement('div', 'product-details__review-card-top');
+  const avatar = createElement('div', 'product-details__review-avatar');
+  avatar.textContent = review.initials;
+  const meta = createElement('div', 'product-details__review-meta');
+  const name = createElement('div', 'product-details__review-name');
+  name.textContent = review.name;
+  const date = createElement('div', 'product-details__review-date');
+  date.textContent = review.date;
+  meta.append(name, date);
+  top.append(avatar, meta);
+
+  const stars = createElement('div', 'product-details__review-stars');
+  stars.innerHTML = createStarsMarkup(review.rating);
+
+  card.append(top, stars);
+
+  if (review.verified) {
+    const verified = createElement('div', 'product-details__review-verified');
+    const icon = createElement('span', 'product-details__review-verified-icon', {
+      'aria-hidden': 'true',
+    });
+    icon.innerHTML = SVG_MARKUP.check;
+    const text = createElement('span');
+    text.textContent = 'Verified Purchase';
+    verified.append(icon, text);
+    card.append(verified);
+  }
+
+  const body = createElement('p', 'product-details__review-body');
+  body.textContent = review.body;
+  card.append(body);
+
+  return card;
+}
+
+function renderReviewsSection(section, experience) {
+  const reviews = experience?.reviews;
+  section.replaceChildren();
+
+  if (!reviews?.count) {
+    section.hidden = true;
+    return;
+  }
+
+  const label = createElement('div', 'product-details__section-label');
+  label.textContent = 'Customer Reviews';
+
+  const title = createElement('h2', 'product-details__section-title');
+  title.innerHTML = 'What Marines<br>Are Saying';
+
+  const summary = createElement('div', 'product-details__review-summary');
+  const big = createElement('div', 'product-details__review-big');
+  const bigNum = createElement('div', 'product-details__review-big-num');
+  bigNum.textContent = reviews.rating.toFixed(1);
+  const bigStars = createElement('div', 'product-details__review-big-stars');
+  bigStars.innerHTML = createStarsMarkup(reviews.rating);
+  const bigCount = createElement('div', 'product-details__review-big-count');
+  bigCount.textContent = `${reviews.count} Reviews`;
+  big.append(bigNum, bigStars, bigCount);
+
+  const bars = createElement('div', 'product-details__review-bars');
+  const total = reviews.distribution.reduce((sum, count) => sum + count, 0) || reviews.count;
+  reviews.distribution.forEach((count, index) => {
+    const row = createElement('div', 'product-details__review-bar-row');
+    const labelNode = createElement('span', 'product-details__review-bar-label');
+    labelNode.textContent = String(5 - index);
+    const track = createElement('div', 'product-details__review-bar-track');
+    const fill = createElement('div', 'product-details__review-bar-fill');
+    fill.style.width = `${Math.round((count / total) * 100)}%`;
+    track.append(fill);
+    const countNode = createElement('span', 'product-details__review-bar-count');
+    countNode.textContent = String(count);
+    row.append(labelNode, track, countNode);
+    bars.append(row);
+  });
+
+  summary.append(big, bars);
+
+  const cards = createElement('div', 'product-details__review-cards');
+  reviews.items.forEach((review) => {
+    cards.append(createReviewCard(review));
+  });
+
+  section.append(label, title, summary, cards);
+  section.hidden = false;
+}
+
+function setupAccordion(root) {
+  const buttons = [...root.querySelectorAll('[data-accordion-button]')];
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const item = button.closest('.product-details__accordion-item');
+      const isOpen = item.classList.toggle('is-open');
+      button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+}
+
+function imageSlotConfig(ctx) {
+  const {
+    data,
+    defaultImageProps,
+  } = ctx;
+
+  return {
+    alias: data.sku,
+    imageProps: defaultImageProps,
+    params: {
+      width: defaultImageProps.width,
+      height: defaultImageProps.height,
+    },
+  };
+}
+
 export default async function decorate(block) {
   let product = events.lastPayload('pdp/data') ?? null;
+  if (!product) {
+    try {
+      product = await waitForProductData();
+    } catch (error) {
+      console.warn('Product details rendered before product data was ready:', error);
+    }
+  }
+
   const labels = await fetchPlaceholders();
   const blockConfig = readBlockConfig(block);
   const presentation = normalizeProductDetailsPresentation(blockConfig.presentation);
+  const experienceSource = blockConfig['experience-data-source'];
+  let experienceOverrides = {};
 
-  // Read itemUid from URL
+  if (experienceSource) {
+    try {
+      experienceOverrides = await fetchExperienceOverrides(experienceSource);
+    } catch (error) {
+      console.warn('Could not load PDP experience overrides:', error);
+    }
+  }
+
   const urlParams = new URLSearchParams(window.location.search);
   const itemUidFromUrl = urlParams.get('itemUid');
-
-  // State to track if we are in update mode
   let isUpdateMode = false;
+  let experience = buildExperienceModel(product, experienceOverrides);
 
-  // Layout
   const fragment = document.createRange()
     .createContextualFragment(`
-    <div class="product-details__alert"></div>
-    <div class="product-details__wrapper">
-      <div class="product-details__left-column">
-        <div class="product-details__gallery"></div>
-      </div>
-      <div class="product-details__right-column">
-        <div class="product-details__header"></div>
-        <div class="product-details__price"></div>
-        <div class="product-details__gallery"></div>
-        <div class="product-details__short-description"></div>
-        <div class="product-details__gift-card-options"></div>
-        <div class="product-details__configurator-fallback"></div>
-        <div class="product-details__configuration">
-          <div class="product-details__options"></div>
-          <div class="product-details__input-options"></div>
-          <div class="product-details__quantity"></div>
-          <div class="product-details__buttons">
-            <div class="product-details__buttons__add-to-cart"></div>
-            <div class="product-details__buttons__add-to-wishlist"></div>
-            <div class="product-details__buttons__add-to-req-list"></div>
+      <div class="product-details__alert"></div>
+      <nav class="product-details__breadcrumb" aria-label="Breadcrumb">
+        <div class="product-details__breadcrumb-inner" data-role="breadcrumb"></div>
+      </nav>
+      <div class="product-details__wrapper">
+        <div class="product-details__left-column">
+          <div class="product-details__gallery-shell product-details__gallery-shell--desktop">
+            <div class="product-details__gallery-badges" data-role="gallery-badges-desktop"></div>
+            <div class="product-details__gallery-wishlist"></div>
+            <div class="product-details__gallery"></div>
           </div>
         </div>
-        <div class="product-details__description"></div>
-        <div class="product-details__attributes"></div>
+        <div class="product-details__right-column">
+          <div class="product-details__gallery-shell product-details__gallery-shell--mobile">
+            <div class="product-details__gallery-badges" data-role="gallery-badges-mobile"></div>
+            <div class="product-details__gallery-wishlist"></div>
+            <div class="product-details__gallery product-details__gallery--mobile"></div>
+          </div>
+          <div class="product-details__info-brand" data-role="eyebrow"></div>
+          <div class="product-details__header"></div>
+          <div class="product-details__rating-row" data-role="rating-row"></div>
+          <div class="product-details__price-card">
+            <div class="product-details__price-row">
+              <div class="product-details__price"></div>
+              <span class="product-details__price-save-pill" data-role="price-save-pill"></span>
+            </div>
+            <div class="product-details__price-tax" data-role="price-tax"></div>
+          </div>
+          <div class="product-details__promo" data-role="promo"></div>
+          <div class="product-details__gift-card-options"></div>
+          <div class="product-details__configurator-fallback"></div>
+          <div class="product-details__configuration">
+            <div class="product-details__options"></div>
+            <div class="product-details__input-options"></div>
+            <div class="product-details__quantity-row">
+              <div class="product-details__quantity"></div>
+              <div class="product-details__stock-tag" data-role="stock-tag"></div>
+            </div>
+            <div class="product-details__buttons">
+              <div class="product-details__buttons__add-to-cart"></div>
+              <div class="product-details__buttons__add-to-req-list"></div>
+            </div>
+          </div>
+          <div class="product-details__shipping-cards" data-role="shipping-cards"></div>
+          <div class="product-details__accordion" data-role="accordion">
+            <section class="product-details__accordion-item product-details__accordion-item--details is-open">
+              <button class="product-details__accordion-header" type="button" aria-expanded="true" data-accordion-button>
+                <span class="product-details__accordion-title">Product Details</span>
+                <span class="product-details__accordion-arrow" aria-hidden="true">▾</span>
+              </button>
+              <div class="product-details__accordion-body">
+                <div class="product-details__short-description"></div>
+                <div class="product-details__description"></div>
+                <div class="product-details__attributes"></div>
+              </div>
+            </section>
+            <section class="product-details__accordion-item">
+              <button class="product-details__accordion-header" type="button" aria-expanded="false" data-accordion-button>
+                <span class="product-details__accordion-title">Shipping &amp; Pickup</span>
+                <span class="product-details__accordion-arrow" aria-hidden="true">▾</span>
+              </button>
+              <div class="product-details__accordion-body" data-role="shipping-panel"></div>
+            </section>
+            <section class="product-details__accordion-item">
+              <button class="product-details__accordion-header" type="button" aria-expanded="false" data-accordion-button>
+                <span class="product-details__accordion-title">Returns &amp; Exchange</span>
+                <span class="product-details__accordion-arrow" aria-hidden="true">▾</span>
+              </button>
+              <div class="product-details__accordion-body" data-role="returns-panel"></div>
+            </section>
+          </div>
+        </div>
       </div>
-    </div>
-  `);
+      <section class="product-details__reviews-section" id="reviews"></section>
+      <div class="product-details__sticky-atc">
+        <div class="product-details__sticky-atc-info">
+          <div class="product-details__sticky-atc-name" data-role="sticky-name"></div>
+          <div class="product-details__sticky-atc-price" data-role="sticky-price"></div>
+        </div>
+        <button class="product-details__sticky-atc-button" type="button" data-role="sticky-atc-button">Add to Cart</button>
+      </div>
+    `);
 
   const $alert = fragment.querySelector('.product-details__alert');
-  const $gallery = fragment.querySelector('.product-details__gallery');
+  const $breadcrumb = fragment.querySelector('[data-role="breadcrumb"]');
+  const $gallery = fragment.querySelector('.product-details__left-column .product-details__gallery');
+  const $galleryMobile = fragment.querySelector('.product-details__gallery--mobile');
+  const $desktopBadges = fragment.querySelector('[data-role="gallery-badges-desktop"]');
+  const $mobileBadges = fragment.querySelector('[data-role="gallery-badges-mobile"]');
+  const [$desktopWishlist, $mobileWishlist] = fragment.querySelectorAll('.product-details__gallery-wishlist');
+  const $eyebrow = fragment.querySelector('[data-role="eyebrow"]');
   const $header = fragment.querySelector('.product-details__header');
+  const $ratingRow = fragment.querySelector('[data-role="rating-row"]');
   const $price = fragment.querySelector('.product-details__price');
-  const $galleryMobile = fragment.querySelector('.product-details__right-column .product-details__gallery');
+  const $priceSavings = fragment.querySelector('[data-role="price-save-pill"]');
+  const $priceTax = fragment.querySelector('[data-role="price-tax"]');
+  const $promo = fragment.querySelector('[data-role="promo"]');
   const $shortDescription = fragment.querySelector('.product-details__short-description');
   const $options = fragment.querySelector('.product-details__options');
   const $inputOptions = fragment.querySelector('.product-details__input-options');
   const $quantity = fragment.querySelector('.product-details__quantity');
+  const $stockTag = fragment.querySelector('[data-role="stock-tag"]');
   const $giftCardOptions = fragment.querySelector('.product-details__gift-card-options');
   const $configuratorFallback = fragment.querySelector('.product-details__configurator-fallback');
   const $addToCart = fragment.querySelector('.product-details__buttons__add-to-cart');
-  const $wishlistToggleBtn = fragment.querySelector('.product-details__buttons__add-to-wishlist');
   const $requisitionListSelector = fragment.querySelector('.product-details__buttons__add-to-req-list');
   const $description = fragment.querySelector('.product-details__description');
   const $attributes = fragment.querySelector('.product-details__attributes');
+  const $shippingCards = fragment.querySelector('[data-role="shipping-cards"]');
+  const $accordion = fragment.querySelector('[data-role="accordion"]');
+  const $shippingPanel = fragment.querySelector('[data-role="shipping-panel"]');
+  const $returnsPanel = fragment.querySelector('[data-role="returns-panel"]');
+  const $reviewsSection = fragment.querySelector('.product-details__reviews-section');
+  const $stickyAtc = fragment.querySelector('.product-details__sticky-atc');
+  const $stickyName = fragment.querySelector('[data-role="sticky-name"]');
+  const $stickyPrice = fragment.querySelector('[data-role="sticky-price"]');
+  const $stickyAtcButton = fragment.querySelector('[data-role="sticky-atc-button"]');
 
   block.replaceChildren(fragment);
   block.classList.toggle(
@@ -229,6 +701,7 @@ export default async function decorate(block) {
     presentation === PRODUCT_DETAILS_PRESENTATIONS.AUTO_IMMERSIVE,
   );
   syncConfiguratorLayoutVariant(block, product);
+  setupAccordion($accordion);
 
   const gallerySlots = {
     CarouselThumbnail: (ctx) => {
@@ -245,9 +718,101 @@ export default async function decorate(block) {
     },
   };
 
-  // Alert
   let inlineAlert = null;
   const routeToWishlist = '/wishlist';
+  let syncFrame = 0;
+  let addToCartButton = null;
+
+  const scheduleDecoratedSync = () => {
+    if (syncFrame) {
+      window.cancelAnimationFrame(syncFrame);
+    }
+
+    syncFrame = window.requestAnimationFrame(() => {
+      syncFrame = 0;
+      renderPriceSavings($priceSavings, experience);
+      renderStockTag($stockTag, product, experience);
+      $stickyName.textContent = $header.querySelector('.pdp-header__title')?.textContent?.trim()
+        || experience.stickyName;
+      $stickyPrice.textContent = getDisplayedPriceText($price, experience);
+      $stickyAtc.classList.toggle('is-hidden', !product);
+    });
+  };
+
+  const renderExperience = () => {
+    experience = buildExperienceModel(product, experienceOverrides);
+    renderBreadcrumbs($breadcrumb, experience.breadcrumbs);
+    $eyebrow.textContent = experience.eyebrow;
+    renderBadges([$desktopBadges, $mobileBadges], experience.badges);
+    renderRatingRow($ratingRow, experience.reviews);
+    renderPromo($promo, experience.promo);
+    renderShippingCards($shippingCards, experience.shippingCards);
+    renderAccordionCopy($shippingPanel, experience.accordion.shippingHtml);
+    renderAccordionCopy($returnsPanel, experience.accordion.returnsHtml);
+    renderReviewsSection($reviewsSection, experience);
+    $priceTax.innerHTML = `${SVG_MARKUP.shield}<span>${experience.taxMessage}</span>`;
+    renderPriceSavings($priceSavings, experience);
+    renderStockTag($stockTag, product, experience);
+    scheduleDecoratedSync();
+  };
+
+  const getSelectedOptionUIDs = (configValues) => {
+    const urlOptionsUIDs = urlParams.get('optionsUIDs');
+    const hasConfigOptions = configValues?.optionsUIDs
+      && Array.isArray(configValues.optionsUIDs)
+      && configValues.optionsUIDs.length > 0;
+
+    if (hasConfigOptions) {
+      return configValues.optionsUIDs;
+    }
+
+    if (urlOptionsUIDs === '') {
+      return null;
+    }
+
+    return null;
+  };
+
+  const wishlistToggleInstances = [];
+  const syncWishlistToggles = () => {
+    const configValues = pdpApi.getProductConfigurationValues();
+    const optionUIDs = getSelectedOptionUIDs(configValues);
+    const enteredOptions = configValues?.enteredOptions;
+
+    wishlistToggleInstances.forEach((instance) => {
+      instance?.setProps?.((prev) => ({
+        ...prev,
+        product: {
+          ...product,
+          optionUIDs,
+          enteredOptions,
+        },
+      }));
+    });
+  };
+
+  const setCtaState = ({
+    text,
+    disabled = false,
+    processing = false,
+  }) => {
+    addToCartButton?.setProps?.((prev) => ({
+      ...prev,
+      children: text,
+      disabled,
+    }));
+    $stickyAtcButton.textContent = text;
+    $stickyAtcButton.disabled = disabled;
+    $stickyAtcButton.classList.toggle('is-loading', processing);
+    $stickyAtcButton.setAttribute('aria-busy', processing ? 'true' : 'false');
+  };
+
+  const syncPrimaryCta = (valid = pdpApi.isProductConfigurationValid()) => {
+    setCtaState({
+      text: getAddToCartButtonText(labels, isUpdateMode),
+      disabled: !valid,
+    });
+  };
 
   const [
     _galleryMobile,
@@ -260,9 +825,9 @@ export default async function decorate(block) {
     _giftCardOptions,
     _description,
     _attributes,
-    wishlistToggleBtn,
+    desktopWishlistToggle,
+    mobileWishlistToggle,
   ] = await Promise.all([
-    // Gallery (Mobile)
     pdpRendered.render(ProductGallery, {
       controls: 'dots',
       arrows: true,
@@ -272,11 +837,9 @@ export default async function decorate(block) {
       imageParams: {
         ...IMAGES_SIZES,
       },
-
       slots: gallerySlots,
     })($galleryMobile),
 
-    // Gallery (Desktop)
     pdpRendered.render(ProductGallery, {
       controls: 'thumbnailsColumn',
       arrows: true,
@@ -286,20 +849,15 @@ export default async function decorate(block) {
       imageParams: {
         ...IMAGES_SIZES,
       },
-
       slots: gallerySlots,
     })($gallery),
 
-    // Header
     pdpRendered.render(ProductHeader, {})($header),
 
-    // Price
     pdpRendered.render(ProductPrice, {})($price),
 
-    // Short Description
     pdpRendered.render(ProductShortDescription, {})($shortDescription),
 
-    // Configuration - Swatches
     pdpRendered.render(ProductOptions, {
       hideSelectedValue: false,
       slots: {
@@ -312,23 +870,30 @@ export default async function decorate(block) {
       },
     })($options),
 
-    // Configuration  Quantity
     pdpRendered.render(ProductQuantity, {})($quantity),
 
-    // Configuration  Gift Card Options
     pdpRendered.render(ProductGiftCardOptions, {})($giftCardOptions),
 
-    // Description
     pdpRendered.render(ProductDescription, {})($description),
 
-    // Attributes
     pdpRendered.render(ProductAttributes, {})($attributes),
 
-    // Wishlist button - WishlistToggle Container
     wishlistRender.render(WishlistToggle, {
       product,
-    })($wishlistToggleBtn),
+    })($desktopWishlist),
+
+    wishlistRender.render(WishlistToggle, {
+      product,
+    })($mobileWishlist),
   ]);
+
+  if (desktopWishlistToggle) {
+    wishlistToggleInstances.push(desktopWishlistToggle);
+  }
+
+  if (mobileWishlistToggle) {
+    wishlistToggleInstances.push(mobileWishlistToggle);
+  }
 
   const initialEnteredOptions = await getInitialEnteredOptions(
     itemUidFromUrl,
@@ -337,6 +902,20 @@ export default async function decorate(block) {
 
   await mountProductInputOptions($inputOptions, {
     initialEnteredOptions,
+  });
+
+  const priceObserver = new MutationObserver(() => scheduleDecoratedSync());
+  priceObserver.observe($price, {
+    childList: true,
+    subtree: true,
+    characterData: true,
+  });
+
+  const headerObserver = new MutationObserver(() => scheduleDecoratedSync());
+  headerObserver.observe($header, {
+    childList: true,
+    subtree: true,
+    characterData: true,
   });
 
   let configuratorFallbackMount = null;
@@ -362,138 +941,107 @@ export default async function decorate(block) {
     return configuratorFallbackMount;
   };
 
+  const handleAddToCart = async () => {
+    const buttonActionText = isUpdateMode
+      ? labels.Global?.UpdatingInCart || 'Updating...'
+      : labels.Global?.AddingToCart || 'Adding...';
+
+    try {
+      setCtaState({
+        text: buttonActionText,
+        disabled: true,
+        processing: true,
+      });
+
+      const values = pdpApi.getProductConfigurationValues();
+      const valid = pdpApi.isProductConfigurationValid();
+
+      if (valid) {
+        if (isUpdateMode) {
+          const { updateProductsFromCart } = await import('@dropins/storefront-cart/api.js');
+
+          await updateProductsFromCart([{
+            ...values,
+            uid: itemUidFromUrl,
+          }]);
+
+          const updatedSku = values?.sku;
+          if (updatedSku) {
+            const cartRedirectUrl = new URL(
+              rootLink('/cart'),
+              window.location.origin,
+            );
+            cartRedirectUrl.searchParams.set('itemUid', itemUidFromUrl);
+            window.location.href = cartRedirectUrl.toString();
+          } else {
+            console.warn(
+              'Could not retrieve SKU for updated item. Redirecting to cart without parameter.',
+            );
+            window.location.href = rootLink('/cart');
+          }
+          return;
+        }
+
+        const { addProductsToCart } = await import('@dropins/storefront-cart/api.js');
+        await addProductsToCart([{ ...values }]);
+      }
+
+      inlineAlert?.remove();
+    } catch (error) {
+      inlineAlert = await UI.render(InLineAlert, {
+        heading: 'Error',
+        description: error.message,
+        icon: h(Icon, { source: 'Warning' }),
+        'aria-live': 'assertive',
+        role: 'alert',
+        onDismiss: () => {
+          inlineAlert.remove();
+        },
+      })($alert);
+
+      $alert.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    } finally {
+      syncPrimaryCta();
+      setCtaState({
+        text: getAddToCartButtonText(labels, isUpdateMode),
+        disabled: !pdpApi.isProductConfigurationValid(),
+        processing: false,
+      });
+      scheduleDecoratedSync();
+    }
+  };
+
+  addToCartButton = await UI.render(Button, {
+    children: getAddToCartButtonText(labels, isUpdateMode),
+    icon: h(Icon, { source: 'Cart' }),
+    onClick: handleAddToCart,
+  })($addToCart);
+
+  $stickyAtcButton.addEventListener('click', handleAddToCart);
+
+  renderExperience();
+  syncWishlistToggles();
+  syncPrimaryCta();
+  scheduleDecoratedSync();
+
   events.on('pdp/data', (nextProduct) => {
     product = nextProduct;
     syncConfiguratorLayoutVariant(block, nextProduct);
     ensureConfiguratorFallback(nextProduct);
+    renderExperience();
+    syncWishlistToggles();
   }, { eager: true });
 
-  // Configuration – Button - Add to Cart
-  const addToCart = await UI.render(Button, {
-    children: labels.Global?.AddProductToCart,
-    icon: h(Icon, { source: 'Cart' }),
-    onClick: async () => {
-      const buttonActionText = isUpdateMode
-        ? labels.Global?.UpdatingInCart
-        : labels.Global?.AddingToCart;
-      try {
-        addToCart.setProps((prev) => ({
-          ...prev,
-          children: buttonActionText,
-          disabled: true,
-        }));
-
-        // get the current selection values
-        const values = pdpApi.getProductConfigurationValues();
-        const valid = pdpApi.isProductConfigurationValid();
-
-        // add or update the product in the cart
-        if (valid) {
-          if (isUpdateMode) {
-            // --- Update existing item ---
-            const { updateProductsFromCart } = await import('@dropins/storefront-cart/api.js');
-
-            await updateProductsFromCart([{
-              ...values,
-              uid: itemUidFromUrl,
-            }]);
-
-            // --- START REDIRECT ON UPDATE ---
-            const updatedSku = values?.sku;
-            if (updatedSku) {
-              const cartRedirectUrl = new URL(
-                rootLink('/cart'),
-                window.location.origin,
-              );
-              cartRedirectUrl.searchParams.set('itemUid', itemUidFromUrl);
-              window.location.href = cartRedirectUrl.toString();
-            } else {
-              // Fallback if SKU is somehow missing (shouldn't happen in normal flow)
-              console.warn(
-                'Could not retrieve SKU for updated item. Redirecting to cart without parameter.',
-              );
-              window.location.href = rootLink('/cart');
-            }
-            return;
-          }
-          // --- Add new item ---
-          const { addProductsToCart } = await import('@dropins/storefront-cart/api.js');
-          await addProductsToCart([{ ...values }]);
-        }
-
-        // reset any previous alerts if successful
-        inlineAlert?.remove();
-      } catch (error) {
-        // add alert message
-        inlineAlert = await UI.render(InLineAlert, {
-          heading: 'Error',
-          description: error.message,
-          icon: h(Icon, { source: 'Warning' }),
-          'aria-live': 'assertive',
-          role: 'alert',
-          onDismiss: () => {
-            inlineAlert.remove();
-          },
-        })($alert);
-
-        // Scroll the alertWrapper into view
-        $alert.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center',
-        });
-      } finally {
-        // Reset button text using the helper function which respects the current mode
-        updateAddToCartButtonText(addToCart, isUpdateMode, labels);
-        // Re-enable button
-        addToCart.setProps((prev) => ({
-          ...prev,
-          disabled: false,
-        }));
-      }
-    },
-  })($addToCart);
-
-  // Lifecycle Events
   events.on('pdp/valid', (valid) => {
-    // update add to cart button disabled state based on product selection validity
-    addToCart.setProps((prev) => ({
-      ...prev,
-      disabled: !valid,
-    }));
+    syncPrimaryCta(valid);
   }, { eager: true });
 
-  // Handle option changes
-  events.on('pdp/values', async () => {
-    const configValues = pdpApi.getProductConfigurationValues();
-    const enteredOptions = configValues?.enteredOptions;
-
-    // Check URL parameter for empty optionsUIDs
-    const urlOptionsUIDs = urlParams.get('optionsUIDs');
-
-    // Get optionsUIDs - prioritize actual selected values from configValues
-    let optionUIDs = null;
-    // First priority: actual selected options from configValues
-    const hasConfigOptions = configValues?.optionsUIDs
-      && Array.isArray(configValues.optionsUIDs)
-      && configValues.optionsUIDs.length > 0;
-
-    if (hasConfigOptions) {
-      optionUIDs = configValues.optionsUIDs;
-    } else if (urlOptionsUIDs === '') {
-      // Second priority: URL has explicit empty optionsUIDs parameter
-      optionUIDs = null;
-    }
-
-    if (wishlistToggleBtn) {
-      wishlistToggleBtn.setProps((prev) => ({
-        ...prev,
-        product: {
-          ...product,
-          optionUIDs,
-          enteredOptions,
-        },
-      }));
-    }
+  events.on('pdp/values', () => {
+    syncWishlistToggles();
+    scheduleDecoratedSync();
   }, { eager: true });
 
   events.on('wishlist/alert', ({
@@ -518,8 +1066,6 @@ export default async function decorate(block) {
     }, 0);
   });
 
-  // Conditionally load requisition list functionality
-  // The module sets up event handlers that check feature status on each render
   try {
     const { initializeRequisitionList } = await import('./requisition-list.js');
     await initializeRequisitionList({
@@ -530,11 +1076,9 @@ export default async function decorate(block) {
       urlParams,
     });
   } catch (error) {
-    // If module fails to load, requisition list features won't be available
     console.warn('Requisition list module not available:', error);
   }
 
-  // --- Add new event listener for cart/data ---
   events.on(
     'cart/data',
     (cartData) => {
@@ -544,19 +1088,17 @@ export default async function decorate(block) {
           (item) => item.uid === itemUidFromUrl,
         );
       }
-      // Set the update mode state
-      isUpdateMode = itemIsInCart;
 
-      // Update button text based on whether the item is in the cart
-      updateAddToCartButtonText(addToCart, itemIsInCart, labels);
+      isUpdateMode = itemIsInCart;
+      syncPrimaryCta();
+      scheduleDecoratedSync();
     },
     { eager: true },
   );
 
-  // Set JSON-LD and Meta Tags
   events.on('aem/lcp', () => {
-    const isPrerendered = isProductPrerendered();
-    if (product && !isPrerendered) {
+    const prerendered = isProductPrerendered();
+    if (product && !prerendered) {
       setJsonLdProduct(product);
       setMetaTags(product);
       document.title = product.name;
@@ -592,7 +1134,6 @@ async function setJsonLdProduct(product) {
   const amount = priceRange?.minimum?.final?.amount || price?.final?.amount;
   const brand = attributes?.find((attr) => attr.name === 'brand');
 
-  // get variants
   const { data } = await pdpApi.fetchGraphQl(`
     query GET_PRODUCT_VARIANTS($sku: String!) {
       variants(sku: $sku) {
@@ -663,19 +1204,23 @@ function createMetaTag(property, content, type) {
   if (!property || !type) {
     return;
   }
+
   let meta = document.head.querySelector(`meta[${type}="${property}"]`);
   if (meta) {
     if (!content) {
       meta.remove();
       return;
     }
+
     meta.setAttribute(type, property);
     meta.setAttribute('content', content);
     return;
   }
+
   if (!content) {
     return;
   }
+
   meta = document.createElement('meta');
   meta.setAttribute(type, property);
   meta.setAttribute('content', content);
@@ -703,25 +1248,4 @@ function setMetaTags(product) {
   createMetaTag('og:image:secure_url', metaImage, 'property');
   createMetaTag('product:price:amount', price.value, 'property');
   createMetaTag('product:price:currency', price.currency, 'property');
-}
-
-/**
- * Returns the configuration for an image slot.
- * @param ctx - The context of the slot.
- * @returns The configuration for the image slot.
- */
-function imageSlotConfig(ctx) {
-  const {
-    data,
-    defaultImageProps,
-  } = ctx;
-  return {
-    alias: data.sku,
-    imageProps: defaultImageProps,
-
-    params: {
-      width: defaultImageProps.width,
-      height: defaultImageProps.height,
-    },
-  };
 }

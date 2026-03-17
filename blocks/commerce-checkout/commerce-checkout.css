@@ -1,3 +1,8 @@
+body.columns main:has(.commerce-checkout) {
+  max-width: 1480px;
+  padding-inline: clamp(24px, 4vw, 48px);
+}
+
 .commerce-checkout {
   padding: clamp(24px, 4vw, 48px) 0 clamp(64px, 8vw, 96px);
   position: relative;
@@ -174,8 +179,8 @@ button.checkout-progress__link[disabled] {
 
 .checkout__content {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 390px);
-  gap: clamp(24px, 3vw, 40px);
+  grid-template-columns: minmax(0, 1.18fr) minmax(300px, 360px);
+  gap: clamp(28px, 3vw, 48px);
   align-items: start;
 }
 
@@ -408,35 +413,148 @@ button.checkout-progress__link[disabled] {
 
 .checkout__main label,
 .checkout__main .dropin-label,
-.checkout__main .dropin-field__label {
+.checkout__main .dropin-field__label,
+.checkout__main .dropin-field__hint,
+.checkout__main .dropin-field__message,
+.checkout__main .dropin-input__label--floating,
+.checkout__main .dropin-picker__floatingLabel,
+.checkout__main .dropin-textarea__label--floating,
+.checkout__main .dropin-checkbox__label,
+.checkout__main .dropin-radio__label,
+.checkout__main .checkout-login-form__customer-email,
+.checkout__main .checkout-estimate-shipping__caption,
+.checkout__aside .cart-order-summary__caption,
+.checkout__aside .coupon-code-form__error {
   color: var(--text-dim);
 }
 
-.checkout__main input,
-.checkout__main select,
-.checkout__main textarea,
-.checkout__aside input,
-.checkout__aside select {
+.checkout__main :is(
+  input,
+  select,
+  textarea,
+  .dropin-input,
+  .dropin-picker__button,
+  .dropin-picker__select,
+  .dropin-textarea
+),
+.checkout__aside :is(
+  input,
+  select,
+  .dropin-input,
+  .dropin-picker__button,
+  .dropin-picker__select
+) {
+  min-height: 54px;
   border-color: rgb(255 255 255 / 9%);
+  background: rgb(255 255 255 / 3%);
+  color: var(--text-bright);
+  transition:
+    border-color var(--t-fast) var(--ease),
+    background var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+
+.checkout__main :is(input, select, textarea, .dropin-input, .dropin-picker__button, .dropin-picker__select, .dropin-textarea)::placeholder,
+.checkout__aside :is(input, select, .dropin-input, .dropin-picker__button, .dropin-picker__select)::placeholder {
+  color: rgb(241 237 229 / 44%);
+}
+
+.checkout__main :is(input, select, textarea, .dropin-input, .dropin-picker__button, .dropin-picker__select, .dropin-textarea):hover,
+.checkout__aside :is(input, select, .dropin-input, .dropin-picker__button, .dropin-picker__select):hover {
+  border-color: rgb(255 255 255 / 20%);
+}
+
+.checkout__main :is(input, select, textarea, .dropin-input, .dropin-picker__button, .dropin-picker__select, .dropin-textarea):focus,
+.checkout__main :is(input, select, textarea, .dropin-input, .dropin-picker__button, .dropin-picker__select, .dropin-textarea):focus-visible,
+.checkout__aside :is(input, select, .dropin-input, .dropin-picker__button, .dropin-picker__select):focus,
+.checkout__aside :is(input, select, .dropin-input, .dropin-picker__button, .dropin-picker__select):focus-visible {
+  border-color: rgb(193 18 31 / 40%);
+  background: rgb(255 255 255 / 5%);
+  box-shadow: 0 0 0 3px rgb(193 18 31 / 10%);
+}
+
+.checkout__main :is(.checkout-login-form__title, .checkout-login-form__title h2, .checkout-login-form__heading-label, .checkout-login-form__sign-in, .checkout-login-form__sign-out, .checkout-login-form__customer-name, .checkout-payment-methods__title, .checkout-payment-methods__title h2) {
+  color: var(--text-bright);
+}
+
+.checkout__main :is(.checkout-login-form__heading-label a, a.checkout-login-form__link) {
+  color: var(--gold);
+}
+
+.checkout__main .checkout-payment-methods__content {
+  color: var(--text-body);
+}
+
+.checkout__main .checkout-payment-methods__method {
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 16px;
   background: rgb(255 255 255 / 3%);
   color: var(--text-bright);
 }
 
-.checkout__main input:focus,
-.checkout__main select:focus,
-.checkout__main textarea:focus,
-.checkout__aside input:focus,
-.checkout__aside select:focus {
-  border-color: rgb(193 18 31 / 40%);
-  box-shadow: 0 0 0 3px rgb(193 18 31 / 10%);
+.checkout__main .checkout-payment-methods__method:hover,
+.checkout__main .checkout-payment-methods__method:focus-visible {
+  border-color: rgb(201 162 39 / 24%);
+  background: rgb(255 255 255 / 5%);
+}
+
+.checkout__main :is(.checkout-payment-methods__method svg, .checkout-payment-methods__method .dropin-icon) {
+  color: var(--gold);
+}
+
+.checkout__aside :is(.cart-order-summary__entry, .cart-order-summary__taxEntry, .checkout-estimate-shipping) {
+  color: rgb(241 237 229 / 76%);
+  font-size: 16px;
+}
+
+.checkout__aside :is(.cart-order-summary__label, .checkout-estimate-shipping__label) {
+  color: rgb(241 237 229 / 76%);
+  line-height: 1.45;
+}
+
+.checkout__aside :is(.cart-order-summary__price, .checkout-estimate-shipping__price) {
+  color: var(--text-bright);
+  font-weight: 600;
+}
+
+.checkout__aside .cart-order-summary__total {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 18px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgb(255 255 255 / 8%);
+}
+
+.checkout__aside .cart-order-summary__total .cart-order-summary__label {
+  color: var(--text-bright);
+  font-family: var(--font-ui);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.checkout__aside .cart-order-summary__total .cart-order-summary__price {
+  color: var(--text-bright);
+  font-family: var(--font-ui);
+  font-size: clamp(30px, 3vw, 38px);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .checkout__main .dropin-button--primary,
 .checkout__aside .dropin-button--primary,
 .checkout__place-order .dropin-button,
 .checkout__place-order button[class*='checkout-place-order__button'] {
+  border: 1px solid rgb(198 31 43 / 52%);
   border-radius: var(--r-pill);
   background: linear-gradient(135deg, var(--scarlet), var(--scarlet-bright));
+  color: #fff;
   box-shadow: var(--shadow-red);
 }
 
@@ -459,7 +577,7 @@ button.checkout-progress__link[disabled] {
 
 .checkout-review-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: clamp(16px, 1.8vw, 22px);
   align-items: stretch;
 }
@@ -478,7 +596,7 @@ button.checkout-progress__link[disabled] {
 
 .checkout-review-card__header {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px 16px;
   align-items: start;
 }
@@ -500,7 +618,8 @@ button.checkout-progress__link[disabled] {
   font-weight: 700;
   letter-spacing: 0.06em;
   line-height: 1.08;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  word-break: normal;
   text-transform: uppercase;
 }
 
@@ -511,9 +630,9 @@ button.checkout-progress__link[disabled] {
   font-weight: 700;
   letter-spacing: 0.18em;
   display: inline-flex;
+  place-self: start;
   align-items: center;
   justify-content: center;
-  align-self: start;
   min-height: 40px;
   padding: 0 14px;
   border: 1px solid rgb(255 255 255 / 9%);
@@ -668,14 +787,29 @@ button.checkout-progress__link[disabled] {
   padding-block: 2px;
 }
 
-.checkout__aside .cart-order-summary__total {
-  margin-top: 18px;
-  padding-top: 18px;
-  border-top: 1px solid rgb(255 255 255 / 8%);
-}
-
 .checkout__aside .dropin-accordion-section__title-container {
   align-items: center;
+  min-height: 54px;
+  padding: 0 16px;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 14px;
+  background: rgb(255 255 255 / 2%);
+  color: var(--text-bright);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.checkout__aside :is(.dropin-accordion-section__title-container svg, .dropin-accordion-section__icon) {
+  color: var(--gold);
+}
+
+.checkout__aside .dropin-accordion-section__content-container {
+  display: grid;
+  gap: 14px;
+  padding: 16px 6px 4px;
 }
 
 .checkout__aside .coupon-code-form__action {
@@ -883,10 +1017,6 @@ button.checkout-progress__link[disabled] {
   .checkout__aside-shell {
     position: static;
   }
-
-  .checkout-review-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 @media (max-width: 1360px) {
@@ -919,10 +1049,6 @@ button.checkout-progress__link[disabled] {
   }
 
   .checkout-progress {
-    grid-template-columns: 1fr;
-  }
-
-  .checkout-review-grid {
     grid-template-columns: 1fr;
   }
 }
