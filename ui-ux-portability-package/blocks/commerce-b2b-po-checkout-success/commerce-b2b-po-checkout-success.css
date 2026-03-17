@@ -93,11 +93,9 @@ body:is(.mcx, .mcx-preview) main > .section > div.commerce-b2b-po-checkout-succe
 .po-confirmation__content .purchase-orders-confirmation-content__title {
   margin: 0 0 16px;
   color: var(--po-text-main);
-  font-family: var(--font-hero, var(--ff-heading, sans-serif));
-  font-size: clamp(3.8rem, 5.8vw, 6.4rem);
-  line-height: 0.9;
-  letter-spacing: 0.01em;
-  text-transform: none;
+  font: var(--type-display-2-font);
+  letter-spacing: var(--type-display-2-letter-spacing);
+  text-transform: uppercase;
 }
 
 .po-confirmation__content .purchase-orders-confirmation-content__message {
@@ -181,10 +179,8 @@ body:is(.mcx, .mcx-preview) main > .section > div.commerce-b2b-po-checkout-succe
 .po-confirmation-summary-stat__value {
   margin: 8px 0 0;
   color: var(--po-text-main);
-  font-family: var(--font-ui, sans-serif);
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 1.25;
+  font: var(--type-headline-2-strong-font);
+  letter-spacing: var(--type-headline-2-strong-letter-spacing);
 }
 
 .po-confirmation__hero-actions {
@@ -241,9 +237,9 @@ body:is(.mcx, .mcx-preview) main > .section > div.commerce-b2b-po-checkout-succe
 .po-confirmation-spotlight__title {
   margin: 10px 0 6px;
   color: var(--po-text-main);
-  font-family: var(--font-hero, var(--ff-heading, sans-serif));
-  font-size: 3rem;
-  line-height: 0.96;
+  font: var(--type-display-3-font);
+  letter-spacing: var(--type-display-3-letter-spacing);
+  text-transform: uppercase;
 }
 
 .po-confirmation-spotlight__body {
@@ -311,9 +307,9 @@ body:is(.mcx, .mcx-preview) main > .section > div.commerce-b2b-po-checkout-succe
 .po-confirmation-footer__title {
   margin: 8px 0 0;
   color: var(--po-text-main);
-  font-family: var(--font-hero, var(--ff-heading, sans-serif));
-  font-size: 3.1rem;
-  line-height: 0.98;
+  font: var(--type-headline-1-font);
+  letter-spacing: var(--type-headline-1-letter-spacing);
+  text-transform: uppercase;
 }
 
 .po-confirmation-section__copy,
@@ -417,10 +413,8 @@ body:is(.mcx, .mcx-preview) main > .section > div.commerce-b2b-po-checkout-succe
 .po-confirmation-timeline-step__name {
   margin: 0;
   color: var(--po-text-main);
-  font-family: var(--font-ui, sans-serif);
-  font-size: 1.35rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font: var(--type-headline-2-strong-font);
+  letter-spacing: var(--type-headline-2-strong-letter-spacing);
   text-transform: uppercase;
 }
 
@@ -493,10 +487,8 @@ body:is(.mcx, .mcx-preview) main > .section > div.commerce-b2b-po-checkout-succe
   border: 1px solid rgb(255 255 255 / 10%);
   border-radius: var(--r-pill, 999px);
   color: var(--po-text-main);
-  font-family: var(--font-ui, sans-serif);
-  font-size: 1.2rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font: var(--type-button-2-font);
+  letter-spacing: var(--type-button-2-letter-spacing);
   text-decoration: none;
   text-transform: uppercase;
   transition:
