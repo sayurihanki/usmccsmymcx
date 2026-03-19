@@ -23,6 +23,7 @@ const MCX_BLOCKS = [
   'mcx-hero-newcomer',
   'mcx-newsletter',
   'mcx-promo-popup',
+  'mcx-wheel-popup',
   'mcx-product-cards',
   'mcx-promo-strip',
   'mcx-ticker',
@@ -144,6 +145,7 @@ test('MCX hero, deal countdown, newsletter, popup, and promo examples include re
   const countdown = await loadTable('docs/mcx-examples/mcx-deal-countdown.table.txt');
   const newsletter = await loadTable('docs/mcx-examples/mcx-newsletter.table.txt');
   const popup = await loadTable('docs/mcx-examples/mcx-promo-popup.table.txt');
+  const wheelPopup = await loadTable('docs/mcx-examples/mcx-wheel-popup.table.txt');
   const promo = await loadTable('docs/mcx-examples/mcx-promo-strip.table.txt');
 
   assert.equal(hero.title, 'mcx-hero');
@@ -195,6 +197,28 @@ test('MCX hero, deal countdown, newsletter, popup, and promo examples include re
     assert.ok(hasField(popup.rows, field), `popup example is missing ${field}`);
   });
   assert.ok(popup.rows.every((row) => row.length === 2));
+
+  assert.equal(wheelPopup.title, 'mcx-wheel-popup');
+  [
+    'campaign-id',
+    'eyebrow',
+    'heading-line-1',
+    'heading-line-2',
+    'description',
+    'result-headline',
+    'fine-print',
+  ].forEach((field) => {
+    assert.ok(hasField(wheelPopup.rows, field), `wheel popup example is missing ${field}`);
+  });
+  for (let index = 1; index <= 8; index += 1) {
+    ['label', 'title', 'description'].forEach((suffix) => {
+      assert.ok(
+        hasField(wheelPopup.rows, `slice-${index}-${suffix}`),
+        `wheel popup example is missing slice-${index}-${suffix}`,
+      );
+    });
+  }
+  assert.ok(wheelPopup.rows.every((row) => row.length === 2));
 
   assert.equal(promo.title, 'mcx-promo-strip');
   ['badge', 'title', 'description', 'cta'].forEach((field) => {

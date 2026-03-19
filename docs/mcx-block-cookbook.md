@@ -17,6 +17,7 @@ This cookbook lists the reusable MCX storefront blocks, their authoring shape, a
 | `mcx-product-cards` | 4 | image, brand/name cell, pricing cell, config cell | section label, title, view-link; legacy `tabs` and `default-tab` rows are tolerated but deprecated | `docs/mcx-examples/mcx-product-cards.table.txt` |
 | `mcx-deal-countdown` | 2 | label, title, description, end-datetime, CTA | ended state text, hide CTA toggle | `docs/mcx-examples/mcx-deal-countdown.table.txt` |
 | `mcx-promo-popup` | 2 | campaign-id, eyebrow, two heading lines, description, three offer pairs, end-datetime, coupon-code, two CTAs, fine-print | badge label, copy button label, trigger rows | `docs/mcx-examples/mcx-promo-popup.table.txt` |
+| `mcx-wheel-popup` | 2 | campaign-id, eyebrow, two heading lines, description, result-headline, and 8 complete slice groups | per-slice code and CTA rows; trigger and button-label rows | `docs/mcx-examples/mcx-wheel-popup.table.txt` |
 | `mcx-promo-strip` | 2 | badge, title, description, CTA | none | `docs/mcx-examples/mcx-promo-strip.table.txt` |
 | `mcx-featured-collections` | 4 | image, tag, title, CTA | label, title, view-link config rows | `docs/mcx-examples/mcx-featured-collections.table.txt` |
 | `mcx-brands` | 1 | brand rows | none | `docs/mcx-examples/mcx-brands.table.txt` |
@@ -40,6 +41,9 @@ This cookbook lists the reusable MCX storefront blocks, their authoring shape, a
 - For `mcx-hero`, `image` is the first slide and any additional carousel slides should be authored as `image-2`, `image-3`, and so on.
 - For `mcx-promo-popup`, `campaign-id` should stay stable for the full life of the campaign so session suppression behaves predictably.
 - For `mcx-promo-popup`, `description` and `fine-print` may contain inline formatting, but `end-datetime` still needs a full ISO 8601 timestamp with timezone offset.
+- For `mcx-wheel-popup`, author all 8 slice groups. Missing required slice rows cause the block to hide instead of rendering a partial wheel.
+- For `mcx-wheel-popup`, duplicate slice copy is allowed, but it intentionally increases the effective odds of that reward because all slices are selected uniformly.
+- For `mcx-wheel-popup`, `description`, `fine-print`, and `slice-n-description` can contain inline formatting and links, and `slice-n-cta` rows should be authored as real links when present.
 - For `mcx-hero`, do not author `status-badge-*` rows for new content. Older content can keep them safely until cleanup.
 - For `mcx-hero-newcomer`, `primary-cta` and `secondary-cta` should be authored as links in the value cell.
 - For `mcx-hero-newcomer`, each quick-link or intel slot should be authored as a complete matched row set. Partial groups are skipped.

@@ -181,12 +181,14 @@ test('mcx deal countdown, newsletter, and promo strip expose the authored data n
     const countdownBlock = await createBlockFromTable(document, 'docs/mcx-examples/mcx-deal-countdown.table.txt');
     const newsletterBlock = await createBlockFromTable(document, 'docs/mcx-examples/mcx-newsletter.table.txt');
     const popupBlock = await createBlockFromTable(document, 'docs/mcx-examples/mcx-promo-popup.table.txt');
+    const wheelPopupBlock = await createBlockFromTable(document, 'docs/mcx-examples/mcx-wheel-popup.table.txt');
     const promoBlock = await createBlockFromTable(document, 'docs/mcx-examples/mcx-promo-strip.table.txt');
-    document.body.append(countdownBlock, newsletterBlock, popupBlock, promoBlock);
+    document.body.append(countdownBlock, newsletterBlock, popupBlock, wheelPopupBlock, promoBlock);
 
     const { default: decorateCountdown } = await import('../../blocks/mcx-deal-countdown/mcx-deal-countdown.js');
     const { default: decorateNewsletter } = await import('../../blocks/mcx-newsletter/mcx-newsletter.js');
     const { default: decoratePopup } = await import('../../blocks/mcx-promo-popup/mcx-promo-popup.js');
+    const { default: decorateWheelPopup } = await import('../../blocks/mcx-wheel-popup/mcx-wheel-popup.js');
     const { default: decoratePromo } = await import('../../blocks/mcx-promo-strip/mcx-promo-strip.js');
 
     const previousNavigatorDescriptor = Object.getOwnPropertyDescriptor(globalThis, 'navigator');
@@ -203,6 +205,7 @@ test('mcx deal countdown, newsletter, and promo strip expose the authored data n
       decorateCountdown(countdownBlock);
       decorateNewsletter(newsletterBlock);
       decoratePopup(popupBlock);
+      decorateWheelPopup(wheelPopupBlock);
       decoratePromo(promoBlock);
     } finally {
       if (previousNavigatorDescriptor) {
@@ -228,6 +231,14 @@ test('mcx deal countdown, newsletter, and promo strip expose the authored data n
     assert.equal(popupOverlay.querySelector('.mpp-coupon-code')?.textContent, 'SEMPERFI20');
     assert.equal(popupOverlay.querySelector('.mpp-btn-primary')?.getAttribute('href'), '/deals');
     assert.equal(popupOverlay.querySelector('.mpp-countdown')?.dataset.status, 'active');
+
+    const wheelOverlay = document.querySelector('.mwp-overlay');
+    assert.ok(wheelOverlay);
+    assert.equal(wheelOverlay.querySelector('.mwp-heading')?.textContent.includes('Spin For'), true);
+    assert.equal(wheelOverlay.querySelectorAll('.mwp-label').length, 8);
+    wheelOverlay.querySelector('.mwp-spin-btn')?.dispatchEvent({ type: 'click' });
+    assert.equal(wheelOverlay.classList.contains('is-result'), true);
+    assert.equal(wheelOverlay.querySelector('.mwp-result-title')?.textContent.length > 0, true);
 
     assert.equal(promoBlock.querySelector('.promo-title')?.textContent, 'EARN MORE, SPEND LESS');
     assert.equal(promoBlock.querySelector('.btn-promo')?.href, '/clearance');

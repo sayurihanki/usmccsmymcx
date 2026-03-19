@@ -1,0 +1,22 @@
+{
+  "definitions": [
+    {
+      "title": "MCX Wheel Popup",
+      "id": "mcx-wheel-popup",
+      "plugins": {
+        "da": {
+          "name": "mcx-wheel-popup",
+          "rows": 52,
+          "columns": 2
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "mcx-wheel-popup",
+      "fields": []
+    }
+  ],
+  "filters": []
+}

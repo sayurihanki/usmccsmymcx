@@ -39,6 +39,12 @@ test('hasMcxContentBlock includes the MCX promo popup block', () => {
   assert.equal(hasMcxContentBlock(main), true);
 });
 
+test('hasMcxContentBlock includes the MCX wheel popup block', () => {
+  const { main } = createPageWithBlock('mcx-wheel-popup');
+
+  assert.equal(hasMcxContentBlock(main), true);
+});
+
 test('hasMcxContentBlock ignores MCX helper data nodes', () => {
   const { main } = createPageWithBlock('mcx-nav-data');
 

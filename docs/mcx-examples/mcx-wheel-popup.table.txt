@@ -1,0 +1,46 @@
+mcx-wheel-popup
+campaign-id | spring-spin-2026
+eyebrow | Spring Tactical Drop
+heading-line-1 | Spin For
+heading-line-2 | Your Reward
+description | Take one tactical spin to reveal your authored MCX reward. Every slice is a winning offer, with <strong>equal odds</strong> across all eight positions on the wheel.
+result-headline | Reward Transmission
+slice-1-label | 15% Off
+slice-1-title | Save 15% On Field Gear
+slice-1-description | Apply <strong>FIELD15</strong> on select packs, hydration systems, and range-day essentials.
+slice-1-code | FIELD15
+slice-1-cta | [Shop Field Gear](/gear)
+slice-2-label | Free Ship
+slice-2-title | Unlock Free Shipping
+slice-2-description | Score free standard shipping on your next online order with no minimum basket required.
+slice-2-code | SHIPMCX
+slice-2-cta | [Start Shopping](/products)
+slice-3-label | Dress Blues
+slice-3-title | Extra Savings On Uniform Essentials
+slice-3-description | Refresh inspection-ready staples with an extra markdown on dress blues and finishing accessories.
+slice-3-cta | [Browse Uniforms](/uniforms)
+slice-4-label | PX Bonus
+slice-4-title | $10 Bonus On Orders Over $75
+slice-4-description | Reach the spend threshold and use the reward code below before checkout closes.
+slice-4-code | BONUS10
+slice-5-label | Nike Drop
+slice-5-title | Early Access To New Arrivals
+slice-5-description | Your reward is front-of-line access to the latest Nike and Under Armour arrivals before the wider push.
+slice-5-cta | [View New Arrivals](/new-arrivals)
+slice-6-label | Home Setup
+slice-6-title | Save On First-Duty-Station Setup
+slice-6-description | Use this reward on select home electronics, kitchen must-haves, and barracks-ready storage.
+slice-6-code | SETTLE20
+slice-6-cta | [Shop Home](/home)
+slice-7-label | Tax-Free
+slice-7-title | Extra Tax-Free Advantage
+slice-7-description | Your wheel result is a reminder reward only: stack MCX tax-free pricing with current shelf markdowns while they last.
+slice-8-label | Boots
+slice-8-title | Boot Locker Flash Offer
+slice-8-description | Redeem a limited-time boot offer on select tactical and duty-ready styles.
+slice-8-code | BOOTUP
+slice-8-cta | [Shop Boots](/boots)
+fine-print | * Rewards are static authored offers for campaign storytelling. Availability, category exclusions, and final checkout eligibility still depend on the live storefront configuration.
+trigger | time
+trigger-delay | 3
+trigger-scroll | 50

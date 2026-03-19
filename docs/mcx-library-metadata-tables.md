@@ -68,6 +68,14 @@ Do not paste the block authoring rows here. These library docs should contain `l
 | description | Tactical promotional modal with countdown, coupon code, offer cards, and two CTAs. |
 | searchtags | mcx, popup, promo modal, campaign, countdown, coupon, overlay, tactical |
 
+## MCX Wheel Popup
+
+| library metadata | |
+| --- | --- |
+| name | mcx wheel popup |
+| description | Tactical MCX spin-to-win modal with a fixed 8-slice wheel, equal-odds reward reveal, optional coupon copy, and optional CTA. |
+| searchtags | mcx, wheel popup, spin to win, promo modal, campaign, coupon, overlay, tactical |
+
 ## MCX Promo Strip
 
 | library metadata | |

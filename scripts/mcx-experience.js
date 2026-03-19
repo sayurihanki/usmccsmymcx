@@ -10,6 +10,7 @@ const MCX_CONTENT_BLOCKS = new Set([
   'mcx-hero',
   'mcx-newsletter',
   'mcx-promo-popup',
+  'mcx-wheel-popup',
   'mcx-product-cards',
   'mcx-promo-strip',
   'mcx-ticker',

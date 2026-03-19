@@ -484,6 +484,17 @@
           }
         },
         {
+          "title": "MCX Wheel Popup",
+          "id": "mcx-wheel-popup",
+          "plugins": {
+            "da": {
+              "name": "mcx-wheel-popup",
+              "rows": 52,
+              "columns": 2
+            }
+          }
+        },
+        {
           "title": "VIP Hero Block",
           "id": "vip-hero-block",
           "model": "vip-hero-block",

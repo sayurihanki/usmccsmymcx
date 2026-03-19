@@ -61,6 +61,7 @@ Use these files directly when building the page in DA.live:
 - [product cards](/Users/hanki/Jenifer%20GitHub%20repository/usmccsmymcx/docs/mcx-examples/mcx-product-cards.table.txt)
 - [deal countdown](/Users/hanki/Jenifer%20GitHub%20repository/usmccsmymcx/docs/mcx-examples/mcx-deal-countdown.table.txt)
 - [promo popup](/Users/hanki/Jenifer%20GitHub%20repository/usmccsmymcx/docs/mcx-examples/mcx-promo-popup.table.txt)
+- [wheel popup](/Users/hanki/Jenifer%20GitHub%20repository/usmccsmymcx/docs/mcx-examples/mcx-wheel-popup.table.txt)
 - [promo strip](/Users/hanki/Jenifer%20GitHub%20repository/usmccsmymcx/docs/mcx-examples/mcx-promo-strip.table.txt)
 - [featured section metadata](/Users/hanki/Jenifer%20GitHub%20repository/usmccsmymcx/docs/mcx-examples/mcx-featured-collections.section-metadata.table.txt)
 - [featured collections](/Users/hanki/Jenifer%20GitHub%20repository/usmccsmymcx/docs/mcx-examples/mcx-featured-collections.table.txt)
@@ -86,6 +87,7 @@ The repo now includes a full local preview harness:
 - As a publish safety net, pages that contain authored `mcx-*` content blocks now auto-activate the MCX experience even if the page metadata missed `theme: mcx`. Keep the metadata on the page anyway so the intent stays explicit in DA.live.
 - Generic `promo-strip` blocks are optional authored inserts. They are not part of the required MCX homepage base order and can be placed wherever the page narrative needs an inline promotion.
 - `mcx-promo-popup` blocks are also optional authored inserts. They are not part of the required homepage base order and should be used sparingly for high-priority campaigns.
+- `mcx-wheel-popup` blocks are also optional authored inserts. They are not part of the required homepage base order and should be reserved for marquee campaigns where a spin-to-reveal interaction is worth the extra interruption.
 - Section styling for the category, product, and featured rows is controlled by the section metadata example files above.
 - `mcx-header` and `mcx-footer` are shell blocks. Authors should edit the fragment docs, not inline blocks on the homepage.
 - `mcx-hero` supports an image-only carousel. Author `image` for the first slide, then add `image-2`, `image-3`, and so on for additional slides.
