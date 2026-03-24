@@ -59,6 +59,9 @@
           "...": "../blocks/hero/_*.json#/definitions"
         },
         {
+          "...": "../blocks/hero-banner-vodka-2/_*.json#/definitions"
+        },
+        {
           "...": "../blocks/mcx-*/_*.json#/definitions"
         },
         {

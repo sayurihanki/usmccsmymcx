@@ -296,6 +296,19 @@
           }
         },
         {
+          "title": "Hero Banner Vodka 2",
+          "id": "hero-banner-vodka-2",
+          "model": "hero-banner-vodka-2",
+          "plugins": {
+            "da": {
+              "name": "hero-banner-vodka-2",
+              "type": "key-value-block",
+              "rows": 30,
+              "columns": 2
+            }
+          }
+        },
+        {
           "title": "MCX Announcement Bar",
           "id": "mcx-announcement-bar",
           "plugins": {

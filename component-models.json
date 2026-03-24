@@ -1362,6 +1362,83 @@
     ]
   },
   {
+    "id": "hero-banner-vodka-2",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Section title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "subtitle-1",
+        "label": "Subtitle line 1"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "subtitle-2",
+        "label": "Subtitle line 2"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "header-align",
+        "label": "Header alignment (left or right)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tile-1-type",
+        "label": "Tile 1 type (video or product)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tile-1-width",
+        "label": "Tile 1 width (wide or standard)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tile-1-gradient",
+        "label": "Tile 1 gradient (green, peach, pink, neutral, dark)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tile-1-delay",
+        "label": "Tile 1 reveal delay (ms)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tile-1-header-type",
+        "label": "Tile 1 product eyebrow"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tile-1-header-name",
+        "label": "Tile 1 product name"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tile-1-silhouette",
+        "label": "Tile 1 silhouette (bottle or can)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tile-1-image",
+        "label": "Tile 1 background image URL"
+      }
+    ]
+  },
+  {
     "id": "hero-cta",
     "fields": []
   },

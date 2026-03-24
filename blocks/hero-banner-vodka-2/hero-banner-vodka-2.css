@@ -1,0 +1,364 @@
+/* Hero Banner Vodka 2 — skew reveal product grid (scoped) */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
+.hero-banner-vodka-2 {
+  --hbv-cream: #f0ece4;
+  --hbv-dark: #1a1a17;
+  --hbv-serif: 'Instrument Serif', georgia, serif;
+  --hbv-sans: system-ui, -apple-system, sans-serif;
+  --hbv-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --hbv-radius: 14px;
+  --hbv-gap: clamp(8px, 1.2vw, 16px);
+
+  background: var(--hbv-cream);
+  color: var(--hbv-dark);
+  font-family: var(--hbv-sans);
+  overflow-x: hidden;
+  position: relative;
+}
+
+.hero-banner-vodka-2 .hbv-noise {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px;
+}
+
+.hero-banner-vodka-2 .hbv-section-header,
+.hero-banner-vodka-2 .hbv-product-grid {
+  position: relative;
+  z-index: 2;
+}
+
+/* Section header */
+.hero-banner-vodka-2 .section-header {
+  padding: clamp(4rem, 10vh, 8rem) clamp(1.5rem, 4vw, 3rem) clamp(2rem, 4vh, 3rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+}
+
+.hero-banner-vodka-2 .hbv-header-align-right {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.hero-banner-vodka-2 .section-title {
+  font-family: var(--hbv-serif);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 400;
+  line-height: 1;
+  overflow: hidden;
+}
+
+.hero-banner-vodka-2 .section-title .title-inner {
+  display: block;
+  transform: translateY(100%) skewX(10deg) scale(1.04);
+  opacity: 0;
+  transition: all 1s var(--hbv-ease);
+}
+
+.hero-banner-vodka-2 .section-title .title-inner.visible {
+  transform: translateY(0) skewX(0deg) scale(1);
+  opacity: 1;
+}
+
+.hero-banner-vodka-2 .section-subtitle {
+  font-family: var(--hbv-serif);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 400;
+  line-height: 1;
+  opacity: 0.35;
+  overflow: hidden;
+}
+
+.hero-banner-vodka-2 .section-subtitle .sub-line {
+  display: block;
+  overflow: hidden;
+}
+
+.hero-banner-vodka-2 .section-subtitle .sub-inner {
+  display: block;
+  transform: translateY(100%) skewX(10deg) scale(1.04);
+  opacity: 0;
+  transition: all 1s var(--hbv-ease);
+}
+
+.hero-banner-vodka-2 .section-subtitle .sub-inner.visible {
+  transform: translateY(0) skewX(0deg) scale(1);
+  opacity: 1;
+}
+
+/* Grid */
+.hero-banner-vodka-2 .product-grid {
+  padding: 0 clamp(1.5rem, 4vw, 3rem);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--hbv-gap);
+  padding-bottom: clamp(4rem, 10vh, 8rem);
+}
+
+/* Tile base */
+.hero-banner-vodka-2 .tile {
+  border-radius: var(--hbv-radius);
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transform: scale(0) skewX(12deg) skewY(10deg);
+  opacity: 0;
+  clip-path: inset(100% 0 0 0 round var(--hbv-radius));
+  transition:
+    transform 1.2s var(--hbv-ease),
+    opacity 1.2s var(--hbv-ease),
+    clip-path 1.2s var(--hbv-ease);
+}
+
+.hero-banner-vodka-2 .tile.visible {
+  transform: scale(1) skewX(0deg) skewY(0deg);
+  opacity: 1;
+  clip-path: inset(0 0 0 0 round var(--hbv-radius));
+}
+
+.hero-banner-vodka-2 .tile-wide {
+  grid-column: span 2;
+  aspect-ratio: 688 / 400;
+}
+
+.hero-banner-vodka-2 .tile-standard {
+  aspect-ratio: 336 / 400;
+}
+
+.hero-banner-vodka-2 .tile-product-wide {
+  grid-column: span 2;
+  aspect-ratio: 688 / 400;
+}
+
+.hero-banner-vodka-2 .tile-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-banner-vodka-2 .tile-bg picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-banner-vodka-2 .tile-bg img {
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform 8s ease;
+}
+
+.hero-banner-vodka-2 .tile:hover .tile-bg img {
+  transform: scale(1.05);
+}
+
+.hero-banner-vodka-2 .gradient-bg {
+  position: absolute;
+  inset: 0;
+  background-size: 200% 200%;
+  animation: hbv-grad-shift 12s ease infinite;
+}
+
+@keyframes hbv-grad-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.hero-banner-vodka-2 .grad-green {
+  background: linear-gradient(135deg, #c8ecc8, #a9e5a9, #8fd98f, #b5efb5);
+}
+
+.hero-banner-vodka-2 .grad-peach {
+  background: linear-gradient(135deg, #ffe5cc, #ffd4b8, #fed, #ffcaaa);
+}
+
+.hero-banner-vodka-2 .grad-pink {
+  background: linear-gradient(135deg, #ffd1da, #ffc4d0, #ffe0e8, #ffb8c8);
+}
+
+.hero-banner-vodka-2 .grad-neutral {
+  background: linear-gradient(135deg, #f7f8f7, #eef0ee, #f5f7f5, #e8ebe8);
+}
+
+.hero-banner-vodka-2 .grad-dark {
+  background: linear-gradient(135deg, #1a3020, #0d1a12, #2a4a32, #152a1d);
+}
+
+.hero-banner-vodka-2 .tile-product-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 55%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.hero-banner-vodka-2 .bottle-silhouette {
+  width: 60%;
+  height: 90%;
+  background: rgb(0 0 0 / 6%);
+  border-radius: 8px 8px 4px 4px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-banner-vodka-2 .bottle-silhouette::before {
+  content: '';
+  width: 30%;
+  height: 15%;
+  background: rgb(0 0 0 / 8%);
+  border-radius: 3px 3px 0 0;
+  position: absolute;
+  top: -12%;
+}
+
+.hero-banner-vodka-2 .can-silhouette {
+  width: 40%;
+  height: 75%;
+  background: rgb(0 0 0 / 6%);
+  border-radius: 6px;
+  position: relative;
+}
+
+.hero-banner-vodka-2 .can-silhouette::before {
+  content: '';
+  width: 50%;
+  height: 4%;
+  background: rgb(0 0 0 / 8%);
+  border-radius: 2px;
+  position: absolute;
+  top: -6%;
+  left: 25%;
+}
+
+.hero-banner-vodka-2 .tile-header {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: clamp(0.8rem, 2vw, 1.2rem);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+}
+
+.hero-banner-vodka-2 .tile-header-type {
+  font-family: var(--hbv-sans);
+  font-size: clamp(0.65rem, 1.2vw, 0.85rem);
+  font-weight: 500;
+  opacity: 0.6;
+}
+
+.hero-banner-vodka-2 .tile-header-name {
+  font-family: var(--hbv-serif);
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.hero-banner-vodka-2 .tile-video {
+  color: #fff;
+}
+
+.hero-banner-vodka-2 .tile-video::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(0 0 0 / 50%) 0%, transparent 50%);
+  z-index: 1;
+}
+
+.hero-banner-vodka-2 .tile-product .tile-product-img {
+  transition: transform 0.6s var(--hbv-ease);
+}
+
+.hero-banner-vodka-2 .tile-product:hover .tile-product-img {
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+@media (max-width: 1024px) {
+  .hero-banner-vodka-2 .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero-banner-vodka-2 .tile-product-wide {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-banner-vodka-2 .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-banner-vodka-2 .tile-wide,
+  .hero-banner-vodka-2 .tile-product-wide {
+    grid-column: span 1;
+  }
+
+  .hero-banner-vodka-2 .tile-wide {
+    aspect-ratio: 16 / 10;
+  }
+
+  .hero-banner-vodka-2 .tile-product-wide {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-banner-vodka-2 .gradient-bg {
+    animation: none;
+  }
+
+  .hero-banner-vodka-2 .section-title .title-inner,
+  .hero-banner-vodka-2 .section-subtitle .sub-inner {
+    transition: opacity 0.2s ease;
+    transform: none;
+  }
+
+  .hero-banner-vodka-2 .section-title .title-inner.visible,
+  .hero-banner-vodka-2 .section-subtitle .sub-inner.visible {
+    transform: none;
+  }
+
+  .hero-banner-vodka-2 .tile {
+    transition: opacity 0.2s ease;
+    transform: none;
+    clip-path: inset(0 0 0 0 round var(--hbv-radius));
+  }
+
+  .hero-banner-vodka-2 .tile.visible {
+    transform: none;
+  }
+
+  .hero-banner-vodka-2 .tile-bg img {
+    transition: none;
+  }
+
+  .hero-banner-vodka-2 .tile-product .tile-product-img {
+    transition: none;
+  }
+}
